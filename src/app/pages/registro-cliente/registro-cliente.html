@@ -1,0 +1,295 @@
+<div class="bg-gray-100 flex items-center justify-center min-h-screen py-12">
+    <div class="max-w-2xl w-full px-4">
+
+        <!-- Botón regresar -->
+        <div class="mb-4">
+            <a routerLink="/inicio-registro" class="flex items-center space-x-1.5 text-sm font-medium text-custom-blue hover:underline">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                </svg>
+                <span>Regresar a inicio</span>
+            </a>
+        </div>
+
+        <!-- Barra de progreso -->
+        <div *ngIf="!formEnviado" class="bg-white p-6 rounded-lg shadow-lg mb-6">
+            <h3 class="text-lg font-semibold text-custom-blue text-center mb-4">
+                {{ stepTitles[currentStep - 1] }}
+            </h3>
+            <p class="text-sm text-gray-600 text-center mb-4 -mt-2">
+                Los campos con <span class="text-red-500">*</span> son obligatorios.
+            </p>
+
+            <div class="flex items-center">
+                <button (click)="prevStep()" [disabled]="currentStep === 1" 
+                        class="disabled:text-gray-400 text-custom-blue">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                    </svg>
+                </button>
+                <div class="flex-grow flex items-center mx-4 space-x-1">
+                    <div *ngFor="let step of [1,2,3,4]" 
+                         [class]="step <= currentStep ? 'flex-1 h-2 bg-custom-red rounded-full' : 'flex-1 h-2 bg-gray-300 rounded-full'">
+                    </div>
+                </div>
+                <button (click)="nextStep()" [disabled]="currentStep === 4"
+                        class="disabled:text-gray-400 text-custom-blue">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Paso 1: Datos de la inmobiliaria (Póliza) -->
+        <div *ngIf="currentStep === 1 && !formEnviado" class="bg-white rounded-lg shadow-lg">
+            <div class="flex items-center space-x-3 p-5 bg-gray-100 rounded-t-lg">
+                <svg class="w-6 h-6 text-custom-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-lg font-semibold text-custom-blue">Datos del cliente</span>
+            </div>
+            <div class="p-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-custom-blue mb-1">Número de póliza <span class="text-red-500">*</span></label>
+                    <input type="text" [(ngModel)]="formData.poliza.numero"
+                           class="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                           placeholder="Ingresa el número de tu póliza">
+                    <p *ngIf="polizaError" class="text-red-500 text-sm mt-1">{{ polizaError }}</p>
+                </div>
+
+                <div *ngIf="polizaValidada" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-custom-blue mb-1">Nombre de la Inmobiliaria <span class="text-red-500">*</span></label>
+                        <input type="text" [(ngModel)]="formData.poliza.inmobiliaria" readonly
+                               class="block w-full rounded-md border-gray-300 shadow-sm bg-gray-100">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-custom-blue mb-1">Ciudad <span class="text-red-500">*</span></label>
+                        <input type="text" [(ngModel)]="formData.poliza.ciudad" readonly
+                               class="block w-full rounded-md border-gray-300 shadow-sm bg-gray-100">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-custom-blue mb-1">Ejecutivo <span class="text-red-500">*</span></label>
+                        <input type="text" [(ngModel)]="formData.poliza.ejecutivo" readonly
+                               class="block w-full rounded-md border-gray-300 shadow-sm bg-gray-100">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paso 2: Datos de los asistentes -->
+        <div *ngIf="currentStep === 2 && !formEnviado" class="bg-white rounded-lg shadow-lg">
+            <div class="flex items-center space-x-3 p-5 bg-gray-100 rounded-t-lg">
+                <svg class="w-6 h-6 text-custom-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-lg font-semibold text-custom-blue">Datos de los asistentes ({{ cantidadBoletas }})</span>
+            </div>
+            <div class="p-6 space-y-6">
+                <!-- Loop por cada asistente -->
+                <div *ngFor="let asistente of formData.asistentes; let i = index" 
+                     [class]="i > 0 ? 'pt-4 mt-4 border-t border-gray-200' : ''">
+                    
+                    <h4 *ngIf="cantidadBoletas > 1" class="text-md font-semibold text-custom-blue mb-4">
+                        Asistente {{ i + 1 }}
+                    </h4>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-custom-blue mb-1">
+                                Nombre completo <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" [(ngModel)]="asistente.nombre"
+                                   class="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                                   placeholder="Ingresa el nombre">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-custom-blue mb-1">
+                                Número de Documento <span class="text-red-500">*</span>
+                            </label>
+                            <input type="numDoc" [(ngModel)]="asistente.numDoc"
+                                   class="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                                   placeholder="Ingresa el número de documento">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-custom-blue mb-1">
+                                Número telefónico <span class="text-red-500">*</span>
+                            </label>
+                            <input type="tel" [(ngModel)]="asistente.telefono"
+                                   class="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                                   placeholder="Ingresa el número telefónico">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-custom-blue mb-1">
+                                Correo <span class="text-red-500">*</span>
+                            </label>
+                            <input type="email" [(ngModel)]="asistente.correo"
+                                   class="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                                   placeholder="Ingresa el correo electrónico">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paso 3: Facturación -->
+        <div *ngIf="currentStep === 3 && !formEnviado" class="bg-white rounded-lg shadow-lg">
+            <div class="flex items-center space-x-3 p-5 bg-gray-100 rounded-t-lg">
+                <svg class="w-6 h-6 text-custom-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4.5 3.75a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V6.75a3 3 0 0 0-3-3h-15Z" />
+                </svg>
+                <span class="text-lg font-semibold text-custom-blue">Información de facturación</span>
+            </div>
+             <p class="recordatorio">Los datos ingresados en este formulario deben corresponder a la persona o empresa a cuyo nombre se emitirá la factura</p>
+            <div class="p-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-custom-blue mb-1">Tipo de documento <span class="text-red-500">*</span></label>
+                    <select [(ngModel)]="formData.facturacion.tipoDoc"
+                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500">
+                        <option value="">Selecciona un tipo de documento</option>
+                        <option value="CC">Cédula de ciudadanía (C.C)</option>
+                        <option value="NIT">NIT</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-custom-blue mb-1">Número de documento <span class="text-red-500">*</span></label>
+                    <input type="text" [(ngModel)]="formData.facturacion.numDoc"
+                           class="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                           placeholder="Ingresa el número de documento">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-custom-blue mb-1">Nombre completo o Razón social <span class="text-red-500">*</span></label>
+                    <input type="text" [(ngModel)]="formData.facturacion.nombre"
+                           class="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                           placeholder="Ingresa el nombre o razón social">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-custom-blue mb-1">Correo electrónico <span class="text-red-500">*</span></label>
+                    <input type="email" [(ngModel)]="formData.facturacion.correo"
+                           class="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                           placeholder="Ingresa el correo electrónico">
+                </div>
+            </div>
+        </div>
+
+        <!-- Paso 4: Confirmación -->
+        <div *ngIf="currentStep === 4 && !formEnviado" class="bg-white rounded-lg shadow-lg">
+            <div class="flex items-center space-x-3 p-5 bg-gray-100 rounded-t-lg">
+                <svg class="w-6 h-6 text-custom-blue" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <span class="text-lg font-semibold text-custom-blue">Confirmar Información</span>
+            </div>
+            <div class="p-6 space-y-6">
+                <p class="text-sm text-gray-700">Por favor, revisa que toda la información sea correcta antes de enviar.</p>
+
+                <!-- Resumen Póliza -->
+                <div class="border-b pb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-md font-semibold text-custom-blue">Datos del Cliente</h4>
+                        <button (click)="goToStep(1)" class="text-sm text-custom-blue font-medium hover:underline">Editar</button>
+                    </div>
+                    <dl class="grid grid-cols-3 gap-2 text-sm">
+                        <dt class="text-gray-500">Póliza</dt>
+                        <dd class="col-span-2">{{ formData.poliza.numero || 'N/A' }}</dd>
+                        <dt class="text-gray-500">Inmobiliaria</dt>
+                        <dd class="col-span-2">{{ formData.poliza.inmobiliaria || 'N/A' }}</dd>
+                        <dt class="text-gray-500">Ciudad</dt>
+                        <dd class="col-span-2">{{ formData.poliza.ciudad || 'N/A' }}</dd>
+                        <dt class="text-gray-500">Ejecutivo</dt>
+                        <dd class="col-span-2">{{ formData.poliza.ejecutivo || 'N/A' }}</dd>
+                    </dl>
+                </div>
+
+                <!-- Resumen Asistentes -->
+                <div class="border-b pb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-md font-semibold text-custom-blue">Asistentes ({{ cantidadBoletas }})</h4>
+                        <button (click)="goToStep(2)" class="text-sm text-custom-blue font-medium hover:underline">Editar</button>
+                    </div>
+                    
+                    <div *ngFor="let asistente of formData.asistentes; let i = index" 
+                         [class]="i > 0 ? 'mt-4 pt-4 border-t border-gray-100' : ''">
+                        <h5 *ngIf="cantidadBoletas > 1" class="font-semibold text-gray-700 mb-2">Asistente {{ i + 1 }}</h5>
+                        <dl class="grid grid-cols-3 gap-2 text-sm">
+                            <dt class="text-gray-500">Nombre</dt>
+                            <dd class="col-span-2">{{ asistente.nombre || 'N/A' }}</dd>
+                            <dt class="text-gray-500">Teléfono</dt>
+                            <dd class="col-span-2">{{ asistente.telefono || 'N/A' }}</dd>
+                            <dt class="text-gray-500">Correo</dt>
+                            <dd class="col-span-2">{{ asistente.correo || 'N/A' }}</dd>
+                        </dl>
+                    </div>
+                </div>
+
+                <!-- Resumen Facturación -->
+                <div class="border-b pb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-md font-semibold text-custom-blue">Datos de Facturación</h4>
+                        <button (click)="goToStep(3)" class="text-sm text-custom-blue font-medium hover:underline">Editar</button>
+                    </div>
+                    <dl class="grid grid-cols-3 gap-2 text-sm">
+                        <dt class="text-gray-500">Tipo Documento</dt>
+                        <dd class="col-span-2">{{ formData.facturacion.tipoDoc || 'N/A' }}</dd>
+                        <dt class="text-gray-500"># Documento</dt>
+                        <dd class="col-span-2">{{ formData.facturacion.numDoc || 'N/A' }}</dd>
+                        <dt class="text-gray-500">Razón Social</dt>
+                        <dd class="col-span-2">{{ formData.facturacion.nombre || 'N/A' }}</dd>
+                        <dt class="text-gray-500">Correo</dt>
+                        <dd class="col-span-2">{{ formData.facturacion.correo || 'N/A' }}</dd>
+                    </dl>
+                </div>
+
+                <!-- Resumen del pago -->
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-semibold text-custom-blue">Total a pagar:</span>
+                        <span class="precioTotal">{{ precioBoletas | currency:'COP':'symbol-narrow':'1.0-0' }}</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">{{ cantidadBoletas }} entrada(s)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensaje de éxito -->
+        <div *ngIf="formEnviado" class="bg-white p-6 rounded-lg shadow-lg text-center">
+            <svg class="w-16 h-16 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="text-2xl font-semibold text-custom-blue mt-4">¡Registro Exitoso!</h3>
+            <p class="text-gray-600 mt-2">Hemos recibido tu información correctamente.</p>
+        </div>
+
+        <!-- Botones de navegación -->
+        <div *ngIf="!formEnviado" class="mt-6 flex justify-end space-x-4">
+            <button *ngIf="currentStep > 1" (click)="prevStep()"
+                    class="text-custom-blue font-semibold py-2 px-6 hover:underline">
+                Anterior
+            </button>
+            <button *ngIf="currentStep === 1 && !polizaValidada" (click)="validarPoliza()"
+                    [disabled]="validandoPoliza"
+                    class="btn-primary">
+                {{ validandoPoliza ? 'Validando...' : 'Validar Póliza' }}
+            </button>
+            <button *ngIf="currentStep === 1 && polizaValidada" (click)="nextStep()"
+                    class="btn-primary">
+                Siguiente
+            </button>
+            <button *ngIf="currentStep === 2" (click)="nextStep()"
+                    class="btn-primary">
+                Siguiente
+            </button>
+            <button *ngIf="currentStep === 3" (click)="nextStep()"
+                    class="btn-primary">
+                Siguiente
+            </button>
+            <button *ngIf="currentStep === 4" (click)="enviarFormulario()"
+                    class="btn-primary" [disabled] = "spinner">
+                <div class="loading-spinner" *ngIf="spinner"></div>
+                Confirmar y Pagar
+            </button>
+        </div>
+
+    </div>
+</div>

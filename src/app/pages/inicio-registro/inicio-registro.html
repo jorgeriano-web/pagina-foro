@@ -1,0 +1,48 @@
+<div class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="max-w-md w-full px-4">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full">
+            <h2 class="text-2xl font-bold text-custom-blue mb-2">
+                Por favor ingresa la siguiente información
+            </h2>
+            <p class="text-sm text-custom-blue opacity-80 mb-6">
+                Estos datos son necesarios antes de proceder con el pago
+            </p>
+
+            <fieldset>
+                <legend class="text-lg font-semibold text-custom-blue mb-4">
+                    ¿Eres cliente de El Libertador?
+                </legend>
+                
+                <div class="flex space-x-8">
+                    <div class="flex items-center">
+                        <input id="opcion-si" name="cliente" type="radio" value="si" 
+                               [(ngModel)]="opcionCliente"
+                               class="h-4 w-4 border-gray-300 accent-red-600">
+                        <label for="opcion-si" class="ml-3 block text-md font-medium text-custom-blue">
+                            Sí
+                        </label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="opcion-no" name="cliente" type="radio" value="no"
+                               [(ngModel)]="opcionCliente"
+                               class="h-4 w-4 border-gray-300 accent-red-600">
+                        <label for="opcion-no" class="ml-3 block text-md font-medium text-custom-blue">
+                            No
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <p *ngIf="mostrarError" class="text-red-500 text-sm mt-4">
+                Por favor, selecciona una opción.
+            </p>
+        </div>
+
+        <div class="mt-4 flex justify-end">
+            <button (click)="siguiente()" 
+                    class="bg-custom-blue-light text-custom-blue border-2 border-custom-blue font-semibold py-2 px-6 rounded-md shadow-sm hover:bg-custom-blue-dark transition duration-150">
+                Siguiente
+            </button>
+        </div>
+    </div>
+</div>

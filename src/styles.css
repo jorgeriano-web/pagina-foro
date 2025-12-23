@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap');
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: transparent;
+    background-image: url('/assets/img/fondo-respuesta.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.recordatorio {
+    font-size: 0.875rem; 
+    color: black; 
+    margin: 1rem; 
+    font-size: 12px;
+}

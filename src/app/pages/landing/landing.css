@@ -1,0 +1,346 @@
+.hero-bg {
+    background-image: url('https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/da01a461-c25e-400e-8037-cc341bfc1bd3.png');
+    background-size: cover;
+    background-position: center;
+    background-color: #2d3450;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    background-color: transparent;
+    transition: background-color 0.4s ease-out;
+}
+
+header.scrolled-header {
+    background-color: #2d3450;
+}
+
+.logo-white {
+    filter: brightness(0) invert(1);
+}
+
+.logo-principal {
+    max-width: 290px;
+    width: 100%;
+}
+
+.logo-foro-1 {
+    max-width: 130px;
+}
+
+.logo-libertador {
+    max-width: 200px;
+}
+
+.contenedor-logos {
+    max-width: 170px;
+}
+
+.timer-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    backdrop-filter: blur(10px);
+}
+
+.texto-conexion {
+    line-height: 24px;
+    font-size: 22px;
+    margin-top: 13px;
+}
+
+.texto-contador {
+    text-align: center;
+    font-weight: 500;
+}
+
+.texto-tiempo {
+    text-align: center;
+}
+
+.texto-pabellon {
+    border-bottom: 1px solid #fff;
+    padding-bottom: 15px;
+}
+
+.texto-fecha {
+    margin-top: 15px;
+    font-size: 22px;
+}
+
+.texto-ubicacion {
+    font-size: 20px;
+}
+
+.contenedor-logo-principal {
+    margin-top: 150px;
+}
+
+.contenedor-textos-info {
+    margin-top: 30px;
+}
+
+.texto-desliza {
+    margin-top: 20px;
+}
+
+.floating-cta {
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    z-index: 30;
+}
+
+#animation-container {
+     position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.seccion-historia {
+    padding-top: 30px;
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: #2d3450;
+    text-align: center;
+    background-color: #f7f8fa;
+    margin-bottom: 130px;
+}
+
+.etiqueta-pilar {
+    background-color: #2d3450;
+}
+
+.seccion-temas {
+    background-image: url('https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/ca85fb18-d61a-4604-8f9d-004f021d7e98.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.texto-pilares {
+    font-weight: 300;
+    font-size: 30px;
+}
+
+.texto-entradas {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.icono-compra {
+    margin-right: 10px;
+}
+
+.sub-texto-tarjeta {
+    margin-top: 20px;
+}
+
+.seccion-boletas-ad {
+    background-image: url("https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/a0154101-11b4-4330-8169-a6071bff0f43.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 185px;
+    margin-bottom: 80px;
+}
+
+.sub-text-entradas-ad {
+    font-size: 31px;
+}
+
+.imagen-boletos {
+    margin-top: 50px;
+}
+
+.seccion-precios {
+    padding-bottom: 30px;
+}
+
+/* Logos animados */
+.logos-container {
+    overflow: hidden;
+    padding: 1rem 0;
+    position: relative;
+    width: 100%;
+    display: flex;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.logos-slide {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+    animation: scroll-logos 25s linear infinite;
+}
+
+.logos-slide img {
+    width: 160px;
+    height: 60px;
+    object-fit: contain;
+    margin: 0 20px;
+}
+
+.logo-davivienda,
+.logo-bolivar {
+    width: 110px !important;
+}
+
+@keyframes scroll-logos {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.logos-container:hover .logos-slide {
+    animation-play-state: paused;
+}
+
+/* Carrusel 3D */
+.carousel-container {
+    width: 90%;
+    max-width: 500px;
+    aspect-ratio: 8 / 5;
+    perspective: 1500px;
+    position: relative;
+}
+
+.carousel-rotator {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCarousel 20s linear infinite;
+}
+
+.carousel-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.carousel-face:nth-child(1) {
+    transform: rotateY(0deg) translateZ(150px);
+}
+
+.carousel-face:nth-child(2) {
+    transform: rotateY(120deg) translateZ(150px);
+}
+
+.carousel-face:nth-child(3) {
+    transform: rotateY(240deg) translateZ(150px);
+}
+
+@keyframes rotateCarousel {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(-360deg);
+    }
+}
+
+/* Tarjetas animables */
+.animatable-card.is-flipped {
+    background-color: white !important;
+    backdrop-filter: none !important;
+}
+
+.animatable-card.is-flipped .card-original-content {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.animatable-card.is-flipped .card-flipped-content {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Slider de tarjetas */
+.card-slider {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.card-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.card-slider {
+    scrollbar-width: none;
+}
+
+.card-slider > div {
+    scroll-snap-align: center;
+}
+
+/* Media queries */
+@media (max-width: 1107px) {
+    .contenedor-logos {
+        max-width: 520px !important;
+    }
+    .logo-foro-1 {
+        max-width: 160px;
+    }
+    .logo-libertador {
+        max-width: 230px;
+    }
+    .contenedor-numeros {
+        margin-top: 100px;
+    }
+    .sub-text-entradas-ad {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .logos-slide img {
+        width: 110px;
+        height: 45px;
+        margin: 0 10px;
+    }
+}
+
+@media (max-width: 757px) {
+    .logo-foro-1 {
+        max-width: 130px;
+    }
+    .logo-libertador {
+        max-width: 160px;
+    }
+    .texto-conexion {
+        margin-top: -20px;
+    }
+    .contenedor-logo-principal {
+        margin-top: 40px !important;
+    }
+}
+
+@media (max-width: 500px) {
+    .titulo-entradas {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 407px) {
+    .logo-foro-1 {
+        max-width: 90px;
+    }
+    .logo-libertador {
+        max-width: 100px;
+    }
+}
