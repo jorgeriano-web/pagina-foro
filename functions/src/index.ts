@@ -5,6 +5,7 @@ import axios from "axios";
 import { onCall, HttpsError } from "firebase-functions/v2/https";
 import { FieldValue } from "firebase-admin/firestore";
 import { agregarFilaAsheet } from "./service/sheetService";
+import { enviarEmail } from "./service/emailService";
 
 admin.initializeApp();
 
@@ -258,6 +259,7 @@ export const verificarEstadoPago = onCall({ cors: true }, async (request) => {
           await doc.ref.update({
             guardadoEnSheet: true,
           });
+        
 
         } catch (sheetError: any) {
           console.error("❌ ERROR REAL DE SHEETS:");
@@ -266,13 +268,25 @@ export const verificarEstadoPago = onCall({ cors: true }, async (request) => {
           console.error("❌ sheetError.response?.data:", sheetError?.response?.data);
           throw sheetError;
       }
-    }
+      }
+
+    // enviar el correo a cada asistente con su respectivo pdf
+
+      for(const asistente of data.asistentes ){
+        await enviarEmail({
+          correo: asistente.correo,
+          asunto: 'Confirmación para el Foro Inmobiliario 2026',
+        mensaje: 'Buen dia.  Gracias por tu compra. Adjuntamos tu confirmación de entrada al evento.',
+        })
+      }
+
   }
     return {
       success: response.data.success,
       estado: estadoGateway || "NO_ENCONTRADO",
       datos: response.data.data,
     };
+
 
   } catch (error: any) {
     console.error("❌ Error verificando estado:", error.response?.data || error);

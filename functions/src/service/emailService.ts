@@ -1,12 +1,11 @@
 import nodemailer from 'nodemailer';
 import * as emailConfig from '../emailConfig.json';
+import { obtenerPdf } from './pdfService';
 
 interface datosEmail {
     correo: string;
     asunto: string;
     mensaje: string;
-    pdfAdjunto?: Buffer;
-    nombrePdf?: string;
 }
 
 // Configuración del transporter de nodemailer
@@ -18,6 +17,7 @@ const transporter = nodemailer.createTransport({
     },
 }); 
 
+const pdfBoleta = obtenerPdf();
 
 export async function enviarEmail(datos: datosEmail): Promise<void> {
   try {
@@ -25,16 +25,15 @@ export async function enviarEmail(datos: datosEmail): Promise<void> {
     await transporter.sendMail({
       from: emailConfig.email,          
       to: datos.correo,                 
-      subject: datos.asunto,            
-      text: datos.mensaje,              
-      attachments: datos.pdfAdjunto     
-        ? [
-              {
-                  filename: datos.nombrePdf || 'boleta.pdf',  // Usa el nombre personalizado, o 'boleta.pdf' si no hay
-                  content: datos.pdfAdjunto,                   // El contenido del PDF
-              },
-          ]
-        : [],  // Si no hay PDF, no adjuntar nada
+      subject: 'Confirmación para el Foro Inmobiliario 2026',            
+      text: 'Buen dia.Gracias por tu compra. Adjuntamos tu confirmación de entrada al evento.',              
+      attachments:     
+        [
+          {
+            filename: 'boleta_foro_2026.pdf',
+            content: pdfBoleta,                   
+          },
+        ]
     });
     
     // 2. Si llegó aquí, funcionó
