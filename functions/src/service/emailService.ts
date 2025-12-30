@@ -26,7 +26,7 @@ export async function enviarEmail(datos: datosEmail): Promise<void> {
       from: emailConfig.email,          
       to: datos.correo,                 
       subject: 'Confirmación para el Foro Inmobiliario 2026',            
-      text: 'Buen dia.Gracias por tu compra. Adjuntamos tu confirmación de entrada al evento.',              
+      text: 'Te esperamos para vivir la mejor experiencia en Cartagena. Adjuntamos tu confirmación de entrada al evento.',              
       attachments:     
         [
           {
