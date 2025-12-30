@@ -98,7 +98,7 @@ header.scrolled-header {
 #animation-container {
      position: relative;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .seccion-historia {
@@ -270,23 +270,33 @@ header.scrolled-header {
     pointer-events: auto;
 }
 
-/* Slider de tarjetas */
-.card-slider {
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-}
-
 .card-slider::-webkit-scrollbar {
     display: none;
 }
 
 .card-slider {
-    scrollbar-width: none;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    touch-action: pan-x !important;
+    overscroll-behavior-x: contain;
 }
+
 
 .card-slider > div {
     scroll-snap-align: center;
 }
+
+.card-slider > * {
+    flex-shrink: 0;
+    touch-action: pan-x !important;
+}
+
+.particle-canvas {
+    pointer-events: none;
+}
+
 
 /* Media queries */
 @media (max-width: 1107px) {

@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ServiceBoletas } from '../../service/service-boletas';
 
 @Component({
   selector: 'app-inicio-registro',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './inicio-registro.html',
   styleUrl: './inicio-registro.css',
 })
