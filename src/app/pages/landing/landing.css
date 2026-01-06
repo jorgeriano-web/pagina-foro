@@ -275,12 +275,10 @@ header.scrolled-header {
 }
 
 .card-slider {
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
+    overflow-x: auto;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    touch-action: pan-x !important;
-    overscroll-behavior-x: contain;
 }
 
 
@@ -290,7 +288,6 @@ header.scrolled-header {
 
 .card-slider > * {
     flex-shrink: 0;
-    touch-action: pan-x !important;
 }
 
 .particle-canvas {

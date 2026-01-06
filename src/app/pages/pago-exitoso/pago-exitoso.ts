@@ -33,7 +33,6 @@ export class PagoExitoso implements OnInit, AfterViewInit, OnDestroy {
   constructor(private router : Router, private pagoService: Pago) {}
 
   ngOnInit(): void {
-     this.verificarPago();
   }
 
   ngAfterViewInit(): void {
@@ -157,56 +156,6 @@ export class PagoExitoso implements OnInit, AfterViewInit, OnDestroy {
     this.router.navigate([''])
   }
 
-
-  async verificarPago(): Promise<void> {
-  this.referencia = localStorage.getItem('pagoReferencia');
-  console.log("Referencia de pago:", this.referencia);
-
-  if (!this.referencia) {
-    this.verificando = false;
-    this.error = 'No se encontró información del pago.';
-    return;
-  }
-
-  const maxIntentos = 10;
-  let intento = 0;
-
-  const interval = setInterval(async () => {
-    intento++;
-
-    try {
-      const response = await this.pagoService.verificarPago(this.referencia!);
-      console.log( "Respuesta de verificación de pago:", response);
-
-      if (response.estado === 'APROBADO') {
-        clearInterval(interval);
-        this.verificando = false;
-        this.pagoAprobado = true;
-        localStorage.removeItem('pagoReferencia');
-      }
-
-      if (response.estado === 'RECHAZADO') {
-        clearInterval(interval);
-        this.verificando = false;
-        this.pagoRechazado = true;
-        localStorage.removeItem('pagoReferencia');
-        this.router.navigate(['/pagoNoExitoso']);
-      }
-
-      if (intento >= maxIntentos) {
-        clearInterval(interval);
-        this.verificando = false;
-        this.error = 'El pago está en validación. Intenta más tarde.';
-      }
-
-    } catch (err) {
-      clearInterval(interval);
-      this.verificando = false;
-      this.error = 'Error al verificar el pago.';
-      console.error(err);
-    }
-  }, 10000); // cada 4 segundos
-}
 
 
 }
