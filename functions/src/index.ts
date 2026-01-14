@@ -149,6 +149,9 @@ export const crearLinkPago = onCall({ cors: true }, async (request) => {
       }
     );
 
+    console.log("📦 RESPUESTA GATEWAY COMPLETA:", response.data);
+
+
 
     // 4. Guardar en Firestore
     const transaccionRef = await db.collection("transacciones").add({

@@ -270,20 +270,16 @@ header.scrolled-header {
     pointer-events: auto;
 }
 
-.card-slider::-webkit-scrollbar {
-    display: none;
-}
 
 .card-slider {
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 1rem;
 }
 
-
 .card-slider > div {
-    scroll-snap-align: center;
+    width: 100%;
 }
 
 .card-slider > * {
@@ -319,6 +315,13 @@ header.scrolled-header {
         width: 110px;
         height: 45px;
         margin: 0 10px;
+    }
+
+    .card-slider {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
     }
 }
 
