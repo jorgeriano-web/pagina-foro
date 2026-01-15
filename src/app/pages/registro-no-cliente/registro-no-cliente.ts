@@ -72,8 +72,7 @@ export class RegistroNoCliente implements OnInit {
     esCliente: false,
     asistentes: this.formData.asistentes,
     facturacion: this.formData.facturacion,
-    cantidad_boletas: this.cantidadBoletas,
-    precio_total: this.precioBoletas
+    cantidad_boletas: this.cantidadBoletas
   };
 
   this.spinner = true;

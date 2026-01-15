@@ -7,6 +7,7 @@ import { FieldValue } from "firebase-admin/firestore";
 import { agregarFilaAsheet } from "./service/sheetService";
 import { enviarEmail } from "./service/emailService";
 import { onSchedule } from "firebase-functions/v2/scheduler";
+import { PreciosService } from "./service/preciosService";
 
 
 admin.initializeApp();
@@ -53,7 +54,6 @@ interface PagoRequest {
   asistentes: AsistenteData[];         // Array de 1, 2 o 3 asistentes
   facturacion: Facturacion;
   cantidad_boletas: number;
-  precio_total: number;
 }
 
 // FUNCIÓN: OBTENER TOKEN
@@ -87,13 +87,16 @@ export const crearLinkPago = onCall({ cors: true }, async (request) => {
   const data = request.data as PagoRequest;
 
   // Validar datos
-  if (!data.asistentes || !data.facturacion || !data.precio_total) {
+  if (!data.asistentes || !data.facturacion) {
     throw new HttpsError("invalid-argument", "Faltan datos requeridos");
   }
 
   try {
+
+    const preciosService = new PreciosService();
+    const precioReal = preciosService.seleccionarBoletasYprecio(data.cantidad_boletas);
+
     // 1. Obtener token
-    console.log("🔐 Obteniendo token...");
     const token = await obtenerToken();
 
     // 2. Preparar datos para el gateway
@@ -108,7 +111,7 @@ export const crearLinkPago = onCall({ cors: true }, async (request) => {
         email: data.asistentes[0].correo,
         id: data.facturacion.numDoc,
         id_type: data.facturacion.tipoDoc,
-        amount: data.precio_total,
+        amount: precioReal,
         description: `Compra de ${data.cantidad_boletas} boleta(s)`,
         vat: 0,
         url_return: "https://foro-inmobiliarias01.web.app/pagoExitoso",
@@ -126,7 +129,7 @@ export const crearLinkPago = onCall({ cors: true }, async (request) => {
         email: data.asistentes[0].correo,
         id: data.facturacion.numDoc,
         id_type: data.facturacion.tipoDoc,
-        amount: data.precio_total,
+        amount: precioReal,
         description: `Compra de ${data.cantidad_boletas} boleta(s)`,
         vat: 0,
         url_return: "https://foro-inmobiliarias01.web.app/pagoExitoso",
@@ -149,7 +152,7 @@ export const crearLinkPago = onCall({ cors: true }, async (request) => {
       }
     );
 
-    console.log("📦 RESPUESTA GATEWAY COMPLETA:", response.data);
+    //console.log("📦 RESPUESTA GATEWAY COMPLETA:", response.data);
 
 
 
@@ -159,7 +162,7 @@ export const crearLinkPago = onCall({ cors: true }, async (request) => {
       inmobiliaria: data.inmobiliaria || null,
       asistentes: data.asistentes,
       cantidad_boletas: data.cantidad_boletas,
-      precio_total: data.precio_total,
+      precio_total: precioReal,
       referencia: response.data.reference,
       estado: "PENDIENTE",
       fecha_creacion: FieldValue.serverTimestamp(),
@@ -202,7 +205,7 @@ export const verificarPagosPendientes = onSchedule(
         .where("fecha_creacion", ">", hace30Min)
         .get();
 
-      console.log(`📊 Transacciones pendientes encontradas: ${snapshot.size}`);
+      //console.log(`📊 Transacciones pendientes encontradas: ${snapshot.size}`);
 
       if (snapshot.empty) {
         console.log("✅ No hay pagos pendientes");
@@ -227,7 +230,7 @@ export const verificarPagosPendientes = onSchedule(
           );
 
           const estadoGateway = response.data?.data?.status;
-          console.log(`📌 ${referencia}: ${estadoGateway}`);
+          //console.log(`📌 ${referencia}: ${estadoGateway}`);
 
           // ✅ SI ESTÁ APROBADO
           if (response.data.success && estadoGateway === "APROBADO") {
@@ -237,7 +240,7 @@ export const verificarPagosPendientes = onSchedule(
               estado: "APROBADO",
               fecha_pago: FieldValue.serverTimestamp(),
             });
-            console.log(`✅ Firestore actualizado: ${referencia}`);
+            //console.log(`✅ Firestore actualizado: ${referencia}`);
 
             // 2. Guardar en Sheets (SOLO si no se ha guardado)
             if (!data.guardadoEnSheet) {
@@ -261,7 +264,7 @@ export const verificarPagosPendientes = onSchedule(
                 });
 
                 await doc.ref.update({ guardadoEnSheet: true });
-                console.log(`✅ Guardado en Sheets: ${referencia}`);
+                //console.log(`✅ Guardado en Sheets: ${referencia}`);
               } catch (sheetError) {
                 console.error(`❌ Error Sheets para ${referencia}:`, sheetError);
               }
@@ -278,14 +281,14 @@ export const verificarPagosPendientes = onSchedule(
                     asunto: "Confirmación para el Foro Inmobiliario 2026",
                     mensaje: "Buen día. Gracias por tu compra. Adjuntamos tu confirmación de entrada al evento.",
                   });
-                  console.log(`✅ Email enviado a: ${asistente.correo}`);
+                  //console.log(`✅ Email enviado a: ${asistente.correo}`);
                 } catch (emailError) {
                   console.error(`❌ Error email a ${asistente.correo}:`, emailError);
                 }
               }
 
               await doc.ref.update({ emailsEnviados: true });
-              console.log(`✅ Emails marcados como enviados: ${referencia}`);
+              //console.log(`✅ Emails marcados como enviados: ${referencia}`);
             } else {
               console.log(`⏭️ Emails ya enviados: ${referencia}`);
             }

@@ -33,8 +33,6 @@ export class RegistroCliente implements OnInit {
     this.cantidadBoletas = this.boletasService.getCantidad();
     this.precioBoletas = this.boletasService.getPrecio();
     this.inicializarAsistentes()
-    console.log('Cantidad:', this.cantidadBoletas);
-    console.log('Precio:', this.precioBoletas);
   }
 
   stepTitles = [
@@ -119,8 +117,7 @@ export class RegistroCliente implements OnInit {
     },
     asistentes: this.formData.asistentes,
     facturacion: this.formData.facturacion,
-    cantidad_boletas: this.cantidadBoletas,
-    precio_total: this.precioBoletas
+    cantidad_boletas: this.cantidadBoletas
   };
 
   this.spinner = true;

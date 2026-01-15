@@ -29,7 +29,6 @@ export interface PagoRequest {
   asistentes: AsistenteData[];
   facturacion: Facturacion;
   cantidad_boletas: number;
-  precio_total: number;
 }
 
 export interface PagoResponse {
