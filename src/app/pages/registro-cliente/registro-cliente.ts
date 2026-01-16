@@ -146,5 +146,29 @@ export class RegistroCliente implements OnInit {
   }
 
 
+  isFormValid(): boolean {
+  // 1️⃣ Validar póliza
+  if (!this.formData.poliza.numero || !this.polizaValidada) {
+    return false;
+  }
+
+  // 2️⃣ Validar asistentes
+  for (const asistente of this.formData.asistentes) {
+    if (!asistente.nombre || !asistente.numDoc || !asistente.telefono || !asistente.correo) {
+      return false;
+    }
+  }
+
+  // 3️⃣ Validar facturación
+  const fact = this.formData.facturacion;
+  if (!fact.tipoDoc || !fact.numDoc || !fact.nombre || !fact.correo) {
+    return false;
+  }
+
+  // ✅ Todo está completo
+  return true;
+}
+
+
 
 }

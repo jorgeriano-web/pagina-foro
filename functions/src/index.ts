@@ -8,22 +8,17 @@ import { agregarFilaAsheet } from "./service/sheetService";
 import { enviarEmail } from "./service/emailService";
 import { onSchedule } from "firebase-functions/v2/scheduler";
 import { PreciosService } from "./service/preciosService";
-
+import { getGatewayConfig } from "./configSecrets/gatewayConfig";
+import { defineSecret } from "firebase-functions/params";
 
 admin.initializeApp();
 
 const db = getFirestore("payments-foro-inmobiliario");
 
 
-// CONFIGURACIÓN DEL GATEWAY
-
-const GATEWAY_CONFIG = {
-    baseUrl: "https://qa.api-gateway.solucionesbolivar.com",
-    user: "jorge.riano@segurosbolivar.com",
-    pass:"am9yZ2Uucmlhbm8=",
-    client: "TU_CLIENT_AQUI",
-    subclient: "TU_SUBCLIENT_AQUI",
-}
+const GATEWAY_CREDENTIALS= defineSecret("gateway-credentials-dev");
+const EMAIL_CREDENTIALS = defineSecret("email-credentials");
+const FIREBASE_CONFIG_ACCOUNT = defineSecret("service-account-transacciones-inmobiliarias")
 
 // ============================================
 
@@ -61,11 +56,14 @@ interface PagoRequest {
 
 async function obtenerToken(): Promise<string> {
   try {
+
+    const gateway = await getGatewayConfig("dev")
+
     const response = await axios.post(
-      `${GATEWAY_CONFIG.baseUrl}/load/compare`,
+      `${gateway.baseUrl}/load/compare`,
       {
-        user: GATEWAY_CONFIG.user,
-        pass: GATEWAY_CONFIG.pass,
+        user: gateway.user,
+        pass: gateway.pass,
       },
       {
         headers: { "Content-Type": "application/json" },
@@ -83,8 +81,10 @@ async function obtenerToken(): Promise<string> {
 // FUNCIÓN PRINCIPAL: CREAR LINK DE PAGO
 // ============================================
 
-export const crearLinkPago = onCall({ cors: true }, async (request) => {
+export const crearLinkPago = onCall({ cors: true, secrets: [GATEWAY_CREDENTIALS] }, async (request) => {
   const data = request.data as PagoRequest;
+
+  const gateway = await getGatewayConfig("dev");
 
   // Validar datos
   if (!data.asistentes || !data.facturacion) {
@@ -142,7 +142,7 @@ export const crearLinkPago = onCall({ cors: true }, async (request) => {
     // 3. Generar link de pago
     console.log("🔗 Generando link de pago...");
     const response = await axios.post(
-      `${GATEWAY_CONFIG.baseUrl}/api/generate-link-manual`,
+      `${gateway.baseUrl}/api/generate-link-manual`,
       payloadGateway,
       {
         headers: {
@@ -191,13 +191,22 @@ export const crearLinkPago = onCall({ cors: true }, async (request) => {
 // ============================================
 
 export const verificarPagosPendientes = onSchedule(
-  "every 1 minutes",
+  {
+    schedule: "every 1 minutes",
+    secrets: [
+      GATEWAY_CREDENTIALS, 
+      EMAIL_CREDENTIALS,     // <- secreto de emails
+      FIREBASE_CONFIG_ACCOUNT // <- secreto de Sheets
+    ],
+  },
   async (event) => {
     console.log("🔍 Iniciando verificación automática...");
 
     try {
       // Buscar pagos pendientes de los últimos 30 minutos
       const hace30Min = new Date(Date.now() - 30 * 60 * 1000);
+
+      const gateway = await getGatewayConfig("dev");
 
       const snapshot = await db
         .collection("transacciones")
@@ -223,7 +232,7 @@ export const verificarPagosPendientes = onSchedule(
         try {
           // Consultar estado en el gateway
           const response = await axios.get(
-            `${GATEWAY_CONFIG.baseUrl}/views/check-status?dev_reference=${referencia}`,
+            `${gateway.baseUrl}/views/check-status?dev_reference=${referencia}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }

@@ -71,7 +71,7 @@
                             <label class="block text-sm font-medium text-custom-blue mb-1">
                                 Número de Documento <span class="text-red-500">*</span>
                             </label>
-                            <input type="numDoc" [(ngModel)]="asistente.numDoc"
+                            <input type="text" [(ngModel)]="asistente.numDoc"
                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
                                    placeholder="Ingresa el número de documento">
                         </div>
@@ -221,7 +221,8 @@
                 Siguiente
             </button>
             <button *ngIf="currentStep === 3" (click)="enviarFormulario()"
-                    class="btn-primary" [disabled] = "spinner">
+                    class="btn-primary" 
+                    [disabled]="spinner || !isFormValid()">
                     <div class="loading-spinner" *ngIf="spinner"></div>
                 Confirmar y Pagar
             </button>

@@ -284,8 +284,10 @@
                     class="btn-primary">
                 Siguiente
             </button>
-            <button *ngIf="currentStep === 4" (click)="enviarFormulario()"
-                    class="btn-primary" [disabled] = "spinner">
+            <button *ngIf="currentStep === 4" 
+                    (click)="enviarFormulario()" 
+                    class="btn-primary" 
+                    [disabled]="spinner || !isFormValid()">
                 <div class="loading-spinner" *ngIf="spinner"></div>
                 Confirmar y Pagar
             </button>

@@ -20,8 +20,7 @@ export class InicioRegistro implements OnInit {
   constructor(private router: Router, private boletasService: ServiceBoletas) {}
 
   ngOnInit(): void {
-    console.log('Cantidad:', this.boletasService.getCantidad());
-    console.log('Precio:', this.boletasService.getPrecio());
+    
   }
 
   siguiente() {

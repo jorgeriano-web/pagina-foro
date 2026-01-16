@@ -1,46 +1,44 @@
 import nodemailer from 'nodemailer';
-import * as emailConfig from '../emailConfig.json';
 import { obtenerPdf } from './pdfService';
+import { emailSendConfig } from '../configSecrets/emailConfig';
 
 interface datosEmail {
-    correo: string;
-    asunto: string;
-    mensaje: string;
+  correo: string;
+  asunto: string;
+  mensaje: string;
 }
-
-// Configuración del transporter de nodemailer
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: emailConfig.email,
-        pass: emailConfig.appPassword,
-    },
-}); 
-
-const pdfBoleta = obtenerPdf();
 
 export async function enviarEmail(datos: datosEmail): Promise<void> {
   try {
-    // 1. Enviar el correo
-    await transporter.sendMail({
-      from: emailConfig.email,          
-      to: datos.correo,                 
-      subject: 'Confirmación para el Foro Inmobiliario 2026',            
-      text: 'Te esperamos para vivir la mejor experiencia en Cartagena. Adjuntamos tu confirmación de entrada al evento.',              
-      attachments:     
-        [
-          {
-            filename: 'boleta_foro_2026.pdf',
-            content: pdfBoleta,                   
-          },
-        ]
+
+    const emailConfig = await emailSendConfig();
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: emailConfig.email,
+        pass: emailConfig.appPassword,
+      },
     });
-    
-    // 2. Si llegó aquí, funcionó
+
+    const pdfBoleta = obtenerPdf();
+
+    await transporter.sendMail({
+      from: emailConfig.email,
+      to: datos.correo,
+      subject: datos.asunto,
+      text: datos.mensaje,
+      attachments: [
+        {
+          filename: 'boleta_foro_2026.pdf',
+          content: pdfBoleta,
+        },
+      ],
+    });
+
     console.log('✅ Correo enviado a:', datos.correo);
-    
   } catch (error) {
     console.error('❌ Error enviando correo:', error);
-    throw error;  
+    throw error;
   }
 }

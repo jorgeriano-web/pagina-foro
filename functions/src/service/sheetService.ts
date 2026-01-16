@@ -1,5 +1,5 @@
 import {google} from 'googleapis';
-import * as serviceAccount from '../serviceAccount.json';
+import { accFireBaseConfig } from '../configSecrets/firebaseConfigAccount';
 
 const SHEET_ID = '1uon5WZ7e6Nr2Gg2sWLKUS9gExPbVhBwdpIIK1iV_HvE';
 
@@ -21,7 +21,10 @@ interface TransaccionData{
   estado: string;
 }
 
+
 export async function agregarFilaAsheet(transaccionData: TransaccionData) {
+
+    const serviceAccount = await accFireBaseConfig();
 
     const auth = new google.auth.GoogleAuth({
       credentials: {
