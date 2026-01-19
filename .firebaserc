@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "visual-comercial-inmobiliarias"
+  },
+  "targets": {
+    "visual-comercial-inmobiliarias": {
+      "hosting": {
+        "foro": [
+          "foro-inmobiliarias01"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
