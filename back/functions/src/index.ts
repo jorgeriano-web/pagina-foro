@@ -91,6 +91,10 @@ export const crearLinkPago = onCall({ cors: true, secrets: [GATEWAY_CREDENTIALS]
     throw new HttpsError("invalid-argument", "Faltan datos requeridos");
   }
 
+  if(data.asistentes.length !== data.cantidad_boletas){
+    throw new HttpsError("invalid-argument", "Número de asistentes no coincide con la cantidad de boletas");
+  }
+
   try {
 
     const preciosService = new PreciosService();
