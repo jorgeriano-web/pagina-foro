@@ -120,6 +120,15 @@ export class Landing implements OnInit, OnDestroy {
 
     this.timeleft = { days, hours, minutes, seconds };
   }
+
+  abrirWhatsapp(){
+  const numeroWhatsapp = '573144352014';
+  const mensaje = encodeURIComponent('Buen día, necesito ayuda con ');
+  const url = `https://wa.me/${numeroWhatsapp}?text=${mensaje}`;
+  window.open(url, '_blank');
+  }
+
+
 }
 
 

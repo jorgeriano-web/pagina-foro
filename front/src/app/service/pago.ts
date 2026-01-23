@@ -65,7 +65,7 @@ export class Pago {
   async verificarPago(referencia: string){
     const callable = httpsCallable<{ referencia: string }, VerificarPagoResponse>(
       this.functions, 
-      'verificarEstadoPago'
+      'verificarPagosPendientes'
     );
     const result = await callable({ referencia });
     return result.data;

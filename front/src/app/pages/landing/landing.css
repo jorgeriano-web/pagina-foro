@@ -159,6 +159,10 @@ header.scrolled-header {
     margin-top: 50px;
 }
 
+.seccion-boletas-ad :hover {
+    cursor: pointer;
+}
+
 .seccion-precios {
     padding-bottom: 30px;
 }

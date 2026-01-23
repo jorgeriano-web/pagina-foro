@@ -16,7 +16,7 @@ admin.initializeApp();
 const db = getFirestore("payments-foro-inmobiliario");
 
 
-const GATEWAY_CREDENTIALS= defineSecret("gateway-credentials-dev");
+const GATEWAY_CREDENTIALS= defineSecret("gateway-credentials-prod");
 const EMAIL_CREDENTIALS = defineSecret("email-credentials");
 const FIREBASE_CONFIG_ACCOUNT = defineSecret("service-account-transacciones-inmobiliarias")
 
@@ -57,7 +57,7 @@ interface PagoRequest {
 async function obtenerToken(): Promise<string> {
   try {
 
-    const gateway = await getGatewayConfig("dev")
+    const gateway = await getGatewayConfig("prod")
 
     const response = await axios.post(
       `${gateway.baseUrl}/load/compare`,
@@ -81,10 +81,10 @@ async function obtenerToken(): Promise<string> {
 // FUNCIÓN PRINCIPAL: CREAR LINK DE PAGO
 // ============================================
 
-export const crearLinkPago = onCall({ cors: true, secrets: [GATEWAY_CREDENTIALS] }, async (request) => {
+export const crearLinkPagoProd = onCall({ cors: true, secrets: [GATEWAY_CREDENTIALS] }, async (request) => {
   const data = request.data as PagoRequest;
 
-  const gateway = await getGatewayConfig("dev");
+  const gateway = await getGatewayConfig("prod");
 
   // Validar datos
   if (!data.asistentes || !data.facturacion) {
@@ -194,9 +194,9 @@ export const crearLinkPago = onCall({ cors: true, secrets: [GATEWAY_CREDENTIALS]
 // VERIFICAR PAGOS PENDIENTES AUTOMÁTICAMENTE
 // ============================================
 
-export const verificarPagosPendientes = onSchedule(
+export const verificarPagosPendientesProd = onSchedule(
   {
-    schedule: "every 1 minutes",
+    schedule: "every 20 minutes",
     secrets: [
       GATEWAY_CREDENTIALS, 
       EMAIL_CREDENTIALS,     // <- secreto de emails
@@ -210,7 +210,7 @@ export const verificarPagosPendientes = onSchedule(
       // Buscar pagos pendientes de los últimos 30 minutos
       const hace30Min = new Date(Date.now() - 30 * 60 * 1000);
 
-      const gateway = await getGatewayConfig("dev");
+      const gateway = await getGatewayConfig("prod");
 
       const snapshot = await db
         .collection("transacciones")

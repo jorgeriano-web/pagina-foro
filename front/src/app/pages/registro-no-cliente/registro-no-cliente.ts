@@ -80,7 +80,7 @@ export class RegistroNoCliente implements OnInit {
     
     if (response.success) {
       localStorage.setItem('pagoReferencia', response.referencia);
-      
+      console.log("el link es " + response.shortLink)
       this.pagoService.redirigirAPago(response.shortLink);
     }
   } catch (error) {
