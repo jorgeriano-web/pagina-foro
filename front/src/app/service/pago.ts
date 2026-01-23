@@ -53,7 +53,7 @@ export class Pago {
   constructor(private functions : Functions){}
 
   async crearLinkPago(datos: PagoRequest): Promise<PagoResponse> {
-    const callable = httpsCallable<PagoRequest, PagoResponse>(this.functions, 'crearLinkPago');
+    const callable = httpsCallable<PagoRequest, PagoResponse>(this.functions, 'crearLinkPagoProd');
     const result = await callable(datos);
     return result.data;
   }
@@ -65,7 +65,7 @@ export class Pago {
   async verificarPago(referencia: string){
     const callable = httpsCallable<{ referencia: string }, VerificarPagoResponse>(
       this.functions, 
-      'verificarPagosPendientes'
+      'verificarPagosPendientesProd'
     );
     const result = await callable({ referencia });
     return result.data;

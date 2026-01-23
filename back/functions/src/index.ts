@@ -84,7 +84,6 @@ async function obtenerToken(): Promise<string> {
 export const crearLinkPagoProd = onCall({ cors: true, secrets: [GATEWAY_CREDENTIALS] }, async (request) => {
   const data = request.data as PagoRequest;
 
-  const gateway = await getGatewayConfig("prod");
 
   // Validar datos
   if (!data.asistentes || !data.facturacion) {
@@ -96,6 +95,8 @@ export const crearLinkPagoProd = onCall({ cors: true, secrets: [GATEWAY_CREDENTI
   }
 
   try {
+
+    const gateway = await getGatewayConfig("prod");
 
     const preciosService = new PreciosService();
     const precioReal = preciosService.seleccionarBoletasYprecio(data.cantidad_boletas);

@@ -53,10 +53,10 @@ export class RegistroCliente implements OnInit {
   // URL del script de Google para validar póliza
   private GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQqpkFd5pxVcaTlCgydAdKvw3-LQpjTTCuKhGTb8G4F3tl_8BwHnsSuu81dqZm9td82Q/exec';
 
- validarPoliza() {
+async validarPoliza(): Promise<boolean> {
   if (!this.formData.poliza.numero) {
     this.polizaError = 'Ingresa el número de póliza';
-    return;
+    return false;
   }
 
   this.validandoPoliza = true;
@@ -64,25 +64,27 @@ export class RegistroCliente implements OnInit {
 
   const url = `${this.GOOGLE_SCRIPT_URL}?poliza=${this.formData.poliza.numero}`;
 
-  this.http.get<any>(url).subscribe({
-    next: (data) => {
-      if (data.success) {
-        this.formData.poliza.inmobiliaria = data.inmobiliaria;
-        this.formData.poliza.ciudad = data.ciudad;
-        this.formData.poliza.ejecutivo = data.ejecutivo;
-        this.polizaValidada = true;
-      } else {
-        this.polizaError = data.message || 'Póliza no encontrada.';
-      }
+  try {
+    const data = await this.http.get<any>(url).toPromise();
+    
+    if (data.success) {
+      this.formData.poliza.inmobiliaria = data.inmobiliaria;
+      this.formData.poliza.ciudad = data.ciudad;
+      this.formData.poliza.ejecutivo = data.ejecutivo;
+      this.polizaValidada = true;
       this.validandoPoliza = false;
-      
-      this.cdr.detectChanges(); 
-    },
-    error: () => {
-      this.polizaError = 'No se pudo conectar. Intente de nuevo.';
+      this.cdr.detectChanges();
+      return true;
+    } else {
+      this.polizaError = data.message || 'Póliza no encontrada.';
       this.validandoPoliza = false;
+      return false;
     }
-  });
+  } catch (error) {
+    this.polizaError = 'No se pudo conectar. Intente de nuevo.';
+    this.validandoPoliza = false;
+    return false;
+  }
 }
 
 
@@ -107,6 +109,17 @@ export class RegistroCliente implements OnInit {
   }
 
   async enviarFormulario() {
+
+    this.spinner = true;
+
+    const esValida = await this.validarPoliza();
+
+    if (!esValida) {
+    this.spinner = false;
+    alert('Error: La póliza no es válida.');
+    return;
+    }
+
     const datosPago: PagoRequest = {
     esCliente: true,
     inmobiliaria: {
@@ -120,7 +133,6 @@ export class RegistroCliente implements OnInit {
     cantidad_boletas: this.cantidadBoletas
   };
 
-  this.spinner = true;
 
   try {
     const response = await this.pagoService.crearLinkPago(datosPago);
@@ -148,7 +160,11 @@ export class RegistroCliente implements OnInit {
 
   isFormValid(): boolean {
   // 1️⃣ Validar póliza
-  if (!this.formData.poliza.numero || !this.polizaValidada) {
+  if (!this.formData.poliza.numero || 
+      !this.polizaValidada ||
+      !this.formData.poliza.inmobiliaria ||
+      !this.formData.poliza.ciudad ||
+      !this.formData.poliza.ejecutivo) {
     return false;
   }
 
