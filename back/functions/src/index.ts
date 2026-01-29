@@ -275,6 +275,7 @@ export const verificarPagosPendientesProd = onSchedule(
                     numDoc: a.numDoc || a.numeroDocumento || "",
                   })),
                   estado: "APROBADO",
+                  ejecutivo: data.inmobiliaria?.ejecutivo || null
                 });
 
                 await doc.ref.update({ guardadoEnSheet: true });

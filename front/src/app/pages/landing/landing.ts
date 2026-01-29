@@ -12,6 +12,7 @@ import { ServiceBoletas } from '../../service/service-boletas';
 })
 export class Landing implements OnInit, OnDestroy {
 
+  dataLayer: any[] = (window as any).dataLayer || [];
   isScrolled = false;
   isMenuOpen = false;
   timeleft = {
@@ -89,6 +90,34 @@ export class Landing implements OnInit, OnDestroy {
   }
 
   seleccionarBoletas(cantidad: 1 | 2 | 3): void{
+
+    if (cantidad === 1) {
+      this.dataLayer.push({
+        event: 'ga_event',
+        category: 'foro 2026',
+        action: 'AMW - comprar 1 entrada',
+        label: 'Comprar 1 entrada'
+      });
+    }
+
+    if (cantidad === 2) {
+      this.dataLayer.push({
+        event: 'ga_event',
+        category: 'foro 2026',
+        action: 'AMW - comprar 2 entradas',
+        label: 'Comprar 2 entradas'
+      });
+    }
+
+    if (cantidad === 3) {
+      this.dataLayer.push({
+        event: 'ga_event',
+        category: 'foro 2026',
+        action: 'AMW - comprar 3 entradas',
+        label: 'Comprar 3 entradas'
+      });
+    }
+
     this.boletasService.seleccionarCantidadBoletas(cantidad);
     this.router.navigate(['/inicio-registro'])
   }
@@ -122,12 +151,44 @@ export class Landing implements OnInit, OnDestroy {
   }
 
   abrirWhatsapp(){
+
+    this.dataLayer.push({
+    event: 'ga_event',
+    category: 'foro 2026',
+    action: 'AMW - boton whatsapp',
+    label: 'resuelve tus dudas'
+    });
   const numeroWhatsapp = '573144352014';
-  const mensaje = encodeURIComponent('Buen día, necesito ayuda con ');
+  const mensaje = encodeURIComponent('Buen día, tengo una duda con ');
   const url = `https://wa.me/${numeroWhatsapp}?text=${mensaje}`;
   window.open(url, '_blank');
   }
 
+  comprarMasDe4boletas(){
+
+    this.dataLayer.push({
+      'event':'ga_event',
+      'category':'foro 2026',
+      'action':'AMW - necesito mas de 5 entradas',
+      'label':'{{texto boton}}'})
+
+      const numeroWhatsapp = '573144352014';
+      const mensaje = encodeURIComponent('Buen día, quiero comprar.. ');
+      const url = `https://wa.me/${numeroWhatsapp}?text=${mensaje}`;
+      window.open(url, '_blank');
+    }
+
+
+  trackHeader(opcion: string): void {
+    this.dataLayer.push({
+      event: 'ga_event',
+      category: 'foro 2026',
+      action: 'AMW - header foro',
+      label: opcion
+    });
+  }
+
+    
 
 }
 

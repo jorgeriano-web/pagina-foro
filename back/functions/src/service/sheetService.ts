@@ -19,6 +19,7 @@ interface TransaccionData{
     numDoc: string
   }[];
   estado: string;
+  ejecutivo: string
 }
 
 
@@ -50,6 +51,7 @@ export async function agregarFilaAsheet(transaccionData: TransaccionData) {
     asistente.correo,
     asistente.telefono,
     transaccionData.estado,
+    transaccionData.ejecutivo || 'N/A'
   ]);
 
   await sheets.spreadsheets.values.append({
