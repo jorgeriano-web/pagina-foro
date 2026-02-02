@@ -333,6 +333,77 @@ export const verificarPagosPendientesProd = onSchedule(
   }
 );
 
+// Función para recuperar pagos aprobados que no se guardaron en Sheets
+export const recuperarPagosNoGuardadosEnSheets = onSchedule(
+  {
+    schedule: "every 5 minutes",
+    secrets: [
+      GATEWAY_CREDENTIALS, 
+      EMAIL_CREDENTIALS,
+      FIREBASE_CONFIG_ACCOUNT
+    ],
+  },
+  async (event) => {
+    console.log("🔍 Iniciando recuperación de pagos no guardados en Sheets...");
+
+    try {
+      const snapshot = await db
+        .collection("transacciones")
+        .where("estado", "==", "APROBADO")
+        .where("guardadoEnSheet", "==", false)
+        .get();
+
+      console.log(`📊 Transacciones aprobadas sin guardar encontradas: ${snapshot.size}`);
+
+      if (snapshot.empty) {
+        console.log("✅ No hay pagos pendientes de guardar");
+        return;
+      }
+
+      for (const doc of snapshot.docs) {
+        const data = doc.data();
+        const referencia = data.referencia;
+
+        try {
+          await agregarFilaAsheet({
+            fecha: data.fecha_pago 
+              ? new Date(data.fecha_pago.toDate()).toISOString().split("T")[0]
+              : new Date().toISOString().split("T")[0],
+            referencia: data.referencia,
+            esCliente: data.esCliente,
+            inmobiliaria: data.inmobiliaria?.inmobiliaria || null,
+            ciudad: data.inmobiliaria?.ciudad || null,
+            poliza: data.inmobiliaria?.poliza || null,
+            cantidadBoletas: data.cantidad_boletas,
+            precioTotal: data.precio_total,
+            asistentes: data.asistentes.map((a: any) => ({
+              nombre: a.nombre,
+              telefono: a.telefono,
+              correo: a.correo,
+              numDoc: a.numDoc || a.numeroDocumento || "",
+            })),
+            estado: "APROBADO",
+            ejecutivo: data.inmobiliaria?.ejecutivo || null
+          });
+
+          await doc.ref.update({ guardadoEnSheet: true });
+          console.log(`✅ Guardado en Sheets: ${referencia}`);
+
+        } catch (sheetError) {
+          console.error(`❌ Error Sheets para ${referencia}:`, sheetError);
+        }
+      }
+
+      console.log("✅ Recuperación completada");
+
+    } catch (error: any) {
+      console.error("❌ Error general en recuperación:", error);
+    }
+  }
+);
+
+
+
 
 
 
