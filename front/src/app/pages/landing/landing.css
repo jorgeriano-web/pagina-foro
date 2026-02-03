@@ -171,7 +171,8 @@ header.scrolled-header {
 }
 
 .seccion-precios {
-    padding-bottom: 30px;
+    padding-bottom: 10px;
+    padding-top: 2rem !important;
 }
 
 /* Logos animados */
