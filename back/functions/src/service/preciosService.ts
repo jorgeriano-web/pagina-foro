@@ -3,9 +3,17 @@
 export class PreciosService{
 
     private precios: {[key: number]: number} = {
-    1: 280000,
-    2: 520000,
-    3: 640000
+        1: 330000,
+        2: 520000,
+        3: 640000,
+        4: 1000000,
+        5: 1150000,
+        6: 1320000,
+        8: 1600000,
+        10: 1900000,
+        15: 2400000,
+        20: 3000000,
+        30: 4200000
     }
 
     private cantidad: number = 0;
@@ -13,7 +21,7 @@ export class PreciosService{
 
     seleccionarBoletasYprecio(cantidad: number){
         if (!(cantidad in this.precios)) {
-            throw new Error("Cantidad de boletas inválida. Solo se permiten 1, 2 o 3 boletas");
+            throw new Error("Cantidad de boletas inválida.");
         }
         return this.precios[cantidad];
     }
