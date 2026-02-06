@@ -197,7 +197,7 @@ export const crearLinkPagoProd = onCall({ cors: true, secrets: [GATEWAY_CREDENTI
 
 export const verificarPagosPendientesProd = onSchedule(
   {
-    schedule: "every 20 minutes",
+    schedule: "every 6 hours",
     secrets: [
       GATEWAY_CREDENTIALS, 
       EMAIL_CREDENTIALS,     // <- secreto de emails
@@ -208,18 +208,15 @@ export const verificarPagosPendientesProd = onSchedule(
     console.log("🔍 Iniciando verificación automática...");
 
     try {
-      // Buscar pagos pendientes de los últimos 30 minutos
-      const hace30Min = new Date(Date.now() - 30 * 60 * 1000);
 
       const gateway = await getGatewayConfig("prod");
 
       const snapshot = await db
         .collection("transacciones")
         .where("estado", "==", "PENDIENTE")
-        .where("fecha_creacion", ">", hace30Min)
         .get();
 
-      //console.log(`📊 Transacciones pendientes encontradas: ${snapshot.size}`);
+      console.log(`📊 Transacciones pendientes encontradas: ${snapshot.size}`);
 
       if (snapshot.empty) {
         console.log("✅ No hay pagos pendientes");
@@ -336,7 +333,7 @@ export const verificarPagosPendientesProd = onSchedule(
 // Función para recuperar pagos aprobados que no se guardaron en Sheets
 export const recuperarPagosNoGuardadosEnSheets = onSchedule(
   {
-    schedule: "every 5 minutes",
+    schedule: "every 2 hours",
     secrets: [
       GATEWAY_CREDENTIALS, 
       EMAIL_CREDENTIALS,
@@ -401,10 +398,3 @@ export const recuperarPagosNoGuardadosEnSheets = onSchedule(
     }
   }
 );
-
-
-
-
-
-
-
