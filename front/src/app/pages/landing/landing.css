@@ -159,6 +159,13 @@ header.scrolled-header {
     margin-top: 50px;
 }
 
+.devolucion{
+    margin-top: 10px;
+    font-size: 15px;
+    color: rgb(107 114 128 / var(--tw-text-opacity, 1));
+    font-style: italic;
+}
+
 .seccion-boletas-ad :hover {
     cursor: pointer;
 }

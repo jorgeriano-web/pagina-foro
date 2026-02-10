@@ -26,7 +26,7 @@ export class Landing implements OnInit, OnDestroy {
   constructor(private boletasService: ServiceBoletas, private router: Router, private cdRef: ChangeDetectorRef){}
 
   ngOnInit(): void {
-    const fechaForo = new Date(2026, 1, 13, 0, 0, 0);
+    const fechaForo = new Date(2026, 1, 14, 0, 0, 0);
 
     // Primera ejecución inmediata
     this.actualizarTiempo(fechaForo);

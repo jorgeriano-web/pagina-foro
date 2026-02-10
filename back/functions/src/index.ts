@@ -34,6 +34,9 @@ interface InmobiliariaData{
   inmobiliaria: string;
   ciudad: string;
   ejecutivo: string;
+  segmento: string,
+  contratos: string,
+  primas: string
 }
 
 interface Facturacion {
@@ -272,7 +275,10 @@ export const verificarPagosPendientesProd = onSchedule(
                     numDoc: a.numDoc || a.numeroDocumento || "",
                   })),
                   estado: "APROBADO",
-                  ejecutivo: data.inmobiliaria?.ejecutivo || null
+                  ejecutivo: data.inmobiliaria?.ejecutivo || null,
+                  segmento: data.inmobiliaria?.segmento || null,
+                  contratos: data.inmobiliaria?.contratos || null,
+                  primas: data.inmobiliaria?.primas || null
                 });
 
                 await doc.ref.update({ guardadoEnSheet: true });
@@ -380,7 +386,10 @@ export const recuperarPagosNoGuardadosEnSheets = onSchedule(
               numDoc: a.numDoc || a.numeroDocumento || "",
             })),
             estado: "APROBADO",
-            ejecutivo: data.inmobiliaria?.ejecutivo || null
+            ejecutivo: data.inmobiliaria?.ejecutivo || null,
+            segmento: data.inmobiliaria?.segmento || null,
+            contratos: data.inmobiliaria?.contratos || null,
+            primas: data.inmobiliaria?.primas || null
           });
 
           await doc.ref.update({ guardadoEnSheet: true });
