@@ -161,10 +161,9 @@ header.scrolled-header {
 
 .devolucion{
     margin-top: 10px;
-    font-size: 25px;
-    color: rgb(45 52 80 / var(--tw-text-opacity, 1));
-    font-weight: bolder;
-    font-family: italic;
+    font-size: 15px;
+    color: rgb(107 114 128 / var(--tw-text-opacity, 1));
+    font-style: italic;
 }
 .seccion-boletas-ad :hover {
     cursor: pointer;
