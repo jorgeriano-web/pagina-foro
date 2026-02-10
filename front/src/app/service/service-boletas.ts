@@ -9,20 +9,22 @@ export class ServiceBoletas {
   private precio: number = 0;
 
   private readonly precios: {[key: number]: number} ={
-    1: 330000,
+    1: 280000,
     2: 520000,
     3: 640000,
-    4: 1000000,
-    5: 1150000,
-    6: 1320000,
-    8: 1600000,
-    10: 1900000,
+    4: 840000,
+    5: 1000000,
+    6: 1140000,
+    7: 1260000,
+    8: 1360000,
+    10: 1600000,
     15: 2400000,
     20: 3000000,
+    21: 4200000,
     30: 4200000
   }
 
-  seleccionarCantidadBoletas(cantidad: 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 15 | 20 | 30 ): void{
+  seleccionarCantidadBoletas(cantidad: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 10 | 15 | 20 | 21 | 30 ): void{
     this.cantidad = cantidad;
     this.precio =  this.precios[cantidad];
   }

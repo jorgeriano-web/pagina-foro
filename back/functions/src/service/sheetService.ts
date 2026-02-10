@@ -55,9 +55,9 @@ export async function agregarFilaAsheet(transaccionData: TransaccionData) {
     asistente.telefono,
     transaccionData.estado,
     transaccionData.ejecutivo || 'N/A',
-    transaccionData.segmento || 'N/A',
-    transaccionData.contratos || 'N/A',
-    transaccionData.primas || 'N/A'
+    index === 0 ? transaccionData.segmento : 0,
+    index === 0 ? transaccionData.contratos : 0,
+    index === 0 ? transaccionData.primas : 0
   ]);
 
   await sheets.spreadsheets.values.append({

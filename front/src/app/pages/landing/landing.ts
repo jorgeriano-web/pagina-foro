@@ -26,7 +26,7 @@ export class Landing implements OnInit, OnDestroy {
   constructor(private boletasService: ServiceBoletas, private router: Router, private cdRef: ChangeDetectorRef){}
 
   ngOnInit(): void {
-    const fechaForo = new Date(2026, 4, 20, 0, 0, 0);
+    const fechaForo = new Date(2026, 2, 1 , 0, 0, 0);
 
     // Primera ejecución inmediata
     this.actualizarTiempo(fechaForo);
@@ -89,7 +89,7 @@ export class Landing implements OnInit, OnDestroy {
     });
   }
 
-  seleccionarBoletas(cantidad: 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 15 | 20 | 30): void{
+  seleccionarBoletas(cantidad: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 10 | 15 | 20 | 21 | 30): void{
 
     if (cantidad === 1) {
       this.dataLayer.push({
