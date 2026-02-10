@@ -4,7 +4,7 @@ import { accFireBaseConfig } from '../configSecrets/firebaseConfigAccount';
 const SHEET_ID = '1uon5WZ7e6Nr2Gg2sWLKUS9gExPbVhBwdpIIK1iV_HvE';
 
 interface TransaccionData{
-    fecha: string;
+  fecha: string;
   referencia: string;
   esCliente: boolean;
   inmobiliaria: string | null;
@@ -19,7 +19,10 @@ interface TransaccionData{
     numDoc: string
   }[];
   estado: string;
-  ejecutivo: string
+  ejecutivo: string;
+  segmento: string;
+  contratos: string;
+  primas: string
 }
 
 
@@ -51,7 +54,10 @@ export async function agregarFilaAsheet(transaccionData: TransaccionData) {
     asistente.correo,
     asistente.telefono,
     transaccionData.estado,
-    transaccionData.ejecutivo || 'N/A'
+    transaccionData.ejecutivo || 'N/A',
+    transaccionData.segmento || 'N/A',
+    transaccionData.contratos || 'N/A',
+    transaccionData.primas || 'N/A'
   ]);
 
   await sheets.spreadsheets.values.append({
