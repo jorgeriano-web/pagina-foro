@@ -1,7 +1,7 @@
 import {
   AppCheckInstances,
   AuthInstances
-} from "./chunk-ERXEO3KN.js";
+} from "./chunk-WE66RUD5.js";
 import {
   Component,
   FirebaseApp,
@@ -33,9 +33,10 @@ import {
   ɵgetAllInstancesOf,
   ɵgetDefaultInstanceOf,
   ɵzoneWrap
-} from "./chunk-7BBCYIYA.js";
+} from "./chunk-SANJESCD.js";
 import "./chunk-52KQLOME.js";
 import "./chunk-R6U7IGMG.js";
+import "./chunk-JS7UPFDT.js";
 import {
   InjectionToken,
   Injector,
@@ -61,7 +62,6 @@ import {
   startWith,
   timer
 } from "./chunk-JI2ZN7O6.js";
-import "./chunk-JS7UPFDT.js";
 import "./chunk-GOMI4DH3.js";
 
 // node_modules/@angular/fire/node_modules/@firebase/webchannel-wrapper/dist/bloom-blob/esm/bloom_blob_es2018.js

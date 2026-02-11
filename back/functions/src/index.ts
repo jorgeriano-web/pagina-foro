@@ -200,7 +200,7 @@ export const crearLinkPagoProd = onCall({ cors: true, secrets: [GATEWAY_CREDENTI
 
 export const verificarPagosPendientesProd = onSchedule(
   {
-    schedule: "every 6 hours",
+    schedule: "every 30 minutes",
     secrets: [
       GATEWAY_CREDENTIALS, 
       EMAIL_CREDENTIALS,     // <- secreto de emails
@@ -339,7 +339,7 @@ export const verificarPagosPendientesProd = onSchedule(
 // Función para recuperar pagos aprobados que no se guardaron en Sheets
 export const recuperarPagosNoGuardadosEnSheets = onSchedule(
   {
-    schedule: "every 2 hours",
+    schedule: "every 4 hours",
     secrets: [
       GATEWAY_CREDENTIALS, 
       EMAIL_CREDENTIALS,

@@ -1,4 +1,7 @@
 import {
+  openDB
+} from "./chunk-JS7UPFDT.js";
+import {
   EnvironmentInjector,
   Inject,
   Injectable,
@@ -33,9 +36,6 @@ import {
   subscribeOn,
   timer
 } from "./chunk-JI2ZN7O6.js";
-import {
-  openDB
-} from "./chunk-JS7UPFDT.js";
 
 // node_modules/@angular/fire/node_modules/@firebase/util/dist/postinstall.mjs
 var getDefaultsFromPostinstall = () => void 0;
@@ -2736,4 +2736,4 @@ firebase/app/dist/esm/index.esm.js:
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-7BBCYIYA.js.map
+//# sourceMappingURL=chunk-SANJESCD.js.map

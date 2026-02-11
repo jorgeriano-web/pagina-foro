@@ -44,7 +44,7 @@ export class RegistroCliente implements OnInit {
   ];
 
   formData = {
-    poliza: { numero: '', inmobiliaria: '', ciudad: '', ejecutivo: ''},
+    poliza: { numero: '', inmobiliaria: '', ciudad: '', ejecutivo: '', segmentacion: '', contratos: 0, primas:''},
     asistentes: [
       { nombre: '', telefono: '', numDoc: '', correo: '' }
     ],
@@ -73,6 +73,9 @@ async validarPoliza(): Promise<boolean> {
       this.formData.poliza.inmobiliaria = data.inmobiliaria;
       this.formData.poliza.ciudad = data.ciudad;
       this.formData.poliza.ejecutivo = data.ejecutivo;
+      this.formData.poliza.segmentacion = data.segmentacion;
+      this.formData.poliza.contratos = Number(data.contratos);
+      this.formData.poliza.primas = data.primas;
       this.polizaValidada = true;
       this.validandoPoliza = false;
       this.cdr.detectChanges();
@@ -128,7 +131,10 @@ async validarPoliza(): Promise<boolean> {
       poliza: this.formData.poliza.numero,
       inmobiliaria: this.formData.poliza.inmobiliaria,
       ciudad: this.formData.poliza.ciudad,
-      ejecutivo: this.formData.poliza.ejecutivo
+      ejecutivo: this.formData.poliza.ejecutivo,
+      segmentacion: this.formData.poliza.segmentacion,
+      contratos: this.formData.poliza.contratos,
+      primas: this.formData.poliza.primas
     },
     asistentes: this.formData.asistentes,
     facturacion: this.formData.facturacion,

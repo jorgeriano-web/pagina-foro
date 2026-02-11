@@ -14,6 +14,9 @@ interface InmobiliariaData {
   inmobiliaria: string;
   ciudad: string;
   ejecutivo: string;
+  segmentacion?: string;
+  contratos?: number;
+  primas?: string;
 }
 
 interface Facturacion {
