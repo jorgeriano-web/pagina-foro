@@ -26,7 +26,7 @@ export class Landing implements OnInit, OnDestroy {
   constructor(private boletasService: ServiceBoletas, private router: Router, private cdRef: ChangeDetectorRef){}
 
   ngOnInit(): void {
-    const fechaForo = new Date(2026, 1, 14, 0, 0, 0);
+    const fechaForo = new Date(2026, 2, 1 , 0, 0, 0);
 
     // Primera ejecución inmediata
     this.actualizarTiempo(fechaForo);
@@ -89,7 +89,7 @@ export class Landing implements OnInit, OnDestroy {
     });
   }
 
-  seleccionarBoletas(cantidad: 1 | 2 | 3): void{
+  seleccionarBoletas(cantidad: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8): void{
 
     if (cantidad === 1) {
       this.dataLayer.push({
@@ -163,20 +163,6 @@ export class Landing implements OnInit, OnDestroy {
   const url = `https://wa.me/${numeroWhatsapp}?text=${mensaje}`;
   window.open(url, '_blank');
   }
-
-  comprarMasDe4boletas(){
-
-    this.dataLayer.push({
-      'event':'ga_event',
-      'category':'foro 2026',
-      'action':'AMW - necesito mas de 5 entradas',
-      'label':'{{texto boton}}'})
-
-      const numeroWhatsapp = '573144352014';
-      const mensaje = encodeURIComponent('Buen día, quiero comprar.. ');
-      const url = `https://wa.me/${numeroWhatsapp}?text=${mensaje}`;
-      window.open(url, '_blank');
-    }
 
 
   trackHeader(opcion: string): void {

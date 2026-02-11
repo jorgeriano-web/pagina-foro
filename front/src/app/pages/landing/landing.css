@@ -165,13 +165,13 @@ header.scrolled-header {
     color: rgb(107 114 128 / var(--tw-text-opacity, 1));
     font-style: italic;
 }
-
 .seccion-boletas-ad :hover {
     cursor: pointer;
 }
 
 .seccion-precios {
-    padding-bottom: 30px;
+    padding-bottom: 10px;
+    padding-top: 2rem !important;
 }
 
 /* Logos animados */

@@ -11,10 +11,15 @@ export class ServiceBoletas {
   private readonly precios: {[key: number]: number} ={
     1: 280000,
     2: 520000,
-    3: 640000
+    3: 640000,
+    4: 840000,
+    5: 1000000,
+    6: 1140000,
+    7: 1260000,
+    8: 1360000,
   }
 
-  seleccionarCantidadBoletas(cantidad: 1 | 2 | 3): void{
+  seleccionarCantidadBoletas(cantidad: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8): void{
     this.cantidad = cantidad;
     this.precio =  this.precios[cantidad];
   }
