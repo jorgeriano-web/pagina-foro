@@ -407,10 +407,3 @@ export const recuperarPagosNoGuardadosEnSheets = onSchedule(
     }
   }
 );
-
-
-
-
-
-
-
