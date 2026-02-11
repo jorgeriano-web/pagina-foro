@@ -5,6 +5,7 @@ import { RouterLink } from "@angular/router";
 import { ServiceBoletas } from '../../service/service-boletas';
 import { Pago, PagoRequest } from '../../service/pago';
 import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-registro-cliente',
@@ -43,7 +44,7 @@ export class RegistroCliente implements OnInit {
   ];
 
   formData = {
-    poliza: { numero: '', inmobiliaria: '', ciudad: '', ejecutivo: '' },
+    poliza: { numero: '', inmobiliaria: '', ciudad: '', ejecutivo: ''},
     asistentes: [
       { nombre: '', telefono: '', numDoc: '', correo: '' }
     ],
@@ -65,7 +66,8 @@ async validarPoliza(): Promise<boolean> {
   const url = `${this.GOOGLE_SCRIPT_URL}?poliza=${this.formData.poliza.numero}`;
 
   try {
-    const data = await this.http.get<any>(url).toPromise();
+    
+    const data = await firstValueFrom(this.http.get<any>(url));
     
     if (data.success) {
       this.formData.poliza.inmobiliaria = data.inmobiliaria;

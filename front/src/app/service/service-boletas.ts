@@ -17,14 +17,9 @@ export class ServiceBoletas {
     6: 1140000,
     7: 1260000,
     8: 1360000,
-    10: 1600000,
-    15: 2400000,
-    20: 3000000,
-    21: 4200000,
-    30: 4200000
   }
 
-  seleccionarCantidadBoletas(cantidad: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 10 | 15 | 20 | 21 | 30 ): void{
+  seleccionarCantidadBoletas(cantidad: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8): void{
     this.cantidad = cantidad;
     this.precio =  this.precios[cantidad];
   }

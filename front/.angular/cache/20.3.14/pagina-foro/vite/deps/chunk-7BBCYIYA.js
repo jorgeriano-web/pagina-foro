@@ -1,7 +1,4 @@
 import {
-  openDB
-} from "./chunk-JS7UPFDT.js";
-import {
   EnvironmentInjector,
   Inject,
   Injectable,
@@ -9,31 +6,36 @@ import {
   Injector,
   NgModule,
   NgZone,
-  Observable,
   Optional,
   PLATFORM_ID,
   PendingTasks,
   VERSION,
   Version,
   assertInInjectionContext,
-  asyncScheduler,
-  concatMap,
-  distinct,
-  from,
   inject,
   isDevMode,
   makeEnvironmentProviders,
-  observeOn,
-  queueScheduler,
   runInInjectionContext,
   setClassMetadata,
-  subscribeOn,
-  timer,
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-3SLAJDTR.js";
+} from "./chunk-S2HDPD4Q.js";
+import {
+  Observable,
+  asyncScheduler,
+  concatMap,
+  distinct,
+  from,
+  observeOn,
+  queueScheduler,
+  subscribeOn,
+  timer
+} from "./chunk-JI2ZN7O6.js";
+import {
+  openDB
+} from "./chunk-JS7UPFDT.js";
 
 // node_modules/@angular/fire/node_modules/@firebase/util/dist/postinstall.mjs
 var getDefaultsFromPostinstall = () => void 0;
@@ -2734,4 +2736,4 @@ firebase/app/dist/esm/index.esm.js:
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-MY2YIWBS.js.map
+//# sourceMappingURL=chunk-7BBCYIYA.js.map
