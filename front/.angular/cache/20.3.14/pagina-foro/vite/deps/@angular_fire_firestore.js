@@ -34,9 +34,9 @@ import {
   ɵgetDefaultInstanceOf,
   ɵzoneWrap
 } from "./chunk-SANJESCD.js";
+import "./chunk-JS7UPFDT.js";
 import "./chunk-52KQLOME.js";
 import "./chunk-R6U7IGMG.js";
-import "./chunk-JS7UPFDT.js";
 import {
   InjectionToken,
   Injector,

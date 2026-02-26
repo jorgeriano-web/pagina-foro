@@ -118,6 +118,51 @@ export class Landing implements OnInit, OnDestroy {
       });
     }
 
+    if (cantidad === 4) {
+      this.dataLayer.push({
+        event: 'ga_event',
+        category: 'foro 2026',
+        action: 'AMW - necesito mas entradas',
+        label: 'Comprar 4 entradas'
+      });
+    }
+
+    if (cantidad === 5) {
+      this.dataLayer.push({
+        event: 'ga_event',
+        category: 'foro 2026',
+        action: 'AMW - necesito mas entradas',
+        label: 'Comprar 5 entradas'
+      });
+    }
+
+    if (cantidad === 6) {
+      this.dataLayer.push({
+        event: 'ga_event',
+        category: 'foro 2026',
+        action: 'AMW - necesito mas entradas',
+        label: 'Comprar 6 entradas'
+      });
+    }
+
+    if (cantidad === 7) {
+      this.dataLayer.push({
+        event: 'ga_event',
+        category: 'foro 2026',
+        action: 'AMW - necesito mas entradas',
+        label: 'Comprar 7 entradas'
+      });
+    }
+
+    if (cantidad === 8) {
+      this.dataLayer.push({
+        event: 'ga_event',
+        category: 'foro 2026',
+        action: 'AMW - necesito mas entradas',
+        label: 'Comprar 8 entradas'
+      });
+    }
+
     this.boletasService.seleccionarCantidadBoletas(cantidad);
     this.router.navigate(['/inicio-registro'])
   }
@@ -172,6 +217,13 @@ export class Landing implements OnInit, OnDestroy {
       action: 'AMW - header foro',
       label: opcion
     });
+  }
+
+  abrirWhatsappHotel(){
+    const numeroWhatsapp = '573204116480';
+    const mensaje = encodeURIComponent('Buen día, quisiera mas información para la reserva de hotel. ');
+    const url = `https://wa.me/${numeroWhatsapp}?text=${mensaje}`;
+    window.open(url, '_blank');
   }
 
     
