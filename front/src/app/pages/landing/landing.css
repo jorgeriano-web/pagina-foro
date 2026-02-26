@@ -112,6 +112,19 @@ header.scrolled-header {
     margin-bottom: 130px;
 }
 
+.seccion-boletas-ad-2{
+            background-image: url("../../../assets/img/fondo-banner-2.png");
+            background-repeat: no-repeat;
+            background-size: cover !important;
+            height: auto;
+            min-height: 185px;
+            margin-bottom: 80px !important;
+}
+
+.imagen-boletos-2{
+    width: 230px;
+}
+
 .etiqueta-pilar {
     background-color: #2d3450;
 }
@@ -149,6 +162,10 @@ header.scrolled-header {
     background-size: cover;
     height: 185px;
     margin-bottom: 80px;
+}
+
+.botonWhatsappHilton :hover{
+    cursor: pointer !important;
 }
 
 .sub-text-entradas-ad {

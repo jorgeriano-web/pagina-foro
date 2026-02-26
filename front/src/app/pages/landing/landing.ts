@@ -221,7 +221,7 @@ export class Landing implements OnInit, OnDestroy {
 
   abrirWhatsappHotel(){
     const numeroWhatsapp = '573204116480';
-    const mensaje = encodeURIComponent('Buen día, quisiera mas información para la reserva de hotel. ');
+    const mensaje = encodeURIComponent('Hola. Soy asistente del Foro Experiencia Inmobiliaria, quisiera cotizar habitación con la tarifa preferencial del evento. ¿Podrían compartirme disponibilidad y valores, por favor? ');
     const url = `https://wa.me/${numeroWhatsapp}?text=${mensaje}`;
     window.open(url, '_blank');
   }
