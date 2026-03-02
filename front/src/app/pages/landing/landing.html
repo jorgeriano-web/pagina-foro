@@ -12,7 +12,7 @@
             <a href="#precios-pioneros-section" (click)="trackHeader('Boletas')" class="nav-link text-white hover:text-gray-300">Boletas</a>
         </div>
         <div class="hidden min-[1108px]:block">
-            <span class="text-white border border-white/50 rounded-md px-3 py-1.5 text-sm">Etapa 1: pioneros</span>
+            <span class="text-white border border-white/50 rounded-md px-3 py-1.5 text-sm">Etapa 2: visionarios</span>
         </div>
         <div class="min-[1108px]:hidden col-start-3 justify-self-end">
             <button (click)="toggleMenu()" class="absolute top-4 right-6 text-[#2d3450]">
@@ -50,7 +50,7 @@
                     <p class="text-2xl font-bold mt-2 texto-fecha">21 - 22 de mayo 2026</p>
                 </div>
                 <div class="mt-12">
-                    <p class="text-sm mb-2 texto-contador">Etapa pioneros cierra en:</p>
+                    <p class="text-sm mb-2 texto-contador">Etapa visionarios cierra en:</p>
                     <div class="flex space-x-3 justify-center">
                         <div class="timer-box">
                             <span id="days" class="text-3xl font-bold">{{timeleft.days}}</span>
@@ -251,7 +251,7 @@
 
     <section id="precios-pioneros-section" class="py-20 sm:py-28 bg-[#f7f8fa] seccion-precios">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-[#2d3450] texto-entradas">Etapa pioneros: asegura tu entrada</h2>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#2d3450] texto-entradas">Etapa visionarios: asegura tu entrada</h2>
             <p class="mt-4 text-lg text-gray-600" style="margin-top: 0;">Comparte el conocimiento con tu equipo y vive la mejor experiencia</p>
     
             <div class="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center max-w-sm mx-auto lg:max-w-none">
@@ -259,7 +259,7 @@
                 <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col h-full border border-gray-200">
                     <h3 class="text-2xl font-bold text-[#2d3450] sub-texto-tarjeta">Entrada individual</h3>
                     <div class="my-6">
-                        <span class="text-5xl font-extrabold text-[#2d3450]">$280.000</span>
+                        <span class="text-5xl font-extrabold text-[#2d3450]">$330.000</span>
                     </div>
                     <div class="space-y-2 text-gray-600 mb-8">
                         <p class="border-b border-gray-300 pb-3">Por persona</p>
@@ -279,11 +279,10 @@
                     </div>
                     <h3 class="text-2xl font-bold">Equipo de 2 personas</h3>
                     <div class="my-6">
-                        <span class="text-5xl font-extrabold">$520.000</span>
+                        <span class="text-5xl font-extrabold">$620.000</span>
                     </div>
                     <div class="space-y-2 text-white mb-8">
-                        <p class="border-b border-white/50 pb-3">Ahorro: 40.000</p>
-                        <p class="font-bold pt-2">Persona: 260.000</p>
+                        <p class="font-bold pt-2">Persona: 310.000</p>
                     </div>
                     <button (click)="seleccionarBoletas(2)" class="mt-auto w-full bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-ticket icono-compra"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 5l0 2" /><path d="M15 11l0 2" /><path d="M15 17l0 2" /><path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" /></svg>
@@ -294,11 +293,10 @@
                 <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col h-full border border-gray-200">
                     <h3 class="text-2xl font-bold text-[#2d3450] sub-texto-tarjeta">Equipo de 3 personas</h3>
                     <div class="my-6">
-                        <span class="text-5xl font-extrabold text-[#2d3450]">$640.000</span>
+                        <span class="text-5xl font-extrabold text-[#2d3450]">$780.000</span>
                     </div>
                     <div class="space-y-2 text-gray-600 mb-8">
-                        <p class="border-b border-gray-300 pb-3">Ahorro: 200.000</p>
-                        <p class="font-bold text-[#2d3450] pt-2">Persona: $213.000</p>
+                        <p class="font-bold text-[#2d3450] pt-2">Persona: $260.000</p>
                     </div>
                     <button (click)="seleccionarBoletas(3)" class="mt-auto w-full bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-ticket icono-compra"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 5l0 2" /><path d="M15 11l0 2" /><path d="M15 17l0 2" /><path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" /></svg>
@@ -309,11 +307,10 @@
                 <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col h-full border border-gray-200">
                     <h3 class="text-2xl font-bold text-[#2d3450] sub-texto-tarjeta">Equipo de 4 personas</h3>
                     <div class="my-6">
-                        <span class="text-5xl font-extrabold text-[#2d3450]">$840.000</span>
+                        <span class="text-5xl font-extrabold text-[#2d3450]">$1.000.000</span>
                     </div>
                     <div class="space-y-2 text-gray-600 mb-8">
-                        <p class="border-b border-gray-300 pb-3">Ahorro: 280.000</p>
-                        <p class="font-bold text-[#2d3450] pt-2">Persona: $210.000</p>
+                        <p class="font-bold text-[#2d3450] pt-2">Persona: $250.000</p>
                     </div>
                     <button (click)="seleccionarBoletas(4)" class="mt-auto w-full bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-ticket icono-compra"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 5l0 2" /><path d="M15 11l0 2" /><path d="M15 17l0 2" /><path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" /></svg>
@@ -324,11 +321,10 @@
                 <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col h-full border border-gray-200">
                     <h3 class="text-2xl font-bold text-[#2d3450] sub-texto-tarjeta">Equipo de 5 personas</h3>
                     <div class="my-6">
-                        <span class="text-5xl font-extrabold text-[#2d3450]">$1.000.000</span>
+                        <span class="text-5xl font-extrabold text-[#2d3450]">$1.150.000</span>
                     </div>
                     <div class="space-y-2 text-gray-600 mb-8">
-                        <p class="border-b border-gray-300 pb-3">Ahorro: 400.000</p>
-                        <p class="font-bold text-[#2d3450] pt-2">Persona: $200.000</p>
+                        <p class="font-bold text-[#2d3450] pt-2">Persona: $230.000</p>
                     </div>
                     <button (click)="seleccionarBoletas(5)" class="mt-auto w-full bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-ticket icono-compra"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 5l0 2" /><path d="M15 11l0 2" /><path d="M15 17l0 2" /><path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" /></svg>
@@ -339,11 +335,10 @@
                 <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col h-full border border-gray-200">
                     <h3 class="text-2xl font-bold text-[#2d3450] sub-texto-tarjeta">Equipo de 6 personas</h3>
                     <div class="my-6">
-                        <span class="text-5xl font-extrabold text-[#2d3450]">$1.140.000</span>
+                        <span class="text-5xl font-extrabold text-[#2d3450]">$1.320.000</span>
                     </div>
                     <div class="space-y-2 text-gray-600 mb-8">
-                        <p class="border-b border-gray-300 pb-3">Ahorro: 540.000</p>
-                        <p class="font-bold text-[#2d3450] pt-2">Persona: $190.000</p>
+                        <p class="font-bold text-[#2d3450] pt-2">Persona: $220.000</p>
                     </div>
                     <button (click)="seleccionarBoletas(6)" class="mt-auto w-full bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-ticket icono-compra"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 5l0 2" /><path d="M15 11l0 2" /><path d="M15 17l0 2" /><path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" /></svg>
@@ -354,11 +349,10 @@
                 <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col h-full border border-gray-200">
                     <h3 class="text-2xl font-bold text-[#2d3450] sub-texto-tarjeta">Equipo de 7 personas</h3>
                     <div class="my-6">
-                        <span class="text-5xl font-extrabold text-[#2d3450]">$1.260.000</span>
+                        <span class="text-5xl font-extrabold text-[#2d3450]">$1.470.000</span>
                     </div>
                     <div class="space-y-2 text-gray-600 mb-8">
-                        <p class="border-b border-gray-300 pb-3">Ahorro: 700.000</p>
-                        <p class="font-bold text-[#2d3450] pt-2">Persona: $180.000</p>
+                        <p class="font-bold text-[#2d3450] pt-2">Persona: $210.000</p>
                     </div>
                     <button (click)="seleccionarBoletas(7)" class="mt-auto w-full bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-ticket icono-compra"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 5l0 2" /><path d="M15 11l0 2" /><path d="M15 17l0 2" /><path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" /></svg>
@@ -369,17 +363,32 @@
                 <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col h-full border border-gray-200">
                     <h3 class="text-2xl font-bold text-[#2d3450] sub-texto-tarjeta">Equipo de 8 personas</h3>
                     <div class="my-6">
-                        <span class="text-5xl font-extrabold text-[#2d3450]">$1.360.000</span>
+                        <span class="text-5xl font-extrabold text-[#2d3450]">$1.600.000</span>
                     </div>
                     <div class="space-y-2 text-gray-600 mb-8">
-                        <p class="border-b border-gray-300 pb-3">Ahorro: 840.000</p>
-                        <p class="font-bold text-[#2d3450] pt-2">Persona: $170.000</p>
+                        <p class="font-bold text-[#2d3450] pt-2">Persona: $200.000</p>
                     </div>
                     <button (click)="seleccionarBoletas(8)" class="mt-auto w-full bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-ticket icono-compra"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 5l0 2" /><path d="M15 11l0 2" /><path d="M15 17l0 2" /><path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" /></svg>
                         Comprar 8 entradas
                     </button>
                 </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col h-full border border-gray-200">
+                    <h3 class="text-2xl font-bold text-[#2d3450] sub-texto-tarjeta">Equipo de 10 personas</h3>
+                    <div class="my-6">
+                        <span class="text-5xl font-extrabold text-[#2d3450]">$1.900.000</span>
+                    </div>
+                    <div class="space-y-2 text-gray-600 mb-8">
+                        <p class="font-bold text-[#2d3450] pt-2">Persona: $190.000</p>
+                    </div>
+                    <button (click)="seleccionarBoletas(10)" class="mt-auto w-full bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-ticket icono-compra"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 5l0 2" /><path d="M15 11l0 2" /><path d="M15 17l0 2" /><path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" /></svg>
+                        Comprar 10 entradas
+                    </button>
+                </div>
+
+                
     
             </div>
             <p class="mt-16 text-sm text-gray-500 italic">*Válido hasta el 28 de Febrero de 2026.</p>
