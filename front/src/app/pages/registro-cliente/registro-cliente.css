@@ -17,12 +17,15 @@
 }
 
 .btn-primary:hover {
-    background-color: rgba(45, 52, 80, 0.3);
+  background-color: #0f2335;
+  color: #f7dba7;
 }
 
 .btn-primary:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    background-color: grey;
+    color: black;
 }
 
 input, select {

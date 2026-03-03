@@ -7,7 +7,7 @@
 }
 
 .btn-primary {
-    background-color: rgba(45, 52, 80, 0.2);
+    background-color: rgba(73, 148, 228, 0.2);
     color: #2d3450;
     border: 2px solid #2d3450;
     font-weight: 600;
@@ -17,7 +17,15 @@
 }
 
 .btn-primary:hover {
-    background-color: rgba(45, 52, 80, 0.3);
+  background-color: #0f2335;
+  color: #f7dba7;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: grey;
+  color: black;
 }
 
 input, select {
