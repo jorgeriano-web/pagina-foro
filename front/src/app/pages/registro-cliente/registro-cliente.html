@@ -285,12 +285,26 @@
                 Siguiente
             </button>
             <button *ngIf="currentStep === 4" 
-                    (click)="enviarFormulario()" 
+                    (click)="intentarEnviar()" 
                     class="btn-primary" 
-                    [disabled]="spinner || !isFormValid()">
+                    [disabled]="spinner">
                 <div class="loading-spinner" *ngIf="spinner"></div>
                 Confirmar y Pagar
             </button>
+        </div>
+
+        <!-- Popup secciones faltantes -->
+        <div *ngIf="showFaltantesPopup" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" (click)="cerrarPopupFaltantes()">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6" (click)="$event.stopPropagation()">
+                <h3 class="text-lg font-semibold text-custom-blue mb-2">Completa tu registro</h3>
+                <p class="text-gray-600 text-sm mb-4">Faltan por completar las siguientes secciones:</p>
+                <ul class="list-disc list-inside text-gray-700 space-y-1 mb-6">
+                    <li *ngFor="let seccion of seccionesFaltantes">{{ seccion }}</li>
+                </ul>
+                <button type="button" (click)="cerrarPopupFaltantes()" class="btn-primary w-full">
+                    Entendido
+                </button>
+            </div>
         </div>
 
     </div>

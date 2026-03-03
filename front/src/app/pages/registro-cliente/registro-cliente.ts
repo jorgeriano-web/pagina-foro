@@ -193,6 +193,43 @@ async validarPoliza(): Promise<boolean> {
   return true;
 }
 
+  /** Devuelve las secciones que faltan por completar (para el popup). */
+  getMissingSections(): string[] {
+    const faltantes: string[] = [];
+    if (!this.formData.poliza.numero || !this.polizaValidada ||
+        !this.formData.poliza.inmobiliaria || !this.formData.poliza.ciudad || !this.formData.poliza.ejecutivo) {
+      faltantes.push('Datos de la inmobiliaria');
+    }
+    for (const asistente of this.formData.asistentes) {
+      if (!asistente.nombre || !asistente.numDoc || !asistente.telefono || !asistente.correo) {
+        faltantes.push('Datos de los asistentes');
+        break;
+      }
+    }
+    const fact = this.formData.facturacion;
+    if (!fact.tipoDoc || !fact.numDoc || !fact.nombre || !fact.correo) {
+      faltantes.push('Datos de facturación');
+    }
+    return faltantes;
+  }
+
+  showFaltantesPopup = false;
+  seccionesFaltantes: string[] = [];
+
+  intentarEnviar() {
+    if (this.spinner) return;
+    if (!this.isFormValid()) {
+      this.seccionesFaltantes = this.getMissingSections();
+      this.showFaltantesPopup = true;
+      return;
+    }
+    this.enviarFormulario();
+  }
+
+  cerrarPopupFaltantes() {
+    this.showFaltantesPopup = false;
+  }
+
 
 
 }
