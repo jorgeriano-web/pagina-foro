@@ -3,6 +3,8 @@ import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@
 import { Router, RouterLink } from '@angular/router';
 import { ServiceBoletas } from '../../service/service-boletas';
 
+declare var fbq: any;
+
 @Component({
   selector: 'app-landing',
   imports: [CommonModule],
@@ -10,6 +12,8 @@ import { ServiceBoletas } from '../../service/service-boletas';
   styleUrl: './landing.css',
   standalone: true
 })
+
+
 export class Landing implements OnInit, OnDestroy {
 
   dataLayer: any[] = (window as any).dataLayer || [];
@@ -89,7 +93,9 @@ export class Landing implements OnInit, OnDestroy {
     });
   }
 
-  seleccionarBoletas(cantidad: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 10): void{
+  seleccionarBoletas(cantidad: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8): void{
+
+    fbq('track', 'Lead'); 
 
     if (cantidad === 1) {
       this.dataLayer.push({

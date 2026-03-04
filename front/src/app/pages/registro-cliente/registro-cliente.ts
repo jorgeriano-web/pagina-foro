@@ -7,6 +7,8 @@ import { Pago, PagoRequest } from '../../service/pago';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 
+declare var fbq: any;
+
 @Component({
   selector: 'app-registro-cliente',
   imports: [CommonModule, FormsModule, RouterLink],
@@ -24,6 +26,8 @@ export class RegistroCliente implements OnInit {
   cantidadBoletas: number = 1;
   precioBoletas: number = 0;
   spinner: boolean = false;
+  dataLayer: any[] = (window as any).dataLayer || [];
+
 
   constructor(private boletasService: ServiceBoletas, 
     private pagoService: Pago, 
@@ -93,17 +97,46 @@ async validarPoliza(): Promise<boolean> {
 }
 
 
-  nextStep() {
-    if (this.currentStep < 4) {
-      this.currentStep++;
-    }
+nextStep() {
+
+  if (this.currentStep === 2) {
+    this.dataLayer.push({
+      event: 'ga_event',
+      category: 'foro 2026',
+      action: 'AMW - datos de asistentes-siguiente',
+      label: 'Siguiente'
+    });
   }
 
-  prevStep() {
-    if (this.currentStep > 1) {
-      this.currentStep--;
-    }
+  if (this.currentStep === 3) {
+    this.dataLayer.push({
+      event: 'ga_event',
+      category: 'foro 2026',
+      action: 'AMW - informacion de facturacion',
+      label: 'siguiente'
+    });
   }
+
+  if (this.currentStep < 4) {
+    this.currentStep++;
+  }
+}
+
+prevStep() {
+
+  if (this.currentStep === 4) {
+    this.dataLayer.push({
+      event: 'ga_event',
+      category: 'foro 2026',
+      action: 'AMW - informacion de facturacion',
+      label: 'anterior'
+    });
+  }
+
+  if (this.currentStep > 1) {
+    this.currentStep--;
+  }
+}
 
   goToStep(step: number) {
     this.currentStep = step;
@@ -114,6 +147,13 @@ async validarPoliza(): Promise<boolean> {
   }
 
   async enviarFormulario() {
+
+    this.dataLayer.push({
+      event: 'ga_event',
+      category: 'foro 2026',
+      action: 'AMW - confirmar y pagar',
+      label: 'Confirmar y pagar'
+    });
 
     this.spinner = true;
 
@@ -146,6 +186,11 @@ async validarPoliza(): Promise<boolean> {
     const response = await this.pagoService.crearLinkPago(datosPago);
     
     if (response.success) {
+
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Purchase');
+      }
+      
       localStorage.setItem('pagoReferencia', response.referencia);
       // Redirigir al gateway de pago
       this.pagoService.redirigirAPago(response.shortLink);

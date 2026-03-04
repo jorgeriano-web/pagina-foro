@@ -14,7 +14,7 @@ export class InicioRegistro implements OnInit {
 
   opcionCliente: string = '';
   mostrarError: boolean = false;
-  
+  dataLayer: any[] = (window as any).dataLayer || [];
 
 
   constructor(private router: Router, private boletasService: ServiceBoletas) {}
@@ -31,7 +31,15 @@ export class InicioRegistro implements OnInit {
 
     this.mostrarError = false;
 
+    this.dataLayer.push({
+      event: 'ga_event',
+      category: 'foro 2026',
+      action: 'AMW - cliente libertador',
+      label: this.opcionCliente 
+    });
+
     if (this.opcionCliente === 'si') {
+
       this.router.navigate(['/registro-cliente']);
     } else {
       this.router.navigate(['/registro-no-cliente']);
