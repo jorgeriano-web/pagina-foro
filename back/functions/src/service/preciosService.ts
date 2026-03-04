@@ -11,7 +11,6 @@ export class PreciosService{
         6: 1320000,
         7: 1470000,
         8: 1600000,
-        10: 1900000,
     }
 
     private cantidad: number = 0;
