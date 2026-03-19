@@ -121,6 +121,15 @@ header.scrolled-header {
             margin-bottom: 80px !important;
 }
 
+.seccion-boletas-ad-3{
+    background-image: url("https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/acb20703-f1f9-44c6-88a5-38e2dec47a42.png");
+    background-repeat: no-repeat;
+    background-size: cover !important;
+    height: auto;
+    min-height: 185px;
+    margin-bottom: 80px !important;
+}
+
 .imagen-boletos-2{
     width: 230px;
 }
