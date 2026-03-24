@@ -3,6 +3,7 @@
     background-size: cover;
     background-position: center;
     background-color: #2d3450;
+    height: 80vh;
 }
 
 header {
@@ -77,7 +78,7 @@ header.scrolled-header {
 }
 
 .contenedor-logo-principal {
-    margin-top: 150px;
+    margin-top: 75px;
 }
 
 .contenedor-textos-info {
@@ -98,7 +99,7 @@ header.scrolled-header {
 #animation-container {
      position: relative;
     width: 100%;
-    min-height: 100vh;
+    min-height: 80vh;
 }
 
 .seccion-historia {
@@ -136,6 +137,44 @@ header.scrolled-header {
 
 .etiqueta-pilar {
     background-color: #2d3450;
+}
+
+.temas-charla-card .btn-reserva-vidrio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.65rem 1.15rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    border-radius: 0.625rem;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: linear-gradient(
+        160deg,
+        rgba(255, 255, 255, 0.22) 0%,
+        rgba(255, 255, 255, 0.08) 100%
+    );
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.temas-charla-card .btn-reserva-vidrio:hover {
+    background: linear-gradient(
+        160deg,
+        rgba(255, 255, 255, 0.32) 0%,
+        rgba(255, 255, 255, 0.14) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow:
+        0 6px 28px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
 .seccion-temas {
@@ -309,10 +348,14 @@ header.scrolled-header {
 
 
 .card-slider {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     padding: 1rem;
+}
+
+.temas-card-destacada {
+    width: 100%;
 }
 
 .card-slider > div {
@@ -325,6 +368,40 @@ header.scrolled-header {
 
 .particle-canvas {
     pointer-events: none;
+}
+
+
+.contenedorCharlas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .contenedorCharlas {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Salas 1–4: imagen completa (sin recorte fuerte) y más alto útil */
+.contenedorCharlas .agenda-card-imagen {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+@media (min-width: 768px) {
+    .contenedorCharlas .agenda-card-imagen {
+        min-height: 240px;
+    }
+}
+
+.contenedorCharlas .agenda-card-imagen img {
+    object-fit: contain;
+    max-height: 280px;
 }
 
 
@@ -355,10 +432,8 @@ header.scrolled-header {
     }
 
     .card-slider {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 1rem;
+        gap: 1.5rem;
+        padding: 1rem;
     }
 }
 

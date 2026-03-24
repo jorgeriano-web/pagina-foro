@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { ServiceBoletas } from '../../service/service-boletas';
 
 declare var fbq: any;
 
 @Component({
   selector: 'app-landing',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './landing.html',
   styleUrl: './landing.css',
   standalone: true
@@ -95,7 +95,9 @@ export class Landing implements OnInit, OnDestroy {
 
   seleccionarBoletas(cantidad: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8): void{
 
-    fbq('track', 'Lead'); 
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead');
+    }
 
     if (cantidad === 1) {
       this.dataLayer.push({

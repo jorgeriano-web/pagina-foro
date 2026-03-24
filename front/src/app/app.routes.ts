@@ -5,12 +5,14 @@ import { RegistroCliente } from './pages/registro-cliente/registro-cliente';
 import { RegistroNoCliente } from './pages/registro-no-cliente/registro-no-cliente';
 import { PagoExitoso } from './pages/pago-exitoso/pago-exitoso';
 import { PagoFallido } from './pages/pago-fallido/pago-fallido';
+import { ReservarCupo } from './pages/reservar-cupo/reservar-cupo';
 
 export const routes: Routes = [
   { path: '', component: Landing },
   { path: 'inicio-registro', component: InicioRegistro },
   { path: 'registro-cliente', component: RegistroCliente },
   { path: 'registro-no-cliente', component: RegistroNoCliente },
+  { path: 'reservar-cupos', component: ReservarCupo },
   { path:'pagoExitoso', component: PagoExitoso},
   { path:'pagoNoExitoso', component: PagoFallido},
   { path: '**', redirectTo: '' }
