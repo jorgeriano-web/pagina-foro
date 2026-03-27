@@ -10,6 +10,7 @@ import { onSchedule } from "firebase-functions/v2/scheduler";
 import { PreciosService } from "./service/preciosService";
 import { getGatewayConfig } from "./configSecrets/gatewayConfig";
 import { defineSecret } from "firebase-functions/params";
+import { contarReservasSala, reservaSalaCupo } from "./service/salaCuposService";
 
 admin.initializeApp();
 
@@ -404,6 +405,70 @@ export const recuperarPagosNoGuardadosEnSheets = onSchedule(
 
     } catch (error: any) {
       console.error("❌ Error general en recuperación:", error);
+    }
+  }
+);
+
+export const reservarCupoSalaProd = onCall(
+  { cors: true, secrets: [FIREBASE_CONFIG_ACCOUNT] },
+  async (request) => {
+    const data = request.data as {
+      idSala?: number;
+      fecha?: string;
+      nombre?: string;
+      numDoc?: string;
+    };
+
+    if (!data || typeof data !== "object") {
+      throw new HttpsError("invalid-argument", "Faltan datos de reserva.");
+    }
+
+    const { idSala, fecha, nombre, numDoc } = data;
+
+    if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
+      throw new HttpsError("invalid-argument", "idSala debe ser 1, 2, 3 o 4.");
+    }
+
+    if (!fecha || !nombre || !numDoc) {
+      throw new HttpsError(
+        "invalid-argument",
+        "Completá fecha, nombre y número de documento."
+      );
+    }
+
+    try {
+      await reservaSalaCupo({ idSala, fecha, nombre, numDoc });
+      return { ok: true };
+    } catch (e: unknown) {
+      if (e instanceof HttpsError) {
+        throw e;
+      }
+      console.error("reservarCupoSalaProd:", e);
+      throw new HttpsError("internal", "Error al reservar cupo.");
+    }
+  }
+);
+
+export const contarReservasSalaProd = onCall(
+  { cors: true, secrets: [FIREBASE_CONFIG_ACCOUNT] },
+  async (request) => {
+    const idSala = (request.data as { idSala?: number } | undefined)?.idSala;
+
+    if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
+      throw new HttpsError(
+        "invalid-argument",
+        "Enviá idSala numérico entre 1 y 4."
+      );
+    }
+
+    try {
+      return await contarReservasSala(idSala);
+    } catch (e: unknown) {
+      if (e instanceof HttpsError) {
+        throw e;
+      }
+      console.error("contarReservasSalaProd:", e);
+      throw new HttpsError("internal", "Error al consultar reservas de la sala.");
     }
   }
 );

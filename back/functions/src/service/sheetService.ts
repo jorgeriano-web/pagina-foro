@@ -111,3 +111,28 @@ export async function agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaDa
   });
 }
 
+/** Cantidad de reservas: solo columna A desde la fila 2 (fila 1 = títulos; mismo criterio que el append en `A2`). */
+export async function contarFilasReservasSala(idSala: number): Promise<number> {
+  if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
+    throw new Error("La sala debe ser 1, 2, 3 o 4");
+  }
+
+  const serviceAccount = await accFireBaseConfig();
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: serviceAccount.client_email,
+      private_key: serviceAccount.private_key,
+    },
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
+  const sheets = google.sheets({ version: "v4", auth });
+  const pestaña = `Sala${idSala}Reservas`;
+
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId: SHEET_ID,
+    range: `${pestaña}!A2:A`,
+  });
+
+  return response.data.values?.length ?? 0;
+}

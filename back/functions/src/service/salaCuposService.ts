@@ -1,19 +1,41 @@
 import { HttpsError } from "firebase-functions/v2/https";
-import {agregarDatosClienteReservaSalaAlSheet,} from "./sheetService";
+import { SALAS_EXPERIENCIA } from "../models/salaExperiencia";
+import {
+  agregarDatosClienteReservaSalaAlSheet,
+  ClienteReservaSalaData,
+  contarFilasReservasSala,
+} from "./sheetService";
 
-// --- Cuántos cupos tiene cada sala---
+function salaPorIdSala(idSala: number) {
+  return SALAS_EXPERIENCIA.find((s) => s.id === idSala);
+}
 
-const CUPOS_MAXIMOS_SALA_1 = 30;
-const CUPOS_MAXIMOS_SALA_2 = 40;
-const CUPOS_MAXIMOS_SALA_3 = 45;
-const CUPOS_MAXIMOS_SALA_4 = 50;
+/**
+ * Si la sala no existe o no tiene capacidad (0), no reserva.
+ * Cuando `cuposReservados` refleje datos reales, podés validar también
+ * `sala.cuposReservados >= sala.capacidadTotal` antes de guardar.
+ */
+export async function reservaSalaCupo(clienteReservaSalaData: ClienteReservaSalaData): Promise<void> {
+  const sala = salaPorIdSala(clienteReservaSalaData.idSala);
 
-function cuposMaximosDeEstaSala(numeroSala: number): number {
-  if (numeroSala === 1) return CUPOS_MAXIMOS_SALA_1;
-  if (numeroSala === 2) return CUPOS_MAXIMOS_SALA_2;
-  if (numeroSala === 3) return CUPOS_MAXIMOS_SALA_3;
-  if (numeroSala === 4) return CUPOS_MAXIMOS_SALA_4;
-  return 0;
+  if (!sala || sala.capacidadTotal === 0) {
+    throw new HttpsError(
+      "failed-precondition",
+      "No se puede reservar en esta sala (sin cupos configurados o sala no válida)."
+    );
+  }
+
+  await agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaData);
 }
 
 
+/** Cantidad de filas de reserva en el Sheet para esa sala (desde A2). */
+export async function contarReservasSala(idSala: number): Promise<number> {
+  const sala = salaPorIdSala(idSala);
+
+  if (!sala) {
+    throw new HttpsError("not-found", "La sala no existe.");
+  }
+
+  return await contarFilasReservasSala(idSala);
+}

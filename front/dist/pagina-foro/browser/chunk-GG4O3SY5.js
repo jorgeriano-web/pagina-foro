@@ -5,7 +5,7 @@ import {
   __spreadValues,
   setClassMetadata,
   ɵɵdefineInjectable
-} from "./chunk-CKMI4PS2.js";
+} from "./chunk-XCUDHHH4.js";
 
 // node_modules/@angular/animations/fesm2022/private_export.mjs
 var AnimationMetadataType;
@@ -4565,4 +4565,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-FS6JC2MJ.js.map
+//# sourceMappingURL=chunk-GG4O3SY5.js.map
