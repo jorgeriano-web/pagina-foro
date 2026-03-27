@@ -1,1 +1,28 @@
-<p>reservar-cupo works!</p>
+@if (esDialogo) {
+  <button type="button" class="reserva-cupo-cerrar" (click)="cerrarDialogo()" aria-label="Cerrar">
+    ×
+  </button>
+}
+
+<div class="reserva-cupo-info">
+  @if (idSala !== null) {
+    <p class="reserva-cupo-sala">Sala {{ idSala }}</p>
+  }
+  @if (nombreExperiencia) {
+    <p class="reserva-cupo-experiencia">{{ nombreExperiencia }}</p>
+  }
+</div>
+
+<form class="reserva-cupo-form">
+  <div class="reserva-cupo-field">
+    <label for="nombre">Nombre Completo</label>
+    <input type="text" id="nombre" name="nombre" autocomplete="name" />
+  </div>
+  <div class="reserva-cupo-field">
+    <label for="cedula">Cédula</label>
+    <input type="text" id="cedula" name="cedula" autocomplete="off" inputmode="numeric" />
+  </div>
+</form>
+<button type="button" class="reserva-cupo-submit" (click)="reservarCupo()">
+  Reservar Cupo
+</button>

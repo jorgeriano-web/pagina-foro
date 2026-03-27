@@ -132,7 +132,7 @@
                                         Sala 1
                                     </span>
                                     <h4 class="text-2xl font-bold flex-1">Implementación de IA para tu Inmobiliaria</h4>
-                                    <button type="button" [routerLink]="['/reservar-cupos']" class="saber-mas-btn btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
+                                    <button type="button" (click)="abrirReservaCupo(1, 'Implementación de IA para tu Inmobiliaria', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
                                 </div>
                             </div>
                         </div>
@@ -149,7 +149,7 @@
                                         Sala 2
                                     </span>
                                     <h4 class="text-2xl font-bold flex-1">Entorno Juridico</h4>
-                                    <button type="button" [routerLink]="['/reservar-cupos']" class="saber-mas-btn btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
+                                    <button type="button" (click)="abrirReservaCupo(2, 'Entorno Juridico', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
                                 </div>
                             </div>
                         </div>
@@ -166,7 +166,7 @@
                                         Sala 3
                                     </span>
                                     <h4 class="text-2xl font-bold flex-1">Casos de Exito</h4>
-                                    <button type="button" [routerLink]="['/reservar-cupos']" class="saber-mas-btn btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
+                                    <button type="button" (click)="abrirReservaCupo(3, 'Casos de Exito', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
                                 </div>
                             </div>
                         </div>
@@ -183,7 +183,7 @@
                                         Sala 4
                                     </span>
                                     <h4 class="text-2xl font-bold flex-1">Meet & Greet</h4>
-                                    <button type="button" [routerLink]="['/reservar-cupos']" class="saber-mas-btn btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
+                                    <button type="button" (click)="abrirReservaCupo(4, 'Meet & Greet', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
                                 </div>
                             </div>
                         </div>

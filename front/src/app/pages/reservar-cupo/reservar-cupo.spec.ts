@@ -8,7 +8,7 @@ describe('ReservarCupo', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReservarCupo]
+      imports: [ReservarCupo],
     })
     .compileComponents();
 

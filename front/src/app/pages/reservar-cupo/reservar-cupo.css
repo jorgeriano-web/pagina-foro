@@ -1,0 +1,102 @@
+:host {
+  display: block;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  padding-top: 2.25rem;
+  position: relative;
+  color: #fff;
+  background: #2d3450;
+}
+
+.reserva-cupo-cerrar {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.35rem;
+  z-index: 1;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
+
+.reserva-cupo-info {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.reserva-cupo-sala {
+  margin: 0 0 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.95);
+  opacity: 0.95;
+}
+
+.reserva-cupo-experiencia {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #fff;
+}
+
+.reserva-cupo-form {
+  margin: 0;
+}
+
+.reserva-cupo-field {
+  margin-bottom: 1rem;
+}
+
+.reserva-cupo-field label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.reserva-cupo-field input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.9375rem;
+  color: #1a1d2e;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 0.5rem;
+}
+
+.reserva-cupo-field input:focus {
+  outline: 2px solid rgba(189, 15, 20, 0.45);
+  outline-offset: 1px;
+}
+
+.reserva-cupo-submit {
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  background: #bd0f14;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.reserva-cupo-submit:hover {
+  opacity: 0.92;
+}
+
+.reserva-cupo-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}

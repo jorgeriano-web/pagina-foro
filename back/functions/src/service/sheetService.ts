@@ -26,6 +26,13 @@ interface TransaccionData{
 }
 
 
+export interface ClienteReservaSalaData {
+  idSala: number;
+  fecha: string;
+  nombre: string;
+  numDoc: string;
+}
+
 export async function agregarFilaAsheet(transaccionData: TransaccionData) {
 
     const serviceAccount = await accFireBaseConfig();
@@ -69,3 +76,38 @@ export async function agregarFilaAsheet(transaccionData: TransaccionData) {
     },
   });
 }
+
+export async function agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaData: ClienteReservaSalaData) {
+  const { idSala, fecha, nombre, numDoc } = clienteReservaSalaData;
+
+  if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
+    throw new Error("La sala debe ser 1, 2, 3 o 4");
+  }
+
+  const pestaña = `Sala${idSala}Reservas`;
+  const range = `${pestaña}!A2`;
+
+  const serviceAccount = await accFireBaseConfig();
+
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: serviceAccount.client_email,
+      private_key: serviceAccount.private_key,
+    },
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
+  const sheets = google.sheets({ version: "v4", auth });
+
+  const values = [[fecha, nombre, numDoc]];
+
+  await sheets.spreadsheets.values.append({
+    spreadsheetId: SHEET_ID,
+    range,
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values,
+    },
+  });
+}
+

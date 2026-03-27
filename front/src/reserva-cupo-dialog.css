@@ -1,0 +1,8 @@
+/* panelClass va en .cdk-overlay-pane; hijo = contenedor del MatDialog. */
+.cdk-overlay-pane.reserva-cupo-dialog .mat-mdc-dialog-container .mdc-dialog__surface {
+  padding: 0;
+  background: #2d3450;
+  border-radius: 1rem;
+  overflow: visible;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+}

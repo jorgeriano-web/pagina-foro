@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { ServiceBoletas } from '../../service/service-boletas';
+import { ReservarCupo } from '../reservar-cupo/reservar-cupo';
 
 declare var fbq: any;
 
 @Component({
   selector: 'app-landing',
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './landing.html',
   styleUrl: './landing.css',
   standalone: true
@@ -27,7 +29,12 @@ export class Landing implements OnInit, OnDestroy {
   };
   intervalId: any;
 
-  constructor(private boletasService: ServiceBoletas, private router: Router, private cdRef: ChangeDetectorRef){}
+  constructor(
+    private boletasService: ServiceBoletas,
+    private router: Router,
+    private cdRef: ChangeDetectorRef,
+    private dialog: MatDialog,
+  ) {}
 
   ngOnInit(): void {
     const fechaForo = new Date(2026, 4, 21 , 0, 0, 0);
@@ -90,6 +97,17 @@ export class Landing implements OnInit, OnDestroy {
           card.classList.add('bg-white/10');
         }
       }
+    });
+  }
+
+  abrirReservaCupo(idSala: number, nombreExperiencia: string, event?: Event): void {
+    event?.preventDefault();
+    event?.stopPropagation();
+    this.dialog.open(ReservarCupo, {
+      width: '420px',
+      maxWidth: '90vw',
+      data: { idSala, nombreExperiencia },
+      panelClass: 'reserva-cupo-dialog',
     });
   }
 

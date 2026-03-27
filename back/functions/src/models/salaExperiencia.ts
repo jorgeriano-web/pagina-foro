@@ -1,4 +1,4 @@
-/** Documento en Firestore: salas_experiencias / {id} */
+/** Datos de una sala (estado que devuelve el back; cuposReservados es informativo si lo calculás en otro lado). */
 export interface SalaExperiencia {
   id: string;
   nombre: string;
