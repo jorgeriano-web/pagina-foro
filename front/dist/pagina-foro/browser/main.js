@@ -197,6 +197,8 @@ import {
   ɵɵdomListener,
   ɵɵdomProperty,
   ɵɵelement,
+  ɵɵelementContainerEnd,
+  ɵɵelementContainerStart,
   ɵɵelementEnd,
   ɵɵelementStart,
   ɵɵgetCurrentView,
@@ -229,7 +231,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-XCUDHHH4.js";
+} from "./chunk-OIW34ZCU.js";
 
 // node_modules/@angular/common/fesm2022/location.mjs
 var _DOM = null;
@@ -15250,7 +15252,7 @@ var AsyncAnimationRendererFactory = class _AsyncAnimationRendererFactory {
    * @internal
    */
   loadImpl() {
-    const loadFn = () => this.moduleImpl ?? import("./chunk-GG4O3SY5.js").then((m) => m);
+    const loadFn = () => this.moduleImpl ?? import("./chunk-G6KTLRWX.js").then((m) => m);
     let moduleImplPromise;
     if (this.loadingSchedulerFn) {
       moduleImplPromise = this.loadingSchedulerFn(loadFn);
@@ -15451,6 +15453,40 @@ function provideAnimationsAsync(type = "animations") {
     provide: ANIMATION_MODULE_TYPE,
     useValue: type === "noop" ? "NoopAnimations" : "BrowserAnimations"
   }]);
+}
+
+// src/app/models/sala-experiencia.ts
+var SALAS_EXPERIENCIA = [
+  {
+    id: 1,
+    nombre: "Implementaci\xF3n de IA para tu Inmobiliaria",
+    capacidadTotal: 30,
+    cuposReservados: 0
+  },
+  {
+    id: 2,
+    nombre: "Entorno Juridico",
+    capacidadTotal: 40,
+    cuposReservados: 0
+  },
+  {
+    id: 3,
+    nombre: "Casos de Exito",
+    capacidadTotal: 45,
+    cuposReservados: 0
+  },
+  {
+    id: 4,
+    nombre: "Meet & Greet",
+    capacidadTotal: 50,
+    cuposReservados: 0
+  }
+];
+function salaPorIdSala(idSala) {
+  return SALAS_EXPERIENCIA.find((s) => s.id === idSala);
+}
+function capacidadSala(idSala) {
+  return salaPorIdSala(idSala)?.capacidadTotal ?? 0;
 }
 
 // node_modules/@angular/forms/fesm2022/forms.mjs
@@ -42511,7 +42547,7 @@ var ReservaCupos = class _ReservaCupos {
 function ReservarCupo_button_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 11);
+    \u0275\u0275elementStart(0, "button", 3);
     \u0275\u0275listener("click", function ReservarCupo_button_0_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
@@ -42521,28 +42557,133 @@ function ReservarCupo_button_0_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
 }
-function ReservarCupo_p_2_Template(rf, ctx) {
+function ReservarCupo_div_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 12);
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 4)(1, "p", 5);
+    \u0275\u0275text(2, "\xA1Reserva exitosa!");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "p", 6);
+    \u0275\u0275text(4, "Tu cupo qued\xF3 registrado. Te esperamos en la experiencia.");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "button", 7);
+    \u0275\u0275listener("click", function ReservarCupo_div_1_Template_button_click_5_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.cerrarTrasExito());
+    });
+    \u0275\u0275text(6, "Listo");
+    \u0275\u0275elementEnd()();
+  }
+}
+function ReservarCupo_ng_container_2_p_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 20);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
+    const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1("Sala ", ctx_r1.idSala);
   }
 }
-function ReservarCupo_p_3_Template(rf, ctx) {
+function ReservarCupo_ng_container_2_p_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 13);
+    \u0275\u0275elementStart(0, "p", 21);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
+    const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
     \u0275\u0275textInterpolate(ctx_r1.nombreExperiencia);
+  }
+}
+function ReservarCupo_ng_container_2_p_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 22);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.textoCuposDialogo, " ");
+  }
+}
+function ReservarCupo_ng_container_2_p_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 23);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r1.errorReserva);
+  }
+}
+function ReservarCupo_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "div", 8);
+    \u0275\u0275template(2, ReservarCupo_ng_container_2_p_2_Template, 2, 1, "p", 9)(3, ReservarCupo_ng_container_2_p_3_Template, 2, 1, "p", 10)(4, ReservarCupo_ng_container_2_p_4_Template, 2, 1, "p", 11);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(5, ReservarCupo_ng_container_2_p_5_Template, 2, 1, "p", 12);
+    \u0275\u0275elementStart(6, "form", 13)(7, "div", 14)(8, "label", 15);
+    \u0275\u0275text(9, "Nombre Completo");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(10, "input", 16);
+    \u0275\u0275twoWayListener("ngModelChange", function ReservarCupo_ng_container_2_Template_input_ngModelChange_10_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r1.nombre, $event) || (ctx_r1.nombre = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(11, "div", 14)(12, "label", 17);
+    \u0275\u0275text(13, "C\xE9dula");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(14, "input", 18);
+    \u0275\u0275twoWayListener("ngModelChange", function ReservarCupo_ng_container_2_Template_input_ngModelChange_14_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r1.numDoc, $event) || (ctx_r1.numDoc = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(15, "button", 19);
+    \u0275\u0275listener("click", function ReservarCupo_ng_container_2_Template_button_click_15_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.reservaCupo());
+    });
+    \u0275\u0275text(16);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.idSala !== null);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.nombreExperiencia);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.capacidadMax > 0 && ctx_r1.textoCuposDialogo);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.errorReserva);
+    \u0275\u0275advance(5);
+    \u0275\u0275twoWayProperty("ngModel", ctx_r1.nombre);
+    \u0275\u0275property("disabled", ctx_r1.procesando);
+    \u0275\u0275advance(4);
+    \u0275\u0275twoWayProperty("ngModel", ctx_r1.numDoc);
+    \u0275\u0275property("disabled", ctx_r1.procesando);
+    \u0275\u0275advance();
+    \u0275\u0275property("disabled", ctx_r1.procesando || ctx_r1.idSala === null);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.procesando ? "Procesando\u2026" : "Reservar Cupo", " ");
   }
 }
 var ReservarCupo = class _ReservarCupo {
@@ -42550,13 +42691,48 @@ var ReservarCupo = class _ReservarCupo {
   data;
   route;
   reservaCuposService;
+  cdr;
   nombre = "";
   numDoc = "";
-  constructor(dialogRef, data, route, reservaCuposService) {
+  procesando = false;
+  reservaExitosa = false;
+  errorReserva = null;
+  /** Conteo desde el sheet; null = cargando o sin sala. */
+  reservasActuales = null;
+  constructor(dialogRef, data, route, reservaCuposService, cdr) {
     this.dialogRef = dialogRef;
     this.data = data;
     this.route = route;
     this.reservaCuposService = reservaCuposService;
+    this.cdr = cdr;
+  }
+  ngOnInit() {
+    const id = this.idSala;
+    if (id == null) {
+      return;
+    }
+    void this.reservaCuposService.contarReservasSala(id).then((n) => {
+      this.reservasActuales = n;
+      this.cdr.detectChanges();
+    }, () => {
+      this.reservasActuales = null;
+      this.cdr.detectChanges();
+    });
+  }
+  get capacidadMax() {
+    const id = this.idSala;
+    return id == null ? 0 : capacidadSala(id);
+  }
+  get textoCuposDialogo() {
+    const max = this.capacidadMax;
+    if (max <= 0) {
+      return "";
+    }
+    const n = this.reservasActuales;
+    if (n === null) {
+      return "Consultando cupos\u2026";
+    }
+    return `Reservas: ${n} de ${max}.`;
   }
   get esDialogo() {
     return this.dialogRef != null;
@@ -42587,67 +42763,119 @@ var ReservarCupo = class _ReservarCupo {
   }
   async reservaCupo() {
     const idSala = this.idSala;
-    if (idSala == null) {
+    if (idSala == null || this.procesando || this.reservaExitosa) {
       return;
     }
-    await this.reservaCuposService.reservaSalaCupo({
-      idSala,
-      fecha: (/* @__PURE__ */ new Date()).toISOString(),
-      nombre: this.nombre,
-      numDoc: this.numDoc
-    });
+    const nombre = this.nombre.trim();
+    const numDoc = this.numDoc.trim();
+    if (!nombre || !numDoc) {
+      this.errorReserva = "Complet\xE1 nombre y c\xE9dula.";
+      return;
+    }
+    this.errorReserva = null;
+    this.procesando = true;
+    this.cdr.detectChanges();
+    try {
+      await this.reservaCuposService.reservaSalaCupo({
+        idSala,
+        fecha: (/* @__PURE__ */ new Date()).toISOString(),
+        nombre,
+        numDoc
+      });
+      this.reservaExitosa = true;
+      const prev = this.reservasActuales;
+      this.reservasActuales = prev == null ? null : prev + 1;
+    } catch {
+      this.errorReserva = "No se pudo completar la reserva. Intent\xE1 de nuevo en unos minutos.";
+    } finally {
+      this.procesando = false;
+      this.cdr.detectChanges();
+    }
+  }
+  cerrarTrasExito() {
+    this.dialogRef?.close({ ok: true });
   }
   static \u0275fac = function ReservarCupo_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _ReservarCupo)(\u0275\u0275directiveInject(MatDialogRef, 8), \u0275\u0275directiveInject(MAT_DIALOG_DATA, 8), \u0275\u0275directiveInject(ActivatedRoute, 8), \u0275\u0275directiveInject(ReservaCupos));
+    return new (__ngFactoryType__ || _ReservarCupo)(\u0275\u0275directiveInject(MatDialogRef, 8), \u0275\u0275directiveInject(MAT_DIALOG_DATA, 8), \u0275\u0275directiveInject(ActivatedRoute, 8), \u0275\u0275directiveInject(ReservaCupos), \u0275\u0275directiveInject(ChangeDetectorRef));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ReservarCupo, selectors: [["app-reservar-cupo"]], decls: 15, vars: 5, consts: [["type", "button", "class", "reserva-cupo-cerrar", "aria-label", "Cerrar", 3, "click", 4, "ngIf"], [1, "reserva-cupo-info"], ["class", "reserva-cupo-sala", 4, "ngIf"], ["class", "reserva-cupo-experiencia", 4, "ngIf"], [1, "reserva-cupo-form"], [1, "reserva-cupo-field"], ["for", "nombre"], ["type", "text", "id", "nombre", "name", "nombre", "autocomplete", "name", 3, "ngModelChange", "ngModel"], ["for", "cedula"], ["type", "text", "id", "cedula", "name", "cedula", "autocomplete", "off", "inputmode", "numeric", 3, "ngModelChange", "ngModel"], ["type", "button", 1, "reserva-cupo-submit", 3, "click"], ["type", "button", "aria-label", "Cerrar", 1, "reserva-cupo-cerrar", 3, "click"], [1, "reserva-cupo-sala"], [1, "reserva-cupo-experiencia"]], template: function ReservarCupo_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ReservarCupo, selectors: [["app-reservar-cupo"]], decls: 3, vars: 3, consts: [["type", "button", "class", "reserva-cupo-cerrar", "aria-label", "Cerrar", 3, "click", 4, "ngIf"], ["class", "reserva-cupo-exito", 4, "ngIf"], [4, "ngIf"], ["type", "button", "aria-label", "Cerrar", 1, "reserva-cupo-cerrar", 3, "click"], [1, "reserva-cupo-exito"], [1, "reserva-cupo-exito-titulo"], [1, "reserva-cupo-exito-texto"], ["type", "button", 1, "reserva-cupo-submit", 3, "click"], [1, "reserva-cupo-info"], ["class", "reserva-cupo-sala", 4, "ngIf"], ["class", "reserva-cupo-experiencia", 4, "ngIf"], ["class", "reserva-cupo-cupos-line", 4, "ngIf"], ["class", "reserva-cupo-error", "role", "alert", 4, "ngIf"], [1, "reserva-cupo-form"], [1, "reserva-cupo-field"], ["for", "nombre"], ["type", "text", "id", "nombre", "name", "nombre", "autocomplete", "name", 3, "ngModelChange", "ngModel", "disabled"], ["for", "cedula"], ["type", "text", "id", "cedula", "name", "cedula", "autocomplete", "off", "inputmode", "numeric", 3, "ngModelChange", "ngModel", "disabled"], ["type", "button", 1, "reserva-cupo-submit", 3, "click", "disabled"], [1, "reserva-cupo-sala"], [1, "reserva-cupo-experiencia"], [1, "reserva-cupo-cupos-line"], ["role", "alert", 1, "reserva-cupo-error"]], template: function ReservarCupo_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275template(0, ReservarCupo_button_0_Template, 2, 0, "button", 0);
-      \u0275\u0275elementStart(1, "div", 1);
-      \u0275\u0275template(2, ReservarCupo_p_2_Template, 2, 1, "p", 2)(3, ReservarCupo_p_3_Template, 2, 1, "p", 3);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(4, "form", 4)(5, "div", 5)(6, "label", 6);
-      \u0275\u0275text(7, "Nombre Completo");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(8, "input", 7);
-      \u0275\u0275twoWayListener("ngModelChange", function ReservarCupo_Template_input_ngModelChange_8_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.nombre, $event) || (ctx.nombre = $event);
-        return $event;
-      });
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(9, "div", 5)(10, "label", 8);
-      \u0275\u0275text(11, "C\xE9dula");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(12, "input", 9);
-      \u0275\u0275twoWayListener("ngModelChange", function ReservarCupo_Template_input_ngModelChange_12_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.numDoc, $event) || (ctx.numDoc = $event);
-        return $event;
-      });
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(13, "button", 10);
-      \u0275\u0275listener("click", function ReservarCupo_Template_button_click_13_listener() {
-        return ctx.reservaCupo();
-      });
-      \u0275\u0275text(14, "Reservar Cupo");
-      \u0275\u0275elementEnd();
+      \u0275\u0275template(0, ReservarCupo_button_0_Template, 2, 0, "button", 0)(1, ReservarCupo_div_1_Template, 7, 0, "div", 1)(2, ReservarCupo_ng_container_2_Template, 17, 10, "ng-container", 2);
     }
     if (rf & 2) {
       \u0275\u0275property("ngIf", ctx.esDialogo);
-      \u0275\u0275advance(2);
-      \u0275\u0275property("ngIf", ctx.idSala !== null);
       \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.nombreExperiencia);
-      \u0275\u0275advance(5);
-      \u0275\u0275twoWayProperty("ngModel", ctx.nombre);
-      \u0275\u0275advance(4);
-      \u0275\u0275twoWayProperty("ngModel", ctx.numDoc);
+      \u0275\u0275property("ngIf", ctx.reservaExitosa);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.reservaExitosa);
     }
-  }, dependencies: [CommonModule, NgIf, FormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, NgForm], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  box-sizing: border-box;\n  padding: 1.5rem;\n  padding-top: 2.25rem;\n  position: relative;\n  color: #fff;\n  background: #2d3450;\n}\n.reserva-cupo-cerrar[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0.35rem;\n  right: 0.35rem;\n  z-index: 1;\n  border: none;\n  background: transparent;\n  color: #fff;\n  font-size: 1.5rem;\n  line-height: 1;\n  cursor: pointer;\n  padding: 0.25rem 0.5rem;\n}\n.reserva-cupo-info[_ngcontent-%COMP%] {\n  margin-bottom: 1rem;\n  padding-bottom: 0.75rem;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.2);\n}\n.reserva-cupo-sala[_ngcontent-%COMP%] {\n  margin: 0 0 0.25rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.04em;\n  color: rgba(255, 255, 255, 0.95);\n  opacity: 0.95;\n}\n.reserva-cupo-experiencia[_ngcontent-%COMP%] {\n  margin: 0;\n  font-size: 1rem;\n  font-weight: 700;\n  line-height: 1.35;\n  color: #fff;\n}\n.reserva-cupo-form[_ngcontent-%COMP%] {\n  margin: 0;\n}\n.reserva-cupo-field[_ngcontent-%COMP%] {\n  margin-bottom: 1rem;\n}\n.reserva-cupo-field[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  display: block;\n  margin-bottom: 0.35rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  color: rgba(255, 255, 255, 0.9);\n}\n.reserva-cupo-field[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0.65rem 0.75rem;\n  font-size: 0.9375rem;\n  color: #1a1d2e;\n  background: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.12);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-field[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:focus {\n  outline: 2px solid rgba(189, 15, 20, 0.45);\n  outline-offset: 1px;\n}\n.reserva-cupo-submit[_ngcontent-%COMP%] {\n  width: 100%;\n  margin-top: 0.25rem;\n  padding: 0.75rem 1rem;\n  font-size: 0.9375rem;\n  font-weight: 600;\n  color: #fff;\n  border: none;\n  border-radius: 0.5rem;\n  background: #bd0f14;\n  cursor: pointer;\n  transition: opacity 0.15s ease;\n}\n.reserva-cupo-submit[_ngcontent-%COMP%]:hover {\n  opacity: 0.92;\n}\n.reserva-cupo-submit[_ngcontent-%COMP%]:disabled {\n  opacity: 0.55;\n  cursor: not-allowed;\n}\n/*# sourceMappingURL=reservar-cupo.css.map */"] });
+  }, dependencies: [CommonModule, NgIf, FormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, NgForm], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  box-sizing: border-box;\n  padding: 1.5rem;\n  padding-top: 2.25rem;\n  position: relative;\n  color: #fff;\n  background: #2d3450;\n}\n.reserva-cupo-cerrar[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0.35rem;\n  right: 0.35rem;\n  z-index: 1;\n  border: none;\n  background: transparent;\n  color: #fff;\n  font-size: 1.5rem;\n  line-height: 1;\n  cursor: pointer;\n  padding: 0.25rem 0.5rem;\n}\n.reserva-cupo-info[_ngcontent-%COMP%] {\n  margin-bottom: 1rem;\n  padding-bottom: 0.75rem;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.2);\n}\n.reserva-cupo-sala[_ngcontent-%COMP%] {\n  margin: 0 0 0.25rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.04em;\n  color: rgba(255, 255, 255, 0.95);\n  opacity: 0.95;\n}\n.reserva-cupo-experiencia[_ngcontent-%COMP%] {\n  margin: 0;\n  font-size: 1rem;\n  font-weight: 700;\n  line-height: 1.35;\n  color: #fff;\n}\n.reserva-cupo-form[_ngcontent-%COMP%] {\n  margin: 0;\n}\n.reserva-cupo-field[_ngcontent-%COMP%] {\n  margin-bottom: 1rem;\n}\n.reserva-cupo-field[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  display: block;\n  margin-bottom: 0.35rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  color: rgba(255, 255, 255, 0.9);\n}\n.reserva-cupo-field[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0.65rem 0.75rem;\n  font-size: 0.9375rem;\n  color: #1a1d2e;\n  background: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.12);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-field[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:focus {\n  outline: 2px solid rgba(189, 15, 20, 0.45);\n  outline-offset: 1px;\n}\n.reserva-cupo-submit[_ngcontent-%COMP%] {\n  width: 100%;\n  margin-top: 0.25rem;\n  padding: 0.75rem 1rem;\n  font-size: 0.9375rem;\n  font-weight: 600;\n  color: #fff;\n  border: none;\n  border-radius: 0.5rem;\n  background: #bd0f14;\n  cursor: pointer;\n  transition: opacity 0.15s ease;\n}\n.reserva-cupo-submit[_ngcontent-%COMP%]:hover {\n  opacity: 0.92;\n}\n.reserva-cupo-submit[_ngcontent-%COMP%]:disabled {\n  opacity: 0.55;\n  cursor: not-allowed;\n}\n.reserva-cupo-cupos-line[_ngcontent-%COMP%] {\n  margin: 0.5rem 0 0;\n  font-size: 0.8125rem;\n  color: rgba(255, 255, 255, 0.88);\n  line-height: 1.4;\n}\n.reserva-cupo-error[_ngcontent-%COMP%] {\n  margin: 0 0 0.75rem;\n  padding: 0.5rem 0.65rem;\n  font-size: 0.8125rem;\n  color: #fecaca;\n  background: rgba(189, 15, 20, 0.35);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-exito[_ngcontent-%COMP%] {\n  text-align: center;\n  padding: 0.5rem 0 0.25rem;\n}\n.reserva-cupo-exito-titulo[_ngcontent-%COMP%] {\n  margin: 0 0 0.5rem;\n  font-size: 1.25rem;\n  font-weight: 700;\n  color: #fff;\n}\n.reserva-cupo-exito-texto[_ngcontent-%COMP%] {\n  margin: 0 0 1.25rem;\n  font-size: 0.9375rem;\n  line-height: 1.45;\n  color: rgba(255, 255, 255, 0.92);\n}\n/*# sourceMappingURL=reservar-cupo.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ReservarCupo, [{
     type: Component,
-    args: [{ selector: "app-reservar-cupo", imports: [CommonModule, FormsModule], standalone: true, template: '<button\n  *ngIf="esDialogo"\n  type="button"\n  class="reserva-cupo-cerrar"\n  (click)="cerrarDialogo()"\n  aria-label="Cerrar"\n>\n  \xD7\n</button>\n\n<div class="reserva-cupo-info">\n  <p *ngIf="idSala !== null" class="reserva-cupo-sala">Sala {{ idSala }}</p>\n  <p *ngIf="nombreExperiencia" class="reserva-cupo-experiencia">{{ nombreExperiencia }}</p>\n</div>\n\n<form class="reserva-cupo-form">\n  <div class="reserva-cupo-field">\n    <label for="nombre">Nombre Completo</label>\n    <input type="text" id="nombre" name="nombre" autocomplete="name" [(ngModel)]="nombre" />\n  </div>\n  <div class="reserva-cupo-field">\n    <label for="cedula">C\xE9dula</label>\n    <input\n      type="text"\n      id="cedula"\n      name="cedula"\n      autocomplete="off"\n      inputmode="numeric"\n      [(ngModel)]="numDoc"\n    />\n  </div>\n</form>\n<button type="button" class="reserva-cupo-submit" (click)="reservaCupo()">Reservar Cupo</button>\n', styles: ["/* src/app/pages/reservar-cupo/reservar-cupo.css */\n:host {\n  display: block;\n  box-sizing: border-box;\n  padding: 1.5rem;\n  padding-top: 2.25rem;\n  position: relative;\n  color: #fff;\n  background: #2d3450;\n}\n.reserva-cupo-cerrar {\n  position: absolute;\n  top: 0.35rem;\n  right: 0.35rem;\n  z-index: 1;\n  border: none;\n  background: transparent;\n  color: #fff;\n  font-size: 1.5rem;\n  line-height: 1;\n  cursor: pointer;\n  padding: 0.25rem 0.5rem;\n}\n.reserva-cupo-info {\n  margin-bottom: 1rem;\n  padding-bottom: 0.75rem;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.2);\n}\n.reserva-cupo-sala {\n  margin: 0 0 0.25rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.04em;\n  color: rgba(255, 255, 255, 0.95);\n  opacity: 0.95;\n}\n.reserva-cupo-experiencia {\n  margin: 0;\n  font-size: 1rem;\n  font-weight: 700;\n  line-height: 1.35;\n  color: #fff;\n}\n.reserva-cupo-form {\n  margin: 0;\n}\n.reserva-cupo-field {\n  margin-bottom: 1rem;\n}\n.reserva-cupo-field label {\n  display: block;\n  margin-bottom: 0.35rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  color: rgba(255, 255, 255, 0.9);\n}\n.reserva-cupo-field input {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0.65rem 0.75rem;\n  font-size: 0.9375rem;\n  color: #1a1d2e;\n  background: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.12);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-field input:focus {\n  outline: 2px solid rgba(189, 15, 20, 0.45);\n  outline-offset: 1px;\n}\n.reserva-cupo-submit {\n  width: 100%;\n  margin-top: 0.25rem;\n  padding: 0.75rem 1rem;\n  font-size: 0.9375rem;\n  font-weight: 600;\n  color: #fff;\n  border: none;\n  border-radius: 0.5rem;\n  background: #bd0f14;\n  cursor: pointer;\n  transition: opacity 0.15s ease;\n}\n.reserva-cupo-submit:hover {\n  opacity: 0.92;\n}\n.reserva-cupo-submit:disabled {\n  opacity: 0.55;\n  cursor: not-allowed;\n}\n/*# sourceMappingURL=reservar-cupo.css.map */\n"] }]
+    args: [{ selector: "app-reservar-cupo", imports: [CommonModule, FormsModule], standalone: true, template: `<button
+  *ngIf="esDialogo"
+  type="button"
+  class="reserva-cupo-cerrar"
+  (click)="cerrarDialogo()"
+  aria-label="Cerrar"
+>
+  \xD7
+</button>
+
+<div *ngIf="reservaExitosa" class="reserva-cupo-exito">
+  <p class="reserva-cupo-exito-titulo">\xA1Reserva exitosa!</p>
+  <p class="reserva-cupo-exito-texto">Tu cupo qued\xF3 registrado. Te esperamos en la experiencia.</p>
+  <button type="button" class="reserva-cupo-submit" (click)="cerrarTrasExito()">Listo</button>
+</div>
+
+<ng-container *ngIf="!reservaExitosa">
+  <div class="reserva-cupo-info">
+    <p *ngIf="idSala !== null" class="reserva-cupo-sala">Sala {{ idSala }}</p>
+    <p *ngIf="nombreExperiencia" class="reserva-cupo-experiencia">{{ nombreExperiencia }}</p>
+    <p *ngIf="capacidadMax > 0 && textoCuposDialogo" class="reserva-cupo-cupos-line">
+      {{ textoCuposDialogo }}
+    </p>
+  </div>
+
+  <p *ngIf="errorReserva" class="reserva-cupo-error" role="alert">{{ errorReserva }}</p>
+
+  <form class="reserva-cupo-form">
+    <div class="reserva-cupo-field">
+      <label for="nombre">Nombre Completo</label>
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        autocomplete="name"
+        [(ngModel)]="nombre"
+        [disabled]="procesando"
+      />
+    </div>
+    <div class="reserva-cupo-field">
+      <label for="cedula">C\xE9dula</label>
+      <input
+        type="text"
+        id="cedula"
+        name="cedula"
+        autocomplete="off"
+        inputmode="numeric"
+        [(ngModel)]="numDoc"
+        [disabled]="procesando"
+      />
+    </div>
+  </form>
+  <button
+    type="button"
+    class="reserva-cupo-submit"
+    [disabled]="procesando || idSala === null"
+    (click)="reservaCupo()"
+  >
+    {{ procesando ? 'Procesando\u2026' : 'Reservar Cupo' }}
+  </button>
+</ng-container>
+`, styles: ["/* src/app/pages/reservar-cupo/reservar-cupo.css */\n:host {\n  display: block;\n  box-sizing: border-box;\n  padding: 1.5rem;\n  padding-top: 2.25rem;\n  position: relative;\n  color: #fff;\n  background: #2d3450;\n}\n.reserva-cupo-cerrar {\n  position: absolute;\n  top: 0.35rem;\n  right: 0.35rem;\n  z-index: 1;\n  border: none;\n  background: transparent;\n  color: #fff;\n  font-size: 1.5rem;\n  line-height: 1;\n  cursor: pointer;\n  padding: 0.25rem 0.5rem;\n}\n.reserva-cupo-info {\n  margin-bottom: 1rem;\n  padding-bottom: 0.75rem;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.2);\n}\n.reserva-cupo-sala {\n  margin: 0 0 0.25rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.04em;\n  color: rgba(255, 255, 255, 0.95);\n  opacity: 0.95;\n}\n.reserva-cupo-experiencia {\n  margin: 0;\n  font-size: 1rem;\n  font-weight: 700;\n  line-height: 1.35;\n  color: #fff;\n}\n.reserva-cupo-form {\n  margin: 0;\n}\n.reserva-cupo-field {\n  margin-bottom: 1rem;\n}\n.reserva-cupo-field label {\n  display: block;\n  margin-bottom: 0.35rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  color: rgba(255, 255, 255, 0.9);\n}\n.reserva-cupo-field input {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0.65rem 0.75rem;\n  font-size: 0.9375rem;\n  color: #1a1d2e;\n  background: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.12);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-field input:focus {\n  outline: 2px solid rgba(189, 15, 20, 0.45);\n  outline-offset: 1px;\n}\n.reserva-cupo-submit {\n  width: 100%;\n  margin-top: 0.25rem;\n  padding: 0.75rem 1rem;\n  font-size: 0.9375rem;\n  font-weight: 600;\n  color: #fff;\n  border: none;\n  border-radius: 0.5rem;\n  background: #bd0f14;\n  cursor: pointer;\n  transition: opacity 0.15s ease;\n}\n.reserva-cupo-submit:hover {\n  opacity: 0.92;\n}\n.reserva-cupo-submit:disabled {\n  opacity: 0.55;\n  cursor: not-allowed;\n}\n.reserva-cupo-cupos-line {\n  margin: 0.5rem 0 0;\n  font-size: 0.8125rem;\n  color: rgba(255, 255, 255, 0.88);\n  line-height: 1.4;\n}\n.reserva-cupo-error {\n  margin: 0 0 0.75rem;\n  padding: 0.5rem 0.65rem;\n  font-size: 0.8125rem;\n  color: #fecaca;\n  background: rgba(189, 15, 20, 0.35);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-exito {\n  text-align: center;\n  padding: 0.5rem 0 0.25rem;\n}\n.reserva-cupo-exito-titulo {\n  margin: 0 0 0.5rem;\n  font-size: 1.25rem;\n  font-weight: 700;\n  color: #fff;\n}\n.reserva-cupo-exito-texto {\n  margin: 0 0 1.25rem;\n  font-size: 0.9375rem;\n  line-height: 1.45;\n  color: rgba(255, 255, 255, 0.92);\n}\n/*# sourceMappingURL=reservar-cupo.css.map */\n"] }]
   }], () => [{ type: MatDialogRef, decorators: [{
     type: Optional
   }] }, { type: void 0, decorators: [{
@@ -42657,10 +42885,10 @@ var ReservarCupo = class _ReservarCupo {
     args: [MAT_DIALOG_DATA]
   }] }, { type: ActivatedRoute, decorators: [{
     type: Optional
-  }] }, { type: ReservaCupos }], null);
+  }] }, { type: ReservaCupos }, { type: ChangeDetectorRef }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ReservarCupo, { className: "ReservarCupo", filePath: "src/app/pages/reservar-cupo/reservar-cupo.ts", lineNumber: 21 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ReservarCupo, { className: "ReservarCupo", filePath: "src/app/pages/reservar-cupo/reservar-cupo.ts", lineNumber: 22 });
 })();
 
 // src/app/service/service-boletas.ts
@@ -42711,22 +42939,22 @@ var ServiceBoletas = class _ServiceBoletas {
 // src/app/pages/landing/landing.ts
 function Landing_div_22_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 146)(1, "button", 147);
+    \u0275\u0275elementStart(0, "div", 147)(1, "button", 148);
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(2, "svg", 148);
-    \u0275\u0275element(3, "path", 149);
+    \u0275\u0275elementStart(2, "svg", 149);
+    \u0275\u0275element(3, "path", 150);
     \u0275\u0275elementEnd()();
     \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(4, "div", 150)(5, "a", 151);
+    \u0275\u0275elementStart(4, "div", 151)(5, "a", 152);
     \u0275\u0275text(6, "Inicio");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "a", 152);
+    \u0275\u0275elementStart(7, "a", 153);
     \u0275\u0275text(8, "Historia");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(9, "a", 153);
+    \u0275\u0275elementStart(9, "a", 154);
     \u0275\u0275text(10, "Temas");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(11, "a", 154);
+    \u0275\u0275elementStart(11, "a", 155);
     \u0275\u0275text(12, "Boletas");
     \u0275\u0275elementEnd()()();
   }
@@ -42736,6 +42964,7 @@ var Landing = class _Landing {
   router;
   cdRef;
   dialog;
+  reservaCupos;
   dataLayer = window.dataLayer || [];
   isScrolled = false;
   isMenuOpen = false;
@@ -42746,11 +42975,19 @@ var Landing = class _Landing {
     seconds: 0
   };
   intervalId;
-  constructor(boletasService, router, cdRef, dialog) {
+  /** Conteo por sala desde el sheet; null = cargando o error. */
+  cuposReservados = {
+    1: null,
+    2: null,
+    3: null,
+    4: null
+  };
+  constructor(boletasService, router, cdRef, dialog, reservaCupos) {
     this.boletasService = boletasService;
     this.router = router;
     this.cdRef = cdRef;
     this.dialog = dialog;
+    this.reservaCupos = reservaCupos;
   }
   ngOnInit() {
     const fechaForo = new Date(2026, 4, 21, 0, 0, 0);
@@ -42759,6 +42996,27 @@ var Landing = class _Landing {
       this.actualizarTiempo(fechaForo);
       this.cdRef.detectChanges();
     }, 1e3);
+    for (const id of [1, 2, 3, 4]) {
+      void this.reservaCupos.contarReservasSala(id).then((n) => {
+        this.cuposReservados[id] = n;
+        this.cdRef.detectChanges();
+      }, () => {
+        this.cuposReservados[id] = null;
+        this.cdRef.detectChanges();
+      });
+    }
+  }
+  textoCuposEnSala(idSala) {
+    const max = capacidadSala(idSala);
+    const n = this.cuposReservados[idSala];
+    if (n === null) {
+      return "Cupos: consultando\u2026";
+    }
+    if (max <= 0) {
+      return "";
+    }
+    const quedan = Math.max(0, max - n);
+    return `Reservas: ${n} de ${max}. Quedan ${quedan} cupo${quedan === 1 ? "" : "s"}.`;
   }
   ngOnDestroy() {
     clearInterval(this.intervalId);
@@ -42803,11 +43061,19 @@ var Landing = class _Landing {
   abrirReservaCupo(idSala, nombreExperiencia, event) {
     event?.preventDefault();
     event?.stopPropagation();
-    this.dialog.open(ReservarCupo, {
+    const ref = this.dialog.open(ReservarCupo, {
       width: "420px",
       maxWidth: "90vw",
       data: { idSala, nombreExperiencia },
       panelClass: "reserva-cupo-dialog"
+    });
+    ref.afterClosed().subscribe((result) => {
+      if (result?.ok) {
+        void this.reservaCupos.contarReservasSala(idSala).then((n) => {
+          this.cuposReservados[idSala] = n;
+          this.cdRef.detectChanges();
+        });
+      }
     });
   }
   seleccionarBoletas(cantidad) {
@@ -42929,7 +43195,7 @@ var Landing = class _Landing {
     window.open(url, "_blank");
   }
   static \u0275fac = function Landing_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _Landing)(\u0275\u0275directiveInject(ServiceBoletas), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(ChangeDetectorRef), \u0275\u0275directiveInject(MatDialog));
+    return new (__ngFactoryType__ || _Landing)(\u0275\u0275directiveInject(ServiceBoletas), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(ChangeDetectorRef), \u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(ReservaCupos));
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _Landing, selectors: [["app-landing"]], hostBindings: function Landing_HostBindings(rf, ctx) {
     if (rf & 1) {
@@ -42937,7 +43203,7 @@ var Landing = class _Landing {
         return ctx.onWindowScroll();
       }, \u0275\u0275resolveWindow);
     }
-  }, decls: 420, vars: 7, consts: [[1, "grid", "grid-cols-3", "items-center", "max-w-7xl", "mx-auto", "p-6", "min-[1108px]:flex", "min-[1108px]:justify-between"], [1, "col-start-2", "justify-self-center", "flex", "items-center", "space-x-4", "min-[1108px]:col-auto", "min-[1108px]:justify-self-auto", "contenedor-logos", 2, "max-width", "170px"], ["src", "../../../assets/img/nuevo-logo-foro-2026.png", "alt", "Logo Experiencia Inmobiliaria", 1, "logo-white", "logo-foro-1"], [1, "border-l", "border-gray-400", "h-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png", "alt", "Logo El Libertador", 1, "logo-white", "logo-libertador"], [1, "hidden", "min-[1108px]:flex", "items-center", "space-x-8"], ["href", "#inicio-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#history-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#temas-foro-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#precios-pioneros-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], [1, "hidden", "min-[1108px]:block"], [1, "text-white", "border", "border-white/50", "rounded-md", "px-3", "py-1.5", "text-sm"], [1, "min-[1108px]:hidden", "col-start-3", "justify-self-end"], [1, "absolute", "top-4", "right-6", "text-[#2d3450]", 3, "click"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-6", "h-6"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M4 6h16M4 12h16m-7 6h7"], ["class", "min-[1108px]:hidden fixed top-[80px] left-0 right-0 bottom-0 z-20 bg-white/75 backdrop-blur-md", 4, "ngIf"], ["id", "animation-container"], ["id", "inicio-section", 1, "relative", "hero-bg", "w-full", "h-screen", "flex", "flex-col", "items-center", "justify-center", "p-4"], [1, "particle-canvas", "absolute", "top-0", "left-0", "w-full", "h-full", "z-0"], ["id", "hero-content", 1, "relative", "z-10", "w-full", "max-w-5xl", "px-4", "flex", "flex-col", "items-center", "text-white"], [1, "flex", "flex-col", "md:flex-row", "items-center", "justify-center", "w-full", "mb-8", "contenedor-logo-principal"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e82d61a5-bf01-4d56-85fd-eb8a7207d508.png", "alt", "Connect Logo", 1, "logo-principal", "mb-6", "md:mb-0", "md:mr-4"], [1, "text-lg", "md:text-xl", "text-center", "md:text-left", "texto-conexion"], [1, "text-center", "contenedor-textos-info"], [1, "text-lg", "texto-ubicacion"], [1, "texto-pabellon", "texto-ubicacion"], [1, "text-2xl", "font-bold", "mt-2", "texto-fecha"], [1, "mt-12"], [1, "text-sm", "mb-2", "texto-contador"], [1, "flex", "space-x-3", "justify-center"], [1, "timer-box"], ["id", "days", 1, "text-3xl", "font-bold"], [1, "text-xs", "texto-tiempo"], ["id", "hours", 1, "text-3xl", "font-bold"], ["id", "minutes", 1, "text-3xl", "font-bold"], ["id", "seconds", 1, "text-3xl", "font-bold"], [1, "mt-10", "flex", "flex-col", "items-center", "space-y-2", "opacity-70"], [1, "text-white", "text-sm", "font-light", "tracking-widest", "texto-desliza"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg", 1, "w-6", "h-6", "text-white", "animate-bounce"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M19 9l-7 7-7-7"], [1, "floating-cta"], [1, "bg-white", "text-gray-800", "rounded-full", "flex", "items-center", "shadow-lg", "hover:bg-gray-200", "transition-colors", "p-3", "space-x-0", "md:px-6", "md:py-3", "md:space-x-2", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 24 24", "fill", "none", "stroke", "currentColor", "stroke-width", "2", "stroke-linecap", "round", "stroke-linejoin", "round", 1, "w-8", "h-8", "md:w-6", "md:h-6", "icon", "icon-tabler", "icons-tabler-outline", "icon-tabler-brand-whatsapp"], ["stroke", "none", "d", "M0 0h24v24H0z", "fill", "none"], ["d", "M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"], ["d", "M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"], [1, "hidden", "md:inline"], ["id", "temas-foro-section", 1, "relative", "bg-[#2d3450]", "py-20", "sm:py-28", "seccion-temas"], [1, "relative", "z-10", "max-w-7xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8"], [1, "text-center", "text-white", "mb-16"], [1, "text-3xl", "font-bold", "tracking-tight", "sm:text-4xl"], [1, "text-4xl", "font-extrabold", "tracking-tight", "sm:text-5xl", "mt-2", "texto-pilares"], [1, "card-slider"], [1, "temas-card-destacada", "w-full"], [1, "animatable-card", "agenda-card-destacada", "bg-white/10", "backdrop-blur-lg", "rounded-2xl", "text-white", "text-left", "w-full", "relative", "h-full", "overflow-hidden", "transition-colors", "duration-500"], [1, "card-original-content", "transition-opacity", "duration-300", "flex", "flex-col", "md:flex-row", "md:items-stretch"], [1, "agenda-card-imagen", "shrink-0", "md:w-[42%]", "lg:w-[38%]", "min-h-[200px]", "md:min-h-[260px]"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-01.png", "alt", "Agenda del Foro Experiencia Inmobiliaria", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "agenda-card-texto", "flex", "flex-col", "justify-center", "p-6", "sm:p-8", "md:py-10", "md:pr-10", "md:pl-8", "flex-1", "min-w-0"], [1, "inline-flex", "items-center", "self-start", "px-3", "py-1", "rounded-full", "text-sm", "font-medium", "text-white", "etiqueta-pilar", "mb-4"], [1, "text-2xl", "font-bold"], [1, "mt-6", "flex", "justify-start"], ["href", "https://dvn7rzpuwpj45.cloudfront.net/wp-content/uploads/2026/03/20163220/Agenda_foro_202.pdf", 1, "text-white", "font-semibold", "py-3", "px-6", "rounded-lg", "hover:opacity-90", "transition-opacity", "inline-block", "shadow-md", 2, "background-color", "#bd0f14"], [1, "text-center", "text-white"], [1, "contenedorCharlas"], [1, "w-full", "min-w-0", "flex"], [1, "animatable-card", "temas-charla-card", "bg-white/10", "backdrop-blur-lg", "rounded-2xl", "text-white", "text-left", "relative", "h-full", "w-full", "overflow-hidden", "transition-colors", "duration-500"], [1, "card-original-content", "transition-opacity", "duration-300", "flex", "flex-col", "md:flex-row", "md:items-stretch", "flex-1", "min-h-0"], [1, "agenda-card-imagen", "shrink-0", "md:w-[42%]", "lg:w-[38%]"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-02.png", "alt", "Experiencia alterna \u2014 Sala 1", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "agenda-card-texto", "flex", "flex-col", "p-6", "sm:p-8", "md:py-8", "md:pr-8", "md:pl-6", "flex-1", "min-w-0"], [1, "inline-flex", "items-center", "self-start", "px-3", "py-1", "rounded-full", "text-sm", "font-medium", "text-white", "whitespace-nowrap", "etiqueta-pilar", "mb-4"], [1, "text-2xl", "font-bold", "flex-1"], ["type", "button", 1, "btn-reserva-vidrio", "mt-6", "md:mt-auto", 3, "click"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-03.png", "alt", "Experiencia alterna \u2014 Sala 2", 1, "block", "w-full", "h-full", "object-cover", "object-center"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-04.png", "alt", "Experiencia alterna \u2014 Sala 3", 1, "block", "w-full", "h-full", "object-cover", "object-center"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-05.png", "alt", "Experiencia alterna \u2014 Sala 4", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "relative", "bg-cover", "bg-center", "rounded-2xl", "shadow-lg", "overflow-hidden", "flex", "flex-col", "lg:flex-row", "items-center", "seccion-boletas-ad-2", "h-[220px]"], [1, "absolute", "inset-0", "bg-gray-800", "opacity-50"], [1, "relative", "z-10", "w-full", "lg:w-3/5", "text-white", "text-center", "py-6", "px-6", "lg:py-8", "lg:px-12"], [1, "text-lg", "lg:text-xl", "font-normal", 2, "text-align", "center"], [1, "mt-6", "flex", "justify-center", 2, "justify-content", "center"], [1, "text-white", "font-semibold", "py-3", "px-6", "rounded-lg", "hover:opacity-90", "transition-opacity", "inline-block", "shadow-md", "cursor-pointer", 2, "background-color", "#bd0f14", 3, "click"], [1, "relative", "z-10", "hidden", "lg:flex", "lg:w-2/5", "justify-center"], ["src", "../../../assets/img/persona-boletos.png", "alt", "Persona con entradas", 1, "rounded-lg", "imagen-boletos-2"], ["id", "history-section", 1, "seccion-historia"], [1, "max-w-7xl", "mx-auto", "px-4"], [1, "text-4xl", "md:text-5xl", "font-bold"], [1, "mt-4", "text-lg"], [1, "mt-12", "lg:grid", "lg:grid-cols-4", "lg:gap-8", "lg:items-center"], [1, "carousel-wrapper", "lg:col-span-2", "lg:col-start-2", "flex", "items-center", "justify-center", "mb-8", "lg:mb-0"], [1, "carousel-container"], [1, "carousel-rotator"], [1, "carousel-face"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/0f8c88b4-abc3-4f14-9ea6-8a03b73fe7cb.png", 1, "rounded-xl", "shadow-xl", "w-full", "h-full", "object-cover"], [1, "grid", "grid-cols-2", "gap-8", "lg:contents", "contenedor-numeros"], [1, "stats-box", "space-y-8", "text-center", "lg:col-start-1", "lg:row-start-1"], [1, "bg-white", "p-6", "rounded-lg", "shadow-md"], ["data-target", "4.9", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "font-bold", "mt-2", "text-gray-800"], [1, "text-sm", "text-gray-500"], ["data-target", "9500", "data-suffix", "+", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "stats-box", "space-y-8", "text-center", "lg:col-start-4"], ["data-target", "60", "data-suffix", "+", 1, "text-5xl", "font-extrabold", "counter-number"], ["data-target", "4.8", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "max-w-6xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8"], [1, "mt-20", "text-center"], [1, "text-xl", "font-semibold", "text-gray-700", "tracking-wide"], [1, "logos-container"], [1, "logos-slide"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/66666cd3-65d8-4390-b479-861563e4e8c2.png", "alt", "Logo Seguros Bol\xEDvar", 1, "h-8", "sm:h-10", "mx-8", "logo-bolivar"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e0faa2fd-4ce0-4a1c-9e1f-e9a2fbbfe097.png", "alt", "Logo CienCuadras", 1, "h-8", "sm:h-10", "mx-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/f9c2de7e-e1bd-43d2-8e70-7e650bf02086.png", "alt", "Logo Davivienda", 1, "h-8", "sm:h-10", "mx-8", "logo-davivienda"], ["id", "precios-pioneros-section", 1, "py-20", "sm:py-28", "bg-[#f7f8fa]", "seccion-precios"], [1, "max-w-6xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8", "text-center"], [1, "text-3xl", "md:text-4xl", "font-extrabold", "text-[#2d3450]", "texto-entradas"], [1, "mt-4", "text-lg", "text-gray-600", 2, "margin-top", "0"], [1, "mt-16", "grid", "grid-cols-1", "lg:grid-cols-3", "gap-8", "items-center", "max-w-sm", "mx-auto", "lg:max-w-none"], [1, "bg-white", "rounded-xl", "shadow-lg", "p-8", "flex", "flex-col", "h-full", "border", "border-gray-200"], [1, "text-2xl", "font-bold", "text-[#2d3450]", "sub-texto-tarjeta"], [1, "my-6"], [1, "text-5xl", "font-extrabold", "text-[#2d3450]"], [1, "space-y-2", "text-gray-600", "mb-8"], [1, "border-b", "border-gray-300", "pb-3"], [1, "font-bold", "text-[#2d3450]", "pt-2"], [1, "mt-auto", "w-full", "bg-gray-200", "text-gray-800", "font-semibold", "py-3", "px-6", "rounded-lg", "flex", "items-center", "justify-center", "hover:bg-gray-300", "transition-colors", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "width", "24", "height", "24", "viewBox", "0 0 24 24", "fill", "none", "stroke", "currentColor", "stroke-width", "2", "stroke-linecap", "round", "stroke-linejoin", "round", 1, "icon", "icon-tabler", "icons-tabler-outline", "icon-tabler-ticket", "icono-compra"], ["d", "M15 5l0 2"], ["d", "M15 11l0 2"], ["d", "M15 17l0 2"], ["d", "M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2"], [1, "text-white", "rounded-xl", "shadow-2xl", "p-8", "transform", "lg:scale-110", "flex", "flex-col", "h-full", 2, "background", "linear-gradient(to bottom, #BD0F14, #253150)"], [1, "mb-4"], [1, "bg-white", "text-[#253150]", "text-sm", "font-bold", "px-4", "py-1.5", "rounded-full"], [1, "text-5xl", "font-extrabold"], [1, "space-y-2", "text-white", "mb-8"], [1, "font-bold", "pt-2"], [1, "mt-16", "text-sm", "text-gray-500", "italic"], [1, "devolucion"], ["id", "contacto-patrocinadores-section", 1, "py-10", "sm:py-16", "bg-[#f7f8fa]"], ["src", "../../../assets/img/Afydi_Logo ROJO.ai.png", "alt", "Logo Seguros Bol\xEDvar", 1, "h-8", "sm:h-10", "mx-8", "logo-bolivar"], ["src", "../../../assets/img/LOGO-SIMI.jpg", "alt", "Logo CienCuadras", 1, "h-8", "sm:h-10", "mx-8"], ["src", "../../../assets/img/N - SEDI SOLUTIONS.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], ["src", "../../../assets/img/nuwwe.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], [1, "min-[1108px]:hidden", "fixed", "top-[80px]", "left-0", "right-0", "bottom-0", "z-20", "bg-white/75", "backdrop-blur-md"], ["id", "close-menu-button", 1, "absolute", "top-4", "right-6", "text-[#2d3450]"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg", 1, "w-8", "h-8"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M6 18L18 6M6 6l12 12"], [1, "h-full", "flex", "flex-col", "justify-center", "items-center", "space-y-8", "-mt-[80px]"], ["href", "#inicio-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500", "active-link-mobile"], ["href", "#history-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"], ["href", "#temas-foro-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"], ["href", "#precios-pioneros-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"]], template: function Landing_Template(rf, ctx) {
+  }, decls: 428, vars: 11, consts: [[1, "grid", "grid-cols-3", "items-center", "max-w-7xl", "mx-auto", "p-6", "min-[1108px]:flex", "min-[1108px]:justify-between"], [1, "col-start-2", "justify-self-center", "flex", "items-center", "space-x-4", "min-[1108px]:col-auto", "min-[1108px]:justify-self-auto", "contenedor-logos", 2, "max-width", "170px"], ["src", "../../../assets/img/nuevo-logo-foro-2026.png", "alt", "Logo Experiencia Inmobiliaria", 1, "logo-white", "logo-foro-1"], [1, "border-l", "border-gray-400", "h-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png", "alt", "Logo El Libertador", 1, "logo-white", "logo-libertador"], [1, "hidden", "min-[1108px]:flex", "items-center", "space-x-8"], ["href", "#inicio-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#history-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#temas-foro-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#precios-pioneros-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], [1, "hidden", "min-[1108px]:block"], [1, "text-white", "border", "border-white/50", "rounded-md", "px-3", "py-1.5", "text-sm"], [1, "min-[1108px]:hidden", "col-start-3", "justify-self-end"], [1, "absolute", "top-4", "right-6", "text-[#2d3450]", 3, "click"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-6", "h-6"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M4 6h16M4 12h16m-7 6h7"], ["class", "min-[1108px]:hidden fixed top-[80px] left-0 right-0 bottom-0 z-20 bg-white/75 backdrop-blur-md", 4, "ngIf"], ["id", "animation-container"], ["id", "inicio-section", 1, "relative", "hero-bg", "w-full", "h-screen", "flex", "flex-col", "items-center", "justify-center", "p-4"], [1, "particle-canvas", "absolute", "top-0", "left-0", "w-full", "h-full", "z-0"], ["id", "hero-content", 1, "relative", "z-10", "w-full", "max-w-5xl", "px-4", "flex", "flex-col", "items-center", "text-white"], [1, "flex", "flex-col", "md:flex-row", "items-center", "justify-center", "w-full", "mb-8", "contenedor-logo-principal"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e82d61a5-bf01-4d56-85fd-eb8a7207d508.png", "alt", "Connect Logo", 1, "logo-principal", "mb-6", "md:mb-0", "md:mr-4"], [1, "text-lg", "md:text-xl", "text-center", "md:text-left", "texto-conexion"], [1, "text-center", "contenedor-textos-info"], [1, "text-lg", "texto-ubicacion"], [1, "texto-pabellon", "texto-ubicacion"], [1, "text-2xl", "font-bold", "mt-2", "texto-fecha"], [1, "mt-12"], [1, "text-sm", "mb-2", "texto-contador"], [1, "flex", "space-x-3", "justify-center"], [1, "timer-box"], ["id", "days", 1, "text-3xl", "font-bold"], [1, "text-xs", "texto-tiempo"], ["id", "hours", 1, "text-3xl", "font-bold"], ["id", "minutes", 1, "text-3xl", "font-bold"], ["id", "seconds", 1, "text-3xl", "font-bold"], [1, "mt-10", "flex", "flex-col", "items-center", "space-y-2", "opacity-70"], [1, "text-white", "text-sm", "font-light", "tracking-widest", "texto-desliza"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg", 1, "w-6", "h-6", "text-white", "animate-bounce"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M19 9l-7 7-7-7"], [1, "floating-cta"], [1, "bg-white", "text-gray-800", "rounded-full", "flex", "items-center", "shadow-lg", "hover:bg-gray-200", "transition-colors", "p-3", "space-x-0", "md:px-6", "md:py-3", "md:space-x-2", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 24 24", "fill", "none", "stroke", "currentColor", "stroke-width", "2", "stroke-linecap", "round", "stroke-linejoin", "round", 1, "w-8", "h-8", "md:w-6", "md:h-6", "icon", "icon-tabler", "icons-tabler-outline", "icon-tabler-brand-whatsapp"], ["stroke", "none", "d", "M0 0h24v24H0z", "fill", "none"], ["d", "M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"], ["d", "M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"], [1, "hidden", "md:inline"], ["id", "temas-foro-section", 1, "relative", "bg-[#2d3450]", "py-20", "sm:py-28", "seccion-temas"], [1, "relative", "z-10", "max-w-7xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8"], [1, "text-center", "text-white", "mb-16"], [1, "text-3xl", "font-bold", "tracking-tight", "sm:text-4xl"], [1, "text-4xl", "font-extrabold", "tracking-tight", "sm:text-5xl", "mt-2", "texto-pilares"], [1, "card-slider"], [1, "temas-card-destacada", "w-full"], [1, "animatable-card", "agenda-card-destacada", "bg-white/10", "backdrop-blur-lg", "rounded-2xl", "text-white", "text-left", "w-full", "relative", "h-full", "overflow-hidden", "transition-colors", "duration-500"], [1, "card-original-content", "transition-opacity", "duration-300", "flex", "flex-col", "md:flex-row", "md:items-stretch"], [1, "agenda-card-imagen", "shrink-0", "md:w-[42%]", "lg:w-[38%]", "min-h-[200px]", "md:min-h-[260px]"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-01.png", "alt", "Agenda del Foro Experiencia Inmobiliaria", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "agenda-card-texto", "flex", "flex-col", "justify-center", "p-6", "sm:p-8", "md:py-10", "md:pr-10", "md:pl-8", "flex-1", "min-w-0"], [1, "inline-flex", "items-center", "self-start", "px-3", "py-1", "rounded-full", "text-sm", "font-medium", "text-white", "etiqueta-pilar", "mb-4"], [1, "text-2xl", "font-bold"], [1, "mt-6", "flex", "justify-start"], ["href", "https://dvn7rzpuwpj45.cloudfront.net/wp-content/uploads/2026/03/20163220/Agenda_foro_202.pdf", 1, "text-white", "font-semibold", "py-3", "px-6", "rounded-lg", "hover:opacity-90", "transition-opacity", "inline-block", "shadow-md", 2, "background-color", "#bd0f14"], [1, "text-center", "text-white"], [1, "contenedorCharlas"], [1, "w-full", "min-w-0", "flex"], [1, "animatable-card", "temas-charla-card", "bg-white/10", "backdrop-blur-lg", "rounded-2xl", "text-white", "text-left", "relative", "h-full", "w-full", "overflow-hidden", "transition-colors", "duration-500"], [1, "card-original-content", "transition-opacity", "duration-300", "flex", "flex-col", "md:flex-row", "md:items-stretch", "flex-1", "min-h-0"], [1, "agenda-card-imagen", "shrink-0", "md:w-[42%]", "lg:w-[38%]"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-02.png", "alt", "Experiencia alterna \u2014 Sala 1", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "agenda-card-texto", "flex", "flex-col", "p-6", "sm:p-8", "md:py-8", "md:pr-8", "md:pl-6", "flex-1", "min-w-0"], [1, "inline-flex", "items-center", "self-start", "px-3", "py-1", "rounded-full", "text-sm", "font-medium", "text-white", "whitespace-nowrap", "etiqueta-pilar", "mb-4"], [1, "text-2xl", "font-bold", "flex-1"], [1, "text-sm", "text-white/85", "mt-2", "leading-snug"], ["type", "button", 1, "btn-reserva-vidrio", "mt-6", "md:mt-auto", 3, "click"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-03.png", "alt", "Experiencia alterna \u2014 Sala 2", 1, "block", "w-full", "h-full", "object-cover", "object-center"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-04.png", "alt", "Experiencia alterna \u2014 Sala 3", 1, "block", "w-full", "h-full", "object-cover", "object-center"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-05.png", "alt", "Experiencia alterna \u2014 Sala 4", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "relative", "bg-cover", "bg-center", "rounded-2xl", "shadow-lg", "overflow-hidden", "flex", "flex-col", "lg:flex-row", "items-center", "seccion-boletas-ad-2", "h-[220px]"], [1, "absolute", "inset-0", "bg-gray-800", "opacity-50"], [1, "relative", "z-10", "w-full", "lg:w-3/5", "text-white", "text-center", "py-6", "px-6", "lg:py-8", "lg:px-12"], [1, "text-lg", "lg:text-xl", "font-normal", 2, "text-align", "center"], [1, "mt-6", "flex", "justify-center", 2, "justify-content", "center"], [1, "text-white", "font-semibold", "py-3", "px-6", "rounded-lg", "hover:opacity-90", "transition-opacity", "inline-block", "shadow-md", "cursor-pointer", 2, "background-color", "#bd0f14", 3, "click"], [1, "relative", "z-10", "hidden", "lg:flex", "lg:w-2/5", "justify-center"], ["src", "../../../assets/img/persona-boletos.png", "alt", "Persona con entradas", 1, "rounded-lg", "imagen-boletos-2"], ["id", "history-section", 1, "seccion-historia"], [1, "max-w-7xl", "mx-auto", "px-4"], [1, "text-4xl", "md:text-5xl", "font-bold"], [1, "mt-4", "text-lg"], [1, "mt-12", "lg:grid", "lg:grid-cols-4", "lg:gap-8", "lg:items-center"], [1, "carousel-wrapper", "lg:col-span-2", "lg:col-start-2", "flex", "items-center", "justify-center", "mb-8", "lg:mb-0"], [1, "carousel-container"], [1, "carousel-rotator"], [1, "carousel-face"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/0f8c88b4-abc3-4f14-9ea6-8a03b73fe7cb.png", 1, "rounded-xl", "shadow-xl", "w-full", "h-full", "object-cover"], [1, "grid", "grid-cols-2", "gap-8", "lg:contents", "contenedor-numeros"], [1, "stats-box", "space-y-8", "text-center", "lg:col-start-1", "lg:row-start-1"], [1, "bg-white", "p-6", "rounded-lg", "shadow-md"], ["data-target", "4.9", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "font-bold", "mt-2", "text-gray-800"], [1, "text-sm", "text-gray-500"], ["data-target", "9500", "data-suffix", "+", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "stats-box", "space-y-8", "text-center", "lg:col-start-4"], ["data-target", "60", "data-suffix", "+", 1, "text-5xl", "font-extrabold", "counter-number"], ["data-target", "4.8", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "max-w-6xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8"], [1, "mt-20", "text-center"], [1, "text-xl", "font-semibold", "text-gray-700", "tracking-wide"], [1, "logos-container"], [1, "logos-slide"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/66666cd3-65d8-4390-b479-861563e4e8c2.png", "alt", "Logo Seguros Bol\xEDvar", 1, "h-8", "sm:h-10", "mx-8", "logo-bolivar"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e0faa2fd-4ce0-4a1c-9e1f-e9a2fbbfe097.png", "alt", "Logo CienCuadras", 1, "h-8", "sm:h-10", "mx-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/f9c2de7e-e1bd-43d2-8e70-7e650bf02086.png", "alt", "Logo Davivienda", 1, "h-8", "sm:h-10", "mx-8", "logo-davivienda"], ["id", "precios-pioneros-section", 1, "py-20", "sm:py-28", "bg-[#f7f8fa]", "seccion-precios"], [1, "max-w-6xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8", "text-center"], [1, "text-3xl", "md:text-4xl", "font-extrabold", "text-[#2d3450]", "texto-entradas"], [1, "mt-4", "text-lg", "text-gray-600", 2, "margin-top", "0"], [1, "mt-16", "grid", "grid-cols-1", "lg:grid-cols-3", "gap-8", "items-center", "max-w-sm", "mx-auto", "lg:max-w-none"], [1, "bg-white", "rounded-xl", "shadow-lg", "p-8", "flex", "flex-col", "h-full", "border", "border-gray-200"], [1, "text-2xl", "font-bold", "text-[#2d3450]", "sub-texto-tarjeta"], [1, "my-6"], [1, "text-5xl", "font-extrabold", "text-[#2d3450]"], [1, "space-y-2", "text-gray-600", "mb-8"], [1, "border-b", "border-gray-300", "pb-3"], [1, "font-bold", "text-[#2d3450]", "pt-2"], [1, "mt-auto", "w-full", "bg-gray-200", "text-gray-800", "font-semibold", "py-3", "px-6", "rounded-lg", "flex", "items-center", "justify-center", "hover:bg-gray-300", "transition-colors", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "width", "24", "height", "24", "viewBox", "0 0 24 24", "fill", "none", "stroke", "currentColor", "stroke-width", "2", "stroke-linecap", "round", "stroke-linejoin", "round", 1, "icon", "icon-tabler", "icons-tabler-outline", "icon-tabler-ticket", "icono-compra"], ["d", "M15 5l0 2"], ["d", "M15 11l0 2"], ["d", "M15 17l0 2"], ["d", "M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2"], [1, "text-white", "rounded-xl", "shadow-2xl", "p-8", "transform", "lg:scale-110", "flex", "flex-col", "h-full", 2, "background", "linear-gradient(to bottom, #BD0F14, #253150)"], [1, "mb-4"], [1, "bg-white", "text-[#253150]", "text-sm", "font-bold", "px-4", "py-1.5", "rounded-full"], [1, "text-5xl", "font-extrabold"], [1, "space-y-2", "text-white", "mb-8"], [1, "font-bold", "pt-2"], [1, "mt-16", "text-sm", "text-gray-500", "italic"], [1, "devolucion"], ["id", "contacto-patrocinadores-section", 1, "py-10", "sm:py-16", "bg-[#f7f8fa]"], ["src", "../../../assets/img/Afydi_Logo ROJO.ai.png", "alt", "Logo Seguros Bol\xEDvar", 1, "h-8", "sm:h-10", "mx-8", "logo-bolivar"], ["src", "../../../assets/img/LOGO-SIMI.jpg", "alt", "Logo CienCuadras", 1, "h-8", "sm:h-10", "mx-8"], ["src", "../../../assets/img/N - SEDI SOLUTIONS.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], ["src", "../../../assets/img/nuwwe.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], [1, "min-[1108px]:hidden", "fixed", "top-[80px]", "left-0", "right-0", "bottom-0", "z-20", "bg-white/75", "backdrop-blur-md"], ["id", "close-menu-button", 1, "absolute", "top-4", "right-6", "text-[#2d3450]"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg", 1, "w-8", "h-8"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M6 18L18 6M6 6l12 12"], [1, "h-full", "flex", "flex-col", "justify-center", "items-center", "space-y-8", "-mt-[80px]"], ["href", "#inicio-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500", "active-link-mobile"], ["href", "#history-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"], ["href", "#temas-foro-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"], ["href", "#precios-pioneros-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"]], template: function Landing_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "header")(1, "nav", 0)(2, "div", 1);
       \u0275\u0275element(3, "img", 2)(4, "div", 3)(5, "img", 4);
@@ -43076,341 +43342,353 @@ var Landing = class _Landing {
       \u0275\u0275elementStart(111, "h4", 73);
       \u0275\u0275text(112, "Implementaci\xF3n de IA para tu Inmobiliaria");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(113, "button", 74);
-      \u0275\u0275listener("click", function Landing_Template_button_click_113_listener($event) {
+      \u0275\u0275elementStart(113, "p", 74);
+      \u0275\u0275text(114);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(115, "button", 75);
+      \u0275\u0275listener("click", function Landing_Template_button_click_115_listener($event) {
         return ctx.abrirReservaCupo(1, "Implementaci\xF3n de IA para tu Inmobiliaria", $event);
       });
-      \u0275\u0275text(114, "Reserva tu cupo aqu\xED");
+      \u0275\u0275text(116, "Reserva tu cupo aqu\xED");
       \u0275\u0275elementEnd()()()()();
-      \u0275\u0275elementStart(115, "div", 66)(116, "div", 67)(117, "div", 68)(118, "div", 69);
-      \u0275\u0275element(119, "img", 75);
+      \u0275\u0275elementStart(117, "div", 66)(118, "div", 67)(119, "div", 68)(120, "div", 69);
+      \u0275\u0275element(121, "img", 76);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(120, "div", 71)(121, "span", 60);
-      \u0275\u0275text(122, " Sala 2 ");
+      \u0275\u0275elementStart(122, "div", 71)(123, "span", 60);
+      \u0275\u0275text(124, " Sala 2 ");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(123, "h4", 73);
-      \u0275\u0275text(124, "Entorno Juridico");
+      \u0275\u0275elementStart(125, "h4", 73);
+      \u0275\u0275text(126, "Entorno Juridico");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(125, "button", 74);
-      \u0275\u0275listener("click", function Landing_Template_button_click_125_listener($event) {
+      \u0275\u0275elementStart(127, "p", 74);
+      \u0275\u0275text(128);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(129, "button", 75);
+      \u0275\u0275listener("click", function Landing_Template_button_click_129_listener($event) {
         return ctx.abrirReservaCupo(2, "Entorno Juridico", $event);
       });
-      \u0275\u0275text(126, "Reserva tu cupo aqu\xED");
+      \u0275\u0275text(130, "Reserva tu cupo aqu\xED");
       \u0275\u0275elementEnd()()()()();
-      \u0275\u0275elementStart(127, "div", 66)(128, "div", 67)(129, "div", 68)(130, "div", 69);
-      \u0275\u0275element(131, "img", 76);
+      \u0275\u0275elementStart(131, "div", 66)(132, "div", 67)(133, "div", 68)(134, "div", 69);
+      \u0275\u0275element(135, "img", 77);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(132, "div", 71)(133, "span", 60);
-      \u0275\u0275text(134, " Sala 3 ");
+      \u0275\u0275elementStart(136, "div", 71)(137, "span", 60);
+      \u0275\u0275text(138, " Sala 3 ");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(135, "h4", 73);
-      \u0275\u0275text(136, "Casos de Exito");
+      \u0275\u0275elementStart(139, "h4", 73);
+      \u0275\u0275text(140, "Casos de Exito");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(137, "button", 74);
-      \u0275\u0275listener("click", function Landing_Template_button_click_137_listener($event) {
+      \u0275\u0275elementStart(141, "p", 74);
+      \u0275\u0275text(142);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(143, "button", 75);
+      \u0275\u0275listener("click", function Landing_Template_button_click_143_listener($event) {
         return ctx.abrirReservaCupo(3, "Casos de Exito", $event);
       });
-      \u0275\u0275text(138, "Reserva tu cupo aqu\xED");
+      \u0275\u0275text(144, "Reserva tu cupo aqu\xED");
       \u0275\u0275elementEnd()()()()();
-      \u0275\u0275elementStart(139, "div", 66)(140, "div", 67)(141, "div", 68)(142, "div", 69);
-      \u0275\u0275element(143, "img", 77);
+      \u0275\u0275elementStart(145, "div", 66)(146, "div", 67)(147, "div", 68)(148, "div", 69);
+      \u0275\u0275element(149, "img", 78);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(144, "div", 71)(145, "span", 60);
-      \u0275\u0275text(146, " Sala 4 ");
+      \u0275\u0275elementStart(150, "div", 71)(151, "span", 60);
+      \u0275\u0275text(152, " Sala 4 ");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(147, "h4", 73);
-      \u0275\u0275text(148, "Meet & Greet");
+      \u0275\u0275elementStart(153, "h4", 73);
+      \u0275\u0275text(154, "Meet & Greet");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(149, "button", 74);
-      \u0275\u0275listener("click", function Landing_Template_button_click_149_listener($event) {
+      \u0275\u0275elementStart(155, "p", 74);
+      \u0275\u0275text(156);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(157, "button", 75);
+      \u0275\u0275listener("click", function Landing_Template_button_click_157_listener($event) {
         return ctx.abrirReservaCupo(4, "Meet & Greet", $event);
       });
-      \u0275\u0275text(150, "Reserva tu cupo aqu\xED");
+      \u0275\u0275text(158, "Reserva tu cupo aqu\xED");
       \u0275\u0275elementEnd()()()()()()();
-      \u0275\u0275elementStart(151, "div", 78);
-      \u0275\u0275element(152, "div", 79);
-      \u0275\u0275elementStart(153, "div", 80)(154, "p", 81);
-      \u0275\u0275text(155, "\xA1Vive el XVI Foro Experiencia Inmobiliaria con ");
-      \u0275\u0275elementStart(156, "strong");
-      \u0275\u0275text(157, " total comodidad! ");
+      \u0275\u0275elementStart(159, "div", 79);
+      \u0275\u0275element(160, "div", 80);
+      \u0275\u0275elementStart(161, "div", 81)(162, "p", 82);
+      \u0275\u0275text(163, "\xA1Vive el XVI Foro Experiencia Inmobiliaria con ");
+      \u0275\u0275elementStart(164, "strong");
+      \u0275\u0275text(165, " total comodidad! ");
       \u0275\u0275elementEnd();
-      \u0275\u0275text(158, " Disfruta de un ");
-      \u0275\u0275elementStart(159, "strong");
-      \u0275\u0275text(160, " ahorro especial ");
+      \u0275\u0275text(166, " Disfruta de un ");
+      \u0275\u0275elementStart(167, "strong");
+      \u0275\u0275text(168, " ahorro especial ");
       \u0275\u0275elementEnd();
-      \u0275\u0275text(161, " en el ");
-      \u0275\u0275elementStart(162, "strong");
-      \u0275\u0275text(163, " Hilton Cartagena ");
+      \u0275\u0275text(169, " en el ");
+      \u0275\u0275elementStart(170, "strong");
+      \u0275\u0275text(171, " Hilton Cartagena ");
       \u0275\u0275elementEnd();
-      \u0275\u0275text(164, " gracias a nuestra alianza");
+      \u0275\u0275text(172, " gracias a nuestra alianza");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(165, "div", 82)(166, "a", 83);
-      \u0275\u0275listener("click", function Landing_Template_a_click_166_listener() {
+      \u0275\u0275elementStart(173, "div", 83)(174, "a", 84);
+      \u0275\u0275listener("click", function Landing_Template_a_click_174_listener() {
         return ctx.abrirWhatsappHotel();
       });
-      \u0275\u0275text(167, "\xA1Pide m\xE1s info aqu\xED con nuestro asesor exclusivo!");
+      \u0275\u0275text(175, "\xA1Pide m\xE1s info aqu\xED con nuestro asesor exclusivo!");
       \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(168, "div", 84);
-      \u0275\u0275element(169, "img", 85);
+      \u0275\u0275elementStart(176, "div", 85);
+      \u0275\u0275element(177, "img", 86);
       \u0275\u0275elementEnd()()()();
-      \u0275\u0275elementStart(170, "section", 86)(171, "div", 87)(172, "h2", 88);
-      \u0275\u0275text(173, "16 a\xF1os haciendo historia");
+      \u0275\u0275elementStart(178, "section", 87)(179, "div", 88)(180, "h2", 89);
+      \u0275\u0275text(181, "16 a\xF1os haciendo historia");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(174, "p", 89);
-      \u0275\u0275text(175, "con el evento m\xE1s importante del sector inmobiliario");
+      \u0275\u0275elementStart(182, "p", 90);
+      \u0275\u0275text(183, "con el evento m\xE1s importante del sector inmobiliario");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(176, "div", 90)(177, "div", 91)(178, "div", 92)(179, "div", 93)(180, "div", 94);
-      \u0275\u0275element(181, "img", 95);
+      \u0275\u0275elementStart(184, "div", 91)(185, "div", 92)(186, "div", 93)(187, "div", 94)(188, "div", 95);
+      \u0275\u0275element(189, "img", 96);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(182, "div", 94);
-      \u0275\u0275element(183, "img", 95);
+      \u0275\u0275elementStart(190, "div", 95);
+      \u0275\u0275element(191, "img", 96);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(184, "div", 94);
-      \u0275\u0275element(185, "img", 95);
+      \u0275\u0275elementStart(192, "div", 95);
+      \u0275\u0275element(193, "img", 96);
       \u0275\u0275elementEnd()()()();
-      \u0275\u0275elementStart(186, "div", 96)(187, "div", 97)(188, "div", 98)(189, "p", 99);
-      \u0275\u0275text(190, "4.9");
+      \u0275\u0275elementStart(194, "div", 97)(195, "div", 98)(196, "div", 99)(197, "p", 100);
+      \u0275\u0275text(198, "4.9");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(191, "p", 100);
-      \u0275\u0275text(192, "Calificaci\xF3n general");
+      \u0275\u0275elementStart(199, "p", 101);
+      \u0275\u0275text(200, "Calificaci\xF3n general");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(193, "p", 101);
-      \u0275\u0275text(194, "\xDAltima versi\xF3n");
+      \u0275\u0275elementStart(201, "p", 102);
+      \u0275\u0275text(202, "\xDAltima versi\xF3n");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(195, "div", 98)(196, "p", 102);
-      \u0275\u0275text(197, "9.000");
+      \u0275\u0275elementStart(203, "div", 99)(204, "p", 103);
+      \u0275\u0275text(205, "9.000");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(198, "p", 100);
-      \u0275\u0275text(199, "Usuarios impactados");
+      \u0275\u0275elementStart(206, "p", 101);
+      \u0275\u0275text(207, "Usuarios impactados");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(200, "p", 101);
-      \u0275\u0275text(201, "En 16 a\xF1os");
+      \u0275\u0275elementStart(208, "p", 102);
+      \u0275\u0275text(209, "En 16 a\xF1os");
       \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(202, "div", 103)(203, "div", 98)(204, "p", 104);
-      \u0275\u0275text(205, "60");
+      \u0275\u0275elementStart(210, "div", 104)(211, "div", 99)(212, "p", 105);
+      \u0275\u0275text(213, "60");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(206, "p", 100);
-      \u0275\u0275text(207, "Speakers y expertos");
+      \u0275\u0275elementStart(214, "p", 101);
+      \u0275\u0275text(215, "Speakers y expertos");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(208, "p", 101);
-      \u0275\u0275text(209, "de nivel mundial");
+      \u0275\u0275elementStart(216, "p", 102);
+      \u0275\u0275text(217, "de nivel mundial");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(210, "div", 98)(211, "p", 105);
-      \u0275\u0275text(212, "4.8");
+      \u0275\u0275elementStart(218, "div", 99)(219, "p", 106);
+      \u0275\u0275text(220, "4.8");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(213, "p", 100);
-      \u0275\u0275text(214, "Calificaci\xF3n conferencias");
+      \u0275\u0275elementStart(221, "p", 101);
+      \u0275\u0275text(222, "Calificaci\xF3n conferencias");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(215, "p", 101);
-      \u0275\u0275text(216, "puntaje m\xE1ximo");
+      \u0275\u0275elementStart(223, "p", 102);
+      \u0275\u0275text(224, "puntaje m\xE1ximo");
       \u0275\u0275elementEnd()()()()()();
-      \u0275\u0275elementStart(217, "div", 106)(218, "div", 107)(219, "h3", 108);
-      \u0275\u0275text(220, "Organizan:");
+      \u0275\u0275elementStart(225, "div", 107)(226, "div", 108)(227, "h3", 109);
+      \u0275\u0275text(228, "Organizan:");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(221, "div", 109)(222, "div", 110);
-      \u0275\u0275element(223, "img", 111)(224, "img", 112)(225, "img", 113)(226, "img", 114);
+      \u0275\u0275elementStart(229, "div", 110)(230, "div", 111);
+      \u0275\u0275element(231, "img", 112)(232, "img", 113)(233, "img", 114)(234, "img", 115);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(227, "div", 110);
-      \u0275\u0275element(228, "img", 111)(229, "img", 112)(230, "img", 113)(231, "img", 114);
+      \u0275\u0275elementStart(235, "div", 111);
+      \u0275\u0275element(236, "img", 112)(237, "img", 113)(238, "img", 114)(239, "img", 115);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(232, "div", 110);
-      \u0275\u0275element(233, "img", 111)(234, "img", 112)(235, "img", 113)(236, "img", 114);
+      \u0275\u0275elementStart(240, "div", 111);
+      \u0275\u0275element(241, "img", 112)(242, "img", 113)(243, "img", 114)(244, "img", 115);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(237, "div", 110);
-      \u0275\u0275element(238, "img", 111)(239, "img", 112)(240, "img", 113)(241, "img", 114);
+      \u0275\u0275elementStart(245, "div", 111);
+      \u0275\u0275element(246, "img", 112)(247, "img", 113)(248, "img", 114)(249, "img", 115);
       \u0275\u0275elementEnd()()()()();
-      \u0275\u0275elementStart(242, "section", 115)(243, "div", 116)(244, "h2", 117);
-      \u0275\u0275text(245, "Etapa visionarios: asegura tu entrada");
+      \u0275\u0275elementStart(250, "section", 116)(251, "div", 117)(252, "h2", 118);
+      \u0275\u0275text(253, "Etapa visionarios: asegura tu entrada");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(246, "p", 118);
-      \u0275\u0275text(247, "Comparte el conocimiento con tu equipo y vive la mejor experiencia");
+      \u0275\u0275elementStart(254, "p", 119);
+      \u0275\u0275text(255, "Comparte el conocimiento con tu equipo y vive la mejor experiencia");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(248, "div", 119)(249, "div", 120)(250, "h3", 121);
-      \u0275\u0275text(251, "Entrada individual");
+      \u0275\u0275elementStart(256, "div", 120)(257, "div", 121)(258, "h3", 122);
+      \u0275\u0275text(259, "Entrada individual");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(252, "div", 122)(253, "span", 123);
-      \u0275\u0275text(254, "$330.000");
+      \u0275\u0275elementStart(260, "div", 123)(261, "span", 124);
+      \u0275\u0275text(262, "$330.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(255, "div", 124)(256, "p", 125);
-      \u0275\u0275text(257, "Por persona");
+      \u0275\u0275elementStart(263, "div", 125)(264, "p", 126);
+      \u0275\u0275text(265, "Por persona");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(258, "p", 126);
-      \u0275\u0275text(259, "Acceso total");
+      \u0275\u0275elementStart(266, "p", 127);
+      \u0275\u0275text(267, "Acceso total");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(260, "button", 127);
-      \u0275\u0275listener("click", function Landing_Template_button_click_260_listener() {
+      \u0275\u0275elementStart(268, "button", 128);
+      \u0275\u0275listener("click", function Landing_Template_button_click_268_listener() {
         return ctx.seleccionarBoletas(1);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(261, "svg", 128);
-      \u0275\u0275element(262, "path", 44)(263, "path", 129)(264, "path", 130)(265, "path", 131)(266, "path", 132);
+      \u0275\u0275elementStart(269, "svg", 129);
+      \u0275\u0275element(270, "path", 44)(271, "path", 130)(272, "path", 131)(273, "path", 132)(274, "path", 133);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(267, " Comprar 1 entrada ");
+      \u0275\u0275text(275, " Comprar 1 entrada ");
       \u0275\u0275elementEnd()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(268, "div", 133)(269, "div", 134)(270, "span", 135);
-      \u0275\u0275text(271, " M\xE1s popular ");
+      \u0275\u0275elementStart(276, "div", 134)(277, "div", 135)(278, "span", 136);
+      \u0275\u0275text(279, " M\xE1s popular ");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(272, "h3", 61);
-      \u0275\u0275text(273, "Equipo de 2 personas");
+      \u0275\u0275elementStart(280, "h3", 61);
+      \u0275\u0275text(281, "Equipo de 2 personas");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(274, "div", 122)(275, "span", 136);
-      \u0275\u0275text(276, "$620.000");
+      \u0275\u0275elementStart(282, "div", 123)(283, "span", 137);
+      \u0275\u0275text(284, "$620.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(277, "div", 137)(278, "p", 138);
-      \u0275\u0275text(279, "Persona: 310.000");
+      \u0275\u0275elementStart(285, "div", 138)(286, "p", 139);
+      \u0275\u0275text(287, "Persona: 310.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(280, "button", 127);
-      \u0275\u0275listener("click", function Landing_Template_button_click_280_listener() {
+      \u0275\u0275elementStart(288, "button", 128);
+      \u0275\u0275listener("click", function Landing_Template_button_click_288_listener() {
         return ctx.seleccionarBoletas(2);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(281, "svg", 128);
-      \u0275\u0275element(282, "path", 44)(283, "path", 129)(284, "path", 130)(285, "path", 131)(286, "path", 132);
+      \u0275\u0275elementStart(289, "svg", 129);
+      \u0275\u0275element(290, "path", 44)(291, "path", 130)(292, "path", 131)(293, "path", 132)(294, "path", 133);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(287, " Comprar 2 entradas ");
+      \u0275\u0275text(295, " Comprar 2 entradas ");
       \u0275\u0275elementEnd()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(288, "div", 120)(289, "h3", 121);
-      \u0275\u0275text(290, "Equipo de 3 personas");
+      \u0275\u0275elementStart(296, "div", 121)(297, "h3", 122);
+      \u0275\u0275text(298, "Equipo de 3 personas");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(291, "div", 122)(292, "span", 123);
-      \u0275\u0275text(293, "$780.000");
+      \u0275\u0275elementStart(299, "div", 123)(300, "span", 124);
+      \u0275\u0275text(301, "$780.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(294, "div", 124)(295, "p", 126);
-      \u0275\u0275text(296, "Persona: $260.000");
+      \u0275\u0275elementStart(302, "div", 125)(303, "p", 127);
+      \u0275\u0275text(304, "Persona: $260.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(297, "button", 127);
-      \u0275\u0275listener("click", function Landing_Template_button_click_297_listener() {
+      \u0275\u0275elementStart(305, "button", 128);
+      \u0275\u0275listener("click", function Landing_Template_button_click_305_listener() {
         return ctx.seleccionarBoletas(3);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(298, "svg", 128);
-      \u0275\u0275element(299, "path", 44)(300, "path", 129)(301, "path", 130)(302, "path", 131)(303, "path", 132);
+      \u0275\u0275elementStart(306, "svg", 129);
+      \u0275\u0275element(307, "path", 44)(308, "path", 130)(309, "path", 131)(310, "path", 132)(311, "path", 133);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(304, " Comprar 3 entradas ");
+      \u0275\u0275text(312, " Comprar 3 entradas ");
       \u0275\u0275elementEnd()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(305, "div", 120)(306, "h3", 121);
-      \u0275\u0275text(307, "Equipo de 4 personas");
+      \u0275\u0275elementStart(313, "div", 121)(314, "h3", 122);
+      \u0275\u0275text(315, "Equipo de 4 personas");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(308, "div", 122)(309, "span", 123);
-      \u0275\u0275text(310, "$1.000.000");
+      \u0275\u0275elementStart(316, "div", 123)(317, "span", 124);
+      \u0275\u0275text(318, "$1.000.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(311, "div", 124)(312, "p", 126);
-      \u0275\u0275text(313, "Persona: $250.000");
+      \u0275\u0275elementStart(319, "div", 125)(320, "p", 127);
+      \u0275\u0275text(321, "Persona: $250.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(314, "button", 127);
-      \u0275\u0275listener("click", function Landing_Template_button_click_314_listener() {
+      \u0275\u0275elementStart(322, "button", 128);
+      \u0275\u0275listener("click", function Landing_Template_button_click_322_listener() {
         return ctx.seleccionarBoletas(4);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(315, "svg", 128);
-      \u0275\u0275element(316, "path", 44)(317, "path", 129)(318, "path", 130)(319, "path", 131)(320, "path", 132);
+      \u0275\u0275elementStart(323, "svg", 129);
+      \u0275\u0275element(324, "path", 44)(325, "path", 130)(326, "path", 131)(327, "path", 132)(328, "path", 133);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(321, " Comprar 4 entradas ");
+      \u0275\u0275text(329, " Comprar 4 entradas ");
       \u0275\u0275elementEnd()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(322, "div", 120)(323, "h3", 121);
-      \u0275\u0275text(324, "Equipo de 5 personas");
+      \u0275\u0275elementStart(330, "div", 121)(331, "h3", 122);
+      \u0275\u0275text(332, "Equipo de 5 personas");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(325, "div", 122)(326, "span", 123);
-      \u0275\u0275text(327, "$1.150.000");
+      \u0275\u0275elementStart(333, "div", 123)(334, "span", 124);
+      \u0275\u0275text(335, "$1.150.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(328, "div", 124)(329, "p", 126);
-      \u0275\u0275text(330, "Persona: $230.000");
+      \u0275\u0275elementStart(336, "div", 125)(337, "p", 127);
+      \u0275\u0275text(338, "Persona: $230.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(331, "button", 127);
-      \u0275\u0275listener("click", function Landing_Template_button_click_331_listener() {
+      \u0275\u0275elementStart(339, "button", 128);
+      \u0275\u0275listener("click", function Landing_Template_button_click_339_listener() {
         return ctx.seleccionarBoletas(5);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(332, "svg", 128);
-      \u0275\u0275element(333, "path", 44)(334, "path", 129)(335, "path", 130)(336, "path", 131)(337, "path", 132);
+      \u0275\u0275elementStart(340, "svg", 129);
+      \u0275\u0275element(341, "path", 44)(342, "path", 130)(343, "path", 131)(344, "path", 132)(345, "path", 133);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(338, " Comprar 5 entradas ");
+      \u0275\u0275text(346, " Comprar 5 entradas ");
       \u0275\u0275elementEnd()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(339, "div", 120)(340, "h3", 121);
-      \u0275\u0275text(341, "Equipo de 6 personas");
+      \u0275\u0275elementStart(347, "div", 121)(348, "h3", 122);
+      \u0275\u0275text(349, "Equipo de 6 personas");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(342, "div", 122)(343, "span", 123);
-      \u0275\u0275text(344, "$1.320.000");
+      \u0275\u0275elementStart(350, "div", 123)(351, "span", 124);
+      \u0275\u0275text(352, "$1.320.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(345, "div", 124)(346, "p", 126);
-      \u0275\u0275text(347, "Persona: $220.000");
+      \u0275\u0275elementStart(353, "div", 125)(354, "p", 127);
+      \u0275\u0275text(355, "Persona: $220.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(348, "button", 127);
-      \u0275\u0275listener("click", function Landing_Template_button_click_348_listener() {
+      \u0275\u0275elementStart(356, "button", 128);
+      \u0275\u0275listener("click", function Landing_Template_button_click_356_listener() {
         return ctx.seleccionarBoletas(6);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(349, "svg", 128);
-      \u0275\u0275element(350, "path", 44)(351, "path", 129)(352, "path", 130)(353, "path", 131)(354, "path", 132);
+      \u0275\u0275elementStart(357, "svg", 129);
+      \u0275\u0275element(358, "path", 44)(359, "path", 130)(360, "path", 131)(361, "path", 132)(362, "path", 133);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(355, " Comprar 6 entradas ");
+      \u0275\u0275text(363, " Comprar 6 entradas ");
       \u0275\u0275elementEnd()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(356, "div", 120)(357, "h3", 121);
-      \u0275\u0275text(358, "Equipo de 7 personas");
+      \u0275\u0275elementStart(364, "div", 121)(365, "h3", 122);
+      \u0275\u0275text(366, "Equipo de 7 personas");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(359, "div", 122)(360, "span", 123);
-      \u0275\u0275text(361, "$1.470.000");
+      \u0275\u0275elementStart(367, "div", 123)(368, "span", 124);
+      \u0275\u0275text(369, "$1.470.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(362, "div", 124)(363, "p", 126);
-      \u0275\u0275text(364, "Persona: $210.000");
+      \u0275\u0275elementStart(370, "div", 125)(371, "p", 127);
+      \u0275\u0275text(372, "Persona: $210.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(365, "button", 127);
-      \u0275\u0275listener("click", function Landing_Template_button_click_365_listener() {
+      \u0275\u0275elementStart(373, "button", 128);
+      \u0275\u0275listener("click", function Landing_Template_button_click_373_listener() {
         return ctx.seleccionarBoletas(7);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(366, "svg", 128);
-      \u0275\u0275element(367, "path", 44)(368, "path", 129)(369, "path", 130)(370, "path", 131)(371, "path", 132);
+      \u0275\u0275elementStart(374, "svg", 129);
+      \u0275\u0275element(375, "path", 44)(376, "path", 130)(377, "path", 131)(378, "path", 132)(379, "path", 133);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(372, " Comprar 7 entradas ");
+      \u0275\u0275text(380, " Comprar 7 entradas ");
       \u0275\u0275elementEnd()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(373, "div", 120)(374, "h3", 121);
-      \u0275\u0275text(375, "Equipo de 8 personas");
+      \u0275\u0275elementStart(381, "div", 121)(382, "h3", 122);
+      \u0275\u0275text(383, "Equipo de 8 personas");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(376, "div", 122)(377, "span", 123);
-      \u0275\u0275text(378, "$1.600.000");
+      \u0275\u0275elementStart(384, "div", 123)(385, "span", 124);
+      \u0275\u0275text(386, "$1.600.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(379, "div", 124)(380, "p", 126);
-      \u0275\u0275text(381, "Persona: $200.000");
+      \u0275\u0275elementStart(387, "div", 125)(388, "p", 127);
+      \u0275\u0275text(389, "Persona: $200.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(382, "button", 127);
-      \u0275\u0275listener("click", function Landing_Template_button_click_382_listener() {
+      \u0275\u0275elementStart(390, "button", 128);
+      \u0275\u0275listener("click", function Landing_Template_button_click_390_listener() {
         return ctx.seleccionarBoletas(8);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(383, "svg", 128);
-      \u0275\u0275element(384, "path", 44)(385, "path", 129)(386, "path", 130)(387, "path", 131)(388, "path", 132);
+      \u0275\u0275elementStart(391, "svg", 129);
+      \u0275\u0275element(392, "path", 44)(393, "path", 130)(394, "path", 131)(395, "path", 132)(396, "path", 133);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(389, " Comprar 8 entradas ");
+      \u0275\u0275text(397, " Comprar 8 entradas ");
       \u0275\u0275elementEnd()()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(390, "p", 139);
-      \u0275\u0275text(391, "*V\xE1lido hasta el 20 de Mayo de 2026.");
+      \u0275\u0275elementStart(398, "p", 140);
+      \u0275\u0275text(399, "*V\xE1lido hasta el 20 de Mayo de 2026.");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(392, "h2", 140);
-      \u0275\u0275text(393, "**Ten presente: no realizamos devoluciones de dinero");
+      \u0275\u0275elementStart(400, "h2", 141);
+      \u0275\u0275text(401, "**Ten presente: no realizamos devoluciones de dinero");
       \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(394, "section", 141)(395, "div", 106)(396, "div", 107)(397, "h3", 108);
-      \u0275\u0275text(398, "Patrocinan:");
+      \u0275\u0275elementStart(402, "section", 142)(403, "div", 107)(404, "div", 108)(405, "h3", 109);
+      \u0275\u0275text(406, "Patrocinan:");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(399, "div", 109)(400, "div", 110);
-      \u0275\u0275element(401, "img", 142)(402, "img", 143)(403, "img", 144)(404, "img", 145);
+      \u0275\u0275elementStart(407, "div", 110)(408, "div", 111);
+      \u0275\u0275element(409, "img", 143)(410, "img", 144)(411, "img", 145)(412, "img", 146);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(405, "div", 110);
-      \u0275\u0275element(406, "img", 142)(407, "img", 143)(408, "img", 144)(409, "img", 145);
+      \u0275\u0275elementStart(413, "div", 111);
+      \u0275\u0275element(414, "img", 143)(415, "img", 144)(416, "img", 145)(417, "img", 146);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(410, "div", 110);
-      \u0275\u0275element(411, "img", 142)(412, "img", 143)(413, "img", 144)(414, "img", 145);
+      \u0275\u0275elementStart(418, "div", 111);
+      \u0275\u0275element(419, "img", 143)(420, "img", 144)(421, "img", 145)(422, "img", 146);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(415, "div", 110);
-      \u0275\u0275element(416, "img", 142)(417, "img", 143)(418, "img", 144)(419, "img", 145);
+      \u0275\u0275elementStart(423, "div", 111);
+      \u0275\u0275element(424, "img", 143)(425, "img", 144)(426, "img", 145)(427, "img", 146);
       \u0275\u0275elementEnd()()()()();
     }
     if (rf & 2) {
@@ -43425,6 +43703,14 @@ var Landing = class _Landing {
       \u0275\u0275textInterpolate(ctx.timeleft.minutes);
       \u0275\u0275advance(5);
       \u0275\u0275textInterpolate(ctx.timeleft.seconds);
+      \u0275\u0275advance(53);
+      \u0275\u0275textInterpolate(ctx.textoCuposEnSala(1));
+      \u0275\u0275advance(14);
+      \u0275\u0275textInterpolate(ctx.textoCuposEnSala(2));
+      \u0275\u0275advance(14);
+      \u0275\u0275textInterpolate(ctx.textoCuposEnSala(3));
+      \u0275\u0275advance(14);
+      \u0275\u0275textInterpolate(ctx.textoCuposEnSala(4));
     }
   }, dependencies: [CommonModule, NgIf, RouterModule], styles: ['\n\n.hero-bg[_ngcontent-%COMP%] {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/da01a461-c25e-400e-8037-cc341bfc1bd3.png);\n  background-size: cover;\n  background-position: center;\n  background-color: #2d3450;\n  height: 80vh;\n}\nheader[_ngcontent-%COMP%] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  z-index: 30;\n  background-color: transparent;\n  transition: background-color 0.4s ease-out;\n}\nheader.scrolled-header[_ngcontent-%COMP%] {\n  background-color: #2d3450;\n}\n.logo-white[_ngcontent-%COMP%] {\n  filter: brightness(0) invert(1);\n}\n.logo-principal[_ngcontent-%COMP%] {\n  max-width: 290px;\n  width: 100%;\n}\n.logo-foro-1[_ngcontent-%COMP%] {\n  max-width: 130px;\n}\n.logo-libertador[_ngcontent-%COMP%] {\n  max-width: 200px;\n}\n.contenedor-logos[_ngcontent-%COMP%] {\n  max-width: 170px;\n}\n.timer-box[_ngcontent-%COMP%] {\n  background-color: rgba(255, 255, 255, 0.1);\n  border-radius: 0.5rem;\n  padding: 0.5rem 1rem;\n  -webkit-backdrop-filter: blur(10px);\n  backdrop-filter: blur(10px);\n}\n.texto-conexion[_ngcontent-%COMP%] {\n  line-height: 24px;\n  font-size: 22px;\n  margin-top: 13px;\n}\n.texto-contador[_ngcontent-%COMP%] {\n  text-align: center;\n  font-weight: 500;\n}\n.texto-tiempo[_ngcontent-%COMP%] {\n  text-align: center;\n}\n.texto-pabellon[_ngcontent-%COMP%] {\n  border-bottom: 1px solid #fff;\n  padding-bottom: 15px;\n}\n.texto-fecha[_ngcontent-%COMP%] {\n  margin-top: 15px;\n  font-size: 22px;\n}\n.texto-ubicacion[_ngcontent-%COMP%] {\n  font-size: 20px;\n}\n.contenedor-logo-principal[_ngcontent-%COMP%] {\n  margin-top: 75px;\n}\n.contenedor-textos-info[_ngcontent-%COMP%] {\n  margin-top: 30px;\n}\n.texto-desliza[_ngcontent-%COMP%] {\n  margin-top: 20px;\n}\n.floating-cta[_ngcontent-%COMP%] {\n  position: fixed;\n  bottom: 2.5rem;\n  right: 2.5rem;\n  z-index: 30;\n}\n#animation-container[_ngcontent-%COMP%] {\n  position: relative;\n  width: 100%;\n  min-height: 80vh;\n}\n.seccion-historia[_ngcontent-%COMP%] {\n  padding-top: 30px;\n  padding-bottom: 2rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n  color: #2d3450;\n  text-align: center;\n  background-color: #f7f8fa;\n  margin-bottom: 20px;\n}\n.seccion-boletas-ad-2[_ngcontent-%COMP%] {\n  background-image: url("./media/fondo-banner-2.png");\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.seccion-boletas-ad-3[_ngcontent-%COMP%] {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/acb20703-f1f9-44c6-88a5-38e2dec47a42.png);\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.imagen-boletos-2[_ngcontent-%COMP%] {\n  width: 230px;\n}\n.etiqueta-pilar[_ngcontent-%COMP%] {\n  background-color: #2d3450;\n}\n.temas-charla-card[_ngcontent-%COMP%]   .btn-reserva-vidrio[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  padding: 0.65rem 1.15rem;\n  font-size: 0.875rem;\n  font-weight: 600;\n  color: #fff;\n  text-align: center;\n  border-radius: 0.625rem;\n  border: 1px solid rgba(255, 255, 255, 0.45);\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.22) 0%,\n      rgba(255, 255, 255, 0.08) 100%);\n  backdrop-filter: blur(14px);\n  -webkit-backdrop-filter: blur(14px);\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.35);\n  cursor: pointer;\n  transition:\n    background 0.2s ease,\n    border-color 0.2s ease,\n    box-shadow 0.2s ease;\n}\n.temas-charla-card[_ngcontent-%COMP%]   .btn-reserva-vidrio[_ngcontent-%COMP%]:hover {\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.32) 0%,\n      rgba(255, 255, 255, 0.14) 100%);\n  border-color: rgba(255, 255, 255, 0.6);\n  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.45);\n}\n.seccion-temas[_ngcontent-%COMP%] {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/ca85fb18-d61a-4604-8f9d-004f021d7e98.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  padding-top: 70px;\n  padding-bottom: 70px;\n}\n.texto-pilares[_ngcontent-%COMP%] {\n  font-weight: 300;\n  font-size: 30px;\n}\n.texto-entradas[_ngcontent-%COMP%] {\n  font-size: 28px;\n  font-weight: 600;\n}\n.icono-compra[_ngcontent-%COMP%] {\n  margin-right: 10px;\n}\n.sub-texto-tarjeta[_ngcontent-%COMP%] {\n  margin-top: 20px;\n}\n.seccion-boletas-ad[_ngcontent-%COMP%] {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/a0154101-11b4-4330-8169-a6071bff0f43.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  height: 185px;\n  margin-bottom: 80px;\n}\n.botonWhatsappHilton[_ngcontent-%COMP%]   [_ngcontent-%COMP%]:hover {\n  cursor: pointer !important;\n}\n.sub-text-entradas-ad[_ngcontent-%COMP%] {\n  font-size: 31px;\n}\n.imagen-boletos[_ngcontent-%COMP%] {\n  margin-top: 50px;\n}\n.devolucion[_ngcontent-%COMP%] {\n  margin-top: 10px;\n  font-size: 15px;\n  color: rgb(107 114 128 / var(--tw-text-opacity, 1));\n  font-style: italic;\n}\n.seccion-boletas-ad[_ngcontent-%COMP%]   [_ngcontent-%COMP%]:hover {\n  cursor: pointer;\n}\n.seccion-precios[_ngcontent-%COMP%] {\n  padding-bottom: 10px;\n  padding-top: 2rem !important;\n}\n.logos-container[_ngcontent-%COMP%] {\n  overflow: hidden;\n  padding: 1rem 0;\n  position: relative;\n  width: 100%;\n  display: flex;\n  -webkit-mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n  mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n}\n.logos-slide[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  flex-shrink: 0;\n  white-space: nowrap;\n  animation: _ngcontent-%COMP%_scroll-logos 25s linear infinite;\n}\n.logos-slide[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  width: 160px;\n  height: 60px;\n  object-fit: contain;\n  margin: 0 20px;\n}\n.logo-davivienda[_ngcontent-%COMP%], \n.logo-bolivar[_ngcontent-%COMP%] {\n  width: 110px !important;\n}\n@keyframes _ngcontent-%COMP%_scroll-logos {\n  from {\n    transform: translateX(0);\n  }\n  to {\n    transform: translateX(-100%);\n  }\n}\n.logos-container[_ngcontent-%COMP%]:hover   .logos-slide[_ngcontent-%COMP%] {\n  animation-play-state: paused;\n}\n.carousel-container[_ngcontent-%COMP%] {\n  width: 90%;\n  max-width: 500px;\n  aspect-ratio: 8 / 5;\n  perspective: 1500px;\n  position: relative;\n}\n.carousel-rotator[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  transform-style: preserve-3d;\n  animation: _ngcontent-%COMP%_rotateCarousel 20s linear infinite;\n}\n.carousel-face[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  backface-visibility: hidden;\n}\n.carousel-face[_ngcontent-%COMP%]:nth-child(1) {\n  transform: rotateY(0deg) translateZ(150px);\n}\n.carousel-face[_ngcontent-%COMP%]:nth-child(2) {\n  transform: rotateY(120deg) translateZ(150px);\n}\n.carousel-face[_ngcontent-%COMP%]:nth-child(3) {\n  transform: rotateY(240deg) translateZ(150px);\n}\n@keyframes _ngcontent-%COMP%_rotateCarousel {\n  from {\n    transform: rotateY(0deg);\n  }\n  to {\n    transform: rotateY(-360deg);\n  }\n}\n.animatable-card.is-flipped[_ngcontent-%COMP%] {\n  background-color: white !important;\n  -webkit-backdrop-filter: none !important;\n  backdrop-filter: none !important;\n}\n.animatable-card.is-flipped[_ngcontent-%COMP%]   .card-original-content[_ngcontent-%COMP%] {\n  opacity: 0;\n  pointer-events: none;\n}\n.animatable-card.is-flipped[_ngcontent-%COMP%]   .card-flipped-content[_ngcontent-%COMP%] {\n  opacity: 1;\n  pointer-events: auto;\n}\n.card-slider[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  padding: 1rem;\n}\n.temas-card-destacada[_ngcontent-%COMP%] {\n  width: 100%;\n}\n.card-slider[_ngcontent-%COMP%]    > div[_ngcontent-%COMP%] {\n  width: 100%;\n}\n.card-slider[_ngcontent-%COMP%]    > *[_ngcontent-%COMP%] {\n  flex-shrink: 0;\n}\n.particle-canvas[_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n.contenedorCharlas[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 1.5rem;\n  width: 100%;\n}\n@media (min-width: 768px) {\n  .contenedorCharlas[_ngcontent-%COMP%] {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n.contenedorCharlas[_ngcontent-%COMP%]   .agenda-card-imagen[_ngcontent-%COMP%] {\n  min-height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: rgba(255, 255, 255, 0.06);\n}\n@media (min-width: 768px) {\n  .contenedorCharlas[_ngcontent-%COMP%]   .agenda-card-imagen[_ngcontent-%COMP%] {\n    min-height: 240px;\n  }\n}\n.contenedorCharlas[_ngcontent-%COMP%]   .agenda-card-imagen[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  object-fit: contain;\n  max-height: 280px;\n}\n@media (max-width: 1107px) {\n  .contenedor-logos[_ngcontent-%COMP%] {\n    max-width: 520px !important;\n  }\n  .logo-foro-1[_ngcontent-%COMP%] {\n    max-width: 160px;\n  }\n  .logo-libertador[_ngcontent-%COMP%] {\n    max-width: 230px;\n  }\n  .contenedor-numeros[_ngcontent-%COMP%] {\n    margin-top: 100px;\n  }\n  .sub-text-entradas-ad[_ngcontent-%COMP%] {\n    margin-top: 30px;\n  }\n}\n@media (max-width: 768px) {\n  .logos-slide[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n    width: 110px;\n    height: 45px;\n    margin: 0 10px;\n  }\n  .card-slider[_ngcontent-%COMP%] {\n    gap: 1.5rem;\n    padding: 1rem;\n  }\n}\n@media (max-width: 757px) {\n  .logo-foro-1[_ngcontent-%COMP%] {\n    max-width: 130px;\n  }\n  .logo-libertador[_ngcontent-%COMP%] {\n    max-width: 160px;\n  }\n  .texto-conexion[_ngcontent-%COMP%] {\n    margin-top: -20px;\n  }\n  .contenedor-logo-principal[_ngcontent-%COMP%] {\n    margin-top: 40px !important;\n  }\n}\n@media (max-width: 500px) {\n  .titulo-entradas[_ngcontent-%COMP%] {\n    margin-top: 0;\n  }\n}\n@media (max-width: 407px) {\n  .logo-foro-1[_ngcontent-%COMP%] {\n    max-width: 90px;\n  }\n  .logo-libertador[_ngcontent-%COMP%] {\n    max-width: 100px;\n  }\n}\n/*# sourceMappingURL=landing.css.map */'] });
 };
@@ -43565,6 +43851,7 @@ var Landing = class _Landing {
                                         Sala 1
                                     </span>
                                     <h4 class="text-2xl font-bold flex-1">Implementaci\xF3n de IA para tu Inmobiliaria</h4>
+                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ textoCuposEnSala(1) }}</p>
                                     <button type="button" (click)="abrirReservaCupo(1, 'Implementaci\xF3n de IA para tu Inmobiliaria', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aqu\xED</button>
                                 </div>
                             </div>
@@ -43582,6 +43869,7 @@ var Landing = class _Landing {
                                         Sala 2
                                     </span>
                                     <h4 class="text-2xl font-bold flex-1">Entorno Juridico</h4>
+                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ textoCuposEnSala(2) }}</p>
                                     <button type="button" (click)="abrirReservaCupo(2, 'Entorno Juridico', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aqu\xED</button>
                                 </div>
                             </div>
@@ -43599,6 +43887,7 @@ var Landing = class _Landing {
                                         Sala 3
                                     </span>
                                     <h4 class="text-2xl font-bold flex-1">Casos de Exito</h4>
+                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ textoCuposEnSala(3) }}</p>
                                     <button type="button" (click)="abrirReservaCupo(3, 'Casos de Exito', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aqu\xED</button>
                                 </div>
                             </div>
@@ -43616,6 +43905,7 @@ var Landing = class _Landing {
                                         Sala 4
                                     </span>
                                     <h4 class="text-2xl font-bold flex-1">Meet & Greet</h4>
+                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ textoCuposEnSala(4) }}</p>
                                     <button type="button" (click)="abrirReservaCupo(4, 'Meet & Greet', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aqu\xED</button>
                                 </div>
                             </div>
@@ -43898,13 +44188,13 @@ var Landing = class _Landing {
         </div>
     </section>
 `, styles: ['/* src/app/pages/landing/landing.css */\n.hero-bg {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/da01a461-c25e-400e-8037-cc341bfc1bd3.png);\n  background-size: cover;\n  background-position: center;\n  background-color: #2d3450;\n  height: 80vh;\n}\nheader {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  z-index: 30;\n  background-color: transparent;\n  transition: background-color 0.4s ease-out;\n}\nheader.scrolled-header {\n  background-color: #2d3450;\n}\n.logo-white {\n  filter: brightness(0) invert(1);\n}\n.logo-principal {\n  max-width: 290px;\n  width: 100%;\n}\n.logo-foro-1 {\n  max-width: 130px;\n}\n.logo-libertador {\n  max-width: 200px;\n}\n.contenedor-logos {\n  max-width: 170px;\n}\n.timer-box {\n  background-color: rgba(255, 255, 255, 0.1);\n  border-radius: 0.5rem;\n  padding: 0.5rem 1rem;\n  -webkit-backdrop-filter: blur(10px);\n  backdrop-filter: blur(10px);\n}\n.texto-conexion {\n  line-height: 24px;\n  font-size: 22px;\n  margin-top: 13px;\n}\n.texto-contador {\n  text-align: center;\n  font-weight: 500;\n}\n.texto-tiempo {\n  text-align: center;\n}\n.texto-pabellon {\n  border-bottom: 1px solid #fff;\n  padding-bottom: 15px;\n}\n.texto-fecha {\n  margin-top: 15px;\n  font-size: 22px;\n}\n.texto-ubicacion {\n  font-size: 20px;\n}\n.contenedor-logo-principal {\n  margin-top: 75px;\n}\n.contenedor-textos-info {\n  margin-top: 30px;\n}\n.texto-desliza {\n  margin-top: 20px;\n}\n.floating-cta {\n  position: fixed;\n  bottom: 2.5rem;\n  right: 2.5rem;\n  z-index: 30;\n}\n#animation-container {\n  position: relative;\n  width: 100%;\n  min-height: 80vh;\n}\n.seccion-historia {\n  padding-top: 30px;\n  padding-bottom: 2rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n  color: #2d3450;\n  text-align: center;\n  background-color: #f7f8fa;\n  margin-bottom: 20px;\n}\n.seccion-boletas-ad-2 {\n  background-image: url("./media/fondo-banner-2.png");\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.seccion-boletas-ad-3 {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/acb20703-f1f9-44c6-88a5-38e2dec47a42.png);\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.imagen-boletos-2 {\n  width: 230px;\n}\n.etiqueta-pilar {\n  background-color: #2d3450;\n}\n.temas-charla-card .btn-reserva-vidrio {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  padding: 0.65rem 1.15rem;\n  font-size: 0.875rem;\n  font-weight: 600;\n  color: #fff;\n  text-align: center;\n  border-radius: 0.625rem;\n  border: 1px solid rgba(255, 255, 255, 0.45);\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.22) 0%,\n      rgba(255, 255, 255, 0.08) 100%);\n  backdrop-filter: blur(14px);\n  -webkit-backdrop-filter: blur(14px);\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.35);\n  cursor: pointer;\n  transition:\n    background 0.2s ease,\n    border-color 0.2s ease,\n    box-shadow 0.2s ease;\n}\n.temas-charla-card .btn-reserva-vidrio:hover {\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.32) 0%,\n      rgba(255, 255, 255, 0.14) 100%);\n  border-color: rgba(255, 255, 255, 0.6);\n  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.45);\n}\n.seccion-temas {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/ca85fb18-d61a-4604-8f9d-004f021d7e98.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  padding-top: 70px;\n  padding-bottom: 70px;\n}\n.texto-pilares {\n  font-weight: 300;\n  font-size: 30px;\n}\n.texto-entradas {\n  font-size: 28px;\n  font-weight: 600;\n}\n.icono-compra {\n  margin-right: 10px;\n}\n.sub-texto-tarjeta {\n  margin-top: 20px;\n}\n.seccion-boletas-ad {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/a0154101-11b4-4330-8169-a6071bff0f43.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  height: 185px;\n  margin-bottom: 80px;\n}\n.botonWhatsappHilton :hover {\n  cursor: pointer !important;\n}\n.sub-text-entradas-ad {\n  font-size: 31px;\n}\n.imagen-boletos {\n  margin-top: 50px;\n}\n.devolucion {\n  margin-top: 10px;\n  font-size: 15px;\n  color: rgb(107 114 128 / var(--tw-text-opacity, 1));\n  font-style: italic;\n}\n.seccion-boletas-ad :hover {\n  cursor: pointer;\n}\n.seccion-precios {\n  padding-bottom: 10px;\n  padding-top: 2rem !important;\n}\n.logos-container {\n  overflow: hidden;\n  padding: 1rem 0;\n  position: relative;\n  width: 100%;\n  display: flex;\n  -webkit-mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n  mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n}\n.logos-slide {\n  display: flex;\n  align-items: center;\n  flex-shrink: 0;\n  white-space: nowrap;\n  animation: scroll-logos 25s linear infinite;\n}\n.logos-slide img {\n  width: 160px;\n  height: 60px;\n  object-fit: contain;\n  margin: 0 20px;\n}\n.logo-davivienda,\n.logo-bolivar {\n  width: 110px !important;\n}\n@keyframes scroll-logos {\n  from {\n    transform: translateX(0);\n  }\n  to {\n    transform: translateX(-100%);\n  }\n}\n.logos-container:hover .logos-slide {\n  animation-play-state: paused;\n}\n.carousel-container {\n  width: 90%;\n  max-width: 500px;\n  aspect-ratio: 8 / 5;\n  perspective: 1500px;\n  position: relative;\n}\n.carousel-rotator {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  transform-style: preserve-3d;\n  animation: rotateCarousel 20s linear infinite;\n}\n.carousel-face {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  backface-visibility: hidden;\n}\n.carousel-face:nth-child(1) {\n  transform: rotateY(0deg) translateZ(150px);\n}\n.carousel-face:nth-child(2) {\n  transform: rotateY(120deg) translateZ(150px);\n}\n.carousel-face:nth-child(3) {\n  transform: rotateY(240deg) translateZ(150px);\n}\n@keyframes rotateCarousel {\n  from {\n    transform: rotateY(0deg);\n  }\n  to {\n    transform: rotateY(-360deg);\n  }\n}\n.animatable-card.is-flipped {\n  background-color: white !important;\n  -webkit-backdrop-filter: none !important;\n  backdrop-filter: none !important;\n}\n.animatable-card.is-flipped .card-original-content {\n  opacity: 0;\n  pointer-events: none;\n}\n.animatable-card.is-flipped .card-flipped-content {\n  opacity: 1;\n  pointer-events: auto;\n}\n.card-slider {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  padding: 1rem;\n}\n.temas-card-destacada {\n  width: 100%;\n}\n.card-slider > div {\n  width: 100%;\n}\n.card-slider > * {\n  flex-shrink: 0;\n}\n.particle-canvas {\n  pointer-events: none;\n}\n.contenedorCharlas {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 1.5rem;\n  width: 100%;\n}\n@media (min-width: 768px) {\n  .contenedorCharlas {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n.contenedorCharlas .agenda-card-imagen {\n  min-height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: rgba(255, 255, 255, 0.06);\n}\n@media (min-width: 768px) {\n  .contenedorCharlas .agenda-card-imagen {\n    min-height: 240px;\n  }\n}\n.contenedorCharlas .agenda-card-imagen img {\n  object-fit: contain;\n  max-height: 280px;\n}\n@media (max-width: 1107px) {\n  .contenedor-logos {\n    max-width: 520px !important;\n  }\n  .logo-foro-1 {\n    max-width: 160px;\n  }\n  .logo-libertador {\n    max-width: 230px;\n  }\n  .contenedor-numeros {\n    margin-top: 100px;\n  }\n  .sub-text-entradas-ad {\n    margin-top: 30px;\n  }\n}\n@media (max-width: 768px) {\n  .logos-slide img {\n    width: 110px;\n    height: 45px;\n    margin: 0 10px;\n  }\n  .card-slider {\n    gap: 1.5rem;\n    padding: 1rem;\n  }\n}\n@media (max-width: 757px) {\n  .logo-foro-1 {\n    max-width: 130px;\n  }\n  .logo-libertador {\n    max-width: 160px;\n  }\n  .texto-conexion {\n    margin-top: -20px;\n  }\n  .contenedor-logo-principal {\n    margin-top: 40px !important;\n  }\n}\n@media (max-width: 500px) {\n  .titulo-entradas {\n    margin-top: 0;\n  }\n}\n@media (max-width: 407px) {\n  .logo-foro-1 {\n    max-width: 90px;\n  }\n  .logo-libertador {\n    max-width: 100px;\n  }\n}\n/*# sourceMappingURL=landing.css.map */\n'] }]
-  }], () => [{ type: ServiceBoletas }, { type: Router }, { type: ChangeDetectorRef }, { type: MatDialog }], { onWindowScroll: [{
+  }], () => [{ type: ServiceBoletas }, { type: Router }, { type: ChangeDetectorRef }, { type: MatDialog }, { type: ReservaCupos }], { onWindowScroll: [{
     type: HostListener,
     args: ["window:scroll", []]
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(Landing, { className: "Landing", filePath: "src/app/pages/landing/landing.ts", lineNumber: 19 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(Landing, { className: "Landing", filePath: "src/app/pages/landing/landing.ts", lineNumber: 21 });
 })();
 
 // src/app/pages/inicio-registro/inicio-registro.ts

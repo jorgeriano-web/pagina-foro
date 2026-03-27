@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { capacidadSala } from '../../models/sala-experiencia';
+import { ReservaCupos } from '../../service/reserva-cupos';
 import { ServiceBoletas } from '../../service/service-boletas';
 import { ReservarCupo } from '../reservar-cupo/reservar-cupo';
 
@@ -29,11 +31,20 @@ export class Landing implements OnInit, OnDestroy {
   };
   intervalId: any;
 
+  /** Conteo por sala desde el sheet; null = cargando o error. */
+  cuposReservados: Record<number, number | null> = {
+    1: null,
+    2: null,
+    3: null,
+    4: null,
+  };
+
   constructor(
     private boletasService: ServiceBoletas,
     private router: Router,
     private cdRef: ChangeDetectorRef,
     private dialog: MatDialog,
+    private reservaCupos: ReservaCupos,
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +57,32 @@ export class Landing implements OnInit, OnDestroy {
       this.actualizarTiempo(fechaForo);
       this.cdRef.detectChanges(); 
     }, 1000);
+
+    for (const id of [1, 2, 3, 4] as const) {
+      void this.reservaCupos.contarReservasSala(id).then(
+        (n) => {
+          this.cuposReservados[id] = n;
+          this.cdRef.detectChanges();
+        },
+        () => {
+          this.cuposReservados[id] = null;
+          this.cdRef.detectChanges();
+        },
+      );
+    }
+  }
+
+  textoCuposEnSala(idSala: number): string {
+    const max = capacidadSala(idSala);
+    const n = this.cuposReservados[idSala];
+    if (n === null) {
+      return 'Cupos: consultando…';
+    }
+    if (max <= 0) {
+      return '';
+    }
+    const quedan = Math.max(0, max - n);
+    return `Reservas: ${n} de ${max}. Quedan ${quedan} cupo${quedan === 1 ? '' : 's'}.`;
   }
 
   ngOnDestroy(): void {
@@ -103,11 +140,19 @@ export class Landing implements OnInit, OnDestroy {
   abrirReservaCupo(idSala: number, nombreExperiencia: string, event?: Event): void {
     event?.preventDefault();
     event?.stopPropagation();
-    this.dialog.open(ReservarCupo, {
+    const ref = this.dialog.open(ReservarCupo, {
       width: '420px',
       maxWidth: '90vw',
       data: { idSala, nombreExperiencia },
       panelClass: 'reserva-cupo-dialog',
+    });
+    ref.afterClosed().subscribe((result) => {
+      if (result?.ok) {
+        void this.reservaCupos.contarReservasSala(idSala).then((n) => {
+          this.cuposReservados[idSala] = n;
+          this.cdRef.detectChanges();
+        });
+      }
     });
   }
 

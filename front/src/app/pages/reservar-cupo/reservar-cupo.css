@@ -100,3 +100,38 @@
   opacity: 0.55;
   cursor: not-allowed;
 }
+
+.reserva-cupo-cupos-line {
+  margin: 0.5rem 0 0;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.4;
+}
+
+.reserva-cupo-error {
+  margin: 0 0 0.75rem;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.8125rem;
+  color: #fecaca;
+  background: rgba(189, 15, 20, 0.35);
+  border-radius: 0.5rem;
+}
+
+.reserva-cupo-exito {
+  text-align: center;
+  padding: 0.5rem 0 0.25rem;
+}
+
+.reserva-cupo-exito-titulo {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.reserva-cupo-exito-texto {
+  margin: 0 0 1.25rem;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.92);
+}

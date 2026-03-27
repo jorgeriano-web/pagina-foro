@@ -1004,6 +1004,9 @@ video {
 .italic {
   font-style: italic;
 }
+.leading-snug {
+  line-height: 1.375;
+}
 .tracking-tight {
   letter-spacing: -0.025em;
 }
@@ -1048,6 +1051,9 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.text-white\/85 {
+  color: rgb(255 255 255 / 0.85);
 }
 .accent-red-600 {
   accent-color: #dc2626;

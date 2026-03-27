@@ -8,26 +8,54 @@
   ×
 </button>
 
-<div class="reserva-cupo-info">
-  <p *ngIf="idSala !== null" class="reserva-cupo-sala">Sala {{ idSala }}</p>
-  <p *ngIf="nombreExperiencia" class="reserva-cupo-experiencia">{{ nombreExperiencia }}</p>
+<div *ngIf="reservaExitosa" class="reserva-cupo-exito">
+  <p class="reserva-cupo-exito-titulo">¡Reserva exitosa!</p>
+  <p class="reserva-cupo-exito-texto">Tu cupo quedó registrado. Te esperamos en la experiencia.</p>
+  <button type="button" class="reserva-cupo-submit" (click)="cerrarTrasExito()">Listo</button>
 </div>
 
-<form class="reserva-cupo-form">
-  <div class="reserva-cupo-field">
-    <label for="nombre">Nombre Completo</label>
-    <input type="text" id="nombre" name="nombre" autocomplete="name" [(ngModel)]="nombre" />
+<ng-container *ngIf="!reservaExitosa">
+  <div class="reserva-cupo-info">
+    <p *ngIf="idSala !== null" class="reserva-cupo-sala">Sala {{ idSala }}</p>
+    <p *ngIf="nombreExperiencia" class="reserva-cupo-experiencia">{{ nombreExperiencia }}</p>
+    <p *ngIf="capacidadMax > 0 && textoCuposDialogo" class="reserva-cupo-cupos-line">
+      {{ textoCuposDialogo }}
+    </p>
   </div>
-  <div class="reserva-cupo-field">
-    <label for="cedula">Cédula</label>
-    <input
-      type="text"
-      id="cedula"
-      name="cedula"
-      autocomplete="off"
-      inputmode="numeric"
-      [(ngModel)]="numDoc"
-    />
-  </div>
-</form>
-<button type="button" class="reserva-cupo-submit" (click)="reservaCupo()">Reservar Cupo</button>
+
+  <p *ngIf="errorReserva" class="reserva-cupo-error" role="alert">{{ errorReserva }}</p>
+
+  <form class="reserva-cupo-form">
+    <div class="reserva-cupo-field">
+      <label for="nombre">Nombre Completo</label>
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        autocomplete="name"
+        [(ngModel)]="nombre"
+        [disabled]="procesando"
+      />
+    </div>
+    <div class="reserva-cupo-field">
+      <label for="cedula">Cédula</label>
+      <input
+        type="text"
+        id="cedula"
+        name="cedula"
+        autocomplete="off"
+        inputmode="numeric"
+        [(ngModel)]="numDoc"
+        [disabled]="procesando"
+      />
+    </div>
+  </form>
+  <button
+    type="button"
+    class="reserva-cupo-submit"
+    [disabled]="procesando || idSala === null"
+    (click)="reservaCupo()"
+  >
+    {{ procesando ? 'Procesando…' : 'Reservar Cupo' }}
+  </button>
+</ng-container>
