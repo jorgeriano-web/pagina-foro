@@ -33,6 +33,20 @@ export interface ClienteReservaSalaData {
   numDoc: string;
 }
 
+/** Deja solo año-mes-día (YYYY-MM-DD) para la celda del Sheet, sin hora ni zona. */
+export function fechaSoloDiaParaSheet(fecha: string): string {
+  const s = fecha.trim();
+  const head = s.slice(0, 10);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(head)) {
+    return head;
+  }
+  const d = new Date(s);
+  if (!Number.isNaN(d.getTime())) {
+    return d.toISOString().slice(0, 10);
+  }
+  return head || s;
+}
+
 export async function agregarFilaAsheet(transaccionData: TransaccionData) {
 
     const serviceAccount = await accFireBaseConfig();
@@ -99,7 +113,7 @@ export async function agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaDa
 
   const sheets = google.sheets({ version: "v4", auth });
 
-  const values = [[fecha, nombre, numDoc]];
+  const values = [[fechaSoloDiaParaSheet(fecha), nombre, numDoc]];
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: SHEET_ID,

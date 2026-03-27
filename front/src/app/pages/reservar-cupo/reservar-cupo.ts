@@ -120,7 +120,7 @@ export class ReservarCupo implements OnInit {
     try {
       await this.reservaCuposService.reservaSalaCupo({
         idSala,
-        fecha: new Date().toISOString(),
+        fecha: this.fechaLocalYmd(),
         nombre,
         numDoc,
       });
@@ -138,5 +138,14 @@ export class ReservarCupo implements OnInit {
 
   cerrarTrasExito(): void {
     this.dialogRef?.close({ ok: true });
+  }
+
+  /** Fecha local solo año-mes-día (misma lógica que normaliza el back al escribir el Sheet). */
+  private fechaLocalYmd(): string {
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
   }
 }
