@@ -470,7 +470,15 @@ export const reservarCupoSalaProd = onCall(
 export const contarReservasSalaProd = onCall(
   { cors: true, secrets: [FIREBASE_CONFIG_ACCOUNT] },
   async (request) => {
-    const idSala = (request.data as { idSala?: number } | undefined)?.idSala;
+    const data = request.data as {
+      idSala?: number;
+      fecha?: string;
+      horaCharla?: string;
+    };
+
+    const idSala = data?.idSala;
+    const fecha = data?.fecha;
+    const horaCharla = data?.horaCharla;
 
     if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
       throw new HttpsError(
@@ -479,8 +487,23 @@ export const contarReservasSalaProd = onCall(
       );
     }
 
+    if (!fecha || !horaCharla) {
+      throw new HttpsError(
+        "invalid-argument",
+        "Enviá fecha (YYYY-MM-DD) y horaCharla (HH:mm) del turno."
+      );
+    }
+
+    const horaOk = /^\d{1,2}:\d{2}$/.test(horaCharla.trim());
+    if (!horaOk) {
+      throw new HttpsError(
+        "invalid-argument",
+        "horaCharla debe tener formato HH:mm (ej. 14:30)."
+      );
+    }
+
     try {
-      return await contarReservasSala(idSala);
+      return await contarReservasSala(idSala, fecha, horaCharla.trim());
     } catch (e: unknown) {
       if (e instanceof HttpsError) {
         throw e;

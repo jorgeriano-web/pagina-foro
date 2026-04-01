@@ -3,7 +3,7 @@ import { SALAS_EXPERIENCIA } from "../models/salaExperiencia";
 import {
   agregarDatosClienteReservaSalaAlSheet,
   ClienteReservaSalaData,
-  contarFilasReservasSala,
+  contarReservasPorSlot,
 } from "./sheetService";
 import { enviarEmail } from "./emailService";
 
@@ -23,6 +23,18 @@ export async function reservaSalaCupo(clienteReservaSalaData: ClienteReservaSala
     throw new HttpsError(
       "failed-precondition",
       "No se puede reservar en esta sala (sin cupos configurados o sala no válida)."
+    );
+  }
+
+  const ocupados = await contarReservasPorSlot(
+    clienteReservaSalaData.idSala,
+    clienteReservaSalaData.fecha,
+    clienteReservaSalaData.horaCharla
+  );
+  if (ocupados >= sala.capacidadTotal) {
+    throw new HttpsError(
+      "resource-exhausted",
+      "No hay cupos disponibles para ese día y hora. Elegí otro turno."
     );
   }
 
@@ -54,13 +66,17 @@ export async function reservaSalaCupo(clienteReservaSalaData: ClienteReservaSala
 }
 
 
-/** Cantidad de filas de reserva en el Sheet para esa sala (desde A2). */
-export async function contarReservasSala(idSala: number): Promise<number> {
+/** Cupos ya tomados para ese turno (sala + fecha + hora). */
+export async function contarReservasSala(
+  idSala: number,
+  fecha: string,
+  horaCharla: string
+): Promise<number> {
   const sala = salaPorIdSala(idSala);
 
   if (!sala) {
     throw new HttpsError("not-found", "La sala no existe.");
   }
 
-  return await contarFilasReservasSala(idSala);
+  return await contarReservasPorSlot(idSala, fecha, horaCharla);
 }

@@ -14,22 +14,27 @@ export interface ClienteReservaSalaData {
   providedIn: 'root',
 })
 export class ReservaCupos {
+  constructor(private functions: Functions) {}
 
-  constructor(private functions : Functions){}
-
-
-  async contarReservasSala(idSala: number): Promise<number> {
-    const callable = httpsCallable<{ idSala: number }, number>(
-      this.functions,
-      'contarReservasSalaProd'
-    );
-    const result = await callable({ idSala });
+  /** Reservas ya registradas en el Sheet para ese turno (sala + fecha + hora). */
+  async contarReservasSala(
+    idSala: number,
+    fecha: string,
+    horaCharla: string,
+  ): Promise<number> {
+    const callable = httpsCallable<
+      { idSala: number; fecha: string; horaCharla: string },
+      number
+    >(this.functions, 'contarReservasSalaProd');
+    const result = await callable({ idSala, fecha, horaCharla });
     return result.data;
   }
 
-  async reservaSalaCupo(clienteReservaSalaData: ClienteReservaSalaData): Promise<void> {
-    const callable = httpsCallable<ClienteReservaSalaData, void>(this.functions, 'reservarCupoSalaProd');
-    await callable(clienteReservaSalaData);
+  async reservaSalaCupo(data: ClienteReservaSalaData): Promise<void> {
+    const callable = httpsCallable<ClienteReservaSalaData, { ok: boolean }>(
+      this.functions,
+      'reservarCupoSalaProd',
+    );
+    await callable(data);
   }
-
 }

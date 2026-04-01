@@ -51,6 +51,18 @@ export function fechaSoloDiaParaSheet(fecha: string): string {
   return head || s;
 }
 
+/** Normaliza hora a HH:mm para comparar con la columna B del Sheet. */
+export function normalizarHoraSheet(hora: string): string {
+  const t = hora.trim();
+  const m = t.match(/^(\d{1,2}):(\d{2})$/);
+  if (!m) {
+    return t;
+  }
+  const h = Math.min(23, Math.max(0, parseInt(m[1], 10)));
+  const min = Math.min(59, Math.max(0, parseInt(m[2], 10)));
+  return `${String(h).padStart(2, "0")}:${String(min).padStart(2, "0")}`;
+}
+
 export async function agregarFilaAsheet(transaccionData: TransaccionData) {
 
     const serviceAccount = await accFireBaseConfig();
@@ -125,7 +137,7 @@ export async function agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaDa
   const values = [
     [
       fechaSoloDiaParaSheet(fecha),
-      horaCharla.trim(),
+      normalizarHoraSheet(horaCharla),
       nombre.trim(),
       numDoc.trim(),
       correo.trim(),
@@ -142,11 +154,21 @@ export async function agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaDa
   });
 }
 
-/** Cantidad de reservas: solo columna A desde la fila 2 (fila 1 = títulos; mismo criterio que el append en `A2`). */
-export async function contarFilasReservasSala(idSala: number): Promise<number> {
+/**
+ * Reservas para un turno concreto (misma fecha en A y misma hora en B).
+ * Filas desde la 2; columnas A–E como en `agregarDatosClienteReservaSalaAlSheet`.
+ */
+export async function contarReservasPorSlot(
+  idSala: number,
+  fecha: string,
+  horaCharla: string
+): Promise<number> {
   if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
     throw new Error("La sala debe ser 1, 2, 3 o 4");
   }
+
+  const fechaNorm = fechaSoloDiaParaSheet(fecha);
+  const horaNorm = normalizarHoraSheet(horaCharla);
 
   const serviceAccount = await accFireBaseConfig();
   const auth = new google.auth.GoogleAuth({
@@ -162,8 +184,18 @@ export async function contarFilasReservasSala(idSala: number): Promise<number> {
 
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: SHEET_ID,
-    range: `${pestaña}!A2:A`,
+    range: `${pestaña}!A2:E`,
   });
 
-  return response.data.values?.length ?? 0;
+  const rows = response.data.values ?? [];
+  let n = 0;
+  for (const row of rows) {
+    const celFecha = row[0] != null ? fechaSoloDiaParaSheet(String(row[0])) : "";
+    const celHora =
+      row[1] != null ? normalizarHoraSheet(String(row[1])) : "";
+    if (celFecha === fechaNorm && celHora === horaNorm) {
+      n++;
+    }
+  }
+  return n;
 }

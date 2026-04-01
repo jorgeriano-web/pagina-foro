@@ -66,6 +66,7 @@
         id="fechaHora"
         name="fechaHora"
         [(ngModel)]="slotSeleccionado"
+        (ngModelChange)="onSlotChange()"
         [disabled]="procesando"
       >
         <option value="">Elegí fecha y hora</option>

@@ -1,3 +1,4 @@
+/** Configuración de salas / cupos (alinear con `back/functions/.../salaExperiencia.ts`). */
 
 export interface SalaExperiencia {
   id: number;

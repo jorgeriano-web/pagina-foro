@@ -15455,40 +15455,6 @@ function provideAnimationsAsync(type = "animations") {
   }]);
 }
 
-// src/app/models/sala-experiencia.ts
-var SALAS_EXPERIENCIA = [
-  {
-    id: 1,
-    nombre: "Implementaci\xF3n de IA para tu Inmobiliaria",
-    capacidadTotal: 30,
-    cuposReservados: 0
-  },
-  {
-    id: 2,
-    nombre: "Entorno Juridico",
-    capacidadTotal: 40,
-    cuposReservados: 0
-  },
-  {
-    id: 3,
-    nombre: "Casos de Exito",
-    capacidadTotal: 45,
-    cuposReservados: 0
-  },
-  {
-    id: 4,
-    nombre: "Meet & Greet",
-    capacidadTotal: 50,
-    cuposReservados: 0
-  }
-];
-function salaPorIdSala(idSala) {
-  return SALAS_EXPERIENCIA.find((s) => s.id === idSala);
-}
-function capacidadSala(idSala) {
-  return salaPorIdSala(idSala)?.capacidadTotal ?? 0;
-}
-
 // node_modules/@angular/forms/fesm2022/forms.mjs
 var BaseControlValueAccessor = class _BaseControlValueAccessor {
   _renderer;
@@ -31471,6 +31437,40 @@ var MatDialogModule = class _MatDialogModule {
   }], null, null);
 })();
 
+// src/app/models/sala-experiencia.ts
+var SALAS_EXPERIENCIA = [
+  {
+    id: 1,
+    nombre: "Implementaci\xF3n de IA para tu Inmobiliaria",
+    capacidadTotal: 30,
+    cuposReservados: 0
+  },
+  {
+    id: 2,
+    nombre: "Entorno Juridico",
+    capacidadTotal: 40,
+    cuposReservados: 0
+  },
+  {
+    id: 3,
+    nombre: "Casos de Exito",
+    capacidadTotal: 45,
+    cuposReservados: 0
+  },
+  {
+    id: 4,
+    nombre: "Meet & Greet",
+    capacidadTotal: 50,
+    cuposReservados: 0
+  }
+];
+function salaPorIdSala(idSala) {
+  return SALAS_EXPERIENCIA.find((s) => s.id === idSala);
+}
+function capacidadSala(idSala) {
+  return salaPorIdSala(idSala)?.capacidadTotal ?? 0;
+}
+
 // node_modules/@angular/fire/node_modules/@firebase/util/dist/postinstall.mjs
 var getDefaultsFromPostinstall = () => void 0;
 
@@ -42520,14 +42520,15 @@ var ReservaCupos = class _ReservaCupos {
   constructor(functions) {
     this.functions = functions;
   }
-  async contarReservasSala(idSala) {
+  /** Reservas ya registradas en el Sheet para ese turno (sala + fecha + hora). */
+  async contarReservasSala(idSala, fecha, horaCharla) {
     const callable = httpsCallable3(this.functions, "contarReservasSalaProd");
-    const result = await callable({ idSala });
+    const result = await callable({ idSala, fecha, horaCharla });
     return result.data;
   }
-  async reservaSalaCupo(clienteReservaSalaData) {
+  async reservaSalaCupo(data) {
     const callable = httpsCallable3(this.functions, "reservarCupoSalaProd");
-    await callable(clienteReservaSalaData);
+    await callable(data);
   }
   static \u0275fac = function ReservaCupos_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ReservaCupos)(\u0275\u0275inject(Functions));
@@ -42688,6 +42689,11 @@ function ReservarCupo_ng_container_2_Template(rf, ctx) {
       \u0275\u0275twoWayBindingSet(ctx_r1.slotSeleccionado, $event) || (ctx_r1.slotSeleccionado = $event);
       return \u0275\u0275resetView($event);
     });
+    \u0275\u0275listener("ngModelChange", function ReservarCupo_ng_container_2_Template_select_ngModelChange_22_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onSlotChange());
+    });
     \u0275\u0275elementStart(23, "option", 23);
     \u0275\u0275text(24, "Eleg\xED fecha y hora");
     \u0275\u0275elementEnd();
@@ -42733,16 +42739,18 @@ function ReservarCupo_ng_container_2_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r1.procesando ? "Procesando\u2026" : "Reservar Cupo", " ");
   }
 }
+var RX_FECHA_YMD = /^\d{4}-\d{2}-\d{2}$/;
+var RX_HORA_HM = /^\d{1,2}:\d{2}$/;
 var ReservarCupo = class _ReservarCupo {
   dialogRef;
   data;
   route;
   reservaCuposService;
   cdr;
+  // ——— Formulario ———
   nombre = "";
   numDoc = "";
   correo = "";
-  /** Valor `YYYY-MM-DD|HH:mm` (fecha y hora de la charla). */
   slotSeleccionado = "";
   slotsCharla = [
     { value: "2026-05-21|14:30", label: "21 de mayo, 2:30 p. m." },
@@ -42750,10 +42758,11 @@ var ReservarCupo = class _ReservarCupo {
     { value: "2026-05-22|14:30", label: "22 de mayo, 2:30 p. m." },
     { value: "2026-05-22|16:45", label: "22 de mayo, 4:45 p. m." }
   ];
+  // ——— Estado UI ———
   procesando = false;
   reservaExitosa = false;
   errorReserva = null;
-  /** Conteo desde el sheet; null = cargando o sin sala. */
+  /** Reservas para el turno elegido; null = sin turno o cargando/error. */
   reservasActuales = null;
   constructor(dialogRef, data, route, reservaCuposService, cdr) {
     this.dialogRef = dialogRef;
@@ -42763,33 +42772,9 @@ var ReservarCupo = class _ReservarCupo {
     this.cdr = cdr;
   }
   ngOnInit() {
-    const id = this.idSala;
-    if (id == null) {
-      return;
-    }
-    void this.reservaCuposService.contarReservasSala(id).then((n) => {
-      this.reservasActuales = n;
-      this.cdr.detectChanges();
-    }, () => {
-      this.reservasActuales = null;
-      this.cdr.detectChanges();
-    });
+    this.actualizarConteoSlot();
   }
-  get capacidadMax() {
-    const id = this.idSala;
-    return id == null ? 0 : capacidadSala(id);
-  }
-  get textoCuposDialogo() {
-    const max = this.capacidadMax;
-    if (max <= 0) {
-      return "";
-    }
-    const n = this.reservasActuales;
-    if (n === null) {
-      return "Consultando cupos\u2026";
-    }
-    return `Reservas: ${n} de ${max}.`;
-  }
+  // ——— Vista: getters ———
   get esDialogo() {
     return this.dialogRef != null;
   }
@@ -42807,15 +42792,34 @@ var ReservarCupo = class _ReservarCupo {
     }
     return this.route?.snapshot.queryParamMap.get("titulo") ?? "";
   }
+  get capacidadMax() {
+    const id = this.idSala;
+    return id == null ? 0 : capacidadSala(id);
+  }
+  get textoCuposDialogo() {
+    const max = this.capacidadMax;
+    if (max <= 0) {
+      return "";
+    }
+    if (!this.slotSeleccionado) {
+      return "Eleg\xED fecha y hora para ver cupos de ese turno.";
+    }
+    const n = this.reservasActuales;
+    if (n === null) {
+      return "Consultando cupos\u2026";
+    }
+    const quedan = Math.max(0, max - n);
+    return `Este turno: ${n} de ${max} reservas. Quedan ${quedan} cupo${quedan === 1 ? "" : "s"}.`;
+  }
+  // ——— Acciones template ———
+  onSlotChange() {
+    this.actualizarConteoSlot();
+  }
   cerrarDialogo() {
     this.dialogRef?.close();
   }
-  async contarReservasSala() {
-    const id = this.idSala;
-    if (id == null) {
-      return 0;
-    }
-    return await this.reservaCuposService.contarReservasSala(id);
+  cerrarTrasExito() {
+    this.dialogRef?.close({ ok: true });
   }
   async reservaCupo() {
     const idSala = this.idSala;
@@ -42833,10 +42837,8 @@ var ReservarCupo = class _ReservarCupo {
       this.errorReserva = "Completa nombre, c\xE9dula y correo.";
       return;
     }
-    const partes = this.slotSeleccionado.split("|");
-    const fechaCharla = partes[0] ?? "";
-    const horaCharla = (partes[1] ?? "").trim();
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(fechaCharla) || !/^\d{1,2}:\d{2}$/.test(horaCharla)) {
+    const slot = this.parseSlotSeleccionado();
+    if (slot == null) {
       this.errorReserva = "Eleg\xED una fecha y hora v\xE1lidas.";
       return;
     }
@@ -42846,24 +42848,57 @@ var ReservarCupo = class _ReservarCupo {
     try {
       await this.reservaCuposService.reservaSalaCupo({
         idSala,
-        fecha: fechaCharla,
-        horaCharla,
+        fecha: slot.fecha,
+        horaCharla: slot.horaCharla,
         nombre,
         numDoc,
         correo
       });
       this.reservaExitosa = true;
-      const prev = this.reservasActuales;
-      this.reservasActuales = prev == null ? null : prev + 1;
-    } catch {
-      this.errorReserva = "No se pudo completar la reserva. Intent\xE1 de nuevo en unos minutos.";
+      this.actualizarConteoSlot();
+    } catch (e) {
+      this.errorReserva = this.mensajeErrorReserva(e);
     } finally {
       this.procesando = false;
       this.cdr.detectChanges();
     }
   }
-  cerrarTrasExito() {
-    this.dialogRef?.close({ ok: true });
+  // ——— Internos ———
+  actualizarConteoSlot() {
+    const id = this.idSala;
+    const slot = this.parseSlotSeleccionado();
+    if (id == null || slot == null) {
+      this.reservasActuales = null;
+      this.cdr.detectChanges();
+      return;
+    }
+    void this.reservaCuposService.contarReservasSala(id, slot.fecha, slot.horaCharla).then((n) => {
+      this.reservasActuales = n;
+      this.cdr.detectChanges();
+    }, () => {
+      this.reservasActuales = null;
+      this.cdr.detectChanges();
+    });
+  }
+  /** Interpreta `slotSeleccionado` (`fecha|horaCharla`). */
+  parseSlotSeleccionado() {
+    if (!this.slotSeleccionado) {
+      return null;
+    }
+    const partes = this.slotSeleccionado.split("|");
+    const fecha = partes[0] ?? "";
+    const horaCharla = (partes[1] ?? "").trim();
+    if (!RX_FECHA_YMD.test(fecha) || !RX_HORA_HM.test(horaCharla)) {
+      return null;
+    }
+    return { fecha, horaCharla };
+  }
+  mensajeErrorReserva(e) {
+    const code = e && typeof e === "object" && "code" in e ? String(e.code) : "";
+    if (code === "functions/resource-exhausted") {
+      return "No hay cupos para ese turno. Eleg\xED otro d\xEDa u hora.";
+    }
+    return "No se pudo completar la reserva. Intent\xE1 de nuevo en unos minutos.";
   }
   static \u0275fac = function ReservarCupo_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ReservarCupo)(\u0275\u0275directiveInject(MatDialogRef, 8), \u0275\u0275directiveInject(MAT_DIALOG_DATA, 8), \u0275\u0275directiveInject(ActivatedRoute, 8), \u0275\u0275directiveInject(ReservaCupos), \u0275\u0275directiveInject(ChangeDetectorRef));
@@ -42952,6 +42987,7 @@ var ReservarCupo = class _ReservarCupo {
         id="fechaHora"
         name="fechaHora"
         [(ngModel)]="slotSeleccionado"
+        (ngModelChange)="onSlotChange()"
         [disabled]="procesando"
       >
         <option value="">Eleg\xED fecha y hora</option>
@@ -42981,7 +43017,7 @@ var ReservarCupo = class _ReservarCupo {
   }] }, { type: ReservaCupos }, { type: ChangeDetectorRef }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ReservarCupo, { className: "ReservarCupo", filePath: "src/app/pages/reservar-cupo/reservar-cupo.ts", lineNumber: 22 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ReservarCupo, { className: "ReservarCupo", filePath: "src/app/pages/reservar-cupo/reservar-cupo.ts", lineNumber: 37 });
 })();
 
 // src/app/service/service-boletas.ts
@@ -43057,7 +43093,6 @@ var Landing = class _Landing {
   router;
   cdRef;
   dialog;
-  reservaCupos;
   dataLayer = window.dataLayer || [];
   isScrolled = false;
   isMenuOpen = false;
@@ -43068,19 +43103,13 @@ var Landing = class _Landing {
     seconds: 0
   };
   intervalId;
-  /** Conteo por sala desde el sheet; null = cargando o error. */
-  cuposReservados = {
-    1: null,
-    2: null,
-    3: null,
-    4: null
-  };
-  constructor(boletasService, router, cdRef, dialog, reservaCupos) {
+  /** Texto bajo las cards de experiencias alternas (cupo por turno). */
+  mensajeCuposPorTurno = "Cupo limitado por charla y turno. Al reservar eleg\xEDs d\xEDa y hora y ves disponibilidad.";
+  constructor(boletasService, router, cdRef, dialog) {
     this.boletasService = boletasService;
     this.router = router;
     this.cdRef = cdRef;
     this.dialog = dialog;
-    this.reservaCupos = reservaCupos;
   }
   ngOnInit() {
     const fechaForo = new Date(2026, 4, 21, 0, 0, 0);
@@ -43089,30 +43118,11 @@ var Landing = class _Landing {
       this.actualizarTiempo(fechaForo);
       this.cdRef.detectChanges();
     }, 1e3);
-    for (const id of [1, 2, 3, 4]) {
-      void this.reservaCupos.contarReservasSala(id).then((n) => {
-        this.cuposReservados[id] = n;
-        this.cdRef.detectChanges();
-      }, () => {
-        this.cuposReservados[id] = null;
-        this.cdRef.detectChanges();
-      });
-    }
-  }
-  textoCuposEnSala(idSala) {
-    const max = capacidadSala(idSala);
-    const n = this.cuposReservados[idSala];
-    if (n === null) {
-      return "Cupos: consultando\u2026";
-    }
-    if (max <= 0) {
-      return "";
-    }
-    const quedan = Math.max(0, max - n);
-    return `Reservas: ${n} de ${max}. Quedan ${quedan} cupo${quedan === 1 ? "" : "s"}.`;
   }
   ngOnDestroy() {
-    clearInterval(this.intervalId);
+    if (this.intervalId != null) {
+      clearInterval(this.intervalId);
+    }
   }
   onWindowScroll() {
     this.isScrolled = window.scrollY > 50;
@@ -43154,19 +43164,11 @@ var Landing = class _Landing {
   abrirReservaCupo(idSala, nombreExperiencia, event) {
     event?.preventDefault();
     event?.stopPropagation();
-    const ref = this.dialog.open(ReservarCupo, {
+    this.dialog.open(ReservarCupo, {
       width: "420px",
       maxWidth: "90vw",
       data: { idSala, nombreExperiencia },
       panelClass: "reserva-cupo-dialog"
-    });
-    ref.afterClosed().subscribe((result) => {
-      if (result?.ok) {
-        void this.reservaCupos.contarReservasSala(idSala).then((n) => {
-          this.cuposReservados[idSala] = n;
-          this.cdRef.detectChanges();
-        });
-      }
     });
   }
   seleccionarBoletas(cantidad) {
@@ -43288,7 +43290,7 @@ var Landing = class _Landing {
     window.open(url, "_blank");
   }
   static \u0275fac = function Landing_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _Landing)(\u0275\u0275directiveInject(ServiceBoletas), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(ChangeDetectorRef), \u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(ReservaCupos));
+    return new (__ngFactoryType__ || _Landing)(\u0275\u0275directiveInject(ServiceBoletas), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(ChangeDetectorRef), \u0275\u0275directiveInject(MatDialog));
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _Landing, selectors: [["app-landing"]], hostBindings: function Landing_HostBindings(rf, ctx) {
     if (rf & 1) {
@@ -43797,13 +43799,13 @@ var Landing = class _Landing {
       \u0275\u0275advance(5);
       \u0275\u0275textInterpolate(ctx.timeleft.seconds);
       \u0275\u0275advance(53);
-      \u0275\u0275textInterpolate(ctx.textoCuposEnSala(1));
+      \u0275\u0275textInterpolate(ctx.mensajeCuposPorTurno);
       \u0275\u0275advance(14);
-      \u0275\u0275textInterpolate(ctx.textoCuposEnSala(2));
+      \u0275\u0275textInterpolate(ctx.mensajeCuposPorTurno);
       \u0275\u0275advance(14);
-      \u0275\u0275textInterpolate(ctx.textoCuposEnSala(3));
+      \u0275\u0275textInterpolate(ctx.mensajeCuposPorTurno);
       \u0275\u0275advance(14);
-      \u0275\u0275textInterpolate(ctx.textoCuposEnSala(4));
+      \u0275\u0275textInterpolate(ctx.mensajeCuposPorTurno);
     }
   }, dependencies: [CommonModule, NgIf, RouterModule], styles: ['\n\n.hero-bg[_ngcontent-%COMP%] {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/da01a461-c25e-400e-8037-cc341bfc1bd3.png);\n  background-size: cover;\n  background-position: center;\n  background-color: #2d3450;\n  height: 80vh;\n}\nheader[_ngcontent-%COMP%] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  z-index: 30;\n  background-color: transparent;\n  transition: background-color 0.4s ease-out;\n}\nheader.scrolled-header[_ngcontent-%COMP%] {\n  background-color: #2d3450;\n}\n.logo-white[_ngcontent-%COMP%] {\n  filter: brightness(0) invert(1);\n}\n.logo-principal[_ngcontent-%COMP%] {\n  max-width: 290px;\n  width: 100%;\n}\n.logo-foro-1[_ngcontent-%COMP%] {\n  max-width: 130px;\n}\n.logo-libertador[_ngcontent-%COMP%] {\n  max-width: 200px;\n}\n.contenedor-logos[_ngcontent-%COMP%] {\n  max-width: 170px;\n}\n.timer-box[_ngcontent-%COMP%] {\n  background-color: rgba(255, 255, 255, 0.1);\n  border-radius: 0.5rem;\n  padding: 0.5rem 1rem;\n  -webkit-backdrop-filter: blur(10px);\n  backdrop-filter: blur(10px);\n}\n.texto-conexion[_ngcontent-%COMP%] {\n  line-height: 24px;\n  font-size: 22px;\n  margin-top: 13px;\n}\n.texto-contador[_ngcontent-%COMP%] {\n  text-align: center;\n  font-weight: 500;\n}\n.texto-tiempo[_ngcontent-%COMP%] {\n  text-align: center;\n}\n.texto-pabellon[_ngcontent-%COMP%] {\n  border-bottom: 1px solid #fff;\n  padding-bottom: 15px;\n}\n.texto-fecha[_ngcontent-%COMP%] {\n  margin-top: 15px;\n  font-size: 22px;\n}\n.texto-ubicacion[_ngcontent-%COMP%] {\n  font-size: 20px;\n}\n.contenedor-logo-principal[_ngcontent-%COMP%] {\n  margin-top: 75px;\n}\n.contenedor-textos-info[_ngcontent-%COMP%] {\n  margin-top: 30px;\n}\n.texto-desliza[_ngcontent-%COMP%] {\n  margin-top: 20px;\n}\n.floating-cta[_ngcontent-%COMP%] {\n  position: fixed;\n  bottom: 2.5rem;\n  right: 2.5rem;\n  z-index: 30;\n}\n#animation-container[_ngcontent-%COMP%] {\n  position: relative;\n  width: 100%;\n  min-height: 80vh;\n}\n.seccion-historia[_ngcontent-%COMP%] {\n  padding-top: 30px;\n  padding-bottom: 2rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n  color: #2d3450;\n  text-align: center;\n  background-color: #f7f8fa;\n  margin-bottom: 20px;\n}\n.seccion-boletas-ad-2[_ngcontent-%COMP%] {\n  background-image: url("./media/fondo-banner-2.png");\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.seccion-boletas-ad-3[_ngcontent-%COMP%] {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/acb20703-f1f9-44c6-88a5-38e2dec47a42.png);\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.imagen-boletos-2[_ngcontent-%COMP%] {\n  width: 230px;\n}\n.etiqueta-pilar[_ngcontent-%COMP%] {\n  background-color: #2d3450;\n}\n.temas-charla-card[_ngcontent-%COMP%]   .btn-reserva-vidrio[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  padding: 0.65rem 1.15rem;\n  font-size: 0.875rem;\n  font-weight: 600;\n  color: #fff;\n  text-align: center;\n  border-radius: 0.625rem;\n  border: 1px solid rgba(255, 255, 255, 0.45);\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.22) 0%,\n      rgba(255, 255, 255, 0.08) 100%);\n  backdrop-filter: blur(14px);\n  -webkit-backdrop-filter: blur(14px);\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.35);\n  cursor: pointer;\n  transition:\n    background 0.2s ease,\n    border-color 0.2s ease,\n    box-shadow 0.2s ease;\n  margin: 20px 0 0 0;\n}\n.temas-charla-card[_ngcontent-%COMP%]   .btn-reserva-vidrio[_ngcontent-%COMP%]:hover {\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.32) 0%,\n      rgba(255, 255, 255, 0.14) 100%);\n  border-color: rgba(255, 255, 255, 0.6);\n  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.45);\n}\n.seccion-temas[_ngcontent-%COMP%] {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/ca85fb18-d61a-4604-8f9d-004f021d7e98.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  padding-top: 70px;\n  padding-bottom: 70px;\n}\n.texto-pilares[_ngcontent-%COMP%] {\n  font-weight: 300;\n  font-size: 30px;\n}\n.texto-entradas[_ngcontent-%COMP%] {\n  font-size: 28px;\n  font-weight: 600;\n}\n.icono-compra[_ngcontent-%COMP%] {\n  margin-right: 10px;\n}\n.sub-texto-tarjeta[_ngcontent-%COMP%] {\n  margin-top: 20px;\n}\n.seccion-boletas-ad[_ngcontent-%COMP%] {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/a0154101-11b4-4330-8169-a6071bff0f43.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  height: 185px;\n  margin-bottom: 80px;\n}\n.botonWhatsappHilton[_ngcontent-%COMP%]   [_ngcontent-%COMP%]:hover {\n  cursor: pointer !important;\n}\n.sub-text-entradas-ad[_ngcontent-%COMP%] {\n  font-size: 31px;\n}\n.imagen-boletos[_ngcontent-%COMP%] {\n  margin-top: 50px;\n}\n.devolucion[_ngcontent-%COMP%] {\n  margin-top: 10px;\n  font-size: 15px;\n  color: rgb(107 114 128 / var(--tw-text-opacity, 1));\n  font-style: italic;\n}\n.seccion-boletas-ad[_ngcontent-%COMP%]   [_ngcontent-%COMP%]:hover {\n  cursor: pointer;\n}\n.seccion-precios[_ngcontent-%COMP%] {\n  padding-bottom: 10px;\n  padding-top: 2rem !important;\n}\n.logos-container[_ngcontent-%COMP%] {\n  overflow: hidden;\n  padding: 1rem 0;\n  position: relative;\n  width: 100%;\n  display: flex;\n  -webkit-mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n  mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n}\n.logos-slide[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  flex-shrink: 0;\n  white-space: nowrap;\n  animation: _ngcontent-%COMP%_scroll-logos 25s linear infinite;\n}\n.logos-slide[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  width: 160px;\n  height: 60px;\n  object-fit: contain;\n  margin: 0 20px;\n}\n.logo-davivienda[_ngcontent-%COMP%], \n.logo-bolivar[_ngcontent-%COMP%] {\n  width: 110px !important;\n}\n@keyframes _ngcontent-%COMP%_scroll-logos {\n  from {\n    transform: translateX(0);\n  }\n  to {\n    transform: translateX(-100%);\n  }\n}\n.logos-container[_ngcontent-%COMP%]:hover   .logos-slide[_ngcontent-%COMP%] {\n  animation-play-state: paused;\n}\n.carousel-container[_ngcontent-%COMP%] {\n  width: 90%;\n  max-width: 500px;\n  aspect-ratio: 8 / 5;\n  perspective: 1500px;\n  position: relative;\n}\n.carousel-rotator[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  transform-style: preserve-3d;\n  animation: _ngcontent-%COMP%_rotateCarousel 20s linear infinite;\n}\n.carousel-face[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  backface-visibility: hidden;\n}\n.carousel-face[_ngcontent-%COMP%]:nth-child(1) {\n  transform: rotateY(0deg) translateZ(150px);\n}\n.carousel-face[_ngcontent-%COMP%]:nth-child(2) {\n  transform: rotateY(120deg) translateZ(150px);\n}\n.carousel-face[_ngcontent-%COMP%]:nth-child(3) {\n  transform: rotateY(240deg) translateZ(150px);\n}\n@keyframes _ngcontent-%COMP%_rotateCarousel {\n  from {\n    transform: rotateY(0deg);\n  }\n  to {\n    transform: rotateY(-360deg);\n  }\n}\n.animatable-card.is-flipped[_ngcontent-%COMP%] {\n  background-color: white !important;\n  -webkit-backdrop-filter: none !important;\n  backdrop-filter: none !important;\n}\n.animatable-card.is-flipped[_ngcontent-%COMP%]   .card-original-content[_ngcontent-%COMP%] {\n  opacity: 0;\n  pointer-events: none;\n}\n.animatable-card.is-flipped[_ngcontent-%COMP%]   .card-flipped-content[_ngcontent-%COMP%] {\n  opacity: 1;\n  pointer-events: auto;\n}\n.card-slider[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  padding: 1rem;\n}\n.temas-card-destacada[_ngcontent-%COMP%] {\n  width: 100%;\n}\n.card-slider[_ngcontent-%COMP%]    > div[_ngcontent-%COMP%] {\n  width: 100%;\n}\n.card-slider[_ngcontent-%COMP%]    > *[_ngcontent-%COMP%] {\n  flex-shrink: 0;\n}\n.particle-canvas[_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n.contenedorCharlas[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 1.5rem;\n  width: 100%;\n}\n@media (min-width: 768px) {\n  .contenedorCharlas[_ngcontent-%COMP%] {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n.contenedorCharlas[_ngcontent-%COMP%]   .agenda-card-imagen[_ngcontent-%COMP%] {\n  min-height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: rgba(255, 255, 255, 0.06);\n}\n@media (min-width: 768px) {\n  .contenedorCharlas[_ngcontent-%COMP%]   .agenda-card-imagen[_ngcontent-%COMP%] {\n    min-height: 240px;\n  }\n}\n.contenedorCharlas[_ngcontent-%COMP%]   .agenda-card-imagen[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  object-fit: contain;\n  max-height: 280px;\n}\n@media (max-width: 1107px) {\n  .contenedor-logos[_ngcontent-%COMP%] {\n    max-width: 520px !important;\n  }\n  .logo-foro-1[_ngcontent-%COMP%] {\n    max-width: 160px;\n  }\n  .logo-libertador[_ngcontent-%COMP%] {\n    max-width: 230px;\n  }\n  .contenedor-numeros[_ngcontent-%COMP%] {\n    margin-top: 100px;\n  }\n  .sub-text-entradas-ad[_ngcontent-%COMP%] {\n    margin-top: 30px;\n  }\n}\n@media (max-width: 768px) {\n  .logos-slide[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n    width: 110px;\n    height: 45px;\n    margin: 0 10px;\n  }\n  .card-slider[_ngcontent-%COMP%] {\n    gap: 1.5rem;\n    padding: 1rem;\n  }\n}\n@media (max-width: 757px) {\n  .logo-foro-1[_ngcontent-%COMP%] {\n    max-width: 130px;\n  }\n  .logo-libertador[_ngcontent-%COMP%] {\n    max-width: 160px;\n  }\n  .texto-conexion[_ngcontent-%COMP%] {\n    margin-top: -20px;\n  }\n  .contenedor-logo-principal[_ngcontent-%COMP%] {\n    margin-top: 40px !important;\n  }\n}\n@media (max-width: 500px) {\n  .titulo-entradas[_ngcontent-%COMP%] {\n    margin-top: 0;\n  }\n}\n@media (max-width: 407px) {\n  .logo-foro-1[_ngcontent-%COMP%] {\n    max-width: 90px;\n  }\n  .logo-libertador[_ngcontent-%COMP%] {\n    max-width: 100px;\n  }\n}\n/*# sourceMappingURL=landing.css.map */'] });
 };
@@ -43944,7 +43946,7 @@ var Landing = class _Landing {
                                         Sala 1
                                     </span>
                                     <h4 class="text-2xl font-bold flex-1">Implementaci\xF3n de IA para tu Inmobiliaria</h4>
-                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ textoCuposEnSala(1) }}</p>
+                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ mensajeCuposPorTurno }}</p>
                                     <button type="button" (click)="abrirReservaCupo(1, 'Implementaci\xF3n de IA para tu Inmobiliaria', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aqu\xED</button>
                                 </div>
                             </div>
@@ -43962,7 +43964,7 @@ var Landing = class _Landing {
                                         Sala 2
                                     </span>
                                     <h4 class="text-2xl font-bold flex-1">Entorno Juridico</h4>
-                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ textoCuposEnSala(2) }}</p>
+                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ mensajeCuposPorTurno }}</p>
                                     <button type="button" (click)="abrirReservaCupo(2, 'Entorno Juridico', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aqu\xED</button>
                                 </div>
                             </div>
@@ -43980,7 +43982,7 @@ var Landing = class _Landing {
                                         Sala 3
                                     </span>
                                     <h4 class="text-2xl font-bold flex-1">Casos de Exito</h4>
-                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ textoCuposEnSala(3) }}</p>
+                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ mensajeCuposPorTurno }}</p>
                                     <button type="button" (click)="abrirReservaCupo(3, 'Casos de Exito', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aqu\xED</button>
                                 </div>
                             </div>
@@ -43998,7 +44000,7 @@ var Landing = class _Landing {
                                         Sala 4
                                     </span>
                                     <h4 class="text-2xl font-bold flex-1">Meet & Greet</h4>
-                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ textoCuposEnSala(4) }}</p>
+                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ mensajeCuposPorTurno }}</p>
                                     <button type="button" (click)="abrirReservaCupo(4, 'Meet & Greet', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aqu\xED</button>
                                 </div>
                             </div>
@@ -44281,13 +44283,13 @@ var Landing = class _Landing {
         </div>
     </section>
 `, styles: ['/* src/app/pages/landing/landing.css */\n.hero-bg {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/da01a461-c25e-400e-8037-cc341bfc1bd3.png);\n  background-size: cover;\n  background-position: center;\n  background-color: #2d3450;\n  height: 80vh;\n}\nheader {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  z-index: 30;\n  background-color: transparent;\n  transition: background-color 0.4s ease-out;\n}\nheader.scrolled-header {\n  background-color: #2d3450;\n}\n.logo-white {\n  filter: brightness(0) invert(1);\n}\n.logo-principal {\n  max-width: 290px;\n  width: 100%;\n}\n.logo-foro-1 {\n  max-width: 130px;\n}\n.logo-libertador {\n  max-width: 200px;\n}\n.contenedor-logos {\n  max-width: 170px;\n}\n.timer-box {\n  background-color: rgba(255, 255, 255, 0.1);\n  border-radius: 0.5rem;\n  padding: 0.5rem 1rem;\n  -webkit-backdrop-filter: blur(10px);\n  backdrop-filter: blur(10px);\n}\n.texto-conexion {\n  line-height: 24px;\n  font-size: 22px;\n  margin-top: 13px;\n}\n.texto-contador {\n  text-align: center;\n  font-weight: 500;\n}\n.texto-tiempo {\n  text-align: center;\n}\n.texto-pabellon {\n  border-bottom: 1px solid #fff;\n  padding-bottom: 15px;\n}\n.texto-fecha {\n  margin-top: 15px;\n  font-size: 22px;\n}\n.texto-ubicacion {\n  font-size: 20px;\n}\n.contenedor-logo-principal {\n  margin-top: 75px;\n}\n.contenedor-textos-info {\n  margin-top: 30px;\n}\n.texto-desliza {\n  margin-top: 20px;\n}\n.floating-cta {\n  position: fixed;\n  bottom: 2.5rem;\n  right: 2.5rem;\n  z-index: 30;\n}\n#animation-container {\n  position: relative;\n  width: 100%;\n  min-height: 80vh;\n}\n.seccion-historia {\n  padding-top: 30px;\n  padding-bottom: 2rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n  color: #2d3450;\n  text-align: center;\n  background-color: #f7f8fa;\n  margin-bottom: 20px;\n}\n.seccion-boletas-ad-2 {\n  background-image: url("./media/fondo-banner-2.png");\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.seccion-boletas-ad-3 {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/acb20703-f1f9-44c6-88a5-38e2dec47a42.png);\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.imagen-boletos-2 {\n  width: 230px;\n}\n.etiqueta-pilar {\n  background-color: #2d3450;\n}\n.temas-charla-card .btn-reserva-vidrio {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  padding: 0.65rem 1.15rem;\n  font-size: 0.875rem;\n  font-weight: 600;\n  color: #fff;\n  text-align: center;\n  border-radius: 0.625rem;\n  border: 1px solid rgba(255, 255, 255, 0.45);\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.22) 0%,\n      rgba(255, 255, 255, 0.08) 100%);\n  backdrop-filter: blur(14px);\n  -webkit-backdrop-filter: blur(14px);\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.35);\n  cursor: pointer;\n  transition:\n    background 0.2s ease,\n    border-color 0.2s ease,\n    box-shadow 0.2s ease;\n  margin: 20px 0 0 0;\n}\n.temas-charla-card .btn-reserva-vidrio:hover {\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.32) 0%,\n      rgba(255, 255, 255, 0.14) 100%);\n  border-color: rgba(255, 255, 255, 0.6);\n  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.45);\n}\n.seccion-temas {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/ca85fb18-d61a-4604-8f9d-004f021d7e98.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  padding-top: 70px;\n  padding-bottom: 70px;\n}\n.texto-pilares {\n  font-weight: 300;\n  font-size: 30px;\n}\n.texto-entradas {\n  font-size: 28px;\n  font-weight: 600;\n}\n.icono-compra {\n  margin-right: 10px;\n}\n.sub-texto-tarjeta {\n  margin-top: 20px;\n}\n.seccion-boletas-ad {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/a0154101-11b4-4330-8169-a6071bff0f43.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  height: 185px;\n  margin-bottom: 80px;\n}\n.botonWhatsappHilton :hover {\n  cursor: pointer !important;\n}\n.sub-text-entradas-ad {\n  font-size: 31px;\n}\n.imagen-boletos {\n  margin-top: 50px;\n}\n.devolucion {\n  margin-top: 10px;\n  font-size: 15px;\n  color: rgb(107 114 128 / var(--tw-text-opacity, 1));\n  font-style: italic;\n}\n.seccion-boletas-ad :hover {\n  cursor: pointer;\n}\n.seccion-precios {\n  padding-bottom: 10px;\n  padding-top: 2rem !important;\n}\n.logos-container {\n  overflow: hidden;\n  padding: 1rem 0;\n  position: relative;\n  width: 100%;\n  display: flex;\n  -webkit-mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n  mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n}\n.logos-slide {\n  display: flex;\n  align-items: center;\n  flex-shrink: 0;\n  white-space: nowrap;\n  animation: scroll-logos 25s linear infinite;\n}\n.logos-slide img {\n  width: 160px;\n  height: 60px;\n  object-fit: contain;\n  margin: 0 20px;\n}\n.logo-davivienda,\n.logo-bolivar {\n  width: 110px !important;\n}\n@keyframes scroll-logos {\n  from {\n    transform: translateX(0);\n  }\n  to {\n    transform: translateX(-100%);\n  }\n}\n.logos-container:hover .logos-slide {\n  animation-play-state: paused;\n}\n.carousel-container {\n  width: 90%;\n  max-width: 500px;\n  aspect-ratio: 8 / 5;\n  perspective: 1500px;\n  position: relative;\n}\n.carousel-rotator {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  transform-style: preserve-3d;\n  animation: rotateCarousel 20s linear infinite;\n}\n.carousel-face {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  backface-visibility: hidden;\n}\n.carousel-face:nth-child(1) {\n  transform: rotateY(0deg) translateZ(150px);\n}\n.carousel-face:nth-child(2) {\n  transform: rotateY(120deg) translateZ(150px);\n}\n.carousel-face:nth-child(3) {\n  transform: rotateY(240deg) translateZ(150px);\n}\n@keyframes rotateCarousel {\n  from {\n    transform: rotateY(0deg);\n  }\n  to {\n    transform: rotateY(-360deg);\n  }\n}\n.animatable-card.is-flipped {\n  background-color: white !important;\n  -webkit-backdrop-filter: none !important;\n  backdrop-filter: none !important;\n}\n.animatable-card.is-flipped .card-original-content {\n  opacity: 0;\n  pointer-events: none;\n}\n.animatable-card.is-flipped .card-flipped-content {\n  opacity: 1;\n  pointer-events: auto;\n}\n.card-slider {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  padding: 1rem;\n}\n.temas-card-destacada {\n  width: 100%;\n}\n.card-slider > div {\n  width: 100%;\n}\n.card-slider > * {\n  flex-shrink: 0;\n}\n.particle-canvas {\n  pointer-events: none;\n}\n.contenedorCharlas {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 1.5rem;\n  width: 100%;\n}\n@media (min-width: 768px) {\n  .contenedorCharlas {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n.contenedorCharlas .agenda-card-imagen {\n  min-height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: rgba(255, 255, 255, 0.06);\n}\n@media (min-width: 768px) {\n  .contenedorCharlas .agenda-card-imagen {\n    min-height: 240px;\n  }\n}\n.contenedorCharlas .agenda-card-imagen img {\n  object-fit: contain;\n  max-height: 280px;\n}\n@media (max-width: 1107px) {\n  .contenedor-logos {\n    max-width: 520px !important;\n  }\n  .logo-foro-1 {\n    max-width: 160px;\n  }\n  .logo-libertador {\n    max-width: 230px;\n  }\n  .contenedor-numeros {\n    margin-top: 100px;\n  }\n  .sub-text-entradas-ad {\n    margin-top: 30px;\n  }\n}\n@media (max-width: 768px) {\n  .logos-slide img {\n    width: 110px;\n    height: 45px;\n    margin: 0 10px;\n  }\n  .card-slider {\n    gap: 1.5rem;\n    padding: 1rem;\n  }\n}\n@media (max-width: 757px) {\n  .logo-foro-1 {\n    max-width: 130px;\n  }\n  .logo-libertador {\n    max-width: 160px;\n  }\n  .texto-conexion {\n    margin-top: -20px;\n  }\n  .contenedor-logo-principal {\n    margin-top: 40px !important;\n  }\n}\n@media (max-width: 500px) {\n  .titulo-entradas {\n    margin-top: 0;\n  }\n}\n@media (max-width: 407px) {\n  .logo-foro-1 {\n    max-width: 90px;\n  }\n  .logo-libertador {\n    max-width: 100px;\n  }\n}\n/*# sourceMappingURL=landing.css.map */\n'] }]
-  }], () => [{ type: ServiceBoletas }, { type: Router }, { type: ChangeDetectorRef }, { type: MatDialog }, { type: ReservaCupos }], { onWindowScroll: [{
+  }], () => [{ type: ServiceBoletas }, { type: Router }, { type: ChangeDetectorRef }, { type: MatDialog }], { onWindowScroll: [{
     type: HostListener,
     args: ["window:scroll", []]
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(Landing, { className: "Landing", filePath: "src/app/pages/landing/landing.ts", lineNumber: 21 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(Landing, { className: "Landing", filePath: "src/app/pages/landing/landing.ts", lineNumber: 24 });
 })();
 
 // src/app/pages/inicio-registro/inicio-registro.ts

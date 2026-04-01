@@ -1,9 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { capacidadSala } from '../../models/sala-experiencia';
-import { ReservaCupos } from '../../service/reserva-cupos';
 import { ServiceBoletas } from '../../service/service-boletas';
 import { ReservarCupo } from '../reservar-cupo/reservar-cupo';
 
@@ -14,37 +19,29 @@ declare var fbq: any;
   imports: [CommonModule, RouterModule],
   templateUrl: './landing.html',
   styleUrl: './landing.css',
-  standalone: true
+  standalone: true,
 })
-
-
 export class Landing implements OnInit, OnDestroy {
-
   dataLayer: any[] = (window as any).dataLayer || [];
   isScrolled = false;
   isMenuOpen = false;
   timeleft = {
-  days: 0,
-  hours: 0,
-  minutes: 0,
-  seconds: 0
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
   };
-  intervalId: any;
+  intervalId: ReturnType<typeof setInterval> | undefined;
 
-  /** Conteo por sala desde el sheet; null = cargando o error. */
-  cuposReservados: Record<number, number | null> = {
-    1: null,
-    2: null,
-    3: null,
-    4: null,
-  };
+  /** Texto bajo las cards de experiencias alternas (cupo por turno). */
+  readonly mensajeCuposPorTurno =
+    'Cupo limitado por charla y turno. Al reservar elegís día y hora y ves disponibilidad.';
 
   constructor(
     private boletasService: ServiceBoletas,
     private router: Router,
     private cdRef: ChangeDetectorRef,
     private dialog: MatDialog,
-    private reservaCupos: ReservaCupos,
   ) {}
 
   ngOnInit(): void {
@@ -55,38 +52,14 @@ export class Landing implements OnInit, OnDestroy {
 
     this.intervalId = setInterval(() => {
       this.actualizarTiempo(fechaForo);
-      this.cdRef.detectChanges(); 
+      this.cdRef.detectChanges();
     }, 1000);
-
-    for (const id of [1, 2, 3, 4] as const) {
-      void this.reservaCupos.contarReservasSala(id).then(
-        (n) => {
-          this.cuposReservados[id] = n;
-          this.cdRef.detectChanges();
-        },
-        () => {
-          this.cuposReservados[id] = null;
-          this.cdRef.detectChanges();
-        },
-      );
-    }
-  }
-
-  textoCuposEnSala(idSala: number): string {
-    const max = capacidadSala(idSala);
-    const n = this.cuposReservados[idSala];
-    if (n === null) {
-      return 'Cupos: consultando…';
-    }
-    if (max <= 0) {
-      return '';
-    }
-    const quedan = Math.max(0, max - n);
-    return `Reservas: ${n} de ${max}. Quedan ${quedan} cupo${quedan === 1 ? '' : 's'}.`;
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.intervalId);
+    if (this.intervalId != null) {
+      clearInterval(this.intervalId);
+    }
   }
   
   @HostListener('window:scroll', [])
@@ -98,65 +71,20 @@ export class Landing implements OnInit, OnDestroy {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  ngAfterViewInit() {
-    document.addEventListener('click', (e: Event) => {
-        
-      const target = e.target as HTMLElement;
-      
-      // Si se hizo clic en "Saber más"
-      if (target.classList.contains('saber-mas-btn')) {
-        const card = target.closest('.animatable-card');
-        if (!card) return;
-        
-        const originalContent = card.querySelector('.card-original-content');
-        const flippedContent = card.querySelector('.card-flipped-content');
-        
-        if (originalContent && flippedContent) {
-          originalContent.classList.add('opacity-0', 'pointer-events-none');
-          flippedContent.classList.remove('opacity-0', 'pointer-events-none');
-          card.classList.remove('bg-white/10');
-          card.classList.add('bg-white');
-        }
-      }
-      
-      // Si se hizo clic en "Volver"
-      if (target.classList.contains('volver-btn')) {
-        const card = target.closest('.animatable-card');
-        if (!card) return;
-        
-        const originalContent = card.querySelector('.card-original-content');
-        const flippedContent = card.querySelector('.card-flipped-content');
-        
-        if (originalContent && flippedContent) {
-          originalContent.classList.remove('opacity-0', 'pointer-events-none');
-          flippedContent.classList.add('opacity-0', 'pointer-events-none');
-          card.classList.remove('bg-white');
-          card.classList.add('bg-white/10');
-        }
-      }
-    });
-  }
+
 
   abrirReservaCupo(idSala: number, nombreExperiencia: string, event?: Event): void {
     event?.preventDefault();
     event?.stopPropagation();
-    const ref = this.dialog.open(ReservarCupo, {
+    this.dialog.open(ReservarCupo, {
       width: '420px',
       maxWidth: '90vw',
       data: { idSala, nombreExperiencia },
       panelClass: 'reserva-cupo-dialog',
     });
-    ref.afterClosed().subscribe((result) => {
-      if (result?.ok) {
-        void this.reservaCupos.contarReservasSala(idSala).then((n) => {
-          this.cuposReservados[idSala] = n;
-          this.cdRef.detectChanges();
-        });
-      }
-    });
   }
 
-  seleccionarBoletas(cantidad: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8): void{
+  seleccionarBoletas(cantidad: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8): void {
 
     if (typeof fbq === 'function') {
       fbq('track', 'Lead');
@@ -235,7 +163,7 @@ export class Landing implements OnInit, OnDestroy {
     }
 
     this.boletasService.seleccionarCantidadBoletas(cantidad);
-    this.router.navigate(['/inicio-registro'])
+    this.router.navigate(['/inicio-registro']);
   }
 
   actualizarTiempo(fechaForo: Date) {
@@ -247,7 +175,7 @@ export class Landing implements OnInit, OnDestroy {
         days: 0,
         hours: 0,
         minutes: 0,
-        seconds:0
+        seconds: 0,
       };
       return;
     }
@@ -266,18 +194,17 @@ export class Landing implements OnInit, OnDestroy {
     this.timeleft = { days, hours, minutes, seconds };
   }
 
-  abrirWhatsapp(){
-
+  abrirWhatsapp(): void {
     this.dataLayer.push({
-    event: 'ga_event',
-    category: 'foro 2026',
-    action: 'AMW - boton whatsapp',
-    label: 'resuelve tus dudas'
+      event: 'ga_event',
+      category: 'foro 2026',
+      action: 'AMW - boton whatsapp',
+      label: 'resuelve tus dudas',
     });
-  const numeroWhatsapp = '573144352014';
-  const mensaje = encodeURIComponent('Buen día, tengo una duda con ');
-  const url = `https://wa.me/${numeroWhatsapp}?text=${mensaje}`;
-  window.open(url, '_blank');
+    const numeroWhatsapp = '573144352014';
+    const mensaje = encodeURIComponent('Buen día, tengo una duda con ');
+    const url = `https://wa.me/${numeroWhatsapp}?text=${mensaje}`;
+    window.open(url, '_blank');
   }
 
 
@@ -290,15 +217,11 @@ export class Landing implements OnInit, OnDestroy {
     });
   }
 
-  abrirWhatsappHotel(){
+  abrirWhatsappHotel(): void {
     const numeroWhatsapp = '573204116480';
     const mensaje = encodeURIComponent('Hola. Soy asistente del Foro Experiencia Inmobiliaria, quisiera cotizar habitación con la tarifa preferencial del evento. ¿Podrían compartirme disponibilidad y valores, por favor? ');
     const url = `https://wa.me/${numeroWhatsapp}?text=${mensaje}`;
     window.open(url, '_blank');
   }
-
-    
-
 }
-
 
