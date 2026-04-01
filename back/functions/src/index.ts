@@ -415,29 +415,46 @@ export const reservarCupoSalaProd = onCall(
     const data = request.data as {
       idSala?: number;
       fecha?: string;
+      horaCharla?: string;
       nombre?: string;
       numDoc?: string;
+      correo?: string;
     };
 
     if (!data || typeof data !== "object") {
       throw new HttpsError("invalid-argument", "Faltan datos de reserva.");
     }
 
-    const { idSala, fecha, nombre, numDoc } = data;
+    const { idSala, fecha, horaCharla, nombre, numDoc, correo } = data;
 
     if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
       throw new HttpsError("invalid-argument", "idSala debe ser 1, 2, 3 o 4.");
     }
 
-    if (!fecha || !nombre || !numDoc) {
+    if (!fecha || !horaCharla || !nombre || !numDoc || !correo) {
       throw new HttpsError(
         "invalid-argument",
-        "Completá fecha, nombre y número de documento."
+        "Completá fecha, hora, nombre, número de documento y correo."
+      );
+    }
+
+    const horaOk = /^\d{1,2}:\d{2}$/.test(horaCharla.trim());
+    if (!horaOk) {
+      throw new HttpsError(
+        "invalid-argument",
+        "La hora debe tener formato HH:mm (ej. 14:30)."
       );
     }
 
     try {
-      await reservaSalaCupo({ idSala, fecha, nombre, numDoc });
+      await reservaSalaCupo({
+        idSala,
+        fecha,
+        horaCharla: horaCharla.trim(),
+        nombre,
+        numDoc,
+        correo,
+      });
       return { ok: true };
     } catch (e: unknown) {
       if (e instanceof HttpsError) {

@@ -73,6 +73,17 @@
   border-radius: 0.5rem;
 }
 
+.reserva-cupo-field select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.9375rem;
+  color: #1a1d2e;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 0.5rem;
+}
+
 .reserva-cupo-field input:focus {
   outline: 2px solid rgba(189, 15, 20, 0.45);
   outline-offset: 1px;

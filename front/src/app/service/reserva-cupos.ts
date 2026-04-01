@@ -4,8 +4,10 @@ import { Functions, httpsCallable } from '@angular/fire/functions';
 export interface ClienteReservaSalaData {
   idSala: number;
   fecha: string;
+  horaCharla: string;
   nombre: string;
   numDoc: string;
+  correo: string;
 }
 
 @Injectable({

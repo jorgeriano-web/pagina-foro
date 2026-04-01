@@ -49,11 +49,34 @@
         [disabled]="procesando"
       />
     </div>
+    <div class="reserva-cupo-field">
+      <label for="correo">Correo</label>
+      <input
+        type="email"
+        id="correo"
+        name="correo"
+        autocomplete="email"
+        [(ngModel)]="correo"
+        [disabled]="procesando"
+      />
+    </div>
+    <div class="reserva-cupo-field">
+      <label for="fechaHora">Fecha y hora de la charla</label>
+      <select
+        id="fechaHora"
+        name="fechaHora"
+        [(ngModel)]="slotSeleccionado"
+        [disabled]="procesando"
+      >
+        <option value="">Elegí fecha y hora</option>
+        <option *ngFor="let s of slotsCharla" [value]="s.value">{{ s.label }}</option>
+      </select>
+    </div>
   </form>
   <button
     type="button"
     class="reserva-cupo-submit"
-    [disabled]="procesando || idSala === null"
+    [disabled]="procesando || idSala === null || !slotSeleccionado"
     (click)="reservaCupo()"
   >
     {{ procesando ? 'Procesando…' : 'Reservar Cupo' }}

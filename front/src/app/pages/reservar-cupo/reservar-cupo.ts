@@ -22,6 +22,15 @@ export interface ReservaCupoDialogData {
 export class ReservarCupo implements OnInit {
   nombre = '';
   numDoc = '';
+  correo = '';
+  /** Valor `YYYY-MM-DD|HH:mm` (fecha y hora de la charla). */
+  slotSeleccionado = '';
+  readonly slotsCharla: { value: string; label: string }[] = [
+    { value: '2026-05-21|14:30', label: '21 de mayo, 2:30 p. m.' },
+    { value: '2026-05-21|16:45', label: '21 de mayo, 4:45 p. m.' },
+    { value: '2026-05-22|14:30', label: '22 de mayo, 2:30 p. m.' },
+    { value: '2026-05-22|16:45', label: '22 de mayo, 4:45 p. m.' },
+  ];
   procesando = false;
   reservaExitosa = false;
   errorReserva: string | null = null;
@@ -110,8 +119,20 @@ export class ReservarCupo implements OnInit {
     }
     const nombre = this.nombre.trim();
     const numDoc = this.numDoc.trim();
-    if (!nombre || !numDoc) {
-      this.errorReserva = 'Completá nombre y cédula.';
+    const correo = this.correo.trim();
+    if (!this.slotSeleccionado) {
+      this.errorReserva = 'Elegí la fecha y hora de la charla.';
+      return;
+    }
+    if (!nombre || !numDoc || !correo) {
+      this.errorReserva = 'Completa nombre, cédula y correo.';
+      return;
+    }
+    const partes = this.slotSeleccionado.split('|');
+    const fechaCharla = partes[0] ?? '';
+    const horaCharla = (partes[1] ?? '').trim();
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(fechaCharla) || !/^\d{1,2}:\d{2}$/.test(horaCharla)) {
+      this.errorReserva = 'Elegí una fecha y hora válidas.';
       return;
     }
     this.errorReserva = null;
@@ -120,9 +141,11 @@ export class ReservarCupo implements OnInit {
     try {
       await this.reservaCuposService.reservaSalaCupo({
         idSala,
-        fecha: this.fechaLocalYmd(),
+        fecha: fechaCharla,
+        horaCharla,
         nombre,
         numDoc,
+        correo,
       });
       this.reservaExitosa = true;
       const prev = this.reservasActuales;
@@ -138,14 +161,5 @@ export class ReservarCupo implements OnInit {
 
   cerrarTrasExito(): void {
     this.dialogRef?.close({ ok: true });
-  }
-
-  /** Fecha local solo año-mes-día (misma lógica que normaliza el back al escribir el Sheet). */
-  private fechaLocalYmd(): string {
-    const d = new Date();
-    const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
-    return `${y}-${m}-${day}`;
   }
 }

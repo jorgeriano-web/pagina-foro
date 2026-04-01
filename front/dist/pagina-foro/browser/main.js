@@ -42578,7 +42578,7 @@ function ReservarCupo_div_1_Template(rf, ctx) {
 }
 function ReservarCupo_ng_container_2_p_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 20);
+    \u0275\u0275elementStart(0, "p", 26);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -42590,7 +42590,7 @@ function ReservarCupo_ng_container_2_p_2_Template(rf, ctx) {
 }
 function ReservarCupo_ng_container_2_p_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 21);
+    \u0275\u0275elementStart(0, "p", 27);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -42602,7 +42602,7 @@ function ReservarCupo_ng_container_2_p_3_Template(rf, ctx) {
 }
 function ReservarCupo_ng_container_2_p_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 22);
+    \u0275\u0275elementStart(0, "p", 28);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -42614,7 +42614,7 @@ function ReservarCupo_ng_container_2_p_4_Template(rf, ctx) {
 }
 function ReservarCupo_ng_container_2_p_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 23);
+    \u0275\u0275elementStart(0, "p", 29);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -42622,6 +42622,19 @@ function ReservarCupo_ng_container_2_p_5_Template(rf, ctx) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
     \u0275\u0275textInterpolate(ctx_r1.errorReserva);
+  }
+}
+function ReservarCupo_ng_container_2_option_25_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "option", 30);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const s_r5 = ctx.$implicit;
+    \u0275\u0275property("value", s_r5.value);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(s_r5.label);
   }
 }
 function ReservarCupo_ng_container_2_Template(rf, ctx) {
@@ -42653,14 +42666,40 @@ function ReservarCupo_ng_container_2_Template(rf, ctx) {
       \u0275\u0275twoWayBindingSet(ctx_r1.numDoc, $event) || (ctx_r1.numDoc = $event);
       return \u0275\u0275resetView($event);
     });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(15, "div", 14)(16, "label", 19);
+    \u0275\u0275text(17, "Correo");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(18, "input", 20);
+    \u0275\u0275twoWayListener("ngModelChange", function ReservarCupo_ng_container_2_Template_input_ngModelChange_18_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r1.correo, $event) || (ctx_r1.correo = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(19, "div", 14)(20, "label", 21);
+    \u0275\u0275text(21, "Fecha y hora de la charla");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(22, "select", 22);
+    \u0275\u0275twoWayListener("ngModelChange", function ReservarCupo_ng_container_2_Template_select_ngModelChange_22_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r1.slotSeleccionado, $event) || (ctx_r1.slotSeleccionado = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementStart(23, "option", 23);
+    \u0275\u0275text(24, "Eleg\xED fecha y hora");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(25, ReservarCupo_ng_container_2_option_25_Template, 2, 2, "option", 24);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(15, "button", 19);
-    \u0275\u0275listener("click", function ReservarCupo_ng_container_2_Template_button_click_15_listener() {
+    \u0275\u0275elementStart(26, "button", 25);
+    \u0275\u0275listener("click", function ReservarCupo_ng_container_2_Template_button_click_26_listener() {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.reservaCupo());
     });
-    \u0275\u0275text(16);
+    \u0275\u0275text(27);
     \u0275\u0275elementEnd();
     \u0275\u0275elementContainerEnd();
   }
@@ -42680,8 +42719,16 @@ function ReservarCupo_ng_container_2_Template(rf, ctx) {
     \u0275\u0275advance(4);
     \u0275\u0275twoWayProperty("ngModel", ctx_r1.numDoc);
     \u0275\u0275property("disabled", ctx_r1.procesando);
+    \u0275\u0275advance(4);
+    \u0275\u0275twoWayProperty("ngModel", ctx_r1.correo);
+    \u0275\u0275property("disabled", ctx_r1.procesando);
+    \u0275\u0275advance(4);
+    \u0275\u0275twoWayProperty("ngModel", ctx_r1.slotSeleccionado);
+    \u0275\u0275property("disabled", ctx_r1.procesando);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngForOf", ctx_r1.slotsCharla);
     \u0275\u0275advance();
-    \u0275\u0275property("disabled", ctx_r1.procesando || ctx_r1.idSala === null);
+    \u0275\u0275property("disabled", ctx_r1.procesando || ctx_r1.idSala === null || !ctx_r1.slotSeleccionado);
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", ctx_r1.procesando ? "Procesando\u2026" : "Reservar Cupo", " ");
   }
@@ -42694,6 +42741,15 @@ var ReservarCupo = class _ReservarCupo {
   cdr;
   nombre = "";
   numDoc = "";
+  correo = "";
+  /** Valor `YYYY-MM-DD|HH:mm` (fecha y hora de la charla). */
+  slotSeleccionado = "";
+  slotsCharla = [
+    { value: "2026-05-21|14:30", label: "21 de mayo, 2:30 p. m." },
+    { value: "2026-05-21|16:45", label: "21 de mayo, 4:45 p. m." },
+    { value: "2026-05-22|14:30", label: "22 de mayo, 2:30 p. m." },
+    { value: "2026-05-22|16:45", label: "22 de mayo, 4:45 p. m." }
+  ];
   procesando = false;
   reservaExitosa = false;
   errorReserva = null;
@@ -42768,8 +42824,20 @@ var ReservarCupo = class _ReservarCupo {
     }
     const nombre = this.nombre.trim();
     const numDoc = this.numDoc.trim();
-    if (!nombre || !numDoc) {
-      this.errorReserva = "Complet\xE1 nombre y c\xE9dula.";
+    const correo = this.correo.trim();
+    if (!this.slotSeleccionado) {
+      this.errorReserva = "Eleg\xED la fecha y hora de la charla.";
+      return;
+    }
+    if (!nombre || !numDoc || !correo) {
+      this.errorReserva = "Completa nombre, c\xE9dula y correo.";
+      return;
+    }
+    const partes = this.slotSeleccionado.split("|");
+    const fechaCharla = partes[0] ?? "";
+    const horaCharla = (partes[1] ?? "").trim();
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(fechaCharla) || !/^\d{1,2}:\d{2}$/.test(horaCharla)) {
+      this.errorReserva = "Eleg\xED una fecha y hora v\xE1lidas.";
       return;
     }
     this.errorReserva = null;
@@ -42778,9 +42846,11 @@ var ReservarCupo = class _ReservarCupo {
     try {
       await this.reservaCuposService.reservaSalaCupo({
         idSala,
-        fecha: this.fechaLocalYmd(),
+        fecha: fechaCharla,
+        horaCharla,
         nombre,
-        numDoc
+        numDoc,
+        correo
       });
       this.reservaExitosa = true;
       const prev = this.reservasActuales;
@@ -42795,20 +42865,12 @@ var ReservarCupo = class _ReservarCupo {
   cerrarTrasExito() {
     this.dialogRef?.close({ ok: true });
   }
-  /** Fecha local solo año-mes-día (misma lógica que normaliza el back al escribir el Sheet). */
-  fechaLocalYmd() {
-    const d = /* @__PURE__ */ new Date();
-    const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
-    return `${y}-${m}-${day}`;
-  }
   static \u0275fac = function ReservarCupo_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ReservarCupo)(\u0275\u0275directiveInject(MatDialogRef, 8), \u0275\u0275directiveInject(MAT_DIALOG_DATA, 8), \u0275\u0275directiveInject(ActivatedRoute, 8), \u0275\u0275directiveInject(ReservaCupos), \u0275\u0275directiveInject(ChangeDetectorRef));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ReservarCupo, selectors: [["app-reservar-cupo"]], decls: 3, vars: 3, consts: [["type", "button", "class", "reserva-cupo-cerrar", "aria-label", "Cerrar", 3, "click", 4, "ngIf"], ["class", "reserva-cupo-exito", 4, "ngIf"], [4, "ngIf"], ["type", "button", "aria-label", "Cerrar", 1, "reserva-cupo-cerrar", 3, "click"], [1, "reserva-cupo-exito"], [1, "reserva-cupo-exito-titulo"], [1, "reserva-cupo-exito-texto"], ["type", "button", 1, "reserva-cupo-submit", 3, "click"], [1, "reserva-cupo-info"], ["class", "reserva-cupo-sala", 4, "ngIf"], ["class", "reserva-cupo-experiencia", 4, "ngIf"], ["class", "reserva-cupo-cupos-line", 4, "ngIf"], ["class", "reserva-cupo-error", "role", "alert", 4, "ngIf"], [1, "reserva-cupo-form"], [1, "reserva-cupo-field"], ["for", "nombre"], ["type", "text", "id", "nombre", "name", "nombre", "autocomplete", "name", 3, "ngModelChange", "ngModel", "disabled"], ["for", "cedula"], ["type", "text", "id", "cedula", "name", "cedula", "autocomplete", "off", "inputmode", "numeric", 3, "ngModelChange", "ngModel", "disabled"], ["type", "button", 1, "reserva-cupo-submit", 3, "click", "disabled"], [1, "reserva-cupo-sala"], [1, "reserva-cupo-experiencia"], [1, "reserva-cupo-cupos-line"], ["role", "alert", 1, "reserva-cupo-error"]], template: function ReservarCupo_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ReservarCupo, selectors: [["app-reservar-cupo"]], decls: 3, vars: 3, consts: [["type", "button", "class", "reserva-cupo-cerrar", "aria-label", "Cerrar", 3, "click", 4, "ngIf"], ["class", "reserva-cupo-exito", 4, "ngIf"], [4, "ngIf"], ["type", "button", "aria-label", "Cerrar", 1, "reserva-cupo-cerrar", 3, "click"], [1, "reserva-cupo-exito"], [1, "reserva-cupo-exito-titulo"], [1, "reserva-cupo-exito-texto"], ["type", "button", 1, "reserva-cupo-submit", 3, "click"], [1, "reserva-cupo-info"], ["class", "reserva-cupo-sala", 4, "ngIf"], ["class", "reserva-cupo-experiencia", 4, "ngIf"], ["class", "reserva-cupo-cupos-line", 4, "ngIf"], ["class", "reserva-cupo-error", "role", "alert", 4, "ngIf"], [1, "reserva-cupo-form"], [1, "reserva-cupo-field"], ["for", "nombre"], ["type", "text", "id", "nombre", "name", "nombre", "autocomplete", "name", 3, "ngModelChange", "ngModel", "disabled"], ["for", "cedula"], ["type", "text", "id", "cedula", "name", "cedula", "autocomplete", "off", "inputmode", "numeric", 3, "ngModelChange", "ngModel", "disabled"], ["for", "correo"], ["type", "email", "id", "correo", "name", "correo", "autocomplete", "email", 3, "ngModelChange", "ngModel", "disabled"], ["for", "fechaHora"], ["id", "fechaHora", "name", "fechaHora", 3, "ngModelChange", "ngModel", "disabled"], ["value", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "button", 1, "reserva-cupo-submit", 3, "click", "disabled"], [1, "reserva-cupo-sala"], [1, "reserva-cupo-experiencia"], [1, "reserva-cupo-cupos-line"], ["role", "alert", 1, "reserva-cupo-error"], [3, "value"]], template: function ReservarCupo_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275template(0, ReservarCupo_button_0_Template, 2, 0, "button", 0)(1, ReservarCupo_div_1_Template, 7, 0, "div", 1)(2, ReservarCupo_ng_container_2_Template, 17, 10, "ng-container", 2);
+      \u0275\u0275template(0, ReservarCupo_button_0_Template, 2, 0, "button", 0)(1, ReservarCupo_div_1_Template, 7, 0, "div", 1)(2, ReservarCupo_ng_container_2_Template, 28, 15, "ng-container", 2);
     }
     if (rf & 2) {
       \u0275\u0275property("ngIf", ctx.esDialogo);
@@ -42817,7 +42879,7 @@ var ReservarCupo = class _ReservarCupo {
       \u0275\u0275advance();
       \u0275\u0275property("ngIf", !ctx.reservaExitosa);
     }
-  }, dependencies: [CommonModule, NgIf, FormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, NgForm], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  box-sizing: border-box;\n  padding: 1.5rem;\n  padding-top: 2.25rem;\n  position: relative;\n  color: #fff;\n  background: #2d3450;\n}\n.reserva-cupo-cerrar[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0.35rem;\n  right: 0.35rem;\n  z-index: 1;\n  border: none;\n  background: transparent;\n  color: #fff;\n  font-size: 1.5rem;\n  line-height: 1;\n  cursor: pointer;\n  padding: 0.25rem 0.5rem;\n}\n.reserva-cupo-info[_ngcontent-%COMP%] {\n  margin-bottom: 1rem;\n  padding-bottom: 0.75rem;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.2);\n}\n.reserva-cupo-sala[_ngcontent-%COMP%] {\n  margin: 0 0 0.25rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.04em;\n  color: rgba(255, 255, 255, 0.95);\n  opacity: 0.95;\n}\n.reserva-cupo-experiencia[_ngcontent-%COMP%] {\n  margin: 0;\n  font-size: 1rem;\n  font-weight: 700;\n  line-height: 1.35;\n  color: #fff;\n}\n.reserva-cupo-form[_ngcontent-%COMP%] {\n  margin: 0;\n}\n.reserva-cupo-field[_ngcontent-%COMP%] {\n  margin-bottom: 1rem;\n}\n.reserva-cupo-field[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  display: block;\n  margin-bottom: 0.35rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  color: rgba(255, 255, 255, 0.9);\n}\n.reserva-cupo-field[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0.65rem 0.75rem;\n  font-size: 0.9375rem;\n  color: #1a1d2e;\n  background: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.12);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-field[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:focus {\n  outline: 2px solid rgba(189, 15, 20, 0.45);\n  outline-offset: 1px;\n}\n.reserva-cupo-submit[_ngcontent-%COMP%] {\n  width: 100%;\n  margin-top: 0.25rem;\n  padding: 0.75rem 1rem;\n  font-size: 0.9375rem;\n  font-weight: 600;\n  color: #fff;\n  border: none;\n  border-radius: 0.5rem;\n  background: #bd0f14;\n  cursor: pointer;\n  transition: opacity 0.15s ease;\n}\n.reserva-cupo-submit[_ngcontent-%COMP%]:hover {\n  opacity: 0.92;\n}\n.reserva-cupo-submit[_ngcontent-%COMP%]:disabled {\n  opacity: 0.55;\n  cursor: not-allowed;\n}\n.reserva-cupo-cupos-line[_ngcontent-%COMP%] {\n  margin: 0.5rem 0 0;\n  font-size: 0.8125rem;\n  color: rgba(255, 255, 255, 0.88);\n  line-height: 1.4;\n}\n.reserva-cupo-error[_ngcontent-%COMP%] {\n  margin: 0 0 0.75rem;\n  padding: 0.5rem 0.65rem;\n  font-size: 0.8125rem;\n  color: #fecaca;\n  background: rgba(189, 15, 20, 0.35);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-exito[_ngcontent-%COMP%] {\n  text-align: center;\n  padding: 0.5rem 0 0.25rem;\n}\n.reserva-cupo-exito-titulo[_ngcontent-%COMP%] {\n  margin: 0 0 0.5rem;\n  font-size: 1.25rem;\n  font-weight: 700;\n  color: #fff;\n}\n.reserva-cupo-exito-texto[_ngcontent-%COMP%] {\n  margin: 0 0 1.25rem;\n  font-size: 0.9375rem;\n  line-height: 1.45;\n  color: rgba(255, 255, 255, 0.92);\n}\n/*# sourceMappingURL=reservar-cupo.css.map */"] });
+  }, dependencies: [CommonModule, NgForOf, NgIf, FormsModule, \u0275NgNoValidate, NgSelectOption, \u0275NgSelectMultipleOption, DefaultValueAccessor, SelectControlValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, NgForm], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  box-sizing: border-box;\n  padding: 1.5rem;\n  padding-top: 2.25rem;\n  position: relative;\n  color: #fff;\n  background: #2d3450;\n}\n.reserva-cupo-cerrar[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0.35rem;\n  right: 0.35rem;\n  z-index: 1;\n  border: none;\n  background: transparent;\n  color: #fff;\n  font-size: 1.5rem;\n  line-height: 1;\n  cursor: pointer;\n  padding: 0.25rem 0.5rem;\n}\n.reserva-cupo-info[_ngcontent-%COMP%] {\n  margin-bottom: 1rem;\n  padding-bottom: 0.75rem;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.2);\n}\n.reserva-cupo-sala[_ngcontent-%COMP%] {\n  margin: 0 0 0.25rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.04em;\n  color: rgba(255, 255, 255, 0.95);\n  opacity: 0.95;\n}\n.reserva-cupo-experiencia[_ngcontent-%COMP%] {\n  margin: 0;\n  font-size: 1rem;\n  font-weight: 700;\n  line-height: 1.35;\n  color: #fff;\n}\n.reserva-cupo-form[_ngcontent-%COMP%] {\n  margin: 0;\n}\n.reserva-cupo-field[_ngcontent-%COMP%] {\n  margin-bottom: 1rem;\n}\n.reserva-cupo-field[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  display: block;\n  margin-bottom: 0.35rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  color: rgba(255, 255, 255, 0.9);\n}\n.reserva-cupo-field[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0.65rem 0.75rem;\n  font-size: 0.9375rem;\n  color: #1a1d2e;\n  background: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.12);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-field[_ngcontent-%COMP%]   select[_ngcontent-%COMP%] {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0.65rem 0.75rem;\n  font-size: 0.9375rem;\n  color: #1a1d2e;\n  background: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.12);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-field[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:focus {\n  outline: 2px solid rgba(189, 15, 20, 0.45);\n  outline-offset: 1px;\n}\n.reserva-cupo-submit[_ngcontent-%COMP%] {\n  width: 100%;\n  margin-top: 0.25rem;\n  padding: 0.75rem 1rem;\n  font-size: 0.9375rem;\n  font-weight: 600;\n  color: #fff;\n  border: none;\n  border-radius: 0.5rem;\n  background: #bd0f14;\n  cursor: pointer;\n  transition: opacity 0.15s ease;\n}\n.reserva-cupo-submit[_ngcontent-%COMP%]:hover {\n  opacity: 0.92;\n}\n.reserva-cupo-submit[_ngcontent-%COMP%]:disabled {\n  opacity: 0.55;\n  cursor: not-allowed;\n}\n.reserva-cupo-cupos-line[_ngcontent-%COMP%] {\n  margin: 0.5rem 0 0;\n  font-size: 0.8125rem;\n  color: rgba(255, 255, 255, 0.88);\n  line-height: 1.4;\n}\n.reserva-cupo-error[_ngcontent-%COMP%] {\n  margin: 0 0 0.75rem;\n  padding: 0.5rem 0.65rem;\n  font-size: 0.8125rem;\n  color: #fecaca;\n  background: rgba(189, 15, 20, 0.35);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-exito[_ngcontent-%COMP%] {\n  text-align: center;\n  padding: 0.5rem 0 0.25rem;\n}\n.reserva-cupo-exito-titulo[_ngcontent-%COMP%] {\n  margin: 0 0 0.5rem;\n  font-size: 1.25rem;\n  font-weight: 700;\n  color: #fff;\n}\n.reserva-cupo-exito-texto[_ngcontent-%COMP%] {\n  margin: 0 0 1.25rem;\n  font-size: 0.9375rem;\n  line-height: 1.45;\n  color: rgba(255, 255, 255, 0.92);\n}\n/*# sourceMappingURL=reservar-cupo.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ReservarCupo, [{
@@ -42873,17 +42935,40 @@ var ReservarCupo = class _ReservarCupo {
         [disabled]="procesando"
       />
     </div>
+    <div class="reserva-cupo-field">
+      <label for="correo">Correo</label>
+      <input
+        type="email"
+        id="correo"
+        name="correo"
+        autocomplete="email"
+        [(ngModel)]="correo"
+        [disabled]="procesando"
+      />
+    </div>
+    <div class="reserva-cupo-field">
+      <label for="fechaHora">Fecha y hora de la charla</label>
+      <select
+        id="fechaHora"
+        name="fechaHora"
+        [(ngModel)]="slotSeleccionado"
+        [disabled]="procesando"
+      >
+        <option value="">Eleg\xED fecha y hora</option>
+        <option *ngFor="let s of slotsCharla" [value]="s.value">{{ s.label }}</option>
+      </select>
+    </div>
   </form>
   <button
     type="button"
     class="reserva-cupo-submit"
-    [disabled]="procesando || idSala === null"
+    [disabled]="procesando || idSala === null || !slotSeleccionado"
     (click)="reservaCupo()"
   >
     {{ procesando ? 'Procesando\u2026' : 'Reservar Cupo' }}
   </button>
 </ng-container>
-`, styles: ["/* src/app/pages/reservar-cupo/reservar-cupo.css */\n:host {\n  display: block;\n  box-sizing: border-box;\n  padding: 1.5rem;\n  padding-top: 2.25rem;\n  position: relative;\n  color: #fff;\n  background: #2d3450;\n}\n.reserva-cupo-cerrar {\n  position: absolute;\n  top: 0.35rem;\n  right: 0.35rem;\n  z-index: 1;\n  border: none;\n  background: transparent;\n  color: #fff;\n  font-size: 1.5rem;\n  line-height: 1;\n  cursor: pointer;\n  padding: 0.25rem 0.5rem;\n}\n.reserva-cupo-info {\n  margin-bottom: 1rem;\n  padding-bottom: 0.75rem;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.2);\n}\n.reserva-cupo-sala {\n  margin: 0 0 0.25rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.04em;\n  color: rgba(255, 255, 255, 0.95);\n  opacity: 0.95;\n}\n.reserva-cupo-experiencia {\n  margin: 0;\n  font-size: 1rem;\n  font-weight: 700;\n  line-height: 1.35;\n  color: #fff;\n}\n.reserva-cupo-form {\n  margin: 0;\n}\n.reserva-cupo-field {\n  margin-bottom: 1rem;\n}\n.reserva-cupo-field label {\n  display: block;\n  margin-bottom: 0.35rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  color: rgba(255, 255, 255, 0.9);\n}\n.reserva-cupo-field input {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0.65rem 0.75rem;\n  font-size: 0.9375rem;\n  color: #1a1d2e;\n  background: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.12);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-field input:focus {\n  outline: 2px solid rgba(189, 15, 20, 0.45);\n  outline-offset: 1px;\n}\n.reserva-cupo-submit {\n  width: 100%;\n  margin-top: 0.25rem;\n  padding: 0.75rem 1rem;\n  font-size: 0.9375rem;\n  font-weight: 600;\n  color: #fff;\n  border: none;\n  border-radius: 0.5rem;\n  background: #bd0f14;\n  cursor: pointer;\n  transition: opacity 0.15s ease;\n}\n.reserva-cupo-submit:hover {\n  opacity: 0.92;\n}\n.reserva-cupo-submit:disabled {\n  opacity: 0.55;\n  cursor: not-allowed;\n}\n.reserva-cupo-cupos-line {\n  margin: 0.5rem 0 0;\n  font-size: 0.8125rem;\n  color: rgba(255, 255, 255, 0.88);\n  line-height: 1.4;\n}\n.reserva-cupo-error {\n  margin: 0 0 0.75rem;\n  padding: 0.5rem 0.65rem;\n  font-size: 0.8125rem;\n  color: #fecaca;\n  background: rgba(189, 15, 20, 0.35);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-exito {\n  text-align: center;\n  padding: 0.5rem 0 0.25rem;\n}\n.reserva-cupo-exito-titulo {\n  margin: 0 0 0.5rem;\n  font-size: 1.25rem;\n  font-weight: 700;\n  color: #fff;\n}\n.reserva-cupo-exito-texto {\n  margin: 0 0 1.25rem;\n  font-size: 0.9375rem;\n  line-height: 1.45;\n  color: rgba(255, 255, 255, 0.92);\n}\n/*# sourceMappingURL=reservar-cupo.css.map */\n"] }]
+`, styles: ["/* src/app/pages/reservar-cupo/reservar-cupo.css */\n:host {\n  display: block;\n  box-sizing: border-box;\n  padding: 1.5rem;\n  padding-top: 2.25rem;\n  position: relative;\n  color: #fff;\n  background: #2d3450;\n}\n.reserva-cupo-cerrar {\n  position: absolute;\n  top: 0.35rem;\n  right: 0.35rem;\n  z-index: 1;\n  border: none;\n  background: transparent;\n  color: #fff;\n  font-size: 1.5rem;\n  line-height: 1;\n  cursor: pointer;\n  padding: 0.25rem 0.5rem;\n}\n.reserva-cupo-info {\n  margin-bottom: 1rem;\n  padding-bottom: 0.75rem;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.2);\n}\n.reserva-cupo-sala {\n  margin: 0 0 0.25rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.04em;\n  color: rgba(255, 255, 255, 0.95);\n  opacity: 0.95;\n}\n.reserva-cupo-experiencia {\n  margin: 0;\n  font-size: 1rem;\n  font-weight: 700;\n  line-height: 1.35;\n  color: #fff;\n}\n.reserva-cupo-form {\n  margin: 0;\n}\n.reserva-cupo-field {\n  margin-bottom: 1rem;\n}\n.reserva-cupo-field label {\n  display: block;\n  margin-bottom: 0.35rem;\n  font-size: 0.8125rem;\n  font-weight: 600;\n  color: rgba(255, 255, 255, 0.9);\n}\n.reserva-cupo-field input {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0.65rem 0.75rem;\n  font-size: 0.9375rem;\n  color: #1a1d2e;\n  background: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.12);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-field select {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0.65rem 0.75rem;\n  font-size: 0.9375rem;\n  color: #1a1d2e;\n  background: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.12);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-field input:focus {\n  outline: 2px solid rgba(189, 15, 20, 0.45);\n  outline-offset: 1px;\n}\n.reserva-cupo-submit {\n  width: 100%;\n  margin-top: 0.25rem;\n  padding: 0.75rem 1rem;\n  font-size: 0.9375rem;\n  font-weight: 600;\n  color: #fff;\n  border: none;\n  border-radius: 0.5rem;\n  background: #bd0f14;\n  cursor: pointer;\n  transition: opacity 0.15s ease;\n}\n.reserva-cupo-submit:hover {\n  opacity: 0.92;\n}\n.reserva-cupo-submit:disabled {\n  opacity: 0.55;\n  cursor: not-allowed;\n}\n.reserva-cupo-cupos-line {\n  margin: 0.5rem 0 0;\n  font-size: 0.8125rem;\n  color: rgba(255, 255, 255, 0.88);\n  line-height: 1.4;\n}\n.reserva-cupo-error {\n  margin: 0 0 0.75rem;\n  padding: 0.5rem 0.65rem;\n  font-size: 0.8125rem;\n  color: #fecaca;\n  background: rgba(189, 15, 20, 0.35);\n  border-radius: 0.5rem;\n}\n.reserva-cupo-exito {\n  text-align: center;\n  padding: 0.5rem 0 0.25rem;\n}\n.reserva-cupo-exito-titulo {\n  margin: 0 0 0.5rem;\n  font-size: 1.25rem;\n  font-weight: 700;\n  color: #fff;\n}\n.reserva-cupo-exito-texto {\n  margin: 0 0 1.25rem;\n  font-size: 0.9375rem;\n  line-height: 1.45;\n  color: rgba(255, 255, 255, 0.92);\n}\n/*# sourceMappingURL=reservar-cupo.css.map */\n"] }]
   }], () => [{ type: MatDialogRef, decorators: [{
     type: Optional
   }] }, { type: void 0, decorators: [{

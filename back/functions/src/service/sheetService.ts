@@ -28,9 +28,13 @@ interface TransaccionData{
 
 export interface ClienteReservaSalaData {
   idSala: number;
+  /** Día de la charla (YYYY-MM-DD). */
   fecha: string;
+  /** Hora de inicio del bloque (HH:mm, ej. 14:30). */
+  horaCharla: string;
   nombre: string;
   numDoc: string;
+  correo: string;
 }
 
 /** Deja solo año-mes-día (YYYY-MM-DD) para la celda del Sheet, sin hora ni zona. */
@@ -91,8 +95,13 @@ export async function agregarFilaAsheet(transaccionData: TransaccionData) {
   });
 }
 
+/**
+ * Una fila por reserva en `Sala{n}Reservas`, desde A2.
+ * Columnas: A fecha (YYYY-MM-DD), B hora (HH:mm), C nombre, D documento, E correo.
+ * Ajustá la fila 1 de cada pestaña con esos títulos si aún tenías el orden anterior.
+ */
 export async function agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaData: ClienteReservaSalaData) {
-  const { idSala, fecha, nombre, numDoc } = clienteReservaSalaData;
+  const { idSala, fecha, horaCharla, nombre, numDoc, correo } = clienteReservaSalaData;
 
   if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
     throw new Error("La sala debe ser 1, 2, 3 o 4");
@@ -113,7 +122,15 @@ export async function agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaDa
 
   const sheets = google.sheets({ version: "v4", auth });
 
-  const values = [[fechaSoloDiaParaSheet(fecha), nombre, numDoc]];
+  const values = [
+    [
+      fechaSoloDiaParaSheet(fecha),
+      horaCharla.trim(),
+      nombre.trim(),
+      numDoc.trim(),
+      correo.trim(),
+    ],
+  ];
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: SHEET_ID,
