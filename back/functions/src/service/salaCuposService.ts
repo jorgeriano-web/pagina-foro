@@ -5,6 +5,7 @@ import {
   ClienteReservaSalaData,
   contarFilasReservasSala,
 } from "./sheetService";
+import { enviarEmail } from "./emailService";
 
 function salaPorIdSala(idSala: number) {
   return SALAS_EXPERIENCIA.find((s) => s.id === idSala);
@@ -26,6 +27,30 @@ export async function reservaSalaCupo(clienteReservaSalaData: ClienteReservaSala
   }
 
   await agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaData);
+
+  const fechaCharla = clienteReservaSalaData.fecha.trim();
+  const horaCharla = clienteReservaSalaData.horaCharla.trim();
+  const mensaje = [
+    `Hola ${clienteReservaSalaData.nombre.trim()},`,
+    "",
+    "Te confirmamos tu reserva de cupo para la experiencia alterna:",
+    "",
+    `• Sala: ${sala.id} — ${sala.nombre}`,
+    `• Fecha: ${fechaCharla}`,
+    `• Hora: ${horaCharla}`,
+    "",
+    "Te esperamos en el XVI Foro Experiencia Inmobiliaria (Cartagena, 21 y 22 de mayo de 2026).",
+  ].join("\n");
+
+  try {
+    await enviarEmail({
+      correo: clienteReservaSalaData.correo.trim(),
+      asunto: `Confirmación de cupo — ${sala.nombre}`,
+      mensaje,
+    });
+  } catch (e) {
+    console.error("reservaSalaCupo: correo de confirmación no enviado:", e);
+  }
 }
 
 

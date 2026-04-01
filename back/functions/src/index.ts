@@ -299,6 +299,7 @@ export const verificarPagosPendientesProd = onSchedule(
                     correo: asistente.correo,
                     asunto: "Confirmación para el Foro Inmobiliario 2026",
                     mensaje: "Buen día. Gracias por tu compra. Adjuntamos tu confirmación de entrada al evento.",
+                    adjuntarBoletaPdf: true,
                   });
                   //console.log(`✅ Email enviado a: ${asistente.correo}`);
                 } catch (emailError) {
@@ -410,7 +411,7 @@ export const recuperarPagosNoGuardadosEnSheets = onSchedule(
 );
 
 export const reservarCupoSalaProd = onCall(
-  { cors: true, secrets: [FIREBASE_CONFIG_ACCOUNT] },
+  { cors: true, secrets: [FIREBASE_CONFIG_ACCOUNT, EMAIL_CREDENTIALS] },
   async (request) => {
     const data = request.data as {
       idSala?: number;
