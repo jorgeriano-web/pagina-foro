@@ -411,9 +411,6 @@ video {
 [hidden]:where(:not([hidden=until-found])) {
   display: none;
 }
-.pointer-events-none {
-  pointer-events: none;
-}
 .static {
   position: static;
 }
@@ -1057,9 +1054,6 @@ video {
 }
 .accent-red-600 {
   accent-color: #dc2626;
-}
-.opacity-0 {
-  opacity: 0;
 }
 .opacity-50 {
   opacity: 0.5;

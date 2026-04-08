@@ -67,10 +67,16 @@
         name="fechaHora"
         [(ngModel)]="slotSeleccionado"
         (ngModelChange)="onSlotChange()"
-        [disabled]="procesando"
+        [disabled]="procesando || (idSala !== null && capacidadMax > 0 && cargandoConteosSlots)"
       >
         <option value="">Elegí fecha y hora</option>
-        <option *ngFor="let s of slotsCharla" [value]="s.value">{{ s.label }}</option>
+        <option
+          *ngFor="let o of opcionesSlotSelect; trackBy: trackBySlotValue"
+          [value]="o.value"
+          [disabled]="o.disabled"
+        >
+          {{ o.label }}
+        </option>
       </select>
     </div>
   </form>

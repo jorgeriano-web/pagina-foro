@@ -42632,10 +42632,10 @@ function ReservarCupo_ng_container_2_option_25_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const s_r5 = ctx.$implicit;
-    \u0275\u0275property("value", s_r5.value);
+    const o_r5 = ctx.$implicit;
+    \u0275\u0275property("value", o_r5.value)("disabled", o_r5.disabled);
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(s_r5.label);
+    \u0275\u0275textInterpolate1(" ", o_r5.label, " ");
   }
 }
 function ReservarCupo_ng_container_2_Template(rf, ctx) {
@@ -42697,7 +42697,7 @@ function ReservarCupo_ng_container_2_Template(rf, ctx) {
     \u0275\u0275elementStart(23, "option", 23);
     \u0275\u0275text(24, "Eleg\xED fecha y hora");
     \u0275\u0275elementEnd();
-    \u0275\u0275template(25, ReservarCupo_ng_container_2_option_25_Template, 2, 2, "option", 24);
+    \u0275\u0275template(25, ReservarCupo_ng_container_2_option_25_Template, 2, 3, "option", 24);
     \u0275\u0275elementEnd()()();
     \u0275\u0275elementStart(26, "button", 25);
     \u0275\u0275listener("click", function ReservarCupo_ng_container_2_Template_button_click_26_listener() {
@@ -42730,9 +42730,9 @@ function ReservarCupo_ng_container_2_Template(rf, ctx) {
     \u0275\u0275property("disabled", ctx_r1.procesando);
     \u0275\u0275advance(4);
     \u0275\u0275twoWayProperty("ngModel", ctx_r1.slotSeleccionado);
-    \u0275\u0275property("disabled", ctx_r1.procesando);
+    \u0275\u0275property("disabled", ctx_r1.procesando || ctx_r1.idSala !== null && ctx_r1.capacidadMax > 0 && ctx_r1.cargandoConteosSlots);
     \u0275\u0275advance(3);
-    \u0275\u0275property("ngForOf", ctx_r1.slotsCharla);
+    \u0275\u0275property("ngForOf", ctx_r1.opcionesSlotSelect)("ngForTrackBy", ctx_r1.trackBySlotValue);
     \u0275\u0275advance();
     \u0275\u0275property("disabled", ctx_r1.procesando || ctx_r1.idSala === null || !ctx_r1.slotSeleccionado);
     \u0275\u0275advance();
@@ -42764,6 +42764,12 @@ var ReservarCupo = class _ReservarCupo {
   errorReserva = null;
   /** Reservas para el turno elegido; null = sin turno o cargando/error. */
   reservasActuales = null;
+  /** Conteo por `value` del slot (`fecha|hora`). `null` = falló la consulta. */
+  conteosPorSlot = {};
+  /** Mientras carga el conteo de todos los turnos (hay sala válida). */
+  cargandoConteosSlots = false;
+  refreshTodosSeq = 0;
+  pedidoConteoSeq = 0;
   constructor(dialogRef, data, route, reservaCuposService, cdr) {
     this.dialogRef = dialogRef;
     this.data = data;
@@ -42772,7 +42778,7 @@ var ReservarCupo = class _ReservarCupo {
     this.cdr = cdr;
   }
   ngOnInit() {
-    this.actualizarConteoSlot();
+    this.refrescarConteosTodosSlots();
   }
   // ——— Vista: getters ———
   get esDialogo() {
@@ -42796,6 +42802,28 @@ var ReservarCupo = class _ReservarCupo {
     const id = this.idSala;
     return id == null ? 0 : capacidadSala(id);
   }
+  get opcionesSlotSelect() {
+    const id = this.idSala;
+    const max = this.capacidadMax;
+    return this.slotsCharla.map((s) => {
+      if (id == null || max <= 0) {
+        return { value: s.value, label: s.label, disabled: false };
+      }
+      if (this.cargandoConteosSlots) {
+        return { value: s.value, label: s.label, disabled: true };
+      }
+      const n = this.conteosPorSlot[s.value];
+      if (n === null || n === void 0) {
+        return { value: s.value, label: s.label, disabled: false };
+      }
+      const lleno = n >= max;
+      return {
+        value: s.value,
+        label: lleno ? `${s.label} \u2014 Cupos agotados` : s.label,
+        disabled: lleno
+      };
+    });
+  }
   get textoCuposDialogo() {
     const max = this.capacidadMax;
     if (max <= 0) {
@@ -42811,8 +42839,12 @@ var ReservarCupo = class _ReservarCupo {
     const quedan = Math.max(0, max - n);
     return `Este turno: ${n} de ${max} reservas. Quedan ${quedan} cupo${quedan === 1 ? "" : "s"}.`;
   }
+  trackBySlotValue(_index, o) {
+    return o.value;
+  }
   // ——— Acciones template ———
   onSlotChange() {
+    this.sincronizarReservasActualesDesdeMap();
     this.actualizarConteoSlot();
   }
   cerrarDialogo() {
@@ -42855,37 +42887,126 @@ var ReservarCupo = class _ReservarCupo {
         correo
       });
       this.reservaExitosa = true;
-      this.actualizarConteoSlot();
+      this.refrescarConteosTodosSlots();
     } catch (e) {
       this.errorReserva = this.mensajeErrorReserva(e);
+      this.refrescarConteosTodosSlots();
     } finally {
       this.procesando = false;
       this.cdr.detectChanges();
     }
   }
   // ——— Internos ———
+  refrescarConteosTodosSlots() {
+    const id = this.idSala;
+    const max = this.capacidadMax;
+    if (id == null || max <= 0) {
+      this.refreshTodosSeq++;
+      this.cargandoConteosSlots = false;
+      this.conteosPorSlot = {};
+      this.limpiarSeleccionSiAgotado();
+      this.sincronizarReservasActualesDesdeMap();
+      this.cdr.detectChanges();
+      return;
+    }
+    const seq = ++this.refreshTodosSeq;
+    this.cargandoConteosSlots = true;
+    this.cdr.detectChanges();
+    const promesas = this.slotsCharla.map(async (s) => {
+      const parsed = this.parseSlotValue(s.value);
+      if (parsed == null) {
+        return { key: s.value, n: null };
+      }
+      try {
+        const n = await this.reservaCuposService.contarReservasSala(id, parsed.fecha, parsed.horaCharla);
+        return { key: s.value, n };
+      } catch {
+        return { key: s.value, n: null };
+      }
+    });
+    void Promise.all(promesas).then((results) => {
+      if (seq !== this.refreshTodosSeq) {
+        return;
+      }
+      const map2 = {};
+      for (const r of results) {
+        map2[r.key] = r.n;
+      }
+      this.conteosPorSlot = map2;
+      this.cargandoConteosSlots = false;
+      this.limpiarSeleccionSiAgotado();
+      this.sincronizarReservasActualesDesdeMap();
+      this.cdr.detectChanges();
+    });
+  }
   actualizarConteoSlot() {
     const id = this.idSala;
     const slot = this.parseSlotSeleccionado();
     if (id == null || slot == null) {
+      this.pedidoConteoSeq++;
       this.reservasActuales = null;
       this.cdr.detectChanges();
       return;
     }
+    const key = this.slotSeleccionado;
+    const seq = ++this.pedidoConteoSeq;
+    const cached = this.conteosPorSlot[key];
+    this.reservasActuales = typeof cached === "number" ? cached : null;
+    this.cdr.detectChanges();
     void this.reservaCuposService.contarReservasSala(id, slot.fecha, slot.horaCharla).then((n) => {
-      this.reservasActuales = n;
+      if (seq !== this.pedidoConteoSeq) {
+        return;
+      }
+      this.conteosPorSlot = __spreadProps(__spreadValues({}, this.conteosPorSlot), { [key]: n });
+      if (this.slotSeleccionado === key) {
+        this.reservasActuales = n;
+      }
+      this.limpiarSeleccionSiAgotado();
       this.cdr.detectChanges();
     }, () => {
-      this.reservasActuales = null;
+      if (seq !== this.pedidoConteoSeq) {
+        return;
+      }
+      this.conteosPorSlot = __spreadProps(__spreadValues({}, this.conteosPorSlot), { [key]: null });
+      if (this.slotSeleccionado === key) {
+        this.reservasActuales = null;
+      }
       this.cdr.detectChanges();
     });
   }
+  limpiarSeleccionSiAgotado() {
+    const max = this.capacidadMax;
+    const id = this.idSala;
+    if (!this.slotSeleccionado || id == null || max <= 0) {
+      return;
+    }
+    const n = this.conteosPorSlot[this.slotSeleccionado];
+    if (typeof n === "number" && n >= max) {
+      this.slotSeleccionado = "";
+      this.reservasActuales = null;
+      this.pedidoConteoSeq++;
+    }
+  }
+  sincronizarReservasActualesDesdeMap() {
+    const v = this.slotSeleccionado;
+    if (!v) {
+      this.reservasActuales = null;
+      return;
+    }
+    const n = this.conteosPorSlot[v];
+    if (typeof n === "number") {
+      this.reservasActuales = n;
+    }
+  }
   /** Interpreta `slotSeleccionado` (`fecha|horaCharla`). */
   parseSlotSeleccionado() {
-    if (!this.slotSeleccionado) {
+    return this.parseSlotValue(this.slotSeleccionado);
+  }
+  parseSlotValue(value) {
+    if (!value) {
       return null;
     }
-    const partes = this.slotSeleccionado.split("|");
+    const partes = value.split("|");
     const fecha = partes[0] ?? "";
     const horaCharla = (partes[1] ?? "").trim();
     if (!RX_FECHA_YMD.test(fecha) || !RX_HORA_HM.test(horaCharla)) {
@@ -42903,9 +43024,9 @@ var ReservarCupo = class _ReservarCupo {
   static \u0275fac = function ReservarCupo_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ReservarCupo)(\u0275\u0275directiveInject(MatDialogRef, 8), \u0275\u0275directiveInject(MAT_DIALOG_DATA, 8), \u0275\u0275directiveInject(ActivatedRoute, 8), \u0275\u0275directiveInject(ReservaCupos), \u0275\u0275directiveInject(ChangeDetectorRef));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ReservarCupo, selectors: [["app-reservar-cupo"]], decls: 3, vars: 3, consts: [["type", "button", "class", "reserva-cupo-cerrar", "aria-label", "Cerrar", 3, "click", 4, "ngIf"], ["class", "reserva-cupo-exito", 4, "ngIf"], [4, "ngIf"], ["type", "button", "aria-label", "Cerrar", 1, "reserva-cupo-cerrar", 3, "click"], [1, "reserva-cupo-exito"], [1, "reserva-cupo-exito-titulo"], [1, "reserva-cupo-exito-texto"], ["type", "button", 1, "reserva-cupo-submit", 3, "click"], [1, "reserva-cupo-info"], ["class", "reserva-cupo-sala", 4, "ngIf"], ["class", "reserva-cupo-experiencia", 4, "ngIf"], ["class", "reserva-cupo-cupos-line", 4, "ngIf"], ["class", "reserva-cupo-error", "role", "alert", 4, "ngIf"], [1, "reserva-cupo-form"], [1, "reserva-cupo-field"], ["for", "nombre"], ["type", "text", "id", "nombre", "name", "nombre", "autocomplete", "name", 3, "ngModelChange", "ngModel", "disabled"], ["for", "cedula"], ["type", "text", "id", "cedula", "name", "cedula", "autocomplete", "off", "inputmode", "numeric", 3, "ngModelChange", "ngModel", "disabled"], ["for", "correo"], ["type", "email", "id", "correo", "name", "correo", "autocomplete", "email", 3, "ngModelChange", "ngModel", "disabled"], ["for", "fechaHora"], ["id", "fechaHora", "name", "fechaHora", 3, "ngModelChange", "ngModel", "disabled"], ["value", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "button", 1, "reserva-cupo-submit", 3, "click", "disabled"], [1, "reserva-cupo-sala"], [1, "reserva-cupo-experiencia"], [1, "reserva-cupo-cupos-line"], ["role", "alert", 1, "reserva-cupo-error"], [3, "value"]], template: function ReservarCupo_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ReservarCupo, selectors: [["app-reservar-cupo"]], decls: 3, vars: 3, consts: [["type", "button", "class", "reserva-cupo-cerrar", "aria-label", "Cerrar", 3, "click", 4, "ngIf"], ["class", "reserva-cupo-exito", 4, "ngIf"], [4, "ngIf"], ["type", "button", "aria-label", "Cerrar", 1, "reserva-cupo-cerrar", 3, "click"], [1, "reserva-cupo-exito"], [1, "reserva-cupo-exito-titulo"], [1, "reserva-cupo-exito-texto"], ["type", "button", 1, "reserva-cupo-submit", 3, "click"], [1, "reserva-cupo-info"], ["class", "reserva-cupo-sala", 4, "ngIf"], ["class", "reserva-cupo-experiencia", 4, "ngIf"], ["class", "reserva-cupo-cupos-line", 4, "ngIf"], ["class", "reserva-cupo-error", "role", "alert", 4, "ngIf"], [1, "reserva-cupo-form"], [1, "reserva-cupo-field"], ["for", "nombre"], ["type", "text", "id", "nombre", "name", "nombre", "autocomplete", "name", 3, "ngModelChange", "ngModel", "disabled"], ["for", "cedula"], ["type", "text", "id", "cedula", "name", "cedula", "autocomplete", "off", "inputmode", "numeric", 3, "ngModelChange", "ngModel", "disabled"], ["for", "correo"], ["type", "email", "id", "correo", "name", "correo", "autocomplete", "email", 3, "ngModelChange", "ngModel", "disabled"], ["for", "fechaHora"], ["id", "fechaHora", "name", "fechaHora", 3, "ngModelChange", "ngModel", "disabled"], ["value", ""], [3, "value", "disabled", 4, "ngFor", "ngForOf", "ngForTrackBy"], ["type", "button", 1, "reserva-cupo-submit", 3, "click", "disabled"], [1, "reserva-cupo-sala"], [1, "reserva-cupo-experiencia"], [1, "reserva-cupo-cupos-line"], ["role", "alert", 1, "reserva-cupo-error"], [3, "value", "disabled"]], template: function ReservarCupo_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275template(0, ReservarCupo_button_0_Template, 2, 0, "button", 0)(1, ReservarCupo_div_1_Template, 7, 0, "div", 1)(2, ReservarCupo_ng_container_2_Template, 28, 15, "ng-container", 2);
+      \u0275\u0275template(0, ReservarCupo_button_0_Template, 2, 0, "button", 0)(1, ReservarCupo_div_1_Template, 7, 0, "div", 1)(2, ReservarCupo_ng_container_2_Template, 28, 16, "ng-container", 2);
     }
     if (rf & 2) {
       \u0275\u0275property("ngIf", ctx.esDialogo);
@@ -42988,10 +43109,16 @@ var ReservarCupo = class _ReservarCupo {
         name="fechaHora"
         [(ngModel)]="slotSeleccionado"
         (ngModelChange)="onSlotChange()"
-        [disabled]="procesando"
+        [disabled]="procesando || (idSala !== null && capacidadMax > 0 && cargandoConteosSlots)"
       >
         <option value="">Eleg\xED fecha y hora</option>
-        <option *ngFor="let s of slotsCharla" [value]="s.value">{{ s.label }}</option>
+        <option
+          *ngFor="let o of opcionesSlotSelect; trackBy: trackBySlotValue"
+          [value]="o.value"
+          [disabled]="o.disabled"
+        >
+          {{ o.label }}
+        </option>
       </select>
     </div>
   </form>
@@ -43017,7 +43144,7 @@ var ReservarCupo = class _ReservarCupo {
   }] }, { type: ReservaCupos }, { type: ChangeDetectorRef }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ReservarCupo, { className: "ReservarCupo", filePath: "src/app/pages/reservar-cupo/reservar-cupo.ts", lineNumber: 37 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ReservarCupo, { className: "ReservarCupo", filePath: "src/app/pages/reservar-cupo/reservar-cupo.ts", lineNumber: 44 });
 })();
 
 // src/app/service/service-boletas.ts
@@ -43129,37 +43256,6 @@ var Landing = class _Landing {
   }
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-  }
-  ngAfterViewInit() {
-    document.addEventListener("click", (e) => {
-      const target = e.target;
-      if (target.classList.contains("saber-mas-btn")) {
-        const card = target.closest(".animatable-card");
-        if (!card)
-          return;
-        const originalContent = card.querySelector(".card-original-content");
-        const flippedContent = card.querySelector(".card-flipped-content");
-        if (originalContent && flippedContent) {
-          originalContent.classList.add("opacity-0", "pointer-events-none");
-          flippedContent.classList.remove("opacity-0", "pointer-events-none");
-          card.classList.remove("bg-white/10");
-          card.classList.add("bg-white");
-        }
-      }
-      if (target.classList.contains("volver-btn")) {
-        const card = target.closest(".animatable-card");
-        if (!card)
-          return;
-        const originalContent = card.querySelector(".card-original-content");
-        const flippedContent = card.querySelector(".card-flipped-content");
-        if (originalContent && flippedContent) {
-          originalContent.classList.remove("opacity-0", "pointer-events-none");
-          flippedContent.classList.add("opacity-0", "pointer-events-none");
-          card.classList.remove("bg-white");
-          card.classList.add("bg-white/10");
-        }
-      }
-    });
   }
   abrirReservaCupo(idSala, nombreExperiencia, event) {
     event?.preventDefault();
@@ -43298,7 +43394,7 @@ var Landing = class _Landing {
         return ctx.onWindowScroll();
       }, \u0275\u0275resolveWindow);
     }
-  }, decls: 428, vars: 11, consts: [[1, "grid", "grid-cols-3", "items-center", "max-w-7xl", "mx-auto", "p-6", "min-[1108px]:flex", "min-[1108px]:justify-between"], [1, "col-start-2", "justify-self-center", "flex", "items-center", "space-x-4", "min-[1108px]:col-auto", "min-[1108px]:justify-self-auto", "contenedor-logos", 2, "max-width", "170px"], ["src", "../../../assets/img/nuevo-logo-foro-2026.png", "alt", "Logo Experiencia Inmobiliaria", 1, "logo-white", "logo-foro-1"], [1, "border-l", "border-gray-400", "h-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png", "alt", "Logo El Libertador", 1, "logo-white", "logo-libertador"], [1, "hidden", "min-[1108px]:flex", "items-center", "space-x-8"], ["href", "#inicio-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#history-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#temas-foro-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#precios-pioneros-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], [1, "hidden", "min-[1108px]:block"], [1, "text-white", "border", "border-white/50", "rounded-md", "px-3", "py-1.5", "text-sm"], [1, "min-[1108px]:hidden", "col-start-3", "justify-self-end"], [1, "absolute", "top-4", "right-6", "text-[#2d3450]", 3, "click"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-6", "h-6"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M4 6h16M4 12h16m-7 6h7"], ["class", "min-[1108px]:hidden fixed top-[80px] left-0 right-0 bottom-0 z-20 bg-white/75 backdrop-blur-md", 4, "ngIf"], ["id", "animation-container"], ["id", "inicio-section", 1, "relative", "hero-bg", "w-full", "h-screen", "flex", "flex-col", "items-center", "justify-center", "p-4"], [1, "particle-canvas", "absolute", "top-0", "left-0", "w-full", "h-full", "z-0"], ["id", "hero-content", 1, "relative", "z-10", "w-full", "max-w-5xl", "px-4", "flex", "flex-col", "items-center", "text-white"], [1, "flex", "flex-col", "md:flex-row", "items-center", "justify-center", "w-full", "mb-8", "contenedor-logo-principal"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e82d61a5-bf01-4d56-85fd-eb8a7207d508.png", "alt", "Connect Logo", 1, "logo-principal", "mb-6", "md:mb-0", "md:mr-4"], [1, "text-lg", "md:text-xl", "text-center", "md:text-left", "texto-conexion"], [1, "text-center", "contenedor-textos-info"], [1, "text-lg", "texto-ubicacion"], [1, "texto-pabellon", "texto-ubicacion"], [1, "text-2xl", "font-bold", "mt-2", "texto-fecha"], [1, "mt-12"], [1, "text-sm", "mb-2", "texto-contador"], [1, "flex", "space-x-3", "justify-center"], [1, "timer-box"], ["id", "days", 1, "text-3xl", "font-bold"], [1, "text-xs", "texto-tiempo"], ["id", "hours", 1, "text-3xl", "font-bold"], ["id", "minutes", 1, "text-3xl", "font-bold"], ["id", "seconds", 1, "text-3xl", "font-bold"], [1, "mt-10", "flex", "flex-col", "items-center", "space-y-2", "opacity-70"], [1, "text-white", "text-sm", "font-light", "tracking-widest", "texto-desliza"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg", 1, "w-6", "h-6", "text-white", "animate-bounce"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M19 9l-7 7-7-7"], [1, "floating-cta"], [1, "bg-white", "text-gray-800", "rounded-full", "flex", "items-center", "shadow-lg", "hover:bg-gray-200", "transition-colors", "p-3", "space-x-0", "md:px-6", "md:py-3", "md:space-x-2", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 24 24", "fill", "none", "stroke", "currentColor", "stroke-width", "2", "stroke-linecap", "round", "stroke-linejoin", "round", 1, "w-8", "h-8", "md:w-6", "md:h-6", "icon", "icon-tabler", "icons-tabler-outline", "icon-tabler-brand-whatsapp"], ["stroke", "none", "d", "M0 0h24v24H0z", "fill", "none"], ["d", "M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"], ["d", "M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"], [1, "hidden", "md:inline"], ["id", "temas-foro-section", 1, "relative", "bg-[#2d3450]", "py-20", "sm:py-28", "seccion-temas"], [1, "relative", "z-10", "max-w-7xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8"], [1, "text-center", "text-white", "mb-16"], [1, "text-3xl", "font-bold", "tracking-tight", "sm:text-4xl"], [1, "text-4xl", "font-extrabold", "tracking-tight", "sm:text-5xl", "mt-2", "texto-pilares"], [1, "card-slider"], [1, "temas-card-destacada", "w-full"], [1, "animatable-card", "agenda-card-destacada", "bg-white/10", "backdrop-blur-lg", "rounded-2xl", "text-white", "text-left", "w-full", "relative", "h-full", "overflow-hidden", "transition-colors", "duration-500"], [1, "card-original-content", "transition-opacity", "duration-300", "flex", "flex-col", "md:flex-row", "md:items-stretch"], [1, "agenda-card-imagen", "shrink-0", "md:w-[42%]", "lg:w-[38%]", "min-h-[200px]", "md:min-h-[260px]"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-01.png", "alt", "Agenda del Foro Experiencia Inmobiliaria", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "agenda-card-texto", "flex", "flex-col", "justify-center", "p-6", "sm:p-8", "md:py-10", "md:pr-10", "md:pl-8", "flex-1", "min-w-0"], [1, "inline-flex", "items-center", "self-start", "px-3", "py-1", "rounded-full", "text-sm", "font-medium", "text-white", "etiqueta-pilar", "mb-4"], [1, "text-2xl", "font-bold"], [1, "mt-6", "flex", "justify-start"], ["href", "https://dvn7rzpuwpj45.cloudfront.net/wp-content/uploads/2026/03/20163220/Agenda_foro_202.pdf", 1, "text-white", "font-semibold", "py-3", "px-6", "rounded-lg", "hover:opacity-90", "transition-opacity", "inline-block", "shadow-md", 2, "background-color", "#bd0f14"], [1, "text-center", "text-white"], [1, "contenedorCharlas"], [1, "w-full", "min-w-0", "flex"], [1, "animatable-card", "temas-charla-card", "bg-white/10", "backdrop-blur-lg", "rounded-2xl", "text-white", "text-left", "relative", "h-full", "w-full", "overflow-hidden", "transition-colors", "duration-500"], [1, "card-original-content", "transition-opacity", "duration-300", "flex", "flex-col", "md:flex-row", "md:items-stretch", "flex-1", "min-h-0"], [1, "agenda-card-imagen", "shrink-0", "md:w-[42%]", "lg:w-[38%]"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-02.png", "alt", "Experiencia alterna \u2014 Sala 1", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "agenda-card-texto", "flex", "flex-col", "p-6", "sm:p-8", "md:py-8", "md:pr-8", "md:pl-6", "flex-1", "min-w-0"], [1, "inline-flex", "items-center", "self-start", "px-3", "py-1", "rounded-full", "text-sm", "font-medium", "text-white", "whitespace-nowrap", "etiqueta-pilar", "mb-4"], [1, "text-2xl", "font-bold", "flex-1"], [1, "text-sm", "text-white/85", "mt-2", "leading-snug"], ["type", "button", 1, "btn-reserva-vidrio", "mt-6", "md:mt-auto", 3, "click"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-03.png", "alt", "Experiencia alterna \u2014 Sala 2", 1, "block", "w-full", "h-full", "object-cover", "object-center"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-04.png", "alt", "Experiencia alterna \u2014 Sala 3", 1, "block", "w-full", "h-full", "object-cover", "object-center"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-05.png", "alt", "Experiencia alterna \u2014 Sala 4", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "relative", "bg-cover", "bg-center", "rounded-2xl", "shadow-lg", "overflow-hidden", "flex", "flex-col", "lg:flex-row", "items-center", "seccion-boletas-ad-2", "h-[220px]"], [1, "absolute", "inset-0", "bg-gray-800", "opacity-50"], [1, "relative", "z-10", "w-full", "lg:w-3/5", "text-white", "text-center", "py-6", "px-6", "lg:py-8", "lg:px-12"], [1, "text-lg", "lg:text-xl", "font-normal", 2, "text-align", "center"], [1, "mt-6", "flex", "justify-center", 2, "justify-content", "center"], [1, "text-white", "font-semibold", "py-3", "px-6", "rounded-lg", "hover:opacity-90", "transition-opacity", "inline-block", "shadow-md", "cursor-pointer", 2, "background-color", "#bd0f14", 3, "click"], [1, "relative", "z-10", "hidden", "lg:flex", "lg:w-2/5", "justify-center"], ["src", "../../../assets/img/persona-boletos.png", "alt", "Persona con entradas", 1, "rounded-lg", "imagen-boletos-2"], ["id", "history-section", 1, "seccion-historia"], [1, "max-w-7xl", "mx-auto", "px-4"], [1, "text-4xl", "md:text-5xl", "font-bold"], [1, "mt-4", "text-lg"], [1, "mt-12", "lg:grid", "lg:grid-cols-4", "lg:gap-8", "lg:items-center"], [1, "carousel-wrapper", "lg:col-span-2", "lg:col-start-2", "flex", "items-center", "justify-center", "mb-8", "lg:mb-0"], [1, "carousel-container"], [1, "carousel-rotator"], [1, "carousel-face"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/0f8c88b4-abc3-4f14-9ea6-8a03b73fe7cb.png", 1, "rounded-xl", "shadow-xl", "w-full", "h-full", "object-cover"], [1, "grid", "grid-cols-2", "gap-8", "lg:contents", "contenedor-numeros"], [1, "stats-box", "space-y-8", "text-center", "lg:col-start-1", "lg:row-start-1"], [1, "bg-white", "p-6", "rounded-lg", "shadow-md"], ["data-target", "4.9", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "font-bold", "mt-2", "text-gray-800"], [1, "text-sm", "text-gray-500"], ["data-target", "9500", "data-suffix", "+", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "stats-box", "space-y-8", "text-center", "lg:col-start-4"], ["data-target", "60", "data-suffix", "+", 1, "text-5xl", "font-extrabold", "counter-number"], ["data-target", "4.8", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "max-w-6xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8"], [1, "mt-20", "text-center"], [1, "text-xl", "font-semibold", "text-gray-700", "tracking-wide"], [1, "logos-container"], [1, "logos-slide"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/66666cd3-65d8-4390-b479-861563e4e8c2.png", "alt", "Logo Seguros Bol\xEDvar", 1, "h-8", "sm:h-10", "mx-8", "logo-bolivar"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e0faa2fd-4ce0-4a1c-9e1f-e9a2fbbfe097.png", "alt", "Logo CienCuadras", 1, "h-8", "sm:h-10", "mx-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/f9c2de7e-e1bd-43d2-8e70-7e650bf02086.png", "alt", "Logo Davivienda", 1, "h-8", "sm:h-10", "mx-8", "logo-davivienda"], ["id", "precios-pioneros-section", 1, "py-20", "sm:py-28", "bg-[#f7f8fa]", "seccion-precios"], [1, "max-w-6xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8", "text-center"], [1, "text-3xl", "md:text-4xl", "font-extrabold", "text-[#2d3450]", "texto-entradas"], [1, "mt-4", "text-lg", "text-gray-600", 2, "margin-top", "0"], [1, "mt-16", "grid", "grid-cols-1", "lg:grid-cols-3", "gap-8", "items-center", "max-w-sm", "mx-auto", "lg:max-w-none"], [1, "bg-white", "rounded-xl", "shadow-lg", "p-8", "flex", "flex-col", "h-full", "border", "border-gray-200"], [1, "text-2xl", "font-bold", "text-[#2d3450]", "sub-texto-tarjeta"], [1, "my-6"], [1, "text-5xl", "font-extrabold", "text-[#2d3450]"], [1, "space-y-2", "text-gray-600", "mb-8"], [1, "border-b", "border-gray-300", "pb-3"], [1, "font-bold", "text-[#2d3450]", "pt-2"], [1, "mt-auto", "w-full", "bg-gray-200", "text-gray-800", "font-semibold", "py-3", "px-6", "rounded-lg", "flex", "items-center", "justify-center", "hover:bg-gray-300", "transition-colors", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "width", "24", "height", "24", "viewBox", "0 0 24 24", "fill", "none", "stroke", "currentColor", "stroke-width", "2", "stroke-linecap", "round", "stroke-linejoin", "round", 1, "icon", "icon-tabler", "icons-tabler-outline", "icon-tabler-ticket", "icono-compra"], ["d", "M15 5l0 2"], ["d", "M15 11l0 2"], ["d", "M15 17l0 2"], ["d", "M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2"], [1, "text-white", "rounded-xl", "shadow-2xl", "p-8", "transform", "lg:scale-110", "flex", "flex-col", "h-full", 2, "background", "linear-gradient(to bottom, #BD0F14, #253150)"], [1, "mb-4"], [1, "bg-white", "text-[#253150]", "text-sm", "font-bold", "px-4", "py-1.5", "rounded-full"], [1, "text-5xl", "font-extrabold"], [1, "space-y-2", "text-white", "mb-8"], [1, "font-bold", "pt-2"], [1, "mt-16", "text-sm", "text-gray-500", "italic"], [1, "devolucion"], ["id", "contacto-patrocinadores-section", 1, "py-10", "sm:py-16", "bg-[#f7f8fa]"], ["src", "../../../assets/img/Afydi_Logo ROJO.ai.png", "alt", "Logo Seguros Bol\xEDvar", 1, "h-8", "sm:h-10", "mx-8", "logo-bolivar"], ["src", "../../../assets/img/LOGO-SIMI.jpg", "alt", "Logo CienCuadras", 1, "h-8", "sm:h-10", "mx-8"], ["src", "../../../assets/img/N - SEDI SOLUTIONS.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], ["src", "../../../assets/img/nuwwe.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], [1, "min-[1108px]:hidden", "fixed", "top-[80px]", "left-0", "right-0", "bottom-0", "z-20", "bg-white/75", "backdrop-blur-md"], ["id", "close-menu-button", 1, "absolute", "top-4", "right-6", "text-[#2d3450]"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg", 1, "w-8", "h-8"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M6 18L18 6M6 6l12 12"], [1, "h-full", "flex", "flex-col", "justify-center", "items-center", "space-y-8", "-mt-[80px]"], ["href", "#inicio-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500", "active-link-mobile"], ["href", "#history-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"], ["href", "#temas-foro-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"], ["href", "#precios-pioneros-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"]], template: function Landing_Template(rf, ctx) {
+  }, decls: 428, vars: 11, consts: [[1, "grid", "grid-cols-3", "items-center", "max-w-7xl", "mx-auto", "p-6", "min-[1108px]:flex", "min-[1108px]:justify-between"], [1, "col-start-2", "justify-self-center", "flex", "items-center", "space-x-4", "min-[1108px]:col-auto", "min-[1108px]:justify-self-auto", "contenedor-logos", 2, "max-width", "170px"], ["src", "../../../assets/img/nuevo-logo-foro-2026.png", "alt", "Logo Experiencia Inmobiliaria", 1, "logo-white", "logo-foro-1"], [1, "border-l", "border-gray-400", "h-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png", "alt", "Logo El Libertador", 1, "logo-white", "logo-libertador"], [1, "hidden", "min-[1108px]:flex", "items-center", "space-x-8"], ["href", "#inicio-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#history-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#temas-foro-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#precios-pioneros-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], [1, "hidden", "min-[1108px]:block"], [1, "text-white", "border", "border-white/50", "rounded-md", "px-3", "py-1.5", "text-sm"], [1, "min-[1108px]:hidden", "col-start-3", "justify-self-end"], [1, "absolute", "top-4", "right-6", "text-[#2d3450]", 3, "click"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-6", "h-6"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M4 6h16M4 12h16m-7 6h7"], ["class", "min-[1108px]:hidden fixed top-[80px] left-0 right-0 bottom-0 z-20 bg-white/75 backdrop-blur-md", 4, "ngIf"], ["id", "animation-container"], ["id", "inicio-section", 1, "relative", "hero-bg", "w-full", "h-screen", "flex", "flex-col", "items-center", "justify-center", "p-4"], [1, "particle-canvas", "absolute", "top-0", "left-0", "w-full", "h-full", "z-0"], ["id", "hero-content", 1, "relative", "z-10", "w-full", "max-w-5xl", "px-4", "flex", "flex-col", "items-center", "text-white"], [1, "flex", "flex-col", "md:flex-row", "items-center", "justify-center", "w-full", "mb-8", "contenedor-logo-principal"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e82d61a5-bf01-4d56-85fd-eb8a7207d508.png", "alt", "Connect Logo", 1, "logo-principal", "mb-6", "md:mb-0", "md:mr-4"], [1, "text-lg", "md:text-xl", "text-center", "md:text-left", "texto-conexion"], [1, "text-center", "contenedor-textos-info"], [1, "text-lg", "texto-ubicacion"], [1, "texto-pabellon", "texto-ubicacion"], [1, "text-2xl", "font-bold", "mt-2", "texto-fecha"], [1, "mt-12"], [1, "text-sm", "mb-2", "texto-contador"], [1, "flex", "space-x-3", "justify-center"], [1, "timer-box"], ["id", "days", 1, "text-3xl", "font-bold"], [1, "text-xs", "texto-tiempo"], ["id", "hours", 1, "text-3xl", "font-bold"], ["id", "minutes", 1, "text-3xl", "font-bold"], ["id", "seconds", 1, "text-3xl", "font-bold"], [1, "mt-10", "flex", "flex-col", "items-center", "space-y-2", "opacity-70"], [1, "text-white", "text-sm", "font-light", "tracking-widest", "texto-desliza"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg", 1, "w-6", "h-6", "text-white", "animate-bounce"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M19 9l-7 7-7-7"], [1, "floating-cta"], [1, "bg-white", "text-gray-800", "rounded-full", "flex", "items-center", "shadow-lg", "hover:bg-gray-200", "transition-colors", "p-3", "space-x-0", "md:px-6", "md:py-3", "md:space-x-2", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 24 24", "fill", "none", "stroke", "currentColor", "stroke-width", "2", "stroke-linecap", "round", "stroke-linejoin", "round", 1, "w-8", "h-8", "md:w-6", "md:h-6", "icon", "icon-tabler", "icons-tabler-outline", "icon-tabler-brand-whatsapp"], ["stroke", "none", "d", "M0 0h24v24H0z", "fill", "none"], ["d", "M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"], ["d", "M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"], [1, "hidden", "md:inline"], ["id", "temas-foro-section", 1, "relative", "bg-[#2d3450]", "py-20", "sm:py-28", "seccion-temas"], [1, "relative", "z-10", "max-w-7xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8"], [1, "text-center", "text-white", "mb-16"], [1, "text-3xl", "font-bold", "tracking-tight", "sm:text-4xl"], [1, "text-4xl", "font-extrabold", "tracking-tight", "sm:text-5xl", "mt-2", "texto-pilares"], [1, "card-slider"], [1, "temas-card-destacada", "w-full"], [1, "animatable-card", "agenda-card-destacada", "bg-white/10", "backdrop-blur-lg", "rounded-2xl", "text-white", "text-left", "w-full", "relative", "h-full", "overflow-hidden", "transition-colors", "duration-500"], [1, "card-original-content", "transition-opacity", "duration-300", "flex", "flex-col", "md:flex-row", "md:items-stretch"], [1, "agenda-card-imagen", "shrink-0", "md:w-[42%]", "lg:w-[38%]", "min-h-[200px]", "md:min-h-[260px]"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-01.png", "alt", "Agenda del Foro Experiencia Inmobiliaria", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "agenda-card-texto", "flex", "flex-col", "justify-center", "p-6", "sm:p-8", "md:py-10", "md:pr-10", "md:pl-8", "flex-1", "min-w-0"], [1, "inline-flex", "items-center", "self-start", "px-3", "py-1", "rounded-full", "text-sm", "font-medium", "text-white", "etiqueta-pilar", "mb-4"], [1, "text-2xl", "font-bold"], [1, "mt-6", "flex", "justify-start"], ["href", "https://dvn7rzpuwpj45.cloudfront.net/wp-content/uploads/2026/03/20163220/Agenda_foro_202.pdf", "target", "_blank", 1, "text-white", "font-semibold", "py-3", "px-6", "rounded-lg", "hover:opacity-90", "transition-opacity", "inline-block", "shadow-md", 2, "background-color", "#bd0f14"], [1, "text-center", "text-white"], [1, "contenedorCharlas"], [1, "w-full", "min-w-0", "flex"], [1, "animatable-card", "temas-charla-card", "bg-white/10", "backdrop-blur-lg", "rounded-2xl", "text-white", "text-left", "relative", "h-full", "w-full", "overflow-hidden", "transition-colors", "duration-500"], [1, "card-original-content", "transition-opacity", "duration-300", "flex", "flex-col", "md:flex-row", "md:items-stretch", "flex-1", "min-h-0"], [1, "agenda-card-imagen", "shrink-0", "md:w-[42%]", "lg:w-[38%]"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-02.png", "alt", "Experiencia alterna \u2014 Sala 1", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "agenda-card-texto", "flex", "flex-col", "p-6", "sm:p-8", "md:py-8", "md:pr-8", "md:pl-6", "flex-1", "min-w-0"], [1, "inline-flex", "items-center", "self-start", "px-3", "py-1", "rounded-full", "text-sm", "font-medium", "text-white", "whitespace-nowrap", "etiqueta-pilar", "mb-4"], [1, "text-2xl", "font-bold", "flex-1"], [1, "text-sm", "text-white/85", "mt-2", "leading-snug"], ["type", "button", 1, "btn-reserva-vidrio", "mt-6", "md:mt-auto", 3, "click"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-03.png", "alt", "Experiencia alterna \u2014 Sala 2", 1, "block", "w-full", "h-full", "object-cover", "object-center"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-04.png", "alt", "Experiencia alterna \u2014 Sala 3", 1, "block", "w-full", "h-full", "object-cover", "object-center"], ["src", "../../../assets/img/Sin ti\u0301tulo-1-05.png", "alt", "Experiencia alterna \u2014 Sala 4", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "relative", "bg-cover", "bg-center", "rounded-2xl", "shadow-lg", "overflow-hidden", "flex", "flex-col", "lg:flex-row", "items-center", "seccion-boletas-ad-2", "h-[220px]"], [1, "absolute", "inset-0", "bg-gray-800", "opacity-50"], [1, "relative", "z-10", "w-full", "lg:w-3/5", "text-white", "text-center", "py-6", "px-6", "lg:py-8", "lg:px-12"], [1, "text-lg", "lg:text-xl", "font-normal", 2, "text-align", "center"], [1, "mt-6", "flex", "justify-center", 2, "justify-content", "center"], [1, "text-white", "font-semibold", "py-3", "px-6", "rounded-lg", "hover:opacity-90", "transition-opacity", "inline-block", "shadow-md", "cursor-pointer", 2, "background-color", "#bd0f14", 3, "click"], [1, "relative", "z-10", "hidden", "lg:flex", "lg:w-2/5", "justify-center"], ["src", "../../../assets/img/persona-boletos.png", "alt", "Persona con entradas", 1, "rounded-lg", "imagen-boletos-2"], ["id", "history-section", 1, "seccion-historia"], [1, "max-w-7xl", "mx-auto", "px-4"], [1, "text-4xl", "md:text-5xl", "font-bold"], [1, "mt-4", "text-lg"], [1, "mt-12", "lg:grid", "lg:grid-cols-4", "lg:gap-8", "lg:items-center"], [1, "carousel-wrapper", "lg:col-span-2", "lg:col-start-2", "flex", "items-center", "justify-center", "mb-8", "lg:mb-0"], [1, "carousel-container"], [1, "carousel-rotator"], [1, "carousel-face"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/0f8c88b4-abc3-4f14-9ea6-8a03b73fe7cb.png", 1, "rounded-xl", "shadow-xl", "w-full", "h-full", "object-cover"], [1, "grid", "grid-cols-2", "gap-8", "lg:contents", "contenedor-numeros"], [1, "stats-box", "space-y-8", "text-center", "lg:col-start-1", "lg:row-start-1"], [1, "bg-white", "p-6", "rounded-lg", "shadow-md"], ["data-target", "4.9", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "font-bold", "mt-2", "text-gray-800"], [1, "text-sm", "text-gray-500"], ["data-target", "9500", "data-suffix", "+", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "stats-box", "space-y-8", "text-center", "lg:col-start-4"], ["data-target", "60", "data-suffix", "+", 1, "text-5xl", "font-extrabold", "counter-number"], ["data-target", "4.8", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "max-w-6xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8"], [1, "mt-20", "text-center"], [1, "text-xl", "font-semibold", "text-gray-700", "tracking-wide"], [1, "logos-container"], [1, "logos-slide"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/66666cd3-65d8-4390-b479-861563e4e8c2.png", "alt", "Logo Seguros Bol\xEDvar", 1, "h-8", "sm:h-10", "mx-8", "logo-bolivar"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e0faa2fd-4ce0-4a1c-9e1f-e9a2fbbfe097.png", "alt", "Logo CienCuadras", 1, "h-8", "sm:h-10", "mx-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/f9c2de7e-e1bd-43d2-8e70-7e650bf02086.png", "alt", "Logo Davivienda", 1, "h-8", "sm:h-10", "mx-8", "logo-davivienda"], ["id", "precios-pioneros-section", 1, "py-20", "sm:py-28", "bg-[#f7f8fa]", "seccion-precios"], [1, "max-w-6xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8", "text-center"], [1, "text-3xl", "md:text-4xl", "font-extrabold", "text-[#2d3450]", "texto-entradas"], [1, "mt-4", "text-lg", "text-gray-600", 2, "margin-top", "0"], [1, "mt-16", "grid", "grid-cols-1", "lg:grid-cols-3", "gap-8", "items-center", "max-w-sm", "mx-auto", "lg:max-w-none"], [1, "bg-white", "rounded-xl", "shadow-lg", "p-8", "flex", "flex-col", "h-full", "border", "border-gray-200"], [1, "text-2xl", "font-bold", "text-[#2d3450]", "sub-texto-tarjeta"], [1, "my-6"], [1, "text-5xl", "font-extrabold", "text-[#2d3450]"], [1, "space-y-2", "text-gray-600", "mb-8"], [1, "border-b", "border-gray-300", "pb-3"], [1, "font-bold", "text-[#2d3450]", "pt-2"], [1, "mt-auto", "w-full", "bg-gray-200", "text-gray-800", "font-semibold", "py-3", "px-6", "rounded-lg", "flex", "items-center", "justify-center", "hover:bg-gray-300", "transition-colors", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "width", "24", "height", "24", "viewBox", "0 0 24 24", "fill", "none", "stroke", "currentColor", "stroke-width", "2", "stroke-linecap", "round", "stroke-linejoin", "round", 1, "icon", "icon-tabler", "icons-tabler-outline", "icon-tabler-ticket", "icono-compra"], ["d", "M15 5l0 2"], ["d", "M15 11l0 2"], ["d", "M15 17l0 2"], ["d", "M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2"], [1, "text-white", "rounded-xl", "shadow-2xl", "p-8", "transform", "lg:scale-110", "flex", "flex-col", "h-full", 2, "background", "linear-gradient(to bottom, #BD0F14, #253150)"], [1, "mb-4"], [1, "bg-white", "text-[#253150]", "text-sm", "font-bold", "px-4", "py-1.5", "rounded-full"], [1, "text-5xl", "font-extrabold"], [1, "space-y-2", "text-white", "mb-8"], [1, "font-bold", "pt-2"], [1, "mt-16", "text-sm", "text-gray-500", "italic"], [1, "devolucion"], ["id", "contacto-patrocinadores-section", 1, "py-10", "sm:py-16", "bg-[#f7f8fa]"], ["src", "../../../assets/img/Afydi_Logo ROJO.ai.png", "alt", "Logo Seguros Bol\xEDvar", 1, "h-8", "sm:h-10", "mx-8", "logo-bolivar"], ["src", "../../../assets/img/LOGO-SIMI.jpg", "alt", "Logo CienCuadras", 1, "h-8", "sm:h-10", "mx-8"], ["src", "../../../assets/img/N - SEDI SOLUTIONS.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], ["src", "../../../assets/img/nuwwe.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], [1, "min-[1108px]:hidden", "fixed", "top-[80px]", "left-0", "right-0", "bottom-0", "z-20", "bg-white/75", "backdrop-blur-md"], ["id", "close-menu-button", 1, "absolute", "top-4", "right-6", "text-[#2d3450]"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg", 1, "w-8", "h-8"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M6 18L18 6M6 6l12 12"], [1, "h-full", "flex", "flex-col", "justify-center", "items-center", "space-y-8", "-mt-[80px]"], ["href", "#inicio-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500", "active-link-mobile"], ["href", "#history-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"], ["href", "#temas-foro-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"], ["href", "#precios-pioneros-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"]], template: function Landing_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "header")(1, "nav", 0)(2, "div", 1);
       \u0275\u0275element(3, "img", 2)(4, "div", 3)(5, "img", 4);
@@ -43921,7 +44017,7 @@ var Landing = class _Landing {
                                 </span>
                                 <h4 class="text-2xl font-bold">Conoce los speakers, horarios y experiencias del evento</h4>
                                 <div class="mt-6 flex justify-start">
-                                    <a href="https://dvn7rzpuwpj45.cloudfront.net/wp-content/uploads/2026/03/20163220/Agenda_foro_202.pdf" style="background-color: #bd0f14;" class="text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity inline-block shadow-md">Ver agenda</a>
+                                    <a href="https://dvn7rzpuwpj45.cloudfront.net/wp-content/uploads/2026/03/20163220/Agenda_foro_202.pdf" target="_blank" style="background-color: #bd0f14;" class="text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity inline-block shadow-md">Ver agenda</a>
                                 </div>
                             </div>
                         </div>

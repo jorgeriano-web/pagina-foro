@@ -24,6 +24,13 @@ export interface OpcionSlotCharla {
   label: string;
 }
 
+/** Una fila del `<select>` (texto, valor, si está llena). */
+export interface OpcionSlotSelect {
+  value: string;
+  label: string;
+  disabled: boolean;
+}
+
 const RX_FECHA_YMD = /^\d{4}-\d{2}-\d{2}$/;
 const RX_HORA_HM = /^\d{1,2}:\d{2}$/;
 
@@ -55,6 +62,15 @@ export class ReservarCupo implements OnInit {
   /** Reservas para el turno elegido; null = sin turno o cargando/error. */
   reservasActuales: number | null = null;
 
+  /** Conteo por `value` del slot (`fecha|hora`). `null` = falló la consulta. */
+  conteosPorSlot: Record<string, number | null> = {};
+
+  /** Mientras carga el conteo de todos los turnos (hay sala válida). */
+  cargandoConteosSlots = false;
+
+  private refreshTodosSeq = 0;
+  private pedidoConteoSeq = 0;
+
   constructor(
     @Optional() private dialogRef: MatDialogRef<ReservarCupo> | null,
     @Optional() @Inject(MAT_DIALOG_DATA) private data: ReservaCupoDialogData | null,
@@ -64,7 +80,7 @@ export class ReservarCupo implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.actualizarConteoSlot();
+    this.refrescarConteosTodosSlots();
   }
 
   // ——— Vista: getters ———
@@ -94,6 +110,29 @@ export class ReservarCupo implements OnInit {
     return id == null ? 0 : capacidadSala(id);
   }
 
+  get opcionesSlotSelect(): OpcionSlotSelect[] {
+    const id = this.idSala;
+    const max = this.capacidadMax;
+    return this.slotsCharla.map((s) => {
+      if (id == null || max <= 0) {
+        return { value: s.value, label: s.label, disabled: false };
+      }
+      if (this.cargandoConteosSlots) {
+        return { value: s.value, label: s.label, disabled: true };
+      }
+      const n = this.conteosPorSlot[s.value];
+      if (n === null || n === undefined) {
+        return { value: s.value, label: s.label, disabled: false };
+      }
+      const lleno = n >= max;
+      return {
+        value: s.value,
+        label: lleno ? `${s.label} — Cupos agotados` : s.label,
+        disabled: lleno,
+      };
+    });
+  }
+
   get textoCuposDialogo(): string {
     const max = this.capacidadMax;
     if (max <= 0) {
@@ -110,9 +149,14 @@ export class ReservarCupo implements OnInit {
     return `Este turno: ${n} de ${max} reservas. Quedan ${quedan} cupo${quedan === 1 ? '' : 's'}.`;
   }
 
+  trackBySlotValue(_index: number, o: OpcionSlotSelect): string {
+    return o.value;
+  }
+
   // ——— Acciones template ———
 
   onSlotChange(): void {
+    this.sincronizarReservasActualesDesdeMap();
     this.actualizarConteoSlot();
   }
 
@@ -163,9 +207,10 @@ export class ReservarCupo implements OnInit {
         correo,
       });
       this.reservaExitosa = true;
-      this.actualizarConteoSlot();
+      this.refrescarConteosTodosSlots();
     } catch (e: unknown) {
       this.errorReserva = this.mensajeErrorReserva(e);
+      this.refrescarConteosTodosSlots();
     } finally {
       this.procesando = false;
       this.cdr.detectChanges();
@@ -174,36 +219,137 @@ export class ReservarCupo implements OnInit {
 
   // ——— Internos ———
 
+  private refrescarConteosTodosSlots(): void {
+    const id = this.idSala;
+    const max = this.capacidadMax;
+
+    if (id == null || max <= 0) {
+      this.refreshTodosSeq++;
+      this.cargandoConteosSlots = false;
+      this.conteosPorSlot = {};
+      this.limpiarSeleccionSiAgotado();
+      this.sincronizarReservasActualesDesdeMap();
+      this.cdr.detectChanges();
+      return;
+    }
+
+    const seq = ++this.refreshTodosSeq;
+    this.cargandoConteosSlots = true;
+    this.cdr.detectChanges();
+
+    const promesas = this.slotsCharla.map(async (s) => {
+      const parsed = this.parseSlotValue(s.value);
+      if (parsed == null) {
+        return { key: s.value, n: null as number | null };
+      }
+      try {
+        const n = await this.reservaCuposService.contarReservasSala(
+          id,
+          parsed.fecha,
+          parsed.horaCharla,
+        );
+        return { key: s.value, n };
+      } catch {
+        return { key: s.value, n: null as number | null };
+      }
+    });
+
+    void Promise.all(promesas).then((results) => {
+      if (seq !== this.refreshTodosSeq) {
+        return;
+      }
+      const map: Record<string, number | null> = {};
+      for (const r of results) {
+        map[r.key] = r.n;
+      }
+      this.conteosPorSlot = map;
+      this.cargandoConteosSlots = false;
+      this.limpiarSeleccionSiAgotado();
+      this.sincronizarReservasActualesDesdeMap();
+      this.cdr.detectChanges();
+    });
+  }
+
   private actualizarConteoSlot(): void {
     const id = this.idSala;
     const slot = this.parseSlotSeleccionado();
 
     if (id == null || slot == null) {
+      this.pedidoConteoSeq++;
       this.reservasActuales = null;
       this.cdr.detectChanges();
       return;
     }
 
+    const key = this.slotSeleccionado;
+    const seq = ++this.pedidoConteoSeq;
+    const cached = this.conteosPorSlot[key];
+    this.reservasActuales = typeof cached === 'number' ? cached : null;
+    this.cdr.detectChanges();
+
     void this.reservaCuposService
       .contarReservasSala(id, slot.fecha, slot.horaCharla)
       .then(
         (n) => {
-          this.reservasActuales = n;
+          if (seq !== this.pedidoConteoSeq) {
+            return;
+          }
+          this.conteosPorSlot = { ...this.conteosPorSlot, [key]: n };
+          if (this.slotSeleccionado === key) {
+            this.reservasActuales = n;
+          }
+          this.limpiarSeleccionSiAgotado();
           this.cdr.detectChanges();
         },
         () => {
-          this.reservasActuales = null;
+          if (seq !== this.pedidoConteoSeq) {
+            return;
+          }
+          this.conteosPorSlot = { ...this.conteosPorSlot, [key]: null };
+          if (this.slotSeleccionado === key) {
+            this.reservasActuales = null;
+          }
           this.cdr.detectChanges();
         },
       );
   }
 
+  private limpiarSeleccionSiAgotado(): void {
+    const max = this.capacidadMax;
+    const id = this.idSala;
+    if (!this.slotSeleccionado || id == null || max <= 0) {
+      return;
+    }
+    const n = this.conteosPorSlot[this.slotSeleccionado];
+    if (typeof n === 'number' && n >= max) {
+      this.slotSeleccionado = '';
+      this.reservasActuales = null;
+      this.pedidoConteoSeq++;
+    }
+  }
+
+  private sincronizarReservasActualesDesdeMap(): void {
+    const v = this.slotSeleccionado;
+    if (!v) {
+      this.reservasActuales = null;
+      return;
+    }
+    const n = this.conteosPorSlot[v];
+    if (typeof n === 'number') {
+      this.reservasActuales = n;
+    }
+  }
+
   /** Interpreta `slotSeleccionado` (`fecha|horaCharla`). */
   private parseSlotSeleccionado(): { fecha: string; horaCharla: string } | null {
-    if (!this.slotSeleccionado) {
+    return this.parseSlotValue(this.slotSeleccionado);
+  }
+
+  private parseSlotValue(value: string): { fecha: string; horaCharla: string } | null {
+    if (!value) {
       return null;
     }
-    const partes = this.slotSeleccionado.split('|');
+    const partes = value.split('|');
     const fecha = partes[0] ?? '';
     const horaCharla = (partes[1] ?? '').trim();
     if (!RX_FECHA_YMD.test(fecha) || !RX_HORA_HM.test(horaCharla)) {
