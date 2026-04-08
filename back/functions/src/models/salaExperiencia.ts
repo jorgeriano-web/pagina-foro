@@ -34,3 +34,18 @@ export const SALAS_EXPERIENCIA: SalaExperiencia[] = [
     cuposReservados: 0,
   },
 ];
+
+/** Payload de `listarSalasExperienciaProd` (una sola fuente: `SALAS_EXPERIENCIA`). */
+export interface SalaExperienciaPublica {
+  id: number;
+  nombre: string;
+  capacidadTotal: number;
+}
+
+export function salasExperienciaParaCliente(): SalaExperienciaPublica[] {
+  return SALAS_EXPERIENCIA.map(({ id, nombre, capacidadTotal }) => ({
+    id,
+    nombre,
+    capacidadTotal,
+  }));
+}

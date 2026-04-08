@@ -18,10 +18,22 @@
   <div class="reserva-cupo-info">
     <p *ngIf="idSala !== null" class="reserva-cupo-sala">Sala {{ idSala }}</p>
     <p *ngIf="nombreExperiencia" class="reserva-cupo-experiencia">{{ nombreExperiencia }}</p>
-    <p *ngIf="capacidadMax > 0 && textoCuposDialogo" class="reserva-cupo-cupos-line">
+    <p *ngIf="textoCuposDialogo" class="reserva-cupo-cupos-line">
       {{ textoCuposDialogo }}
     </p>
   </div>
+
+  <p *ngIf="mensajeErrorConfigSalas" class="reserva-cupo-error" role="alert">
+    {{ mensajeErrorConfigSalas }}
+  </p>
+  <button
+    *ngIf="salasConfigEstado === 'error'"
+    type="button"
+    class="reserva-cupo-submit"
+    (click)="reintentarCargaSalas()"
+  >
+    Reintentar
+  </button>
 
   <p *ngIf="errorReserva" class="reserva-cupo-error" role="alert">{{ errorReserva }}</p>
 
@@ -67,7 +79,11 @@
         name="fechaHora"
         [(ngModel)]="slotSeleccionado"
         (ngModelChange)="onSlotChange()"
-        [disabled]="procesando || (idSala !== null && capacidadMax > 0 && cargandoConteosSlots)"
+        [disabled]="
+          procesando ||
+          salasConfigEstado !== 'ok' ||
+          (idSala !== null && capacidadMax > 0 && cargandoConteosSlots)
+        "
       >
         <option value="">Elegí fecha y hora</option>
         <option
@@ -83,7 +99,7 @@
   <button
     type="button"
     class="reserva-cupo-submit"
-    [disabled]="procesando || idSala === null || !slotSeleccionado"
+    [disabled]="procesando || idSala === null || !slotSeleccionado || salasConfigEstado !== 'ok'"
     (click)="reservaCupo()"
   >
     {{ procesando ? 'Procesando…' : 'Reservar Cupo' }}

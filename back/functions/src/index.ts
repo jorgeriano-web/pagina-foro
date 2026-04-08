@@ -11,6 +11,7 @@ import { PreciosService } from "./service/preciosService";
 import { getGatewayConfig } from "./configSecrets/gatewayConfig";
 import { defineSecret } from "firebase-functions/params";
 import { contarReservasSala, reservaSalaCupo } from "./service/salaCuposService";
+import { salasExperienciaParaCliente } from "./models/salaExperiencia";
 
 admin.initializeApp();
 
@@ -513,3 +514,7 @@ export const contarReservasSalaProd = onCall(
     }
   }
 );
+
+export const listarSalasExperienciaProd = onCall({ cors: true }, async () => {
+  return salasExperienciaParaCliente();
+});

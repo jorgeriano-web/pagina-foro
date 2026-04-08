@@ -31437,40 +31437,6 @@ var MatDialogModule = class _MatDialogModule {
   }], null, null);
 })();
 
-// src/app/models/sala-experiencia.ts
-var SALAS_EXPERIENCIA = [
-  {
-    id: 1,
-    nombre: "Implementaci\xF3n de IA para tu Inmobiliaria",
-    capacidadTotal: 30,
-    cuposReservados: 0
-  },
-  {
-    id: 2,
-    nombre: "Entorno Juridico",
-    capacidadTotal: 40,
-    cuposReservados: 0
-  },
-  {
-    id: 3,
-    nombre: "Casos de Exito",
-    capacidadTotal: 45,
-    cuposReservados: 0
-  },
-  {
-    id: 4,
-    nombre: "Meet & Greet",
-    capacidadTotal: 50,
-    cuposReservados: 0
-  }
-];
-function salaPorIdSala(idSala) {
-  return SALAS_EXPERIENCIA.find((s) => s.id === idSala);
-}
-function capacidadSala(idSala) {
-  return salaPorIdSala(idSala)?.capacidadTotal ?? 0;
-}
-
 // node_modules/@angular/fire/node_modules/@firebase/util/dist/postinstall.mjs
 var getDefaultsFromPostinstall = () => void 0;
 
@@ -42517,8 +42483,26 @@ var httpsCallableFromURL2 = \u0275zoneWrap(httpsCallableFromURL, true);
 // src/app/service/reserva-cupos.ts
 var ReservaCupos = class _ReservaCupos {
   functions;
+  salasExperienciaCache = null;
   constructor(functions) {
     this.functions = functions;
+  }
+  /**
+   * Cupos y nombres oficiales por sala (misma fuente que valida `reservarCupoSalaProd`).
+   */
+  async listarSalasExperiencia() {
+    if (!this.salasExperienciaCache) {
+      const callable = httpsCallable3(this.functions, "listarSalasExperienciaProd");
+      this.salasExperienciaCache = callable({}).then((r) => r.data).catch((e) => {
+        this.salasExperienciaCache = null;
+        throw e;
+      });
+    }
+    return this.salasExperienciaCache;
+  }
+  /** Para reintentar tras un error de red o tras deploy de functions. */
+  invalidarCacheSalasExperiencia() {
+    this.salasExperienciaCache = null;
   }
   /** Reservas ya registradas en el Sheet para ese turno (sala + fecha + hora). */
   async contarReservasSala(idSala, fecha, horaCharla) {
@@ -42579,7 +42563,7 @@ function ReservarCupo_div_1_Template(rf, ctx) {
 }
 function ReservarCupo_ng_container_2_p_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 26);
+    \u0275\u0275elementStart(0, "p", 27);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -42591,7 +42575,7 @@ function ReservarCupo_ng_container_2_p_2_Template(rf, ctx) {
 }
 function ReservarCupo_ng_container_2_p_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 27);
+    \u0275\u0275elementStart(0, "p", 28);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -42603,7 +42587,7 @@ function ReservarCupo_ng_container_2_p_3_Template(rf, ctx) {
 }
 function ReservarCupo_ng_container_2_p_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 28);
+    \u0275\u0275elementStart(0, "p", 29);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -42615,7 +42599,32 @@ function ReservarCupo_ng_container_2_p_4_Template(rf, ctx) {
 }
 function ReservarCupo_ng_container_2_p_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 29);
+    \u0275\u0275elementStart(0, "p", 30);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.mensajeErrorConfigSalas, " ");
+  }
+}
+function ReservarCupo_ng_container_2_button_6_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 7);
+    \u0275\u0275listener("click", function ReservarCupo_ng_container_2_button_6_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.reintentarCargaSalas());
+    });
+    \u0275\u0275text(1, " Reintentar ");
+    \u0275\u0275elementEnd();
+  }
+}
+function ReservarCupo_ng_container_2_p_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 30);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -42625,17 +42634,17 @@ function ReservarCupo_ng_container_2_p_5_Template(rf, ctx) {
     \u0275\u0275textInterpolate(ctx_r1.errorReserva);
   }
 }
-function ReservarCupo_ng_container_2_option_25_Template(rf, ctx) {
+function ReservarCupo_ng_container_2_option_27_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "option", 30);
+    \u0275\u0275elementStart(0, "option", 31);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const o_r5 = ctx.$implicit;
-    \u0275\u0275property("value", o_r5.value)("disabled", o_r5.disabled);
+    const o_r6 = ctx.$implicit;
+    \u0275\u0275property("value", o_r6.value)("disabled", o_r6.disabled);
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", o_r5.label, " ");
+    \u0275\u0275textInterpolate1(" ", o_r6.label, " ");
   }
 }
 function ReservarCupo_ng_container_2_Template(rf, ctx) {
@@ -42645,67 +42654,67 @@ function ReservarCupo_ng_container_2_Template(rf, ctx) {
     \u0275\u0275elementStart(1, "div", 8);
     \u0275\u0275template(2, ReservarCupo_ng_container_2_p_2_Template, 2, 1, "p", 9)(3, ReservarCupo_ng_container_2_p_3_Template, 2, 1, "p", 10)(4, ReservarCupo_ng_container_2_p_4_Template, 2, 1, "p", 11);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(5, ReservarCupo_ng_container_2_p_5_Template, 2, 1, "p", 12);
-    \u0275\u0275elementStart(6, "form", 13)(7, "div", 14)(8, "label", 15);
-    \u0275\u0275text(9, "Nombre Completo");
+    \u0275\u0275template(5, ReservarCupo_ng_container_2_p_5_Template, 2, 1, "p", 12)(6, ReservarCupo_ng_container_2_button_6_Template, 2, 0, "button", 13)(7, ReservarCupo_ng_container_2_p_7_Template, 2, 1, "p", 12);
+    \u0275\u0275elementStart(8, "form", 14)(9, "div", 15)(10, "label", 16);
+    \u0275\u0275text(11, "Nombre Completo");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "input", 16);
-    \u0275\u0275twoWayListener("ngModelChange", function ReservarCupo_ng_container_2_Template_input_ngModelChange_10_listener($event) {
+    \u0275\u0275elementStart(12, "input", 17);
+    \u0275\u0275twoWayListener("ngModelChange", function ReservarCupo_ng_container_2_Template_input_ngModelChange_12_listener($event) {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext();
       \u0275\u0275twoWayBindingSet(ctx_r1.nombre, $event) || (ctx_r1.nombre = $event);
       return \u0275\u0275resetView($event);
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(11, "div", 14)(12, "label", 17);
-    \u0275\u0275text(13, "C\xE9dula");
+    \u0275\u0275elementStart(13, "div", 15)(14, "label", 18);
+    \u0275\u0275text(15, "C\xE9dula");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(14, "input", 18);
-    \u0275\u0275twoWayListener("ngModelChange", function ReservarCupo_ng_container_2_Template_input_ngModelChange_14_listener($event) {
+    \u0275\u0275elementStart(16, "input", 19);
+    \u0275\u0275twoWayListener("ngModelChange", function ReservarCupo_ng_container_2_Template_input_ngModelChange_16_listener($event) {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext();
       \u0275\u0275twoWayBindingSet(ctx_r1.numDoc, $event) || (ctx_r1.numDoc = $event);
       return \u0275\u0275resetView($event);
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(15, "div", 14)(16, "label", 19);
-    \u0275\u0275text(17, "Correo");
+    \u0275\u0275elementStart(17, "div", 15)(18, "label", 20);
+    \u0275\u0275text(19, "Correo");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(18, "input", 20);
-    \u0275\u0275twoWayListener("ngModelChange", function ReservarCupo_ng_container_2_Template_input_ngModelChange_18_listener($event) {
+    \u0275\u0275elementStart(20, "input", 21);
+    \u0275\u0275twoWayListener("ngModelChange", function ReservarCupo_ng_container_2_Template_input_ngModelChange_20_listener($event) {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext();
       \u0275\u0275twoWayBindingSet(ctx_r1.correo, $event) || (ctx_r1.correo = $event);
       return \u0275\u0275resetView($event);
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(19, "div", 14)(20, "label", 21);
-    \u0275\u0275text(21, "Fecha y hora de la charla");
+    \u0275\u0275elementStart(21, "div", 15)(22, "label", 22);
+    \u0275\u0275text(23, "Fecha y hora de la charla");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(22, "select", 22);
-    \u0275\u0275twoWayListener("ngModelChange", function ReservarCupo_ng_container_2_Template_select_ngModelChange_22_listener($event) {
+    \u0275\u0275elementStart(24, "select", 23);
+    \u0275\u0275twoWayListener("ngModelChange", function ReservarCupo_ng_container_2_Template_select_ngModelChange_24_listener($event) {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext();
       \u0275\u0275twoWayBindingSet(ctx_r1.slotSeleccionado, $event) || (ctx_r1.slotSeleccionado = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275listener("ngModelChange", function ReservarCupo_ng_container_2_Template_select_ngModelChange_22_listener() {
+    \u0275\u0275listener("ngModelChange", function ReservarCupo_ng_container_2_Template_select_ngModelChange_24_listener() {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onSlotChange());
     });
-    \u0275\u0275elementStart(23, "option", 23);
-    \u0275\u0275text(24, "Eleg\xED fecha y hora");
+    \u0275\u0275elementStart(25, "option", 24);
+    \u0275\u0275text(26, "Eleg\xED fecha y hora");
     \u0275\u0275elementEnd();
-    \u0275\u0275template(25, ReservarCupo_ng_container_2_option_25_Template, 2, 3, "option", 24);
+    \u0275\u0275template(27, ReservarCupo_ng_container_2_option_27_Template, 2, 3, "option", 25);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(26, "button", 25);
-    \u0275\u0275listener("click", function ReservarCupo_ng_container_2_Template_button_click_26_listener() {
+    \u0275\u0275elementStart(28, "button", 26);
+    \u0275\u0275listener("click", function ReservarCupo_ng_container_2_Template_button_click_28_listener() {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.reservaCupo());
     });
-    \u0275\u0275text(27);
+    \u0275\u0275text(29);
     \u0275\u0275elementEnd();
     \u0275\u0275elementContainerEnd();
   }
@@ -42716,7 +42725,11 @@ function ReservarCupo_ng_container_2_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r1.nombreExperiencia);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.capacidadMax > 0 && ctx_r1.textoCuposDialogo);
+    \u0275\u0275property("ngIf", ctx_r1.textoCuposDialogo);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.mensajeErrorConfigSalas);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.salasConfigEstado === "error");
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r1.errorReserva);
     \u0275\u0275advance(5);
@@ -42730,11 +42743,11 @@ function ReservarCupo_ng_container_2_Template(rf, ctx) {
     \u0275\u0275property("disabled", ctx_r1.procesando);
     \u0275\u0275advance(4);
     \u0275\u0275twoWayProperty("ngModel", ctx_r1.slotSeleccionado);
-    \u0275\u0275property("disabled", ctx_r1.procesando || ctx_r1.idSala !== null && ctx_r1.capacidadMax > 0 && ctx_r1.cargandoConteosSlots);
+    \u0275\u0275property("disabled", ctx_r1.procesando || ctx_r1.salasConfigEstado !== "ok" || ctx_r1.idSala !== null && ctx_r1.capacidadMax > 0 && ctx_r1.cargandoConteosSlots);
     \u0275\u0275advance(3);
     \u0275\u0275property("ngForOf", ctx_r1.opcionesSlotSelect)("ngForTrackBy", ctx_r1.trackBySlotValue);
     \u0275\u0275advance();
-    \u0275\u0275property("disabled", ctx_r1.procesando || ctx_r1.idSala === null || !ctx_r1.slotSeleccionado);
+    \u0275\u0275property("disabled", ctx_r1.procesando || ctx_r1.idSala === null || !ctx_r1.slotSeleccionado || ctx_r1.salasConfigEstado !== "ok");
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", ctx_r1.procesando ? "Procesando\u2026" : "Reservar Cupo", " ");
   }
@@ -42768,6 +42781,9 @@ var ReservarCupo = class _ReservarCupo {
   conteosPorSlot = {};
   /** Mientras carga el conteo de todos los turnos (hay sala válida). */
   cargandoConteosSlots = false;
+  /** Config de salas desde el back (`listarSalasExperienciaProd`). */
+  salasConfigEstado = "loading";
+  salasPorId = {};
   refreshTodosSeq = 0;
   pedidoConteoSeq = 0;
   constructor(dialogRef, data, route, reservaCuposService, cdr) {
@@ -42778,7 +42794,7 @@ var ReservarCupo = class _ReservarCupo {
     this.cdr = cdr;
   }
   ngOnInit() {
-    this.refrescarConteosTodosSlots();
+    void this.cargarConfigSalasYLuegoConteos();
   }
   // ——— Vista: getters ———
   get esDialogo() {
@@ -42800,11 +42816,24 @@ var ReservarCupo = class _ReservarCupo {
   }
   get capacidadMax() {
     const id = this.idSala;
-    return id == null ? 0 : capacidadSala(id);
+    if (id == null || this.salasConfigEstado !== "ok") {
+      return 0;
+    }
+    return this.salasPorId[id]?.capacidadTotal ?? 0;
+  }
+  get mensajeErrorConfigSalas() {
+    return this.salasConfigEstado === "error" ? "No se pudo cargar la informaci\xF3n de cupos. Reintent\xE1 o actualiz\xE1 la p\xE1gina." : null;
   }
   get opcionesSlotSelect() {
     const id = this.idSala;
     const max = this.capacidadMax;
+    if (this.salasConfigEstado === "loading" || this.salasConfigEstado === "error") {
+      return this.slotsCharla.map((s) => ({
+        value: s.value,
+        label: s.label,
+        disabled: true
+      }));
+    }
     return this.slotsCharla.map((s) => {
       if (id == null || max <= 0) {
         return { value: s.value, label: s.label, disabled: false };
@@ -42819,12 +42848,18 @@ var ReservarCupo = class _ReservarCupo {
       const lleno = n >= max;
       return {
         value: s.value,
-        label: lleno ? `${s.label} \u2014 Cupos agotados` : s.label,
+        label: lleno ? `${s.label} \u2014 Agotado` : s.label,
         disabled: lleno
       };
     });
   }
   get textoCuposDialogo() {
+    if (this.salasConfigEstado === "loading") {
+      return "Cargando cupos por sala\u2026";
+    }
+    if (this.salasConfigEstado === "error") {
+      return "";
+    }
     const max = this.capacidadMax;
     if (max <= 0) {
       return "";
@@ -42847,6 +42882,10 @@ var ReservarCupo = class _ReservarCupo {
     this.sincronizarReservasActualesDesdeMap();
     this.actualizarConteoSlot();
   }
+  reintentarCargaSalas() {
+    this.reservaCuposService.invalidarCacheSalasExperiencia();
+    void this.cargarConfigSalasYLuegoConteos();
+  }
   cerrarDialogo() {
     this.dialogRef?.close();
   }
@@ -42855,7 +42894,7 @@ var ReservarCupo = class _ReservarCupo {
   }
   async reservaCupo() {
     const idSala = this.idSala;
-    if (idSala == null || this.procesando || this.reservaExitosa) {
+    if (idSala == null || this.procesando || this.reservaExitosa || this.salasConfigEstado !== "ok") {
       return;
     }
     const nombre = this.nombre.trim();
@@ -42897,6 +42936,26 @@ var ReservarCupo = class _ReservarCupo {
     }
   }
   // ——— Internos ———
+  async cargarConfigSalasYLuegoConteos() {
+    this.salasConfigEstado = "loading";
+    this.cdr.detectChanges();
+    try {
+      const salas = await this.reservaCuposService.listarSalasExperiencia();
+      const map2 = {};
+      for (const s of salas) {
+        if (s.id === 1 || s.id === 2 || s.id === 3 || s.id === 4) {
+          map2[s.id] = { capacidadTotal: s.capacidadTotal };
+        }
+      }
+      this.salasPorId = map2;
+      this.salasConfigEstado = "ok";
+    } catch {
+      this.salasPorId = {};
+      this.salasConfigEstado = "error";
+    }
+    this.cdr.detectChanges();
+    this.refrescarConteosTodosSlots();
+  }
   refrescarConteosTodosSlots() {
     const id = this.idSala;
     const max = this.capacidadMax;
@@ -43024,9 +43083,9 @@ var ReservarCupo = class _ReservarCupo {
   static \u0275fac = function ReservarCupo_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ReservarCupo)(\u0275\u0275directiveInject(MatDialogRef, 8), \u0275\u0275directiveInject(MAT_DIALOG_DATA, 8), \u0275\u0275directiveInject(ActivatedRoute, 8), \u0275\u0275directiveInject(ReservaCupos), \u0275\u0275directiveInject(ChangeDetectorRef));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ReservarCupo, selectors: [["app-reservar-cupo"]], decls: 3, vars: 3, consts: [["type", "button", "class", "reserva-cupo-cerrar", "aria-label", "Cerrar", 3, "click", 4, "ngIf"], ["class", "reserva-cupo-exito", 4, "ngIf"], [4, "ngIf"], ["type", "button", "aria-label", "Cerrar", 1, "reserva-cupo-cerrar", 3, "click"], [1, "reserva-cupo-exito"], [1, "reserva-cupo-exito-titulo"], [1, "reserva-cupo-exito-texto"], ["type", "button", 1, "reserva-cupo-submit", 3, "click"], [1, "reserva-cupo-info"], ["class", "reserva-cupo-sala", 4, "ngIf"], ["class", "reserva-cupo-experiencia", 4, "ngIf"], ["class", "reserva-cupo-cupos-line", 4, "ngIf"], ["class", "reserva-cupo-error", "role", "alert", 4, "ngIf"], [1, "reserva-cupo-form"], [1, "reserva-cupo-field"], ["for", "nombre"], ["type", "text", "id", "nombre", "name", "nombre", "autocomplete", "name", 3, "ngModelChange", "ngModel", "disabled"], ["for", "cedula"], ["type", "text", "id", "cedula", "name", "cedula", "autocomplete", "off", "inputmode", "numeric", 3, "ngModelChange", "ngModel", "disabled"], ["for", "correo"], ["type", "email", "id", "correo", "name", "correo", "autocomplete", "email", 3, "ngModelChange", "ngModel", "disabled"], ["for", "fechaHora"], ["id", "fechaHora", "name", "fechaHora", 3, "ngModelChange", "ngModel", "disabled"], ["value", ""], [3, "value", "disabled", 4, "ngFor", "ngForOf", "ngForTrackBy"], ["type", "button", 1, "reserva-cupo-submit", 3, "click", "disabled"], [1, "reserva-cupo-sala"], [1, "reserva-cupo-experiencia"], [1, "reserva-cupo-cupos-line"], ["role", "alert", 1, "reserva-cupo-error"], [3, "value", "disabled"]], template: function ReservarCupo_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ReservarCupo, selectors: [["app-reservar-cupo"]], decls: 3, vars: 3, consts: [["type", "button", "class", "reserva-cupo-cerrar", "aria-label", "Cerrar", 3, "click", 4, "ngIf"], ["class", "reserva-cupo-exito", 4, "ngIf"], [4, "ngIf"], ["type", "button", "aria-label", "Cerrar", 1, "reserva-cupo-cerrar", 3, "click"], [1, "reserva-cupo-exito"], [1, "reserva-cupo-exito-titulo"], [1, "reserva-cupo-exito-texto"], ["type", "button", 1, "reserva-cupo-submit", 3, "click"], [1, "reserva-cupo-info"], ["class", "reserva-cupo-sala", 4, "ngIf"], ["class", "reserva-cupo-experiencia", 4, "ngIf"], ["class", "reserva-cupo-cupos-line", 4, "ngIf"], ["class", "reserva-cupo-error", "role", "alert", 4, "ngIf"], ["type", "button", "class", "reserva-cupo-submit", 3, "click", 4, "ngIf"], [1, "reserva-cupo-form"], [1, "reserva-cupo-field"], ["for", "nombre"], ["type", "text", "id", "nombre", "name", "nombre", "autocomplete", "name", 3, "ngModelChange", "ngModel", "disabled"], ["for", "cedula"], ["type", "text", "id", "cedula", "name", "cedula", "autocomplete", "off", "inputmode", "numeric", 3, "ngModelChange", "ngModel", "disabled"], ["for", "correo"], ["type", "email", "id", "correo", "name", "correo", "autocomplete", "email", 3, "ngModelChange", "ngModel", "disabled"], ["for", "fechaHora"], ["id", "fechaHora", "name", "fechaHora", 3, "ngModelChange", "ngModel", "disabled"], ["value", ""], [3, "value", "disabled", 4, "ngFor", "ngForOf", "ngForTrackBy"], ["type", "button", 1, "reserva-cupo-submit", 3, "click", "disabled"], [1, "reserva-cupo-sala"], [1, "reserva-cupo-experiencia"], [1, "reserva-cupo-cupos-line"], ["role", "alert", 1, "reserva-cupo-error"], [3, "value", "disabled"]], template: function ReservarCupo_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275template(0, ReservarCupo_button_0_Template, 2, 0, "button", 0)(1, ReservarCupo_div_1_Template, 7, 0, "div", 1)(2, ReservarCupo_ng_container_2_Template, 28, 16, "ng-container", 2);
+      \u0275\u0275template(0, ReservarCupo_button_0_Template, 2, 0, "button", 0)(1, ReservarCupo_div_1_Template, 7, 0, "div", 1)(2, ReservarCupo_ng_container_2_Template, 30, 18, "ng-container", 2);
     }
     if (rf & 2) {
       \u0275\u0275property("ngIf", ctx.esDialogo);
@@ -43060,10 +43119,22 @@ var ReservarCupo = class _ReservarCupo {
   <div class="reserva-cupo-info">
     <p *ngIf="idSala !== null" class="reserva-cupo-sala">Sala {{ idSala }}</p>
     <p *ngIf="nombreExperiencia" class="reserva-cupo-experiencia">{{ nombreExperiencia }}</p>
-    <p *ngIf="capacidadMax > 0 && textoCuposDialogo" class="reserva-cupo-cupos-line">
+    <p *ngIf="textoCuposDialogo" class="reserva-cupo-cupos-line">
       {{ textoCuposDialogo }}
     </p>
   </div>
+
+  <p *ngIf="mensajeErrorConfigSalas" class="reserva-cupo-error" role="alert">
+    {{ mensajeErrorConfigSalas }}
+  </p>
+  <button
+    *ngIf="salasConfigEstado === 'error'"
+    type="button"
+    class="reserva-cupo-submit"
+    (click)="reintentarCargaSalas()"
+  >
+    Reintentar
+  </button>
 
   <p *ngIf="errorReserva" class="reserva-cupo-error" role="alert">{{ errorReserva }}</p>
 
@@ -43109,7 +43180,11 @@ var ReservarCupo = class _ReservarCupo {
         name="fechaHora"
         [(ngModel)]="slotSeleccionado"
         (ngModelChange)="onSlotChange()"
-        [disabled]="procesando || (idSala !== null && capacidadMax > 0 && cargandoConteosSlots)"
+        [disabled]="
+          procesando ||
+          salasConfigEstado !== 'ok' ||
+          (idSala !== null && capacidadMax > 0 && cargandoConteosSlots)
+        "
       >
         <option value="">Eleg\xED fecha y hora</option>
         <option
@@ -43125,7 +43200,7 @@ var ReservarCupo = class _ReservarCupo {
   <button
     type="button"
     class="reserva-cupo-submit"
-    [disabled]="procesando || idSala === null || !slotSeleccionado"
+    [disabled]="procesando || idSala === null || !slotSeleccionado || salasConfigEstado !== 'ok'"
     (click)="reservaCupo()"
   >
     {{ procesando ? 'Procesando\u2026' : 'Reservar Cupo' }}
@@ -43144,7 +43219,7 @@ var ReservarCupo = class _ReservarCupo {
   }] }, { type: ReservaCupos }, { type: ChangeDetectorRef }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ReservarCupo, { className: "ReservarCupo", filePath: "src/app/pages/reservar-cupo/reservar-cupo.ts", lineNumber: 44 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ReservarCupo, { className: "ReservarCupo", filePath: "src/app/pages/reservar-cupo/reservar-cupo.ts", lineNumber: 43 });
 })();
 
 // src/app/service/service-boletas.ts

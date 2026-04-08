@@ -9,7 +9,6 @@ import {
 import { FormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { capacidadSala } from '../../models/sala-experiencia';
 import { ReservaCupos } from '../../service/reserva-cupos';
 
 /** Datos que envía la landing al abrir el MatDialog. */
@@ -68,6 +67,10 @@ export class ReservarCupo implements OnInit {
   /** Mientras carga el conteo de todos los turnos (hay sala válida). */
   cargandoConteosSlots = false;
 
+  /** Config de salas desde el back (`listarSalasExperienciaProd`). */
+  salasConfigEstado: 'loading' | 'ok' | 'error' = 'loading';
+  private salasPorId: Record<number, { capacidadTotal: number }> = {};
+
   private refreshTodosSeq = 0;
   private pedidoConteoSeq = 0;
 
@@ -80,7 +83,7 @@ export class ReservarCupo implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.refrescarConteosTodosSlots();
+    void this.cargarConfigSalasYLuegoConteos();
   }
 
   // ——— Vista: getters ———
@@ -107,12 +110,28 @@ export class ReservarCupo implements OnInit {
 
   get capacidadMax(): number {
     const id = this.idSala;
-    return id == null ? 0 : capacidadSala(id);
+    if (id == null || this.salasConfigEstado !== 'ok') {
+      return 0;
+    }
+    return this.salasPorId[id]?.capacidadTotal ?? 0;
+  }
+
+  get mensajeErrorConfigSalas(): string | null {
+    return this.salasConfigEstado === 'error'
+      ? 'No se pudo cargar la información de cupos. Reintentá o actualizá la página.'
+      : null;
   }
 
   get opcionesSlotSelect(): OpcionSlotSelect[] {
     const id = this.idSala;
     const max = this.capacidadMax;
+    if (this.salasConfigEstado === 'loading' || this.salasConfigEstado === 'error') {
+      return this.slotsCharla.map((s) => ({
+        value: s.value,
+        label: s.label,
+        disabled: true,
+      }));
+    }
     return this.slotsCharla.map((s) => {
       if (id == null || max <= 0) {
         return { value: s.value, label: s.label, disabled: false };
@@ -134,6 +153,12 @@ export class ReservarCupo implements OnInit {
   }
 
   get textoCuposDialogo(): string {
+    if (this.salasConfigEstado === 'loading') {
+      return 'Cargando cupos por sala…';
+    }
+    if (this.salasConfigEstado === 'error') {
+      return '';
+    }
     const max = this.capacidadMax;
     if (max <= 0) {
       return '';
@@ -160,6 +185,11 @@ export class ReservarCupo implements OnInit {
     this.actualizarConteoSlot();
   }
 
+  reintentarCargaSalas(): void {
+    this.reservaCuposService.invalidarCacheSalasExperiencia();
+    void this.cargarConfigSalasYLuegoConteos();
+  }
+
   cerrarDialogo(): void {
     this.dialogRef?.close();
   }
@@ -170,7 +200,12 @@ export class ReservarCupo implements OnInit {
 
   async reservaCupo(): Promise<void> {
     const idSala = this.idSala;
-    if (idSala == null || this.procesando || this.reservaExitosa) {
+    if (
+      idSala == null ||
+      this.procesando ||
+      this.reservaExitosa ||
+      this.salasConfigEstado !== 'ok'
+    ) {
       return;
     }
 
@@ -218,6 +253,27 @@ export class ReservarCupo implements OnInit {
   }
 
   // ——— Internos ———
+
+  private async cargarConfigSalasYLuegoConteos(): Promise<void> {
+    this.salasConfigEstado = 'loading';
+    this.cdr.detectChanges();
+    try {
+      const salas = await this.reservaCuposService.listarSalasExperiencia();
+      const map: Record<number, { capacidadTotal: number }> = {};
+      for (const s of salas) {
+        if (s.id === 1 || s.id === 2 || s.id === 3 || s.id === 4) {
+          map[s.id] = { capacidadTotal: s.capacidadTotal };
+        }
+      }
+      this.salasPorId = map;
+      this.salasConfigEstado = 'ok';
+    } catch {
+      this.salasPorId = {};
+      this.salasConfigEstado = 'error';
+    }
+    this.cdr.detectChanges();
+    this.refrescarConteosTodosSlots();
+  }
 
   private refrescarConteosTodosSlots(): void {
     const id = this.idSala;
