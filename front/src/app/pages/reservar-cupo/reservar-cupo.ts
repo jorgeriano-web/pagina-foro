@@ -127,7 +127,7 @@ export class ReservarCupo implements OnInit {
       const lleno = n >= max;
       return {
         value: s.value,
-        label: lleno ? `${s.label} — Cupos agotados` : s.label,
+        label: lleno ? `${s.label} — Agotado` : s.label,
         disabled: lleno,
       };
     });

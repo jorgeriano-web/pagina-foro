@@ -11,7 +11,7 @@ export const SALAS_EXPERIENCIA: SalaExperiencia[] = [
   {
     id: 1,
     nombre: 'Implementación de IA para tu Inmobiliaria',
-    capacidadTotal: 30,
+    capacidadTotal: 3,
     cuposReservados: 0,
   },
   {
