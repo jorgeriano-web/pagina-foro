@@ -6,6 +6,7 @@ import { RegistroNoCliente } from './pages/registro-no-cliente/registro-no-clien
 import { PagoExitoso } from './pages/pago-exitoso/pago-exitoso';
 import { PagoFallido } from './pages/pago-fallido/pago-fallido';
 import { ReservarCupo } from './pages/reservar-cupo/reservar-cupo';
+import { VerCupo } from './pages/ver-cupo/ver-cupo';
 
 export const routes: Routes = [
   { path: '', component: Landing },
@@ -13,6 +14,7 @@ export const routes: Routes = [
   { path: 'registro-cliente', component: RegistroCliente },
   { path: 'registro-no-cliente', component: RegistroNoCliente },
   { path: 'reservar-cupos', component: ReservarCupo },
+  { path: 'cupo/:uuid', component: VerCupo },
   { path:'pagoExitoso', component: PagoExitoso},
   { path:'pagoNoExitoso', component: PagoFallido},
   { path: '**', redirectTo: '' }

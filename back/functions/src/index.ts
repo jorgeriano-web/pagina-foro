@@ -4,14 +4,15 @@ import { getFirestore } from "firebase-admin/firestore";
 import axios from "axios";
 import { onCall, HttpsError } from "firebase-functions/v2/https";
 import { FieldValue } from "firebase-admin/firestore";
-import { agregarFilaAsheet } from "./service/sheetService";
+import { agregarFilaAsheet, buscarReservaSalaPorUuid } from "./service/sheetService";
 import { enviarEmail } from "./service/emailService";
 import { onSchedule } from "firebase-functions/v2/scheduler";
 import { PreciosService } from "./service/preciosService";
 import { getGatewayConfig } from "./configSecrets/gatewayConfig";
 import { defineSecret } from "firebase-functions/params";
 import { contarReservasSala, reservaSalaCupo } from "./service/salaCuposService";
-import { salasExperienciaParaCliente } from "./models/salaExperiencia";
+import { salasExperienciaParaCliente, SALAS_EXPERIENCIA } from "./models/salaExperiencia";
+import { randomUUID } from "crypto";
 
 admin.initializeApp();
 
@@ -451,6 +452,7 @@ export const reservarCupoSalaProd = onCall(
     try {
       await reservaSalaCupo({
         idSala,
+        id: randomUUID(),
         fecha,
         horaCharla: horaCharla.trim(),
         nombre,
@@ -518,3 +520,37 @@ export const contarReservasSalaProd = onCall(
 export const listarSalasExperienciaProd = onCall({ cors: true }, async () => {
   return salasExperienciaParaCliente();
 });
+
+const RX_UUID_V4 =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+export const obtenerCupoPorUuidProd = onCall(
+  { cors: true, secrets: [FIREBASE_CONFIG_ACCOUNT] },
+  async (request) => {
+    const uuid = String((request.data as { uuid?: string })?.uuid ?? "").trim();
+    if (!RX_UUID_V4.test(uuid)) {
+      throw new HttpsError("invalid-argument", "Identificador de cupo inválido.");
+    }
+
+    try {
+      const row = await buscarReservaSalaPorUuid(uuid);
+      if (!row) {
+        return { encontrada: false as const };
+      }
+      const sala = SALAS_EXPERIENCIA.find((s) => s.id === row.idSala);
+      return {
+        encontrada: true as const,
+        idSala: row.idSala,
+        nombreSala: sala?.nombre ?? `Sala ${row.idSala}`,
+        fecha: row.fecha,
+        horaCharla: row.horaCharla,
+        nombre: row.nombre,
+        numDoc: row.numDoc,
+        correo: row.correo,
+      };
+    } catch (e: unknown) {
+      console.error("obtenerCupoPorUuidProd:", e);
+      throw new HttpsError("internal", "No se pudo consultar el cupo.");
+    }
+  }
+);

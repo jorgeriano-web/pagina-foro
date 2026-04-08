@@ -11,6 +11,19 @@ export interface ClienteReservaSalaData {
   correo: string;
 }
 
+export type ResultadoCupoPorUuid =
+  | { encontrada: false }
+  | {
+      encontrada: true;
+      idSala: number;
+      nombreSala: string;
+      fecha: string;
+      horaCharla: string;
+      nombre: string;
+      numDoc: string;
+      correo: string;
+    };
+
 @Injectable({
   providedIn: 'root',
 })
@@ -54,6 +67,15 @@ export class ReservaCupos {
       number
     >(this.functions, 'contarReservasSalaProd');
     const result = await callable({ idSala, fecha, horaCharla });
+    return result.data;
+  }
+
+  async obtenerCupoPorUuid(uuid: string): Promise<ResultadoCupoPorUuid> {
+    const callable = httpsCallable<{ uuid: string }, ResultadoCupoPorUuid>(
+      this.functions,
+      'obtenerCupoPorUuidProd',
+    );
+    const result = await callable({ uuid });
     return result.data;
   }
 

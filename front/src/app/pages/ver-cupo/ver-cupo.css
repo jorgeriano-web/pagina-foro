@@ -1,0 +1,65 @@
+.ver-cupo {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 2rem 1rem;
+  background: #2d3450;
+  color: #fff;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.ver-cupo-card {
+  width: 100%;
+  max-width: 28rem;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.ver-cupo-ok {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.ver-cupo-alerta {
+  border-color: rgba(189, 15, 20, 0.45);
+}
+
+.ver-cupo-titulo {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.ver-cupo-sub {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+.ver-cupo-texto {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+.ver-cupo-dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 1rem;
+  font-size: 0.9375rem;
+}
+
+.ver-cupo-dl dt {
+  margin: 0;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.ver-cupo-dl dd {
+  margin: 0;
+  word-break: break-word;
+}

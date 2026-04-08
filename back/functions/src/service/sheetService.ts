@@ -28,6 +28,7 @@ interface TransaccionData{
 
 export interface ClienteReservaSalaData {
   idSala: number;
+  id: string;
   /** Día de la charla (YYYY-MM-DD). */
   fecha: string;
   /** Hora de inicio del bloque (HH:mm, ej. 14:30). */
@@ -109,11 +110,10 @@ export async function agregarFilaAsheet(transaccionData: TransaccionData) {
 
 /**
  * Una fila por reserva en `Sala{n}Reservas`, desde A2.
- * Columnas: A fecha (YYYY-MM-DD), B hora (HH:mm), C nombre, D documento, E correo.
- * Ajustá la fila 1 de cada pestaña con esos títulos si aún tenías el orden anterior.
+ * Columnas: A id (UUID), B fecha (YYYY-MM-DD), C hora (HH:mm), D nombre, E documento, F correo.
  */
 export async function agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaData: ClienteReservaSalaData) {
-  const { idSala, fecha, horaCharla, nombre, numDoc, correo } = clienteReservaSalaData;
+  const { idSala, id, fecha, horaCharla, nombre, numDoc, correo } = clienteReservaSalaData;
 
   if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
     throw new Error("La sala debe ser 1, 2, 3 o 4");
@@ -136,6 +136,7 @@ export async function agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaDa
 
   const values = [
     [
+      id,
       fechaSoloDiaParaSheet(fecha),
       normalizarHoraSheet(horaCharla),
       nombre.trim(),
@@ -155,8 +156,8 @@ export async function agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaDa
 }
 
 /**
- * Reservas para un turno concreto (misma fecha en A y misma hora en B).
- * Filas desde la 2; columnas A–E como en `agregarDatosClienteReservaSalaAlSheet`.
+ * Reservas para un turno concreto (misma fecha en B y misma hora en C).
+ * Filas desde la 2; columnas A–F como en `agregarDatosClienteReservaSalaAlSheet`.
  */
 export async function contarReservasPorSlot(
   idSala: number,
@@ -184,18 +185,72 @@ export async function contarReservasPorSlot(
 
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: SHEET_ID,
-    range: `${pestaña}!A2:E`,
+    range: `${pestaña}!A2:F`,
   });
 
   const rows = response.data.values ?? [];
   let n = 0;
   for (const row of rows) {
-    const celFecha = row[0] != null ? fechaSoloDiaParaSheet(String(row[0])) : "";
+    const celFecha = row[1] != null ? fechaSoloDiaParaSheet(String(row[1])) : "";
     const celHora =
-      row[1] != null ? normalizarHoraSheet(String(row[1])) : "";
+      row[2] != null ? normalizarHoraSheet(String(row[2])) : "";
     if (celFecha === fechaNorm && celHora === horaNorm) {
       n++;
     }
   }
   return n;
+}
+
+export interface ReservaSalaEncontradaEnSheet {
+  idSala: number;
+  idReserva: string;
+  fecha: string;
+  horaCharla: string;
+  nombre: string;
+  numDoc: string;
+  correo: string;
+}
+
+/** Busca la fila cuyo UUID (columna A) coincide, en las pestañas Sala1Reservas…Sala4Reservas. */
+export async function buscarReservaSalaPorUuid(
+  uuidBuscado: string
+): Promise<ReservaSalaEncontradaEnSheet | null> {
+  const needle = uuidBuscado.trim();
+  if (!needle) {
+    return null;
+  }
+
+  const serviceAccount = await accFireBaseConfig();
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: serviceAccount.client_email,
+      private_key: serviceAccount.private_key,
+    },
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
+  const sheets = google.sheets({ version: "v4", auth });
+
+  for (let idSala = 1; idSala <= 4; idSala++) {
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: SHEET_ID,
+      range: `Sala${idSala}Reservas!A2:F`,
+    });
+    const rows = response.data.values ?? [];
+    for (const row of rows) {
+      const idCel = row[0] != null ? String(row[0]).trim() : "";
+      if (idCel === needle) {
+        return {
+          idSala,
+          idReserva: idCel,
+          fecha: row[1] != null ? String(row[1]) : "",
+          horaCharla: row[2] != null ? String(row[2]) : "",
+          nombre: row[3] != null ? String(row[3]) : "",
+          numDoc: row[4] != null ? String(row[4]) : "",
+          correo: row[5] != null ? String(row[5]) : "",
+        };
+      }
+    }
+  }
+  return null;
 }

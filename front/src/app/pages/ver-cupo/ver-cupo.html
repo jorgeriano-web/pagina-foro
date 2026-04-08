@@ -1,0 +1,39 @@
+<div class="ver-cupo">
+  <div *ngIf="estado === 'cargando'" class="ver-cupo-card">
+    <p class="ver-cupo-titulo">Consultando cupo…</p>
+  </div>
+
+  <div *ngIf="estado === 'invalido'" class="ver-cupo-card ver-cupo-alerta">
+    <p class="ver-cupo-titulo">Enlace no válido</p>
+    <p class="ver-cupo-texto">El identificador del cupo no tiene el formato correcto.</p>
+  </div>
+
+  <div *ngIf="estado === 'no_encontrado'" class="ver-cupo-card ver-cupo-alerta">
+    <p class="ver-cupo-titulo">Cupo no encontrado</p>
+    <p class="ver-cupo-texto">No hay una reserva registrada con este código.</p>
+  </div>
+
+  <div *ngIf="estado === 'error'" class="ver-cupo-card ver-cupo-alerta">
+    <p class="ver-cupo-titulo">No se pudo cargar</p>
+    <p class="ver-cupo-texto">Intentá de nuevo en unos minutos.</p>
+  </div>
+
+  <div *ngIf="estado === 'ok' && datos" class="ver-cupo-card ver-cupo-ok">
+    <p class="ver-cupo-titulo">Cupo registrado</p>
+    <p class="ver-cupo-sub">Experiencia alterna — XVI Foro Experiencia Inmobiliaria</p>
+    <dl class="ver-cupo-dl">
+      <dt>Nombre</dt>
+      <dd>{{ datos.nombre }}</dd>
+      <dt>Documento</dt>
+      <dd>{{ datos.numDoc }}</dd>
+      <dt>Correo</dt>
+      <dd>{{ datos.correo }}</dd>
+      <dt>Sala</dt>
+      <dd>{{ datos.idSala }} — {{ datos.nombreSala }}</dd>
+      <dt>Fecha</dt>
+      <dd>{{ datos.fecha }}</dd>
+      <dt>Hora</dt>
+      <dd>{{ datos.horaCharla }}</dd>
+    </dl>
+  </div>
+</div>

@@ -1,11 +1,21 @@
 import { HttpsError } from "firebase-functions/v2/https";
+import QRCode from "qrcode";
 import { SALAS_EXPERIENCIA } from "../models/salaExperiencia";
+import { PUBLIC_APP_ORIGIN } from "../config/publicAppUrl";
 import {
   agregarDatosClienteReservaSalaAlSheet,
   ClienteReservaSalaData,
   contarReservasPorSlot,
 } from "./sheetService";
 import { enviarEmail } from "./emailService";
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
 
 function salaPorIdSala(idSala: number) {
   return SALAS_EXPERIENCIA.find((s) => s.id === idSala);
@@ -42,8 +52,20 @@ export async function reservaSalaCupo(clienteReservaSalaData: ClienteReservaSala
 
   const fechaCharla = clienteReservaSalaData.fecha.trim();
   const horaCharla = clienteReservaSalaData.horaCharla.trim();
+  const nombreLimpio = clienteReservaSalaData.nombre.trim();
+  const baseUrl = PUBLIC_APP_ORIGIN.replace(/\/$/, "");
+  const cupoUrl = `${baseUrl}/cupo/${encodeURIComponent(clienteReservaSalaData.id)}`;
+
+  let qrAdjunto: { filename: string; content: Buffer; cid: string }[] = [];
+  try {
+    const qrPng = await QRCode.toBuffer(cupoUrl, { type: "png", margin: 1, width: 220 });
+    qrAdjunto = [{ filename: "cupo-qr.png", content: qrPng, cid: "qrcupo" }];
+  } catch (e) {
+    console.error("reservaSalaCupo: no se generó el QR:", e);
+  }
+
   const mensaje = [
-    `Hola ${clienteReservaSalaData.nombre.trim()},`,
+    `Hola ${nombreLimpio},`,
     "",
     "Te confirmamos tu reserva de cupo para la experiencia alterna:",
     "",
@@ -51,14 +73,38 @@ export async function reservaSalaCupo(clienteReservaSalaData: ClienteReservaSala
     `• Fecha: ${fechaCharla}`,
     `• Hora: ${horaCharla}`,
     "",
+    "Presentá el código QR del correo (o este enlace) en el ingreso:",
+    cupoUrl,
+    "",
     "Te esperamos en el XVI Foro Experiencia Inmobiliaria (Cartagena, 21 y 22 de mayo de 2026).",
   ].join("\n");
+
+  const bloqueQr =
+    qrAdjunto.length > 0
+      ? `<p><img src="cid:qrcupo" width="220" height="220" alt="Código QR del cupo" style="display:block;border:0;" /></p>`
+      : `<p><em>No se pudo generar la imagen del QR; usá el enlace de abajo.</em></p>`;
+
+  const html = `<!DOCTYPE html><html><body style="font-family:system-ui,sans-serif;line-height:1.5;color:#222;">
+<p>Hola ${escapeHtml(nombreLimpio)},</p>
+<p>Te confirmamos tu reserva de cupo para la experiencia alterna:</p>
+<ul>
+<li><strong>Sala:</strong> ${escapeHtml(String(sala.id))} — ${escapeHtml(sala.nombre)}</li>
+<li><strong>Fecha:</strong> ${escapeHtml(fechaCharla)}</li>
+<li><strong>Hora:</strong> ${escapeHtml(horaCharla)}</li>
+</ul>
+<p>Presentá este código QR en el ingreso (o abrí el enlace en el celular):</p>
+${bloqueQr}
+<p><a href="${cupoUrl}">Abrir mi cupo en el navegador</a></p>
+<p style="font-size:0.9em;color:#555;">Te esperamos en el XVI Foro Experiencia Inmobiliaria (Cartagena, 21 y 22 de mayo de 2026).</p>
+</body></html>`;
 
   try {
     await enviarEmail({
       correo: clienteReservaSalaData.correo.trim(),
       asunto: `Confirmación de cupo — ${sala.nombre}`,
       mensaje,
+      html,
+      adjuntosExtra: qrAdjunto,
     });
   } catch (e) {
     console.error("reservaSalaCupo: correo de confirmación no enviado:", e);
