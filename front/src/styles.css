@@ -12,6 +12,7 @@ html {
 }
 
 body {
+    margin: 0;
     font-family: 'Montserrat', sans-serif;
     background-color: transparent;
     background-image: url('/assets/img/fondo-respuesta.png');
@@ -20,7 +21,6 @@ body {
     background-attachment: fixed;
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .recordatorio {
     font-size: 0.875rem; 

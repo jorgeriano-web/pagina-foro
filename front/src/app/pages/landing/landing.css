@@ -1,8 +1,21 @@
 .hero-bg {
-    background-image: url('https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/da01a461-c25e-400e-8037-cc341bfc1bd3.png');
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    background-image: url('../../../assets/img/fotospeakers.jpg');
     background-size: cover;
-    background-position: center;
-    background-color: #2d3450;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+    height: 80vh;
+    margin-top: 95px;
+}
+
+@media (min-width: 768px) {
+    .hero-bg {
+        background-size: contain;
+        background-position: center center;
+    }
 }
 
 header {
@@ -11,7 +24,7 @@ header {
     left: 0;
     right: 0;
     z-index: 30;
-    background-color: transparent;
+    background-color: #2d3450;
     transition: background-color 0.4s ease-out;
 }
 
@@ -47,6 +60,41 @@ header.scrolled-header {
     backdrop-filter: blur(10px);
 }
 
+#hero-content .timer-box {
+    background-color: #000000;
+    backdrop-filter: none;
+}
+
+.timer-box--hero {
+    padding: 0.2rem 0.45rem;
+    border-radius: 0.25rem;
+}
+
+.texto-tiempo--hero {
+    font-size: 0.5625rem;
+    line-height: 1.1;
+    margin-top: 0.125rem;
+}
+
+.hero-agenda-btn {
+    display: inline-block;
+    max-width: min(100%, 16rem);
+    background-color: #bd0f14;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.6875rem;
+    line-height: 1.2;
+    padding: 0.35rem 0.65rem;
+    border-radius: 0.375rem;
+}
+
+@media (min-width: 640px) {
+    .hero-agenda-btn {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.85rem;
+    }
+}
+
 .texto-conexion {
     line-height: 24px;
     font-size: 22px;
@@ -77,7 +125,7 @@ header.scrolled-header {
 }
 
 .contenedor-logo-principal {
-    margin-top: 150px;
+    margin-top: 90px;
 }
 
 .contenedor-textos-info {
@@ -96,20 +144,21 @@ header.scrolled-header {
 }
 
 #animation-container {
-     position: relative;
+    position: relative;
     width: 100%;
-    min-height: 100vh;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    min-height: 60vh;
 }
 
 .seccion-historia {
     padding-top: 30px;
-    padding-bottom: 2rem;
     padding-left: 1rem;
     padding-right: 1rem;
     color: #2d3450;
     text-align: center;
     background-color: #f7f8fa;
-    margin-bottom: 20px;
 }
 
 .seccion-boletas-ad-2{
@@ -138,6 +187,45 @@ header.scrolled-header {
     background-color: #2d3450;
 }
 
+.temas-charla-card .btn-reserva-vidrio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.65rem 1.15rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    border-radius: 0.625rem;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: linear-gradient(
+        160deg,
+        rgba(255, 255, 255, 0.22) 0%,
+        rgba(255, 255, 255, 0.08) 100%
+    );
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    margin: 20px 0 0 0;
+}
+
+.temas-charla-card .btn-reserva-vidrio:hover {
+    background: linear-gradient(
+        160deg,
+        rgba(255, 255, 255, 0.32) 0%,
+        rgba(255, 255, 255, 0.14) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow:
+        0 6px 28px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
 .seccion-temas {
     background-image: url('https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/ca85fb18-d61a-4604-8f9d-004f021d7e98.png');
     background-repeat: no-repeat;
@@ -155,6 +243,7 @@ header.scrolled-header {
 .texto-entradas {
     font-size: 28px;
     font-weight: 600;
+    padding-top: 30px;
 }
 
 .icono-compra {
@@ -177,6 +266,96 @@ header.scrolled-header {
     cursor: pointer !important;
 }
 
+/* Hilton / “Vive el XVI…” — fondo: descomenta background-image cuando envíen el asset */
+.seccion-vive-foro {
+    position: relative;
+    text-align: center;
+    color: #ffffff;
+    padding: 3.5rem 1rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: url('../../../assets/img/banner_2.png');
+}
+
+@media (min-width: 640px) {
+    .seccion-vive-foro {
+        padding: 4.5rem 1.5rem;
+    }
+}
+
+.seccion-vive-foro-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 40rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.seccion-vive-foro .titulo-vive-foro,
+.seccion-vive-foro .subtitulo-vive-foro {
+    color: #ffffff;
+}
+
+.seccion-vive-foro .titulo-vive-foro {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0 0 0.75rem;
+}
+
+@media (min-width: 640px) {
+    .seccion-vive-foro .titulo-vive-foro {
+        font-size: 1.625rem;
+    }
+}
+
+.seccion-vive-foro .titulo-vive-foro strong {
+    font-weight: 700;
+}
+
+.seccion-vive-foro .subtitulo-vive-foro {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.45;
+    margin: 0;
+    opacity: 0.96;
+}
+
+@media (min-width: 640px) {
+    .seccion-vive-foro .subtitulo-vive-foro {
+        font-size: 1.0625rem;
+    }
+}
+
+.seccion-vive-foro .boton-hilton-vidrio {
+    margin-top: 1.5rem;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0.65rem 1.35rem;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.35;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.seccion-vive-foro .boton-hilton-vidrio:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.52);
+}
+
 .sub-text-entradas-ad {
     font-size: 31px;
 }
@@ -196,8 +375,7 @@ header.scrolled-header {
 }
 
 .seccion-precios {
-    padding-bottom: 10px;
-    padding-top: 2rem !important;
+    padding-top: 0 !important;
 }
 
 /* Logos animados */
@@ -309,10 +487,14 @@ header.scrolled-header {
 
 
 .card-slider {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     padding: 1rem;
+}
+
+.temas-card-destacada {
+    width: 100%;
 }
 
 .card-slider > div {
@@ -325,6 +507,40 @@ header.scrolled-header {
 
 .particle-canvas {
     pointer-events: none;
+}
+
+
+.contenedorCharlas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .contenedorCharlas {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Salas 1–4: imagen completa (sin recorte fuerte) y más alto útil */
+.contenedorCharlas .agenda-card-imagen {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+@media (min-width: 768px) {
+    .contenedorCharlas .agenda-card-imagen {
+        min-height: 240px;
+    }
+}
+
+.contenedorCharlas .agenda-card-imagen img {
+    object-fit: contain;
+    max-height: 280px;
 }
 
 
@@ -355,10 +571,8 @@ header.scrolled-header {
     }
 
     .card-slider {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 1rem;
+        gap: 1.5rem;
+        padding: 1rem;
     }
 }
 

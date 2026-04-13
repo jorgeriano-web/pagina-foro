@@ -8,11 +8,11 @@
         <div class="hidden min-[1108px]:flex items-center space-x-8">
             <a href="#inicio-section" (click)="trackHeader('Inicio')" class="nav-link text-white hover:text-gray-300">Inicio</a>
             <a href="#history-section" (click)="trackHeader('Historia')" class="nav-link text-white hover:text-gray-300">Historia</a>
-            <a href="#temas-foro-section" (click)="trackHeader('Temas')" class="nav-link text-white hover:text-gray-300">Temas</a>
+            <a href="#temas-foro-section" (click)="trackHeader('Temas')" class="nav-link text-white hover:text-gray-300">Experiencias</a>
             <a href="#precios-pioneros-section" (click)="trackHeader('Boletas')" class="nav-link text-white hover:text-gray-300">Boletas</a>
         </div>
         <div class="hidden min-[1108px]:block">
-            <span class="text-white border border-white/50 rounded-md px-3 py-1.5 text-sm">Etapa 2: visionarios</span>
+            <span class="text-white border border-white/50 rounded-md px-3 py-1.5 text-sm">Foro 2026</span>
         </div>
         <div class="min-[1108px]:hidden col-start-3 justify-self-end">
             <button (click)="toggleMenu()" class="absolute top-4 right-6 text-[#2d3450]">
@@ -31,48 +31,48 @@
         <div class="h-full flex flex-col justify-center items-center space-y-8 -mt-[80px]">
             <a href="#inicio-section" class="nav-link text-3xl font-bold text-[#2d3450] hover:text-gray-500 active-link-mobile">Inicio</a>
             <a href="#history-section" class="nav-link text-3xl font-bold text-[#2d3450] hover:text-gray-500">Historia</a>
-            <a href="#temas-foro-section" class="nav-link text-3xl font-bold text-[#2d3450] hover:text-gray-500">Temas</a>
+            <a href="#temas-foro-section" class="nav-link text-3xl font-bold text-[#2d3450] hover:text-gray-500">Experiencias</a>
             <a href="#precios-pioneros-section" class="nav-link text-3xl font-bold text-[#2d3450] hover:text-gray-500">Boletas</a>
         </div>
     </div>
 
     <div id="animation-container">
-        <main id="inicio-section" class="relative hero-bg w-full h-screen flex flex-col items-center justify-center p-4">
-            <canvas class="particle-canvas absolute top-0 left-0 w-full h-full z-0"></canvas>
-            <div id="hero-content" class="relative z-10 w-full max-w-5xl px-4 flex flex-col items-center text-white">
-                <div class="flex flex-col md:flex-row items-center justify-center w-full mb-8 contenedor-logo-principal">
-                    <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e82d61a5-bf01-4d56-85fd-eb8a7207d508.png" alt="Connect Logo" class="logo-principal mb-6 md:mb-0 md:mr-4">
-                    <p class="text-lg md:text-xl text-center md:text-left texto-conexion">Conexión inteligente para<br>el sector inmobiliario</p>
+        <main id="inicio-section" class="relative hero-bg w-full flex flex-col p-0">
+            <canvas class="particle-canvas pointer-events-none absolute top-0 left-0 z-0 h-full w-full"></canvas>
+
+            <div
+                id="hero-content"
+                class="absolute bottom-0 left-1/2 z-10 flex w-full max-w-5xl -translate-x-1/2 flex-col items-center px-2 text-white sm:px-4"
+            >
+                <div class="hero-hero-extras mb-3 flex flex-col items-center">
+                    <p class="texto-contador mb-1 text-center text-xs sm:text-sm">Foro Inmobiliario comienza en:</p>
+                    <a
+                        href="https://dvn7rzpuwpj45.cloudfront.net/wp-content/uploads/2026/03/20163220/Agenda_foro_202.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hero-agenda-btn text-center shadow-md transition-opacity hover:opacity-90"
+                        >Conoce la agenda aquí</a>
                 </div>
-                <div class="text-center contenedor-textos-info">
-                    <p class="text-lg texto-ubicacion">Cartagena - Colombia</p>
-                    <p class="texto-pabellon texto-ubicacion">Hotel Hilton centro de convenciones</p>
-                    <p class="text-2xl font-bold mt-2 texto-fecha">21 - 22 de mayo 2026</p>
-                </div>
-                <div class="mt-12">
-                    <p class="text-sm mb-2 texto-contador">Etapa visionarios cierra en:</p>
-                    <div class="flex space-x-3 justify-center">
-                        <div class="timer-box">
-                            <span id="days" class="text-3xl font-bold">{{timeleft.days}}</span>
-                            <p class="text-xs texto-tiempo">Días</p>
+                <div class="hero-timer-anchor flex translate-y-1/2 flex-col items-center">
+                    <div class="hero-timer-row flex flex-wrap justify-center gap-1.5 sm:gap-2">
+                        <div class="timer-box timer-box--hero">
+                            <span id="days" class="text-base font-bold tabular-nums leading-none sm:text-lg">{{timeleft.days}}</span>
+                            <p class="texto-tiempo texto-tiempo--hero">Días</p>
                         </div>
-                        <div class="timer-box">
-                            <span id="hours" class="text-3xl font-bold">{{timeleft.hours}}</span>
-                            <p class="text-xs texto-tiempo">Horas</p>
+                        <div class="timer-box timer-box--hero">
+                            <span id="hours" class="text-base font-bold tabular-nums leading-none sm:text-lg">{{timeleft.hours}}</span>
+                            <p class="texto-tiempo texto-tiempo--hero">Horas</p>
                         </div>
-                        <div class="timer-box">
-                            <span id="minutes" class="text-3xl font-bold">{{timeleft.minutes}}</span>
-                            <p class="text-xs texto-tiempo">Minutos</p>
+                        <div class="timer-box timer-box--hero">
+                            <span id="minutes" class="text-base font-bold tabular-nums leading-none sm:text-lg">{{timeleft.minutes}}</span>
+                            <p class="texto-tiempo texto-tiempo--hero">Minutos</p>
                         </div>
-                        <div class="timer-box">
-                            <span id="seconds" class="text-3xl font-bold">{{timeleft.seconds}}</span>
-                            <p class="text-xs texto-tiempo">Segundos</p>
+                        <div class="timer-box timer-box--hero">
+                            <span id="seconds" class="text-base font-bold tabular-nums leading-none sm:text-lg">{{timeleft.seconds}}</span>
+                            <p class="texto-tiempo texto-tiempo--hero">Segundos</p>
                         </div>
                     </div>
-                    <div class="mt-10 flex flex-col items-center space-y-2 opacity-70">
-                        <p class="text-white text-sm font-light tracking-widest texto-desliza">Desliza hacia abajo</p>
-                        <svg class="w-6 h-6 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </div>
+                    <div class="hero-timer-spacer h-2 shrink-0 sm:h-2.5" aria-hidden="true"></div>
                 </div>
             </div>
         </main>
@@ -85,204 +85,97 @@
         </button>
     </div>
 
-    <section id="history-section" class="seccion-historia">
-        <div class="max-w-7xl mx-auto px-4">
 
-            <div class="relative bg-cover bg-center rounded-2xl shadow-lg overflow-hidden flex flex-col lg:flex-row items-center seccion-boletas-ad-2 h-[220px]">
-                <div class="absolute inset-0 bg-gray-800 opacity-50"></div>
-                <div class="relative z-10 w-full lg:w-3/5 text-white text-center py-6 px-6 lg:py-8 lg:px-12">
-                    <p class="text-lg lg:text-xl font-normal" style="text-align: center;">¡Vive el XVI Foro Experiencia Inmobiliaria con <strong> total comodidad! </strong> Disfruta de un <strong> ahorro especial </strong> en el <strong> Hilton Cartagena </strong> gracias a nuestra alianza</p>
-                    <div class="mt-6 flex justify-center" style="justify-content: center;">
-                        <a (click)="abrirWhatsappHotel()" class="botonWhatsappHilton" style="background-color: #bd0f14;" class="text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity inline-block shadow-md cursor-pointer">¡Pide más info aquí con nuestro asesor exclusivo!</a>
-                    </div>
-                </div>
-                <div class="relative z-10 hidden lg:flex lg:w-2/5 justify-center">
-                    <img src="../../../assets/img/persona-boletos.png" alt="Persona con entradas" class="rounded-lg imagen-boletos-2">
-                </div>
-            </div>
-
-            <h2 class="text-4xl md:text-5xl font-bold">16 años haciendo historia</h2>
-            <p class="mt-4 text-lg">con el evento más importante del sector inmobiliario</p>
-            <div class="mt-12 lg:grid lg:grid-cols-4 lg:gap-8 lg:items-center">
-                <div class="carousel-wrapper lg:col-span-2 lg:col-start-2 flex items-center justify-center mb-8 lg:mb-0">
-                    <div class="carousel-container">
-                        <div class="carousel-rotator">
-                            <div class="carousel-face">
-                                <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/0f8c88b4-abc3-4f14-9ea6-8a03b73fe7cb.png" class="rounded-xl shadow-xl w-full h-full object-cover">
-                            </div>
-                            <div class="carousel-face">
-                                <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/0f8c88b4-abc3-4f14-9ea6-8a03b73fe7cb.png" class="rounded-xl shadow-xl w-full h-full object-cover">
-                            </div>
-                            <div class="carousel-face">
-                                <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/0f8c88b4-abc3-4f14-9ea6-8a03b73fe7cb.png" class="rounded-xl shadow-xl w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-8 lg:contents contenedor-numeros">
-                    <div class="stats-box space-y-8 text-center lg:col-start-1 lg:row-start-1">
-                        <div class="bg-white p-6 rounded-lg shadow-md">
-                            <p class="text-5xl font-extrabold counter-number" data-target="4.9">4.9</p>
-                            <p class="font-bold mt-2 text-gray-800">Calificación general</p>
-                            <p class="text-sm text-gray-500">Última versión</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md">
-                            <p class="text-5xl font-extrabold counter-number" data-target="9500" data-suffix="+">9.000</p>
-                            <p class="font-bold mt-2 text-gray-800">Usuarios impactados</p>
-                            <p class="text-sm text-gray-500">En 16 años</p>
-                        </div>
-                    </div>
-                    <div class="stats-box space-y-8 text-center lg:col-start-4">
-                        <div class="bg-white p-6 rounded-lg shadow-md">
-                            <p class="text-5xl font-extrabold counter-number" data-target="60" data-suffix="+">60</p>
-                            <p class="font-bold mt-2 text-gray-800">Speakers y expertos</p>
-                            <p class="text-sm text-gray-500">de nivel mundial</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md">
-                            <p class="text-5xl font-extrabold counter-number" data-target="4.8">4.8</p>
-                            <p class="font-bold mt-2 text-gray-800">Calificación conferencias</p>
-                            <p class="text-sm text-gray-500">puntaje máximo</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <div class="mt-20 text-center">
-                <h3 class="text-xl font-semibold text-gray-700 tracking-wide">Organizan:</h3>
-                
-                <div class="logos-container">
-                    <div class="logos-slide">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/66666cd3-65d8-4390-b479-861563e4e8c2.png" alt="Logo Seguros Bolívar" class="h-8 sm:h-10 mx-8 logo-bolivar">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e0faa2fd-4ce0-4a1c-9e1f-e9a2fbbfe097.png" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/f9c2de7e-e1bd-43d2-8e70-7e650bf02086.png" alt="Logo Davivienda" class="h-8 sm:h-10 mx-8 logo-davivienda">
-                    </div>
-                    <div class="logos-slide">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/66666cd3-65d8-4390-b479-861563e4e8c2.png" alt="Logo Seguros Bolívar" class="h-8 sm:h-10 mx-8 logo-bolivar">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e0faa2fd-4ce0-4a1c-9e1f-e9a2fbbfe097.png" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/f9c2de7e-e1bd-43d2-8e70-7e650bf02086.png" alt="Logo Davivienda" class="h-8 sm:h-10 mx-8 logo-davivienda">
-                    </div>
-                    <div class="logos-slide">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/66666cd3-65d8-4390-b479-861563e4e8c2.png" alt="Logo Seguros Bolívar" class="h-8 sm:h-10 mx-8 logo-bolivar">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e0faa2fd-4ce0-4a1c-9e1f-e9a2fbbfe097.png" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/f9c2de7e-e1bd-43d2-8e70-7e650bf02086.png" alt="Logo Davivienda" class="h-8 sm:h-10 mx-8 logo-davivienda">
-                    </div>
-                     <div class="logos-slide">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/66666cd3-65d8-4390-b479-861563e4e8c2.png" alt="Logo Seguros Bolívar" class="h-8 sm:h-10 mx-8 logo-bolivar">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e0faa2fd-4ce0-4a1c-9e1f-e9a2fbbfe097.png" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
-                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/f9c2de7e-e1bd-43d2-8e70-7e650bf02086.png" alt="Logo Davivienda" class="h-8 sm:h-10 mx-8 logo-davivienda">
-                    </div>
-                </div>
-
-            </div>
-    
-        </div>
-    </section>
-
-    
-
-    <section id="temas-foro-section" class="relative bg-[#2d3450] py-20 sm:py-28 seccion-temas">
+    <!--<section id="temas-foro-section" class="relative bg-[#2d3450] py-20 sm:py-28 seccion-temas">
         <canvas class="particle-canvas absolute top-0 left-0 w-full h-full z-0"></canvas>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center text-white mb-16">
-                <h3 class="text-3xl font-bold tracking-tight sm:text-4xl">Hoja de ruta 2026:</h3>
-                <h2 class="text-4xl font-extrabold tracking-tight sm:text-5xl mt-2 texto-pilares">Temas que definirán el futuro del sector.</h2>
+                <h3 class="text-3xl font-bold tracking-tight sm:text-4xl">Agenda Foro 2026:</h3>
+                <h2 class="text-4xl font-extrabold tracking-tight sm:text-5xl mt-2 texto-pilares">Dos dias para activar el crecimiento del sector inmobiliario</h2>
             </div>
 
-            <div class="card-slider flex space-x-6 overflow-x-auto p-4 lg:p-0 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12 lg:space-x-0 items-stretch">
-                
-                <div class="w-4/5 flex-shrink-0 md:w-1/2 lg:w-auto flex items-center justify-center lg:justify-start lg:pt-6">
-                     <p class="text-white text-center lg:text-left text-2xl sm:text-3xl font-bold texto-temas">Los temas que veremos <span style="font-weight: bold;"> el 2026</span></p>
-                </div>
-                
-                <div class="w-4/5 flex-shrink-0 md:w-1/2 lg:w-auto lg:col-span-2">
-                    <div class="animatable-card bg-white/10 backdrop-blur-lg rounded-2xl p-6 text-white text-left w-full relative h-full transition-colors duration-500">
-                        <div class="card-original-content transition-opacity duration-300">
-                            <div class="absolute top-6 left-6">
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white etiqueta-pilar">
-                                    Pilar clave
-                                </span>
-                            </div>
-                            <h4 class="text-2xl font-bold mt-16">Inteligencia Artificial y la tecnología</h4>
-                            <div class="text-left">
-                                <button class="saber-mas-btn mt-4 border border-white/50 rounded-md px-4 py-2 text-sm hover:bg-white/10 transition">Saber más</button>
-                            </div>
-                        </div>
-                        <div class="card-flipped-content absolute inset-0 p-6 flex flex-col items-center justify-center transition-opacity duration-300 opacity-0 pointer-events-none">
-                            <div class="flex-grow flex items-center justify-center">
-                                <p style="color: #2d3450;" class="text-center font-medium">No es ciencia ficción, es rentabilidad. Descubre cómo la IA puede automatizar tus procesos operativos hoy mismo para que tu equipo se dedique a lo que realmente importa: cerrar negocios.</p>
-                            </div>
-                            <button class="volver-btn border border-[#2d3450] text-[#2d3450] rounded-md px-4 py-2 text-sm hover:bg-[#2d3450] hover:text-white transition">Volver</button>
-                        </div>
-                    </div>
+            <div class="card-slider">
+
+                <div class="text-center text-white">
+                    <h3 class="text-3xl font-bold tracking-tight sm:text-4xl">Experiencias Alternas</h3>
                 </div>
 
-                <div class="w-4/5 flex-shrink-0 md:w-1/2 lg:w-auto">
-                    <div class="animatable-card bg-white/10 backdrop-blur-lg rounded-2xl p-5 text-white text-left relative h-full transition-colors duration-500">
-                        <div class="card-original-content transition-opacity duration-300">
-                            <div class="absolute top-5 left-5">
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white whitespace-nowrap etiqueta-pilar">
-                                    Análisis experto
-                                </span>
+                <div class="contenedorCharlas">
+
+
+                    <div class="w-full min-w-0 flex">
+                        <div class="animatable-card temas-charla-card bg-white/10 backdrop-blur-lg rounded-2xl text-white text-left relative h-full w-full overflow-hidden transition-colors duration-500">
+                            <div class="card-original-content transition-opacity duration-300 flex flex-col md:flex-row md:items-stretch flex-1 min-h-0">
+                                <div class="agenda-card-imagen shrink-0 md:w-[42%] lg:w-[38%]">
+                                    <img src="../../../assets/img/charla1.png" alt="Experiencia alterna — Sala 1" class="block w-full h-full object-cover object-center" />
+                                </div>
+                                <div class="agenda-card-texto flex flex-col p-6 sm:p-8 md:py-8 md:pr-8 md:pl-6 flex-1 min-w-0">
+                                    <span class="inline-flex items-center self-start px-3 py-1 rounded-full text-sm font-medium text-white whitespace-nowrap etiqueta-pilar mb-4">
+                                        Sala 1
+                                    </span>
+                                    <h4 class="text-2xl font-bold flex-1">Implementación de IA para tu Inmobiliaria</h4>
+                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ mensajeCuposPorTurno }}</p>
+                                    <button type="button" (click)="abrirReservaCupo(1, 'Implementación de IA para tu Inmobiliaria', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
+                                </div>
                             </div>
-                            <h5 class="font-bold mt-12 text-2xl leading-tight">Tendencias Macroeeconómicas </h5>
-                            <button class="saber-mas-btn mt-4 border border-white/50 rounded-md px-4 py-2 text-sm hover:bg-white/10 transition">Saber más</button>
-                        </div>
-                         <div class="card-flipped-content absolute inset-0 p-5 flex flex-col items-center justify-center transition-opacity duration-300 opacity-0 pointer-events-none">
-                            <div class="flex-grow flex items-center justify-center">
-                               <p style="color: #2d3450;" class="text-center font-medium">¿Año de riesgo o de oportunidad? Decodificamos las proyecciones económicas y el impacto de las nuevas reformas para que tomes decisiones financieras con certeza, no con suposiciones.</p>
-                            </div>
-                            <button class="volver-btn border border-[#2d3450] text-[#2d3450] rounded-md px-4 py-2 text-sm hover:bg-[#2d3450] hover:text-white transition">Volver</button>
                         </div>
                     </div>
-                </div>
                 
-                <div class="w-4/5 flex-shrink-0 md:w-1/2 lg:w-auto">
-                    <div class="animatable-card bg-white/10 backdrop-blur-lg rounded-2xl p-5 text-white text-left relative h-full transition-colors duration-500">
-                         <div class="card-original-content transition-opacity duration-300">
-                            <div class="absolute top-5 left-5">
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white etiqueta-pilar">
-                                    Fidelización
-                                </span>
+                    <div class="w-full min-w-0 flex">
+                        <div class="animatable-card temas-charla-card bg-white/10 backdrop-blur-lg rounded-2xl text-white text-left relative h-full w-full overflow-hidden transition-colors duration-500">
+                            <div class="card-original-content transition-opacity duration-300 flex flex-col md:flex-row md:items-stretch flex-1 min-h-0">
+                                <div class="agenda-card-imagen shrink-0 md:w-[42%] lg:w-[38%]">
+                                    <img src="../../../assets/img/charla2.png" alt="Experiencia alterna — Sala 2" class="block w-full h-full object-cover object-center" />
+                                </div>
+                                <div class="agenda-card-texto flex flex-col p-6 sm:p-8 md:py-8 md:pr-8 md:pl-6 flex-1 min-w-0">
+                                    <span class="inline-flex items-center self-start px-3 py-1 rounded-full text-sm font-medium text-white etiqueta-pilar mb-4">
+                                        Sala 2
+                                    </span>
+                                    <h4 class="text-2xl font-bold flex-1">Entorno Juridico</h4>
+                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ mensajeCuposPorTurno }}</p>
+                                    <button type="button" (click)="abrirReservaCupo(2, 'Entorno Juridico', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
+                                </div>
                             </div>
-                            <h5 class="font-bold mt-12 text-2xl leading-tight">Customer Experience Inmobiliario</h5>
-                            <button class="saber-mas-btn mt-4 border border-white/50 rounded-md px-4 py-2 text-sm hover:bg-white/10 transition">Saber más</button>
-                        </div>
-                         <div class="card-flipped-content absolute inset-0 p-5 flex flex-col items-center justify-center transition-opacity duration-300 opacity-0 pointer-events-none">
-                            <div class="flex-grow flex items-center justify-center">
-                                <p style="color: #2d3450;" class="text-center font-medium">En tiempos volátiles, la confianza es la moneda más valiosa. Aprende a diseñar experiencias memorables que blinden tu cartera de clientes y conviertan a cada usuario en un embajador de tu marca.</p>
-                            </div>
-                            <button class="volver-btn border border-[#2d3450] text-[#2d3450] rounded-md px-4 py-2 text-sm hover:bg-[#2d3450] hover:text-white transition">Volver</button>
                         </div>
                     </div>
-                </div>
                 
-                <div class="w-4/5 flex-shrink-0 md:w-1/2 lg:w-auto">
-                    <div class="animatable-card bg-white/10 backdrop-blur-lg rounded-2xl p-5 text-white text-left relative h-full transition-colors duration-500">
-                         <div class="card-original-content transition-opacity duration-300">
-                            <div class="absolute top-5 left-5">
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white etiqueta-pilar">
-                                    Análisis experto
-                                </span>
+                    <div class="w-full min-w-0 flex">
+                        <div class="animatable-card temas-charla-card bg-white/10 backdrop-blur-lg rounded-2xl text-white text-left relative h-full w-full overflow-hidden transition-colors duration-500">
+                            <div class="card-original-content transition-opacity duration-300 flex flex-col md:flex-row md:items-stretch flex-1 min-h-0">
+                                <div class="agenda-card-imagen shrink-0 md:w-[42%] lg:w-[38%]">
+                                    <img src="../../../assets/img/charla3.png" alt="Experiencia alterna — Sala 3" class="block w-full h-full object-cover object-center" />
+                                </div>
+                                <div class="agenda-card-texto flex flex-col p-6 sm:p-8 md:py-8 md:pr-8 md:pl-6 flex-1 min-w-0">
+                                    <span class="inline-flex items-center self-start px-3 py-1 rounded-full text-sm font-medium text-white etiqueta-pilar mb-4">
+                                        Sala 3
+                                    </span>
+                                    <h4 class="text-2xl font-bold flex-1">Casos de Exito</h4>
+                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ mensajeCuposPorTurno }}</p>
+                                    <button type="button" (click)="abrirReservaCupo(3, 'Casos de Exito', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
+                                </div>
                             </div>
-                            <h5 class="font-bold mt-12 text-2xl leading-tight">Tendencias jurídicas inmobiliarias</h5>
-                            <button class="saber-mas-btn mt-4 border border-white/50 rounded-md px-4 py-2 text-sm hover:bg-white/10 transition">Saber más</button>
-                        </div>
-                         <div class="card-flipped-content absolute inset-0 p-5 flex flex-col items-center justify-center transition-opacity duration-300 opacity-0 pointer-events-none">
-                            <div class="flex-grow flex items-center justify-center">
-                                <p style="color: #2d3450;" class="text-center font-medium">El marco legal está cambiando. Actualízate frente a las nuevas normativas de vivienda y arrendamiento para proteger tu operación, tus contratos y el patrimonio de tus propietarios sin correr riesgos innecesarios.</p>
-                            </div>
-                            <button class="volver-btn border border-[#2d3450] text-[#2d3450] rounded-md px-4 py-2 text-sm hover:bg-[#2d3450] hover:text-white transition">Volver</button>
                         </div>
                     </div>
+
+                    <div class="w-full min-w-0 flex">
+                        <div class="animatable-card temas-charla-card bg-white/10 backdrop-blur-lg rounded-2xl text-white text-left relative h-full w-full overflow-hidden transition-colors duration-500">
+                            <div class="card-original-content transition-opacity duration-300 flex flex-col md:flex-row md:items-stretch flex-1 min-h-0">
+                                <div class="agenda-card-imagen shrink-0 md:w-[42%] lg:w-[38%]">
+                                    <img src="../../../assets/img/charla4.png" alt="Experiencia alterna — Sala 4" class="block w-full h-full object-cover object-center" />
+                                </div>
+                                <div class="agenda-card-texto flex flex-col p-6 sm:p-8 md:py-8 md:pr-8 md:pl-6 flex-1 min-w-0">
+                                    <span class="inline-flex items-center self-start px-3 py-1 rounded-full text-sm font-medium text-white etiqueta-pilar mb-4">
+                                        Sala 4
+                                    </span>
+                                    <h4 class="text-2xl font-bold flex-1">Meet & Greet</h4>
+                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ mensajeCuposPorTurno }}</p>
+                                    <button type="button" (click)="abrirReservaCupo(4, 'Meet & Greet', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
                 </div>
-            </div>
 
             <div class="mt-20 relative bg-cover bg-center rounded-2xl shadow-lg overflow-hidden flex flex-col lg:flex-row items-center seccion-boletas-ad-3" style="margin-bottom: 0 !important;">
                 <div class="absolute inset-0  opacity-50"></div>
@@ -300,11 +193,11 @@
             </div>
 
         </div>
-    </section>
+    </section> -->
 
-    <section id="precios-pioneros-section" class="py-20 sm:py-28 bg-[#f7f8fa] seccion-precios">
+    <section id="precios-pioneros-section" class="bg-[#f7f8fa] seccion-precios pt-0 pb-10 sm:pb-12">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-[#2d3450] texto-entradas">Etapa visionarios: asegura tu entrada</h2>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#2d3450] texto-entradas">Asegura tu entrada</h2>
             <p class="mt-4 text-lg text-gray-600" style="margin-top: 0;">Comparte el conocimiento con tu equipo y vive la mejor experiencia</p>
     
             <div class="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center max-w-sm mx-auto lg:max-w-none">
@@ -433,9 +326,9 @@
         </div>
     </section>
 
-    <section id="contacto-patrocinadores-section" class="py-10 sm:py-16 bg-[#f7f8fa]">
+    <section id="contacto-patrocinadores-section" class="bg-[#f7f8fa] pb-8 pt-4 sm:pb-12 sm:pt-6">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mt-20 text-center">
+            <div class="mt-4 text-center sm:mt-6">
                 <h3 class="text-xl font-semibold text-gray-700 tracking-wide">Patrocinan:</h3>
                 
                 <div class="logos-container">
@@ -467,3 +360,107 @@
             </div> 
         </div>
     </section>
+
+    <section class="seccion-vive-foro">
+        <div class="seccion-vive-foro-inner">
+            <h3 class="titulo-vive-foro">
+                <strong>Vive el XVI Foro Experiencia Inmobiliaria</strong> con total comodidad!
+            </h3>
+            <h4 class="subtitulo-vive-foro">Disfruta de un ahorro especial en el Hilton Cartagena gracias a nuestra alianza</h4>
+            <a
+                href="#"
+                class="boton-hilton-vidrio"
+                (click)="abrirWhatsappHotel(); $event.preventDefault()"
+                >¡Pide más info aquí con nuestro asesor exclusivo!</a>
+        </div>
+    </section>
+
+    <section id="history-section" class="seccion-historia">
+        <div class="max-w-7xl mx-auto px-4">
+
+
+            <h2 class="text-4xl md:text-5xl font-bold">16 años haciendo historia</h2>
+            <p class="mt-4 text-lg">con el evento más importante del sector inmobiliario</p>
+            <div class="mt-12 lg:grid lg:grid-cols-4 lg:gap-8 lg:items-center">
+                <div class="carousel-wrapper lg:col-span-2 lg:col-start-2 flex items-center justify-center mb-8 lg:mb-0">
+                    <div class="carousel-container">
+                        <div class="carousel-rotator">
+                            <div class="carousel-face">
+                                <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/0f8c88b4-abc3-4f14-9ea6-8a03b73fe7cb.png" class="rounded-xl shadow-xl w-full h-full object-cover">
+                            </div>
+                            <div class="carousel-face">
+                                <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/0f8c88b4-abc3-4f14-9ea6-8a03b73fe7cb.png" class="rounded-xl shadow-xl w-full h-full object-cover">
+                            </div>
+                            <div class="carousel-face">
+                                <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/0f8c88b4-abc3-4f14-9ea6-8a03b73fe7cb.png" class="rounded-xl shadow-xl w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-8 lg:contents contenedor-numeros">
+                    <div class="stats-box space-y-8 text-center lg:col-start-1 lg:row-start-1">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <p class="text-5xl font-extrabold counter-number" data-target="4.9">4.9</p>
+                            <p class="font-bold mt-2 text-gray-800">Calificación general</p>
+                            <p class="text-sm text-gray-500">Última versión</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <p class="text-5xl font-extrabold counter-number" data-target="9500" data-suffix="+">9.000</p>
+                            <p class="font-bold mt-2 text-gray-800">Usuarios impactados</p>
+                            <p class="text-sm text-gray-500">En 16 años</p>
+                        </div>
+                    </div>
+                    <div class="stats-box space-y-8 text-center lg:col-start-4">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <p class="text-5xl font-extrabold counter-number" data-target="60" data-suffix="+">60</p>
+                            <p class="font-bold mt-2 text-gray-800">Speakers y expertos</p>
+                            <p class="text-sm text-gray-500">de nivel mundial</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <p class="text-5xl font-extrabold counter-number" data-target="4.8">4.8</p>
+                            <p class="font-bold mt-2 text-gray-800">Calificación conferencias</p>
+                            <p class="text-sm text-gray-500">puntaje máximo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="mt-20 text-center">
+                <h3 class="text-xl font-semibold text-gray-700 tracking-wide">Organizan:</h3>
+                
+                <div class="logos-container">
+                    <div class="logos-slide">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/66666cd3-65d8-4390-b479-861563e4e8c2.png" alt="Logo Seguros Bolívar" class="h-8 sm:h-10 mx-8 logo-bolivar">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e0faa2fd-4ce0-4a1c-9e1f-e9a2fbbfe097.png" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/f9c2de7e-e1bd-43d2-8e70-7e650bf02086.png" alt="Logo Davivienda" class="h-8 sm:h-10 mx-8 logo-davivienda">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/66666cd3-65d8-4390-b479-861563e4e8c2.png" alt="Logo Seguros Bolívar" class="h-8 sm:h-10 mx-8 logo-bolivar">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e0faa2fd-4ce0-4a1c-9e1f-e9a2fbbfe097.png" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/f9c2de7e-e1bd-43d2-8e70-7e650bf02086.png" alt="Logo Davivienda" class="h-8 sm:h-10 mx-8 logo-davivienda">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/66666cd3-65d8-4390-b479-861563e4e8c2.png" alt="Logo Seguros Bolívar" class="h-8 sm:h-10 mx-8 logo-bolivar">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e0faa2fd-4ce0-4a1c-9e1f-e9a2fbbfe097.png" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/f9c2de7e-e1bd-43d2-8e70-7e650bf02086.png" alt="Logo Davivienda" class="h-8 sm:h-10 mx-8 logo-davivienda">
+                    </div>
+                     <div class="logos-slide">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/66666cd3-65d8-4390-b479-861563e4e8c2.png" alt="Logo Seguros Bolívar" class="h-8 sm:h-10 mx-8 logo-bolivar">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e0faa2fd-4ce0-4a1c-9e1f-e9a2fbbfe097.png" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
+                        <img src="https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/f9c2de7e-e1bd-43d2-8e70-7e650bf02086.png" alt="Logo Davivienda" class="h-8 sm:h-10 mx-8 logo-davivienda">
+                    </div>
+                </div>
+
+            </div>
+    
+        </div>
+    </section>
+
+
