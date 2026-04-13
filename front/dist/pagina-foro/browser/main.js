@@ -43276,22 +43276,22 @@ var ServiceBoletas = class _ServiceBoletas {
 // src/app/pages/landing/landing.ts
 function Landing_div_22_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 137)(1, "button", 138);
+    \u0275\u0275elementStart(0, "div", 107)(1, "button", 108);
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(2, "svg", 139);
-    \u0275\u0275element(3, "path", 140);
+    \u0275\u0275elementStart(2, "svg", 109);
+    \u0275\u0275element(3, "path", 110);
     \u0275\u0275elementEnd()();
     \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(4, "div", 141)(5, "a", 142);
+    \u0275\u0275elementStart(4, "div", 111)(5, "a", 112);
     \u0275\u0275text(6, "Inicio");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "a", 143);
+    \u0275\u0275elementStart(7, "a", 113);
     \u0275\u0275text(8, "Historia");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(9, "a", 144);
-    \u0275\u0275text(10, "Temas");
+    \u0275\u0275elementStart(9, "a", 114);
+    \u0275\u0275text(10, "Experiencias");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(11, "a", 145);
+    \u0275\u0275elementStart(11, "a", 115);
     \u0275\u0275text(12, "Boletas");
     \u0275\u0275elementEnd()()();
   }
@@ -43475,7 +43475,7 @@ var Landing = class _Landing {
         return ctx.onWindowScroll();
       }, \u0275\u0275resolveWindow);
     }
-  }, decls: 409, vars: 11, consts: [[1, "grid", "grid-cols-3", "items-center", "max-w-7xl", "mx-auto", "p-6", "min-[1108px]:flex", "min-[1108px]:justify-between"], [1, "col-start-2", "justify-self-center", "flex", "items-center", "space-x-4", "min-[1108px]:col-auto", "min-[1108px]:justify-self-auto", "contenedor-logos", 2, "max-width", "170px"], ["src", "../../../assets/img/nuevo-logo-foro-2026.png", "alt", "Logo Experiencia Inmobiliaria", 1, "logo-white", "logo-foro-1"], [1, "border-l", "border-gray-400", "h-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png", "alt", "Logo El Libertador", 1, "logo-white", "logo-libertador"], [1, "hidden", "min-[1108px]:flex", "items-center", "space-x-8"], ["href", "#inicio-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#history-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#temas-foro-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#precios-pioneros-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], [1, "hidden", "min-[1108px]:block"], [1, "text-white", "border", "border-white/50", "rounded-md", "px-3", "py-1.5", "text-sm"], [1, "min-[1108px]:hidden", "col-start-3", "justify-self-end"], [1, "absolute", "top-4", "right-6", "text-[#2d3450]", 3, "click"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-6", "h-6"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M4 6h16M4 12h16m-7 6h7"], ["class", "min-[1108px]:hidden fixed top-[80px] left-0 right-0 bottom-0 z-20 bg-white/75 backdrop-blur-md", 4, "ngIf"], ["id", "animation-container"], ["id", "inicio-section", 1, "relative", "hero-bg", "w-full", "p-0"], ["src", "../../../assets/img/fotospeakers.jpg", "alt", "Speakers XVI Foro Experiencia Inmobiliaria", "width", "6250", "height", "3750", "loading", "eager", "decoding", "async", 1, "hero-speakers-img"], [1, "particle-canvas", "absolute", "top-0", "left-0", "w-full", "h-full", "z-[1]"], ["id", "hero-content", 1, "absolute", "bottom-0", "left-1/2", "z-10", "flex", "w-full", "max-w-5xl", "-translate-x-1/2", "translate-y-1/2", "flex-col", "items-center", "px-2", "text-white", "sm:px-4"], [1, "hero-timer-row", "flex", "flex-wrap", "justify-center", "gap-1.5", "sm:gap-2"], [1, "timer-box", "timer-box--hero"], ["id", "days", 1, "text-lg", "font-bold", "leading-none", "tabular-nums", "sm:text-xl"], [1, "texto-tiempo", "texto-tiempo--hero"], ["id", "hours", 1, "text-lg", "font-bold", "leading-none", "tabular-nums", "sm:text-xl"], ["id", "minutes", 1, "text-lg", "font-bold", "leading-none", "tabular-nums", "sm:text-xl"], ["id", "seconds", 1, "text-lg", "font-bold", "leading-none", "tabular-nums", "sm:text-xl"], ["aria-hidden", "true", 1, "hero-timer-spacer", "h-2.5", "shrink-0", "sm:h-3"], [1, "floating-cta"], [1, "bg-white", "text-gray-800", "rounded-full", "flex", "items-center", "shadow-lg", "hover:bg-gray-200", "transition-colors", "p-3", "space-x-0", "md:px-6", "md:py-3", "md:space-x-2", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 24 24", "fill", "none", "stroke", "currentColor", "stroke-width", "2", "stroke-linecap", "round", "stroke-linejoin", "round", 1, "w-8", "h-8", "md:w-6", "md:h-6", "icon", "icon-tabler", "icons-tabler-outline", "icon-tabler-brand-whatsapp"], ["stroke", "none", "d", "M0 0h24v24H0z", "fill", "none"], ["d", "M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"], ["d", "M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"], [1, "hidden", "md:inline"], ["id", "temas-foro-section", 1, "relative", "bg-[#2d3450]", "py-20", "sm:py-28", "seccion-temas"], [1, "particle-canvas", "absolute", "top-0", "left-0", "w-full", "h-full", "z-0"], [1, "relative", "z-10", "max-w-7xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8"], [1, "text-center", "text-white", "mb-16"], [1, "text-3xl", "font-bold", "tracking-tight", "sm:text-4xl"], [1, "text-4xl", "font-extrabold", "tracking-tight", "sm:text-5xl", "mt-2", "texto-pilares"], [1, "card-slider"], [1, "temas-card-destacada", "w-full"], [1, "animatable-card", "agenda-card-destacada", "bg-white/10", "backdrop-blur-lg", "rounded-2xl", "text-white", "text-left", "w-full", "relative", "h-full", "overflow-hidden", "transition-colors", "duration-500"], [1, "card-original-content", "transition-opacity", "duration-300", "flex", "flex-col", "md:flex-row", "md:items-stretch"], [1, "agenda-card-imagen", "shrink-0", "md:w-[42%]", "lg:w-[38%]", "min-h-[200px]", "md:min-h-[260px]"], ["src", "../../../assets/img/speakers.png", "alt", "Agenda del Foro Experiencia Inmobiliaria", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "agenda-card-texto", "flex", "flex-col", "justify-center", "p-6", "sm:p-8", "md:py-10", "md:pr-10", "md:pl-8", "flex-1", "min-w-0"], [1, "inline-flex", "items-center", "self-start", "px-3", "py-1", "rounded-full", "text-sm", "font-medium", "text-white", "etiqueta-pilar", "mb-4"], [1, "text-2xl", "font-bold"], [1, "mt-6", "flex", "justify-start"], ["href", "https://dvn7rzpuwpj45.cloudfront.net/wp-content/uploads/2026/03/20163220/Agenda_foro_202.pdf", "target", "_blank", 1, "text-white", "font-semibold", "py-3", "px-6", "rounded-lg", "hover:opacity-90", "transition-opacity", "inline-block", "shadow-md", 2, "background-color", "#bd0f14"], [1, "text-center", "text-white"], [1, "contenedorCharlas"], [1, "w-full", "min-w-0", "flex"], [1, "animatable-card", "temas-charla-card", "bg-white/10", "backdrop-blur-lg", "rounded-2xl", "text-white", "text-left", "relative", "h-full", "w-full", "overflow-hidden", "transition-colors", "duration-500"], [1, "card-original-content", "transition-opacity", "duration-300", "flex", "flex-col", "md:flex-row", "md:items-stretch", "flex-1", "min-h-0"], [1, "agenda-card-imagen", "shrink-0", "md:w-[42%]", "lg:w-[38%]"], ["src", "../../../assets/img/charla1.png", "alt", "Experiencia alterna \u2014 Sala 1", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "agenda-card-texto", "flex", "flex-col", "p-6", "sm:p-8", "md:py-8", "md:pr-8", "md:pl-6", "flex-1", "min-w-0"], [1, "inline-flex", "items-center", "self-start", "px-3", "py-1", "rounded-full", "text-sm", "font-medium", "text-white", "whitespace-nowrap", "etiqueta-pilar", "mb-4"], [1, "text-2xl", "font-bold", "flex-1"], [1, "text-sm", "text-white/85", "mt-2", "leading-snug"], ["type", "button", 1, "btn-reserva-vidrio", "mt-6", "md:mt-auto", 3, "click"], ["src", "../../../assets/img/charla2.png", "alt", "Experiencia alterna \u2014 Sala 2", 1, "block", "w-full", "h-full", "object-cover", "object-center"], ["src", "../../../assets/img/charla3.png", "alt", "Experiencia alterna \u2014 Sala 3", 1, "block", "w-full", "h-full", "object-cover", "object-center"], ["src", "../../../assets/img/charla4.png", "alt", "Experiencia alterna \u2014 Sala 4", 1, "block", "w-full", "h-full", "object-cover", "object-center"], [1, "relative", "bg-cover", "bg-center", "rounded-2xl", "shadow-lg", "overflow-hidden", "flex", "flex-col", "lg:flex-row", "items-center", "seccion-boletas-ad-2", "h-[220px]"], [1, "absolute", "inset-0", "bg-gray-800", "opacity-50"], [1, "relative", "z-10", "w-full", "lg:w-3/5", "text-white", "text-center", "py-6", "px-6", "lg:py-8", "lg:px-12"], [1, "text-lg", "lg:text-xl", "font-normal", 2, "text-align", "center"], [1, "mt-6", "flex", "justify-center", 2, "justify-content", "center"], [1, "text-white", "font-semibold", "py-3", "px-6", "rounded-lg", "hover:opacity-90", "transition-opacity", "inline-block", "shadow-md", "cursor-pointer", 2, "background-color", "#bd0f14", 3, "click"], [1, "relative", "z-10", "hidden", "lg:flex", "lg:w-2/5", "justify-center"], ["src", "../../../assets/img/persona-boletos.png", "alt", "Persona con entradas", 1, "rounded-lg", "imagen-boletos-2"], ["id", "precios-pioneros-section", 1, "py-20", "sm:py-28", "bg-[#f7f8fa]", "seccion-precios"], [1, "max-w-6xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8", "text-center"], [1, "text-3xl", "md:text-4xl", "font-extrabold", "text-[#2d3450]", "texto-entradas"], [1, "mt-4", "text-lg", "text-gray-600", 2, "margin-top", "0"], [1, "mt-16", "grid", "grid-cols-1", "lg:grid-cols-3", "gap-8", "items-center", "max-w-sm", "mx-auto", "lg:max-w-none"], [1, "bg-white", "rounded-xl", "shadow-lg", "p-8", "flex", "flex-col", "h-full", "border", "border-gray-200"], [1, "text-2xl", "font-bold", "text-[#2d3450]", "sub-texto-tarjeta"], [1, "my-6"], [1, "text-5xl", "font-extrabold", "text-[#2d3450]"], [1, "space-y-2", "text-gray-600", "mb-8"], [1, "border-b", "border-gray-300", "pb-3"], [1, "font-bold", "text-[#2d3450]", "pt-2"], [1, "mt-auto", "w-full", "bg-gray-200", "text-gray-800", "font-semibold", "py-3", "px-6", "rounded-lg", "flex", "items-center", "justify-center", "hover:bg-gray-300", "transition-colors", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "width", "24", "height", "24", "viewBox", "0 0 24 24", "fill", "none", "stroke", "currentColor", "stroke-width", "2", "stroke-linecap", "round", "stroke-linejoin", "round", 1, "icon", "icon-tabler", "icons-tabler-outline", "icon-tabler-ticket", "icono-compra"], ["d", "M15 5l0 2"], ["d", "M15 11l0 2"], ["d", "M15 17l0 2"], ["d", "M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2"], [1, "text-white", "rounded-xl", "shadow-2xl", "p-8", "transform", "lg:scale-110", "flex", "flex-col", "h-full", 2, "background", "linear-gradient(to bottom, #BD0F14, #253150)"], [1, "mb-4"], [1, "bg-white", "text-[#253150]", "text-sm", "font-bold", "px-4", "py-1.5", "rounded-full"], [1, "text-5xl", "font-extrabold"], [1, "space-y-2", "text-white", "mb-8"], [1, "font-bold", "pt-2"], [1, "mt-16", "text-sm", "text-gray-500", "italic"], [1, "devolucion"], ["id", "history-section", 1, "seccion-historia"], [1, "max-w-7xl", "mx-auto", "px-4"], [1, "text-4xl", "md:text-5xl", "font-bold"], [1, "mt-4", "text-lg"], [1, "mt-12", "lg:grid", "lg:grid-cols-4", "lg:gap-8", "lg:items-center"], [1, "carousel-wrapper", "lg:col-span-2", "lg:col-start-2", "flex", "items-center", "justify-center", "mb-8", "lg:mb-0"], [1, "carousel-container"], [1, "carousel-rotator"], [1, "carousel-face"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/0f8c88b4-abc3-4f14-9ea6-8a03b73fe7cb.png", 1, "rounded-xl", "shadow-xl", "w-full", "h-full", "object-cover"], [1, "grid", "grid-cols-2", "gap-8", "lg:contents", "contenedor-numeros"], [1, "stats-box", "space-y-8", "text-center", "lg:col-start-1", "lg:row-start-1"], [1, "bg-white", "p-6", "rounded-lg", "shadow-md"], ["data-target", "4.9", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "font-bold", "mt-2", "text-gray-800"], [1, "text-sm", "text-gray-500"], ["data-target", "9500", "data-suffix", "+", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "stats-box", "space-y-8", "text-center", "lg:col-start-4"], ["data-target", "60", "data-suffix", "+", 1, "text-5xl", "font-extrabold", "counter-number"], ["data-target", "4.8", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "max-w-6xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8"], [1, "mt-20", "text-center"], [1, "text-xl", "font-semibold", "text-gray-700", "tracking-wide"], [1, "logos-container"], [1, "logos-slide"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/66666cd3-65d8-4390-b479-861563e4e8c2.png", "alt", "Logo Seguros Bol\xEDvar", 1, "h-8", "sm:h-10", "mx-8", "logo-bolivar"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e0faa2fd-4ce0-4a1c-9e1f-e9a2fbbfe097.png", "alt", "Logo CienCuadras", 1, "h-8", "sm:h-10", "mx-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/f9c2de7e-e1bd-43d2-8e70-7e650bf02086.png", "alt", "Logo Davivienda", 1, "h-8", "sm:h-10", "mx-8", "logo-davivienda"], ["id", "contacto-patrocinadores-section", 1, "py-10", "sm:py-16", "bg-[#f7f8fa]"], ["src", "../../../assets/img/Afydi_Logo ROJO.ai.png", "alt", "Logo Seguros Bol\xEDvar", 1, "h-8", "sm:h-10", "mx-8", "logo-bolivar"], ["src", "../../../assets/img/LOGO-SIMI.jpg", "alt", "Logo CienCuadras", 1, "h-8", "sm:h-10", "mx-8"], ["src", "../../../assets/img/N - SEDI SOLUTIONS.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], ["src", "../../../assets/img/nuwwe.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], [1, "min-[1108px]:hidden", "fixed", "top-[80px]", "left-0", "right-0", "bottom-0", "z-20", "bg-white/75", "backdrop-blur-md"], ["id", "close-menu-button", 1, "absolute", "top-4", "right-6", "text-[#2d3450]"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg", 1, "w-8", "h-8"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M6 18L18 6M6 6l12 12"], [1, "h-full", "flex", "flex-col", "justify-center", "items-center", "space-y-8", "-mt-[80px]"], ["href", "#inicio-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500", "active-link-mobile"], ["href", "#history-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"], ["href", "#temas-foro-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"], ["href", "#precios-pioneros-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"]], template: function Landing_Template(rf, ctx) {
+  }, decls: 323, vars: 7, consts: [[1, "grid", "grid-cols-3", "items-center", "max-w-7xl", "mx-auto", "p-6", "min-[1108px]:flex", "min-[1108px]:justify-between"], [1, "col-start-2", "justify-self-center", "flex", "items-center", "space-x-4", "min-[1108px]:col-auto", "min-[1108px]:justify-self-auto", "contenedor-logos", 2, "max-width", "170px"], ["src", "../../../assets/img/nuevo-logo-foro-2026.png", "alt", "Logo Experiencia Inmobiliaria", 1, "logo-white", "logo-foro-1"], [1, "border-l", "border-gray-400", "h-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png", "alt", "Logo El Libertador", 1, "logo-white", "logo-libertador"], [1, "hidden", "min-[1108px]:flex", "items-center", "space-x-8"], ["href", "#inicio-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#history-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#temas-foro-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], ["href", "#precios-pioneros-section", 1, "nav-link", "text-white", "hover:text-gray-300", 3, "click"], [1, "hidden", "min-[1108px]:block"], [1, "text-white", "border", "border-white/50", "rounded-md", "px-3", "py-1.5", "text-sm"], [1, "min-[1108px]:hidden", "col-start-3", "justify-self-end"], [1, "absolute", "top-4", "right-6", "text-[#2d3450]", 3, "click"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-6", "h-6"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M4 6h16M4 12h16m-7 6h7"], ["class", "min-[1108px]:hidden fixed top-[80px] left-0 right-0 bottom-0 z-20 bg-white/75 backdrop-blur-md", 4, "ngIf"], ["id", "animation-container"], ["id", "inicio-section", 1, "relative", "hero-bg", "w-full", "flex", "flex-col", "p-0"], [1, "particle-canvas", "pointer-events-none", "absolute", "top-0", "left-0", "z-0", "h-full", "w-full"], ["id", "hero-content", 1, "absolute", "bottom-0", "left-1/2", "z-10", "flex", "w-full", "max-w-5xl", "-translate-x-1/2", "flex-col", "items-center", "px-2", "text-white", "sm:px-4"], [1, "hero-hero-extras", "mb-3", "flex", "flex-col", "items-center"], [1, "texto-contador", "mb-1", "text-center", "text-xs", "sm:text-sm"], ["href", "https://dvn7rzpuwpj45.cloudfront.net/wp-content/uploads/2026/03/20163220/Agenda_foro_202.pdf", "target", "_blank", "rel", "noopener noreferrer", 1, "hero-agenda-btn", "text-center", "shadow-md", "transition-opacity", "hover:opacity-90"], [1, "hero-timer-anchor", "flex", "translate-y-1/2", "flex-col", "items-center"], [1, "hero-timer-row", "flex", "flex-wrap", "justify-center", "gap-1.5", "sm:gap-2"], [1, "timer-box", "timer-box--hero"], ["id", "days", 1, "text-base", "font-bold", "tabular-nums", "leading-none", "sm:text-lg"], [1, "texto-tiempo", "texto-tiempo--hero"], ["id", "hours", 1, "text-base", "font-bold", "tabular-nums", "leading-none", "sm:text-lg"], ["id", "minutes", 1, "text-base", "font-bold", "tabular-nums", "leading-none", "sm:text-lg"], ["id", "seconds", 1, "text-base", "font-bold", "tabular-nums", "leading-none", "sm:text-lg"], ["aria-hidden", "true", 1, "hero-timer-spacer", "h-2", "shrink-0", "sm:h-2.5"], [1, "floating-cta"], [1, "bg-white", "text-gray-800", "rounded-full", "flex", "items-center", "shadow-lg", "hover:bg-gray-200", "transition-colors", "p-3", "space-x-0", "md:px-6", "md:py-3", "md:space-x-2", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 24 24", "fill", "none", "stroke", "currentColor", "stroke-width", "2", "stroke-linecap", "round", "stroke-linejoin", "round", 1, "w-8", "h-8", "md:w-6", "md:h-6", "icon", "icon-tabler", "icons-tabler-outline", "icon-tabler-brand-whatsapp"], ["stroke", "none", "d", "M0 0h24v24H0z", "fill", "none"], ["d", "M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"], ["d", "M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"], [1, "hidden", "md:inline"], ["id", "precios-pioneros-section", 1, "bg-[#f7f8fa]", "seccion-precios", "pt-0", "pb-10", "sm:pb-12"], [1, "max-w-6xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8", "text-center"], [1, "text-3xl", "md:text-4xl", "font-extrabold", "text-[#2d3450]", "texto-entradas"], [1, "mt-4", "text-lg", "text-gray-600", 2, "margin-top", "0"], [1, "mt-16", "grid", "grid-cols-1", "lg:grid-cols-3", "gap-8", "items-center", "max-w-sm", "mx-auto", "lg:max-w-none"], [1, "bg-white", "rounded-xl", "shadow-lg", "p-8", "flex", "flex-col", "h-full", "border", "border-gray-200"], [1, "text-2xl", "font-bold", "text-[#2d3450]", "sub-texto-tarjeta"], [1, "my-6"], [1, "text-5xl", "font-extrabold", "text-[#2d3450]"], [1, "space-y-2", "text-gray-600", "mb-8"], [1, "border-b", "border-gray-300", "pb-3"], [1, "font-bold", "text-[#2d3450]", "pt-2"], [1, "mt-auto", "w-full", "bg-gray-200", "text-gray-800", "font-semibold", "py-3", "px-6", "rounded-lg", "flex", "items-center", "justify-center", "hover:bg-gray-300", "transition-colors", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "width", "24", "height", "24", "viewBox", "0 0 24 24", "fill", "none", "stroke", "currentColor", "stroke-width", "2", "stroke-linecap", "round", "stroke-linejoin", "round", 1, "icon", "icon-tabler", "icons-tabler-outline", "icon-tabler-ticket", "icono-compra"], ["d", "M15 5l0 2"], ["d", "M15 11l0 2"], ["d", "M15 17l0 2"], ["d", "M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2"], [1, "text-white", "rounded-xl", "shadow-2xl", "p-8", "transform", "lg:scale-110", "flex", "flex-col", "h-full", 2, "background", "linear-gradient(to bottom, #BD0F14, #253150)"], [1, "mb-4"], [1, "bg-white", "text-[#253150]", "text-sm", "font-bold", "px-4", "py-1.5", "rounded-full"], [1, "text-2xl", "font-bold"], [1, "text-5xl", "font-extrabold"], [1, "space-y-2", "text-white", "mb-8"], [1, "font-bold", "pt-2"], [1, "mt-16", "text-sm", "text-gray-500", "italic"], [1, "devolucion"], ["id", "contacto-patrocinadores-section", 1, "bg-[#f7f8fa]", "pb-8", "pt-4", "sm:pb-12", "sm:pt-6"], [1, "max-w-6xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8"], [1, "mt-4", "text-center", "sm:mt-6"], [1, "text-xl", "font-semibold", "text-gray-700", "tracking-wide"], [1, "logos-container"], [1, "logos-slide"], ["src", "../../../assets/img/Afydi_Logo ROJO.ai.png", "alt", "Logo Seguros Bol\xEDvar", 1, "h-8", "sm:h-10", "mx-8", "logo-bolivar"], ["src", "../../../assets/img/LOGO-SIMI.jpg", "alt", "Logo CienCuadras", 1, "h-8", "sm:h-10", "mx-8"], ["src", "../../../assets/img/N - SEDI SOLUTIONS.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], ["src", "../../../assets/img/nuwwe.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], [1, "seccion-vive-foro"], [1, "seccion-vive-foro-inner"], [1, "titulo-vive-foro"], [1, "subtitulo-vive-foro"], ["href", "#", 1, "boton-hilton-vidrio", 3, "click"], ["id", "history-section", 1, "seccion-historia"], [1, "max-w-7xl", "mx-auto", "px-4"], [1, "text-4xl", "md:text-5xl", "font-bold"], [1, "mt-4", "text-lg"], [1, "mt-12", "lg:grid", "lg:grid-cols-4", "lg:gap-8", "lg:items-center"], [1, "carousel-wrapper", "lg:col-span-2", "lg:col-start-2", "flex", "items-center", "justify-center", "mb-8", "lg:mb-0"], [1, "carousel-container"], [1, "carousel-rotator"], [1, "carousel-face"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/0f8c88b4-abc3-4f14-9ea6-8a03b73fe7cb.png", 1, "rounded-xl", "shadow-xl", "w-full", "h-full", "object-cover"], [1, "grid", "grid-cols-2", "gap-8", "lg:contents", "contenedor-numeros"], [1, "stats-box", "space-y-8", "text-center", "lg:col-start-1", "lg:row-start-1"], [1, "bg-white", "p-6", "rounded-lg", "shadow-md"], ["data-target", "4.9", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "font-bold", "mt-2", "text-gray-800"], [1, "text-sm", "text-gray-500"], ["data-target", "9500", "data-suffix", "+", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "stats-box", "space-y-8", "text-center", "lg:col-start-4"], ["data-target", "60", "data-suffix", "+", 1, "text-5xl", "font-extrabold", "counter-number"], ["data-target", "4.8", 1, "text-5xl", "font-extrabold", "counter-number"], [1, "mt-20", "text-center"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/66666cd3-65d8-4390-b479-861563e4e8c2.png", "alt", "Logo Seguros Bol\xEDvar", 1, "h-8", "sm:h-10", "mx-8", "logo-bolivar"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/e0faa2fd-4ce0-4a1c-9e1f-e9a2fbbfe097.png", "alt", "Logo CienCuadras", 1, "h-8", "sm:h-10", "mx-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/b235bf46-4b21-453e-80e6-f218a0fda487.png", "alt", "Logo El Libertador", 1, "h-8", "sm:h-10", "mx-8"], ["src", "https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/f9c2de7e-e1bd-43d2-8e70-7e650bf02086.png", "alt", "Logo Davivienda", 1, "h-8", "sm:h-10", "mx-8", "logo-davivienda"], [1, "min-[1108px]:hidden", "fixed", "top-[80px]", "left-0", "right-0", "bottom-0", "z-20", "bg-white/75", "backdrop-blur-md"], ["id", "close-menu-button", 1, "absolute", "top-4", "right-6", "text-[#2d3450]"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg", 1, "w-8", "h-8"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M6 18L18 6M6 6l12 12"], [1, "h-full", "flex", "flex-col", "justify-center", "items-center", "space-y-8", "-mt-[80px]"], ["href", "#inicio-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500", "active-link-mobile"], ["href", "#history-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"], ["href", "#temas-foro-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"], ["href", "#precios-pioneros-section", 1, "nav-link", "text-3xl", "font-bold", "text-[#2d3450]", "hover:text-gray-500"]], template: function Landing_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "header")(1, "nav", 0)(2, "div", 1);
       \u0275\u0275element(3, "img", 2)(4, "div", 3)(5, "img", 4);
@@ -43496,7 +43496,7 @@ var Landing = class _Landing {
       \u0275\u0275listener("click", function Landing_Template_a_click_11_listener() {
         return ctx.trackHeader("Temas");
       });
-      \u0275\u0275text(12, "Temas");
+      \u0275\u0275text(12, "Experiencias");
       \u0275\u0275elementEnd();
       \u0275\u0275elementStart(13, "a", 9);
       \u0275\u0275listener("click", function Landing_Template_a_click_13_listener() {
@@ -43518,431 +43518,331 @@ var Landing = class _Landing {
       \u0275\u0275template(22, Landing_div_22_Template, 13, 0, "div", 16);
       \u0275\u0275namespaceHTML();
       \u0275\u0275elementStart(23, "div", 17)(24, "main", 18);
-      \u0275\u0275element(25, "img", 19)(26, "canvas", 20);
-      \u0275\u0275elementStart(27, "div", 21)(28, "div", 22)(29, "div", 23)(30, "span", 24);
-      \u0275\u0275text(31);
+      \u0275\u0275element(25, "canvas", 19);
+      \u0275\u0275elementStart(26, "div", 20)(27, "div", 21)(28, "p", 22);
+      \u0275\u0275text(29, "Foro Inmobiliario comienza en:");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(32, "p", 25);
-      \u0275\u0275text(33, "D\xEDas");
+      \u0275\u0275elementStart(30, "a", 23);
+      \u0275\u0275text(31, "Conoce la agenda aqu\xED");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(34, "div", 23)(35, "span", 26);
+      \u0275\u0275elementStart(32, "div", 24)(33, "div", 25)(34, "div", 26)(35, "span", 27);
       \u0275\u0275text(36);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(37, "p", 25);
-      \u0275\u0275text(38, "Horas");
+      \u0275\u0275elementStart(37, "p", 28);
+      \u0275\u0275text(38, "D\xEDas");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(39, "div", 23)(40, "span", 27);
+      \u0275\u0275elementStart(39, "div", 26)(40, "span", 29);
       \u0275\u0275text(41);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(42, "p", 25);
-      \u0275\u0275text(43, "Minutos");
+      \u0275\u0275elementStart(42, "p", 28);
+      \u0275\u0275text(43, "Horas");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(44, "div", 23)(45, "span", 28);
+      \u0275\u0275elementStart(44, "div", 26)(45, "span", 30);
       \u0275\u0275text(46);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(47, "p", 25);
-      \u0275\u0275text(48, "Segundos");
+      \u0275\u0275elementStart(47, "p", 28);
+      \u0275\u0275text(48, "Minutos");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(49, "div", 26)(50, "span", 31);
+      \u0275\u0275text(51);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(52, "p", 28);
+      \u0275\u0275text(53, "Segundos");
       \u0275\u0275elementEnd()()();
-      \u0275\u0275element(49, "div", 29);
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(50, "div", 30)(51, "button", 31);
-      \u0275\u0275listener("click", function Landing_Template_button_click_51_listener() {
+      \u0275\u0275element(54, "div", 32);
+      \u0275\u0275elementEnd()()()();
+      \u0275\u0275elementStart(55, "div", 33)(56, "button", 34);
+      \u0275\u0275listener("click", function Landing_Template_button_click_56_listener() {
         return ctx.abrirWhatsapp();
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(52, "svg", 32);
-      \u0275\u0275element(53, "path", 33)(54, "path", 34)(55, "path", 35);
+      \u0275\u0275elementStart(57, "svg", 35);
+      \u0275\u0275element(58, "path", 36)(59, "path", 37)(60, "path", 38);
       \u0275\u0275elementEnd();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(56, "span", 36);
-      \u0275\u0275text(57, "Resuelve tus dudas");
+      \u0275\u0275elementStart(61, "span", 39);
+      \u0275\u0275text(62, "Resuelve tus dudas");
       \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(58, "section", 37);
-      \u0275\u0275element(59, "canvas", 38);
-      \u0275\u0275elementStart(60, "div", 39)(61, "div", 40)(62, "h3", 41);
-      \u0275\u0275text(63, "Agenda Foro 2026:");
+      \u0275\u0275elementStart(63, "section", 40)(64, "div", 41)(65, "h2", 42);
+      \u0275\u0275text(66, "Asegura tu entrada");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(64, "h2", 42);
-      \u0275\u0275text(65, "Dos dias para activar el crecimiento del sector inmobiliario");
+      \u0275\u0275elementStart(67, "p", 43);
+      \u0275\u0275text(68, "Comparte el conocimiento con tu equipo y vive la mejor experiencia");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(69, "div", 44)(70, "div", 45)(71, "h3", 46);
+      \u0275\u0275text(72, "Entrada individual");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(73, "div", 47)(74, "span", 48);
+      \u0275\u0275text(75, "$330.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(66, "div", 43)(67, "div", 44)(68, "div", 45)(69, "div", 46)(70, "div", 47);
-      \u0275\u0275element(71, "img", 48);
+      \u0275\u0275elementStart(76, "div", 49)(77, "p", 50);
+      \u0275\u0275text(78, "Por persona");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(72, "div", 49)(73, "span", 50);
-      \u0275\u0275text(74, " Agenda ");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(75, "h4", 51);
-      \u0275\u0275text(76, "Conoce los speakers, horarios y experiencias del evento");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(77, "div", 52)(78, "a", 53);
-      \u0275\u0275text(79, "Ver agenda");
-      \u0275\u0275elementEnd()()()()()();
-      \u0275\u0275elementStart(80, "div", 54)(81, "h3", 41);
-      \u0275\u0275text(82, "Experiencias Alternas");
+      \u0275\u0275elementStart(79, "p", 51);
+      \u0275\u0275text(80, "Acceso total");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(83, "div", 55)(84, "div", 56)(85, "div", 57)(86, "div", 58)(87, "div", 59);
-      \u0275\u0275element(88, "img", 60);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(89, "div", 61)(90, "span", 62);
-      \u0275\u0275text(91, " Sala 1 ");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(92, "h4", 63);
-      \u0275\u0275text(93, "Implementaci\xF3n de IA para tu Inmobiliaria");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(94, "p", 64);
-      \u0275\u0275text(95);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(96, "button", 65);
-      \u0275\u0275listener("click", function Landing_Template_button_click_96_listener($event) {
-        return ctx.abrirReservaCupo(1, "Implementaci\xF3n de IA para tu Inmobiliaria", $event);
-      });
-      \u0275\u0275text(97, "Reserva tu cupo aqu\xED");
-      \u0275\u0275elementEnd()()()()();
-      \u0275\u0275elementStart(98, "div", 56)(99, "div", 57)(100, "div", 58)(101, "div", 59);
-      \u0275\u0275element(102, "img", 66);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(103, "div", 61)(104, "span", 50);
-      \u0275\u0275text(105, " Sala 2 ");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(106, "h4", 63);
-      \u0275\u0275text(107, "Entorno Juridico");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(108, "p", 64);
-      \u0275\u0275text(109);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(110, "button", 65);
-      \u0275\u0275listener("click", function Landing_Template_button_click_110_listener($event) {
-        return ctx.abrirReservaCupo(2, "Entorno Juridico", $event);
-      });
-      \u0275\u0275text(111, "Reserva tu cupo aqu\xED");
-      \u0275\u0275elementEnd()()()()();
-      \u0275\u0275elementStart(112, "div", 56)(113, "div", 57)(114, "div", 58)(115, "div", 59);
-      \u0275\u0275element(116, "img", 67);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(117, "div", 61)(118, "span", 50);
-      \u0275\u0275text(119, " Sala 3 ");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(120, "h4", 63);
-      \u0275\u0275text(121, "Casos de Exito");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(122, "p", 64);
-      \u0275\u0275text(123);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(124, "button", 65);
-      \u0275\u0275listener("click", function Landing_Template_button_click_124_listener($event) {
-        return ctx.abrirReservaCupo(3, "Casos de Exito", $event);
-      });
-      \u0275\u0275text(125, "Reserva tu cupo aqu\xED");
-      \u0275\u0275elementEnd()()()()();
-      \u0275\u0275elementStart(126, "div", 56)(127, "div", 57)(128, "div", 58)(129, "div", 59);
-      \u0275\u0275element(130, "img", 68);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(131, "div", 61)(132, "span", 50);
-      \u0275\u0275text(133, " Sala 4 ");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(134, "h4", 63);
-      \u0275\u0275text(135, "Meet & Greet");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(136, "p", 64);
-      \u0275\u0275text(137);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(138, "button", 65);
-      \u0275\u0275listener("click", function Landing_Template_button_click_138_listener($event) {
-        return ctx.abrirReservaCupo(4, "Meet & Greet", $event);
-      });
-      \u0275\u0275text(139, "Reserva tu cupo aqu\xED");
-      \u0275\u0275elementEnd()()()()()()();
-      \u0275\u0275elementStart(140, "div", 69);
-      \u0275\u0275element(141, "div", 70);
-      \u0275\u0275elementStart(142, "div", 71)(143, "p", 72);
-      \u0275\u0275text(144, "\xA1Vive el XVI Foro Experiencia Inmobiliaria con ");
-      \u0275\u0275elementStart(145, "strong");
-      \u0275\u0275text(146, " total comodidad! ");
-      \u0275\u0275elementEnd();
-      \u0275\u0275text(147, " Disfruta de un ");
-      \u0275\u0275elementStart(148, "strong");
-      \u0275\u0275text(149, " ahorro especial ");
-      \u0275\u0275elementEnd();
-      \u0275\u0275text(150, " en el ");
-      \u0275\u0275elementStart(151, "strong");
-      \u0275\u0275text(152, " Hilton Cartagena ");
-      \u0275\u0275elementEnd();
-      \u0275\u0275text(153, " gracias a nuestra alianza");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(154, "div", 73)(155, "a", 74);
-      \u0275\u0275listener("click", function Landing_Template_a_click_155_listener() {
-        return ctx.abrirWhatsappHotel();
-      });
-      \u0275\u0275text(156, "\xA1Pide m\xE1s info aqu\xED con nuestro asesor exclusivo!");
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(157, "div", 75);
-      \u0275\u0275element(158, "img", 76);
-      \u0275\u0275elementEnd()()()();
-      \u0275\u0275elementStart(159, "section", 77)(160, "div", 78)(161, "h2", 79);
-      \u0275\u0275text(162, "Asegura tu entrada");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(163, "p", 80);
-      \u0275\u0275text(164, "Comparte el conocimiento con tu equipo y vive la mejor experiencia");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(165, "div", 81)(166, "div", 82)(167, "h3", 83);
-      \u0275\u0275text(168, "Entrada individual");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(169, "div", 84)(170, "span", 85);
-      \u0275\u0275text(171, "$330.000");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(172, "div", 86)(173, "p", 87);
-      \u0275\u0275text(174, "Por persona");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(175, "p", 88);
-      \u0275\u0275text(176, "Acceso total");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(177, "button", 89);
-      \u0275\u0275listener("click", function Landing_Template_button_click_177_listener() {
+      \u0275\u0275elementStart(81, "button", 52);
+      \u0275\u0275listener("click", function Landing_Template_button_click_81_listener() {
         return ctx.seleccionarBoletas(1);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(178, "svg", 90);
-      \u0275\u0275element(179, "path", 33)(180, "path", 91)(181, "path", 92)(182, "path", 93)(183, "path", 94);
+      \u0275\u0275elementStart(82, "svg", 53);
+      \u0275\u0275element(83, "path", 36)(84, "path", 54)(85, "path", 55)(86, "path", 56)(87, "path", 57);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(184, " Comprar 1 entrada ");
+      \u0275\u0275text(88, " Comprar 1 entrada ");
       \u0275\u0275elementEnd()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(185, "div", 95)(186, "div", 96)(187, "span", 97);
-      \u0275\u0275text(188, " M\xE1s popular ");
+      \u0275\u0275elementStart(89, "div", 58)(90, "div", 59)(91, "span", 60);
+      \u0275\u0275text(92, " M\xE1s popular ");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(189, "h3", 51);
-      \u0275\u0275text(190, "Equipo de 2 personas");
+      \u0275\u0275elementStart(93, "h3", 61);
+      \u0275\u0275text(94, "Equipo de 2 personas");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(191, "div", 84)(192, "span", 98);
-      \u0275\u0275text(193, "$620.000");
+      \u0275\u0275elementStart(95, "div", 47)(96, "span", 62);
+      \u0275\u0275text(97, "$620.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(194, "div", 99)(195, "p", 100);
-      \u0275\u0275text(196, "Persona: 310.000");
+      \u0275\u0275elementStart(98, "div", 63)(99, "p", 64);
+      \u0275\u0275text(100, "Persona: 310.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(197, "button", 89);
-      \u0275\u0275listener("click", function Landing_Template_button_click_197_listener() {
+      \u0275\u0275elementStart(101, "button", 52);
+      \u0275\u0275listener("click", function Landing_Template_button_click_101_listener() {
         return ctx.seleccionarBoletas(2);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(198, "svg", 90);
-      \u0275\u0275element(199, "path", 33)(200, "path", 91)(201, "path", 92)(202, "path", 93)(203, "path", 94);
+      \u0275\u0275elementStart(102, "svg", 53);
+      \u0275\u0275element(103, "path", 36)(104, "path", 54)(105, "path", 55)(106, "path", 56)(107, "path", 57);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(204, " Comprar 2 entradas ");
+      \u0275\u0275text(108, " Comprar 2 entradas ");
       \u0275\u0275elementEnd()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(205, "div", 82)(206, "h3", 83);
-      \u0275\u0275text(207, "Equipo de 3 personas");
+      \u0275\u0275elementStart(109, "div", 45)(110, "h3", 46);
+      \u0275\u0275text(111, "Equipo de 3 personas");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(208, "div", 84)(209, "span", 85);
-      \u0275\u0275text(210, "$780.000");
+      \u0275\u0275elementStart(112, "div", 47)(113, "span", 48);
+      \u0275\u0275text(114, "$780.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(211, "div", 86)(212, "p", 88);
-      \u0275\u0275text(213, "Persona: $260.000");
+      \u0275\u0275elementStart(115, "div", 49)(116, "p", 51);
+      \u0275\u0275text(117, "Persona: $260.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(214, "button", 89);
-      \u0275\u0275listener("click", function Landing_Template_button_click_214_listener() {
+      \u0275\u0275elementStart(118, "button", 52);
+      \u0275\u0275listener("click", function Landing_Template_button_click_118_listener() {
         return ctx.seleccionarBoletas(3);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(215, "svg", 90);
-      \u0275\u0275element(216, "path", 33)(217, "path", 91)(218, "path", 92)(219, "path", 93)(220, "path", 94);
+      \u0275\u0275elementStart(119, "svg", 53);
+      \u0275\u0275element(120, "path", 36)(121, "path", 54)(122, "path", 55)(123, "path", 56)(124, "path", 57);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(221, " Comprar 3 entradas ");
+      \u0275\u0275text(125, " Comprar 3 entradas ");
       \u0275\u0275elementEnd()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(222, "div", 82)(223, "h3", 83);
-      \u0275\u0275text(224, "Equipo de 4 personas");
+      \u0275\u0275elementStart(126, "div", 45)(127, "h3", 46);
+      \u0275\u0275text(128, "Equipo de 4 personas");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(225, "div", 84)(226, "span", 85);
-      \u0275\u0275text(227, "$1.000.000");
+      \u0275\u0275elementStart(129, "div", 47)(130, "span", 48);
+      \u0275\u0275text(131, "$1.000.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(228, "div", 86)(229, "p", 88);
-      \u0275\u0275text(230, "Persona: $250.000");
+      \u0275\u0275elementStart(132, "div", 49)(133, "p", 51);
+      \u0275\u0275text(134, "Persona: $250.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(231, "button", 89);
-      \u0275\u0275listener("click", function Landing_Template_button_click_231_listener() {
+      \u0275\u0275elementStart(135, "button", 52);
+      \u0275\u0275listener("click", function Landing_Template_button_click_135_listener() {
         return ctx.seleccionarBoletas(4);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(232, "svg", 90);
-      \u0275\u0275element(233, "path", 33)(234, "path", 91)(235, "path", 92)(236, "path", 93)(237, "path", 94);
+      \u0275\u0275elementStart(136, "svg", 53);
+      \u0275\u0275element(137, "path", 36)(138, "path", 54)(139, "path", 55)(140, "path", 56)(141, "path", 57);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(238, " Comprar 4 entradas ");
+      \u0275\u0275text(142, " Comprar 4 entradas ");
       \u0275\u0275elementEnd()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(239, "div", 82)(240, "h3", 83);
-      \u0275\u0275text(241, "Equipo de 5 personas");
+      \u0275\u0275elementStart(143, "div", 45)(144, "h3", 46);
+      \u0275\u0275text(145, "Equipo de 5 personas");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(242, "div", 84)(243, "span", 85);
-      \u0275\u0275text(244, "$1.150.000");
+      \u0275\u0275elementStart(146, "div", 47)(147, "span", 48);
+      \u0275\u0275text(148, "$1.150.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(245, "div", 86)(246, "p", 88);
-      \u0275\u0275text(247, "Persona: $230.000");
+      \u0275\u0275elementStart(149, "div", 49)(150, "p", 51);
+      \u0275\u0275text(151, "Persona: $230.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(248, "button", 89);
-      \u0275\u0275listener("click", function Landing_Template_button_click_248_listener() {
+      \u0275\u0275elementStart(152, "button", 52);
+      \u0275\u0275listener("click", function Landing_Template_button_click_152_listener() {
         return ctx.seleccionarBoletas(5);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(249, "svg", 90);
-      \u0275\u0275element(250, "path", 33)(251, "path", 91)(252, "path", 92)(253, "path", 93)(254, "path", 94);
+      \u0275\u0275elementStart(153, "svg", 53);
+      \u0275\u0275element(154, "path", 36)(155, "path", 54)(156, "path", 55)(157, "path", 56)(158, "path", 57);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(255, " Comprar 5 entradas ");
+      \u0275\u0275text(159, " Comprar 5 entradas ");
       \u0275\u0275elementEnd()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(256, "div", 82)(257, "h3", 83);
-      \u0275\u0275text(258, "Equipo de 6 personas");
+      \u0275\u0275elementStart(160, "div", 45)(161, "h3", 46);
+      \u0275\u0275text(162, "Equipo de 6 personas");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(259, "div", 84)(260, "span", 85);
-      \u0275\u0275text(261, "$1.320.000");
+      \u0275\u0275elementStart(163, "div", 47)(164, "span", 48);
+      \u0275\u0275text(165, "$1.320.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(262, "div", 86)(263, "p", 88);
-      \u0275\u0275text(264, "Persona: $220.000");
+      \u0275\u0275elementStart(166, "div", 49)(167, "p", 51);
+      \u0275\u0275text(168, "Persona: $220.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(265, "button", 89);
-      \u0275\u0275listener("click", function Landing_Template_button_click_265_listener() {
+      \u0275\u0275elementStart(169, "button", 52);
+      \u0275\u0275listener("click", function Landing_Template_button_click_169_listener() {
         return ctx.seleccionarBoletas(6);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(266, "svg", 90);
-      \u0275\u0275element(267, "path", 33)(268, "path", 91)(269, "path", 92)(270, "path", 93)(271, "path", 94);
+      \u0275\u0275elementStart(170, "svg", 53);
+      \u0275\u0275element(171, "path", 36)(172, "path", 54)(173, "path", 55)(174, "path", 56)(175, "path", 57);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(272, " Comprar 6 entradas ");
+      \u0275\u0275text(176, " Comprar 6 entradas ");
       \u0275\u0275elementEnd()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(273, "div", 82)(274, "h3", 83);
-      \u0275\u0275text(275, "Equipo de 7 personas");
+      \u0275\u0275elementStart(177, "div", 45)(178, "h3", 46);
+      \u0275\u0275text(179, "Equipo de 7 personas");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(276, "div", 84)(277, "span", 85);
-      \u0275\u0275text(278, "$1.470.000");
+      \u0275\u0275elementStart(180, "div", 47)(181, "span", 48);
+      \u0275\u0275text(182, "$1.470.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(279, "div", 86)(280, "p", 88);
-      \u0275\u0275text(281, "Persona: $210.000");
+      \u0275\u0275elementStart(183, "div", 49)(184, "p", 51);
+      \u0275\u0275text(185, "Persona: $210.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(282, "button", 89);
-      \u0275\u0275listener("click", function Landing_Template_button_click_282_listener() {
+      \u0275\u0275elementStart(186, "button", 52);
+      \u0275\u0275listener("click", function Landing_Template_button_click_186_listener() {
         return ctx.seleccionarBoletas(7);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(283, "svg", 90);
-      \u0275\u0275element(284, "path", 33)(285, "path", 91)(286, "path", 92)(287, "path", 93)(288, "path", 94);
+      \u0275\u0275elementStart(187, "svg", 53);
+      \u0275\u0275element(188, "path", 36)(189, "path", 54)(190, "path", 55)(191, "path", 56)(192, "path", 57);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(289, " Comprar 7 entradas ");
+      \u0275\u0275text(193, " Comprar 7 entradas ");
       \u0275\u0275elementEnd()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(290, "div", 82)(291, "h3", 83);
-      \u0275\u0275text(292, "Equipo de 8 personas");
+      \u0275\u0275elementStart(194, "div", 45)(195, "h3", 46);
+      \u0275\u0275text(196, "Equipo de 8 personas");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(293, "div", 84)(294, "span", 85);
-      \u0275\u0275text(295, "$1.600.000");
+      \u0275\u0275elementStart(197, "div", 47)(198, "span", 48);
+      \u0275\u0275text(199, "$1.600.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(296, "div", 86)(297, "p", 88);
-      \u0275\u0275text(298, "Persona: $200.000");
+      \u0275\u0275elementStart(200, "div", 49)(201, "p", 51);
+      \u0275\u0275text(202, "Persona: $200.000");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(299, "button", 89);
-      \u0275\u0275listener("click", function Landing_Template_button_click_299_listener() {
+      \u0275\u0275elementStart(203, "button", 52);
+      \u0275\u0275listener("click", function Landing_Template_button_click_203_listener() {
         return ctx.seleccionarBoletas(8);
       });
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(300, "svg", 90);
-      \u0275\u0275element(301, "path", 33)(302, "path", 91)(303, "path", 92)(304, "path", 93)(305, "path", 94);
+      \u0275\u0275elementStart(204, "svg", 53);
+      \u0275\u0275element(205, "path", 36)(206, "path", 54)(207, "path", 55)(208, "path", 56)(209, "path", 57);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(306, " Comprar 8 entradas ");
+      \u0275\u0275text(210, " Comprar 8 entradas ");
       \u0275\u0275elementEnd()()();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(307, "p", 101);
-      \u0275\u0275text(308, "*V\xE1lido hasta el 20 de Mayo de 2026.");
+      \u0275\u0275elementStart(211, "p", 65);
+      \u0275\u0275text(212, "*V\xE1lido hasta el 20 de Mayo de 2026.");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(309, "h2", 102);
-      \u0275\u0275text(310, "**Ten presente: no realizamos devoluciones de dinero");
+      \u0275\u0275elementStart(213, "h2", 66);
+      \u0275\u0275text(214, "**Ten presente: no realizamos devoluciones de dinero");
       \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(311, "section", 103)(312, "div", 104)(313, "h2", 105);
-      \u0275\u0275text(314, "16 a\xF1os haciendo historia");
+      \u0275\u0275elementStart(215, "section", 67)(216, "div", 68)(217, "div", 69)(218, "h3", 70);
+      \u0275\u0275text(219, "Patrocinan:");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(315, "p", 106);
-      \u0275\u0275text(316, "con el evento m\xE1s importante del sector inmobiliario");
+      \u0275\u0275elementStart(220, "div", 71)(221, "div", 72);
+      \u0275\u0275element(222, "img", 73)(223, "img", 74)(224, "img", 75)(225, "img", 76);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(317, "div", 107)(318, "div", 108)(319, "div", 109)(320, "div", 110)(321, "div", 111);
-      \u0275\u0275element(322, "img", 112);
+      \u0275\u0275elementStart(226, "div", 72);
+      \u0275\u0275element(227, "img", 73)(228, "img", 74)(229, "img", 75)(230, "img", 76);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(323, "div", 111);
-      \u0275\u0275element(324, "img", 112);
+      \u0275\u0275elementStart(231, "div", 72);
+      \u0275\u0275element(232, "img", 73)(233, "img", 74)(234, "img", 75)(235, "img", 76);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(325, "div", 111);
-      \u0275\u0275element(326, "img", 112);
-      \u0275\u0275elementEnd()()()();
-      \u0275\u0275elementStart(327, "div", 113)(328, "div", 114)(329, "div", 115)(330, "p", 116);
-      \u0275\u0275text(331, "4.9");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(332, "p", 117);
-      \u0275\u0275text(333, "Calificaci\xF3n general");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(334, "p", 118);
-      \u0275\u0275text(335, "\xDAltima versi\xF3n");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(336, "div", 115)(337, "p", 119);
-      \u0275\u0275text(338, "9.000");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(339, "p", 117);
-      \u0275\u0275text(340, "Usuarios impactados");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(341, "p", 118);
-      \u0275\u0275text(342, "En 16 a\xF1os");
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(343, "div", 120)(344, "div", 115)(345, "p", 121);
-      \u0275\u0275text(346, "60");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(347, "p", 117);
-      \u0275\u0275text(348, "Speakers y expertos");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(349, "p", 118);
-      \u0275\u0275text(350, "de nivel mundial");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(351, "div", 115)(352, "p", 122);
-      \u0275\u0275text(353, "4.8");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(354, "p", 117);
-      \u0275\u0275text(355, "Calificaci\xF3n conferencias");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(356, "p", 118);
-      \u0275\u0275text(357, "puntaje m\xE1ximo");
-      \u0275\u0275elementEnd()()()()()();
-      \u0275\u0275elementStart(358, "div", 123)(359, "div", 124)(360, "h3", 125);
-      \u0275\u0275text(361, "Organizan:");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(362, "div", 126)(363, "div", 127);
-      \u0275\u0275element(364, "img", 128)(365, "img", 129)(366, "img", 130)(367, "img", 131);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(368, "div", 127);
-      \u0275\u0275element(369, "img", 128)(370, "img", 129)(371, "img", 130)(372, "img", 131);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(373, "div", 127);
-      \u0275\u0275element(374, "img", 128)(375, "img", 129)(376, "img", 130)(377, "img", 131);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(378, "div", 127);
-      \u0275\u0275element(379, "img", 128)(380, "img", 129)(381, "img", 130)(382, "img", 131);
+      \u0275\u0275elementStart(236, "div", 72);
+      \u0275\u0275element(237, "img", 73)(238, "img", 74)(239, "img", 75)(240, "img", 76);
       \u0275\u0275elementEnd()()()()();
-      \u0275\u0275elementStart(383, "section", 132)(384, "div", 123)(385, "div", 124)(386, "h3", 125);
-      \u0275\u0275text(387, "Patrocinan:");
+      \u0275\u0275elementStart(241, "section", 77)(242, "div", 78)(243, "h3", 79)(244, "strong");
+      \u0275\u0275text(245, "Vive el XVI Foro Experiencia Inmobiliaria");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(388, "div", 126)(389, "div", 127);
-      \u0275\u0275element(390, "img", 133)(391, "img", 134)(392, "img", 135)(393, "img", 136);
+      \u0275\u0275text(246, " con total comodidad! ");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(394, "div", 127);
-      \u0275\u0275element(395, "img", 133)(396, "img", 134)(397, "img", 135)(398, "img", 136);
+      \u0275\u0275elementStart(247, "h4", 80);
+      \u0275\u0275text(248, "Disfruta de un ahorro especial en el Hilton Cartagena gracias a nuestra alianza");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(399, "div", 127);
-      \u0275\u0275element(400, "img", 133)(401, "img", 134)(402, "img", 135)(403, "img", 136);
+      \u0275\u0275elementStart(249, "a", 81);
+      \u0275\u0275listener("click", function Landing_Template_a_click_249_listener($event) {
+        ctx.abrirWhatsappHotel();
+        return $event.preventDefault();
+      });
+      \u0275\u0275text(250, "\xA1Pide m\xE1s info aqu\xED con nuestro asesor exclusivo!");
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(251, "section", 82)(252, "div", 83)(253, "h2", 84);
+      \u0275\u0275text(254, "16 a\xF1os haciendo historia");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(404, "div", 127);
-      \u0275\u0275element(405, "img", 133)(406, "img", 134)(407, "img", 135)(408, "img", 136);
+      \u0275\u0275elementStart(255, "p", 85);
+      \u0275\u0275text(256, "con el evento m\xE1s importante del sector inmobiliario");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(257, "div", 86)(258, "div", 87)(259, "div", 88)(260, "div", 89)(261, "div", 90);
+      \u0275\u0275element(262, "img", 91);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(263, "div", 90);
+      \u0275\u0275element(264, "img", 91);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(265, "div", 90);
+      \u0275\u0275element(266, "img", 91);
+      \u0275\u0275elementEnd()()()();
+      \u0275\u0275elementStart(267, "div", 92)(268, "div", 93)(269, "div", 94)(270, "p", 95);
+      \u0275\u0275text(271, "4.9");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(272, "p", 96);
+      \u0275\u0275text(273, "Calificaci\xF3n general");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(274, "p", 97);
+      \u0275\u0275text(275, "\xDAltima versi\xF3n");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(276, "div", 94)(277, "p", 98);
+      \u0275\u0275text(278, "9.000");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(279, "p", 96);
+      \u0275\u0275text(280, "Usuarios impactados");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(281, "p", 97);
+      \u0275\u0275text(282, "En 16 a\xF1os");
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(283, "div", 99)(284, "div", 94)(285, "p", 100);
+      \u0275\u0275text(286, "60");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(287, "p", 96);
+      \u0275\u0275text(288, "Speakers y expertos");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(289, "p", 97);
+      \u0275\u0275text(290, "de nivel mundial");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(291, "div", 94)(292, "p", 101);
+      \u0275\u0275text(293, "4.8");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(294, "p", 96);
+      \u0275\u0275text(295, "Calificaci\xF3n conferencias");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(296, "p", 97);
+      \u0275\u0275text(297, "puntaje m\xE1ximo");
+      \u0275\u0275elementEnd()()()()()();
+      \u0275\u0275elementStart(298, "div", 68)(299, "div", 102)(300, "h3", 70);
+      \u0275\u0275text(301, "Organizan:");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(302, "div", 71)(303, "div", 72);
+      \u0275\u0275element(304, "img", 103)(305, "img", 104)(306, "img", 105)(307, "img", 106);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(308, "div", 72);
+      \u0275\u0275element(309, "img", 103)(310, "img", 104)(311, "img", 105)(312, "img", 106);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(313, "div", 72);
+      \u0275\u0275element(314, "img", 103)(315, "img", 104)(316, "img", 105)(317, "img", 106);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(318, "div", 72);
+      \u0275\u0275element(319, "img", 103)(320, "img", 104)(321, "img", 105)(322, "img", 106);
       \u0275\u0275elementEnd()()()()();
     }
     if (rf & 2) {
       \u0275\u0275classProp("scrolled-header", ctx.isScrolled);
       \u0275\u0275advance(22);
       \u0275\u0275property("ngIf", ctx.isMenuOpen);
-      \u0275\u0275advance(9);
+      \u0275\u0275advance(14);
       \u0275\u0275textInterpolate(ctx.timeleft.days);
       \u0275\u0275advance(5);
       \u0275\u0275textInterpolate(ctx.timeleft.hours);
@@ -43950,16 +43850,8 @@ var Landing = class _Landing {
       \u0275\u0275textInterpolate(ctx.timeleft.minutes);
       \u0275\u0275advance(5);
       \u0275\u0275textInterpolate(ctx.timeleft.seconds);
-      \u0275\u0275advance(49);
-      \u0275\u0275textInterpolate(ctx.mensajeCuposPorTurno);
-      \u0275\u0275advance(14);
-      \u0275\u0275textInterpolate(ctx.mensajeCuposPorTurno);
-      \u0275\u0275advance(14);
-      \u0275\u0275textInterpolate(ctx.mensajeCuposPorTurno);
-      \u0275\u0275advance(14);
-      \u0275\u0275textInterpolate(ctx.mensajeCuposPorTurno);
     }
-  }, dependencies: [CommonModule, NgIf, RouterModule], styles: ['\n\n.hero-bg[_ngcontent-%COMP%] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n  max-width: 100%;\n  box-sizing: border-box;\n  background-color: #ffffff;\n}\n.hero-bg[_ngcontent-%COMP%]   .hero-speakers-img[_ngcontent-%COMP%] {\n  display: block;\n  width: 100%;\n  height: auto;\n}\nheader[_ngcontent-%COMP%] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  z-index: 30;\n  background-color: #2d3450;\n  transition: background-color 0.4s ease-out;\n}\nheader.scrolled-header[_ngcontent-%COMP%] {\n  background-color: #2d3450;\n}\n.logo-white[_ngcontent-%COMP%] {\n  filter: brightness(0) invert(1);\n}\n.logo-principal[_ngcontent-%COMP%] {\n  max-width: 290px;\n  width: 100%;\n}\n.logo-foro-1[_ngcontent-%COMP%] {\n  max-width: 130px;\n}\n.logo-libertador[_ngcontent-%COMP%] {\n  max-width: 200px;\n}\n.contenedor-logos[_ngcontent-%COMP%] {\n  max-width: 170px;\n}\n.timer-box[_ngcontent-%COMP%] {\n  background-color: #000000;\n  border-radius: 0.5rem;\n  padding: 0.5rem 1rem;\n}\n.timer-box--hero[_ngcontent-%COMP%] {\n  padding: 0.2rem 0.45rem;\n  border-radius: 0.25rem;\n}\n.texto-tiempo--hero[_ngcontent-%COMP%] {\n  font-size: 0.5625rem;\n  line-height: 1.1;\n  margin-top: 0.125rem;\n}\n.texto-conexion[_ngcontent-%COMP%] {\n  line-height: 24px;\n  font-size: 22px;\n  margin-top: 13px;\n}\n.texto-contador[_ngcontent-%COMP%] {\n  text-align: center;\n  font-weight: 500;\n}\n.texto-tiempo[_ngcontent-%COMP%] {\n  text-align: center;\n}\n.texto-pabellon[_ngcontent-%COMP%] {\n  border-bottom: 1px solid #fff;\n  padding-bottom: 15px;\n}\n.texto-fecha[_ngcontent-%COMP%] {\n  margin-top: 15px;\n  font-size: 22px;\n}\n.texto-ubicacion[_ngcontent-%COMP%] {\n  font-size: 20px;\n}\n.contenedor-logo-principal[_ngcontent-%COMP%] {\n  margin-top: 90px;\n}\n.contenedor-textos-info[_ngcontent-%COMP%] {\n  margin-top: 30px;\n}\n.texto-desliza[_ngcontent-%COMP%] {\n  margin-top: 20px;\n}\n.floating-cta[_ngcontent-%COMP%] {\n  position: fixed;\n  bottom: 2.5rem;\n  right: 2.5rem;\n  z-index: 30;\n}\n#animation-container[_ngcontent-%COMP%] {\n  position: relative;\n  width: 100%;\n  max-width: 100%;\n  margin: 0;\n  padding: 0;\n  padding-top: 88px;\n  padding-bottom: clamp(1.25rem, 4vw, 2.5rem);\n}\n.seccion-historia[_ngcontent-%COMP%] {\n  padding-top: 30px;\n  padding-left: 1rem;\n  padding-right: 1rem;\n  color: #2d3450;\n  text-align: center;\n  background-color: #f7f8fa;\n}\n.seccion-boletas-ad-2[_ngcontent-%COMP%] {\n  background-image: url("./media/fondo-banner-2.png");\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.seccion-boletas-ad-3[_ngcontent-%COMP%] {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/acb20703-f1f9-44c6-88a5-38e2dec47a42.png);\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.imagen-boletos-2[_ngcontent-%COMP%] {\n  width: 230px;\n}\n.etiqueta-pilar[_ngcontent-%COMP%] {\n  background-color: #2d3450;\n}\n.temas-charla-card[_ngcontent-%COMP%]   .btn-reserva-vidrio[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  padding: 0.65rem 1.15rem;\n  font-size: 0.875rem;\n  font-weight: 600;\n  color: #fff;\n  text-align: center;\n  border-radius: 0.625rem;\n  border: 1px solid rgba(255, 255, 255, 0.45);\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.22) 0%,\n      rgba(255, 255, 255, 0.08) 100%);\n  backdrop-filter: blur(14px);\n  -webkit-backdrop-filter: blur(14px);\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.35);\n  cursor: pointer;\n  transition:\n    background 0.2s ease,\n    border-color 0.2s ease,\n    box-shadow 0.2s ease;\n  margin: 20px 0 0 0;\n}\n.temas-charla-card[_ngcontent-%COMP%]   .btn-reserva-vidrio[_ngcontent-%COMP%]:hover {\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.32) 0%,\n      rgba(255, 255, 255, 0.14) 100%);\n  border-color: rgba(255, 255, 255, 0.6);\n  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.45);\n}\n.seccion-temas[_ngcontent-%COMP%] {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/ca85fb18-d61a-4604-8f9d-004f021d7e98.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  padding-top: 70px;\n  padding-bottom: 70px;\n}\n.texto-pilares[_ngcontent-%COMP%] {\n  font-weight: 300;\n  font-size: 30px;\n}\n.texto-entradas[_ngcontent-%COMP%] {\n  font-size: 28px;\n  font-weight: 600;\n}\n.icono-compra[_ngcontent-%COMP%] {\n  margin-right: 10px;\n}\n.sub-texto-tarjeta[_ngcontent-%COMP%] {\n  margin-top: 20px;\n}\n.seccion-boletas-ad[_ngcontent-%COMP%] {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/a0154101-11b4-4330-8169-a6071bff0f43.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  height: 185px;\n  margin-bottom: 80px;\n}\n.botonWhatsappHilton[_ngcontent-%COMP%]   [_ngcontent-%COMP%]:hover {\n  cursor: pointer !important;\n}\n.sub-text-entradas-ad[_ngcontent-%COMP%] {\n  font-size: 31px;\n}\n.imagen-boletos[_ngcontent-%COMP%] {\n  margin-top: 50px;\n}\n.devolucion[_ngcontent-%COMP%] {\n  margin-top: 10px;\n  font-size: 15px;\n  color: rgb(107 114 128 / var(--tw-text-opacity, 1));\n  font-style: italic;\n}\n.seccion-boletas-ad[_ngcontent-%COMP%]   [_ngcontent-%COMP%]:hover {\n  cursor: pointer;\n}\n.seccion-precios[_ngcontent-%COMP%] {\n  padding-bottom: 10px;\n  padding-top: 2rem !important;\n}\n.logos-container[_ngcontent-%COMP%] {\n  overflow: hidden;\n  padding: 1rem 0;\n  position: relative;\n  width: 100%;\n  display: flex;\n  -webkit-mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n  mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n}\n.logos-slide[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  flex-shrink: 0;\n  white-space: nowrap;\n  animation: _ngcontent-%COMP%_scroll-logos 25s linear infinite;\n}\n.logos-slide[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  width: 160px;\n  height: 60px;\n  object-fit: contain;\n  margin: 0 20px;\n}\n.logo-davivienda[_ngcontent-%COMP%], \n.logo-bolivar[_ngcontent-%COMP%] {\n  width: 110px !important;\n}\n@keyframes _ngcontent-%COMP%_scroll-logos {\n  from {\n    transform: translateX(0);\n  }\n  to {\n    transform: translateX(-100%);\n  }\n}\n.logos-container[_ngcontent-%COMP%]:hover   .logos-slide[_ngcontent-%COMP%] {\n  animation-play-state: paused;\n}\n.carousel-container[_ngcontent-%COMP%] {\n  width: 90%;\n  max-width: 500px;\n  aspect-ratio: 8 / 5;\n  perspective: 1500px;\n  position: relative;\n}\n.carousel-rotator[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  transform-style: preserve-3d;\n  animation: _ngcontent-%COMP%_rotateCarousel 20s linear infinite;\n}\n.carousel-face[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  backface-visibility: hidden;\n}\n.carousel-face[_ngcontent-%COMP%]:nth-child(1) {\n  transform: rotateY(0deg) translateZ(150px);\n}\n.carousel-face[_ngcontent-%COMP%]:nth-child(2) {\n  transform: rotateY(120deg) translateZ(150px);\n}\n.carousel-face[_ngcontent-%COMP%]:nth-child(3) {\n  transform: rotateY(240deg) translateZ(150px);\n}\n@keyframes _ngcontent-%COMP%_rotateCarousel {\n  from {\n    transform: rotateY(0deg);\n  }\n  to {\n    transform: rotateY(-360deg);\n  }\n}\n.animatable-card.is-flipped[_ngcontent-%COMP%] {\n  background-color: white !important;\n  -webkit-backdrop-filter: none !important;\n  backdrop-filter: none !important;\n}\n.animatable-card.is-flipped[_ngcontent-%COMP%]   .card-original-content[_ngcontent-%COMP%] {\n  opacity: 0;\n  pointer-events: none;\n}\n.animatable-card.is-flipped[_ngcontent-%COMP%]   .card-flipped-content[_ngcontent-%COMP%] {\n  opacity: 1;\n  pointer-events: auto;\n}\n.card-slider[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  padding: 1rem;\n}\n.temas-card-destacada[_ngcontent-%COMP%] {\n  width: 100%;\n}\n.card-slider[_ngcontent-%COMP%]    > div[_ngcontent-%COMP%] {\n  width: 100%;\n}\n.card-slider[_ngcontent-%COMP%]    > *[_ngcontent-%COMP%] {\n  flex-shrink: 0;\n}\n.particle-canvas[_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n.contenedorCharlas[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 1.5rem;\n  width: 100%;\n}\n@media (min-width: 768px) {\n  .contenedorCharlas[_ngcontent-%COMP%] {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n.contenedorCharlas[_ngcontent-%COMP%]   .agenda-card-imagen[_ngcontent-%COMP%] {\n  min-height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: rgba(255, 255, 255, 0.06);\n}\n@media (min-width: 768px) {\n  .contenedorCharlas[_ngcontent-%COMP%]   .agenda-card-imagen[_ngcontent-%COMP%] {\n    min-height: 240px;\n  }\n}\n.contenedorCharlas[_ngcontent-%COMP%]   .agenda-card-imagen[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  object-fit: contain;\n  max-height: 280px;\n}\n@media (max-width: 1107px) {\n  .contenedor-logos[_ngcontent-%COMP%] {\n    max-width: 520px !important;\n  }\n  .logo-foro-1[_ngcontent-%COMP%] {\n    max-width: 160px;\n  }\n  .logo-libertador[_ngcontent-%COMP%] {\n    max-width: 230px;\n  }\n  .contenedor-numeros[_ngcontent-%COMP%] {\n    margin-top: 100px;\n  }\n  .sub-text-entradas-ad[_ngcontent-%COMP%] {\n    margin-top: 30px;\n  }\n}\n@media (max-width: 768px) {\n  .logos-slide[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n    width: 110px;\n    height: 45px;\n    margin: 0 10px;\n  }\n  .card-slider[_ngcontent-%COMP%] {\n    gap: 1.5rem;\n    padding: 1rem;\n  }\n}\n@media (max-width: 757px) {\n  .logo-foro-1[_ngcontent-%COMP%] {\n    max-width: 130px;\n  }\n  .logo-libertador[_ngcontent-%COMP%] {\n    max-width: 160px;\n  }\n  .texto-conexion[_ngcontent-%COMP%] {\n    margin-top: -20px;\n  }\n  .contenedor-logo-principal[_ngcontent-%COMP%] {\n    margin-top: 40px !important;\n  }\n}\n@media (max-width: 500px) {\n  .titulo-entradas[_ngcontent-%COMP%] {\n    margin-top: 0;\n  }\n}\n@media (max-width: 407px) {\n  .logo-foro-1[_ngcontent-%COMP%] {\n    max-width: 90px;\n  }\n  .logo-libertador[_ngcontent-%COMP%] {\n    max-width: 100px;\n  }\n}\n/*# sourceMappingURL=landing.css.map */'] });
+  }, dependencies: [CommonModule, NgIf, RouterModule], styles: ['\n\n.hero-bg[_ngcontent-%COMP%] {\n  width: 100%;\n  max-width: 100%;\n  box-sizing: border-box;\n  background-image: url("./media/fotospeakers.jpg");\n  background-size: cover;\n  background-position: center top;\n  background-repeat: no-repeat;\n  background-color: #ffffff;\n  height: 80vh;\n  margin-top: 95px;\n}\n@media (min-width: 768px) {\n  .hero-bg[_ngcontent-%COMP%] {\n    background-size: contain;\n    background-position: center center;\n  }\n}\nheader[_ngcontent-%COMP%] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  z-index: 30;\n  background-color: #2d3450;\n  transition: background-color 0.4s ease-out;\n}\nheader.scrolled-header[_ngcontent-%COMP%] {\n  background-color: #2d3450;\n}\n.logo-white[_ngcontent-%COMP%] {\n  filter: brightness(0) invert(1);\n}\n.logo-principal[_ngcontent-%COMP%] {\n  max-width: 290px;\n  width: 100%;\n}\n.logo-foro-1[_ngcontent-%COMP%] {\n  max-width: 130px;\n}\n.logo-libertador[_ngcontent-%COMP%] {\n  max-width: 200px;\n}\n.contenedor-logos[_ngcontent-%COMP%] {\n  max-width: 170px;\n}\n.timer-box[_ngcontent-%COMP%] {\n  background-color: rgba(255, 255, 255, 0.1);\n  border-radius: 0.5rem;\n  padding: 0.5rem 1rem;\n  -webkit-backdrop-filter: blur(10px);\n  backdrop-filter: blur(10px);\n}\n#hero-content[_ngcontent-%COMP%]   .timer-box[_ngcontent-%COMP%] {\n  background-color: #000000;\n  -webkit-backdrop-filter: none;\n  backdrop-filter: none;\n}\n.timer-box--hero[_ngcontent-%COMP%] {\n  padding: 0.2rem 0.45rem;\n  border-radius: 0.25rem;\n}\n.texto-tiempo--hero[_ngcontent-%COMP%] {\n  font-size: 0.5625rem;\n  line-height: 1.1;\n  margin-top: 0.125rem;\n}\n.hero-agenda-btn[_ngcontent-%COMP%] {\n  display: inline-block;\n  max-width: min(100%, 16rem);\n  background-color: #bd0f14;\n  color: #ffffff;\n  font-weight: 600;\n  font-size: 0.6875rem;\n  line-height: 1.2;\n  padding: 0.35rem 0.65rem;\n  border-radius: 0.375rem;\n}\n@media (min-width: 640px) {\n  .hero-agenda-btn[_ngcontent-%COMP%] {\n    font-size: 0.75rem;\n    padding: 0.4rem 0.85rem;\n  }\n}\n.texto-conexion[_ngcontent-%COMP%] {\n  line-height: 24px;\n  font-size: 22px;\n  margin-top: 13px;\n}\n.texto-contador[_ngcontent-%COMP%] {\n  text-align: center;\n  font-weight: 500;\n}\n.texto-tiempo[_ngcontent-%COMP%] {\n  text-align: center;\n}\n.texto-pabellon[_ngcontent-%COMP%] {\n  border-bottom: 1px solid #fff;\n  padding-bottom: 15px;\n}\n.texto-fecha[_ngcontent-%COMP%] {\n  margin-top: 15px;\n  font-size: 22px;\n}\n.texto-ubicacion[_ngcontent-%COMP%] {\n  font-size: 20px;\n}\n.contenedor-logo-principal[_ngcontent-%COMP%] {\n  margin-top: 90px;\n}\n.contenedor-textos-info[_ngcontent-%COMP%] {\n  margin-top: 30px;\n}\n.texto-desliza[_ngcontent-%COMP%] {\n  margin-top: 20px;\n}\n.floating-cta[_ngcontent-%COMP%] {\n  position: fixed;\n  bottom: 2.5rem;\n  right: 2.5rem;\n  z-index: 30;\n}\n#animation-container[_ngcontent-%COMP%] {\n  position: relative;\n  width: 100%;\n  max-width: 100%;\n  margin: 0;\n  padding: 0;\n  min-height: 60vh;\n}\n.seccion-historia[_ngcontent-%COMP%] {\n  padding-top: 30px;\n  padding-left: 1rem;\n  padding-right: 1rem;\n  color: #2d3450;\n  text-align: center;\n  background-color: #f7f8fa;\n}\n.seccion-boletas-ad-2[_ngcontent-%COMP%] {\n  background-image: url("./media/fondo-banner-2.png");\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.seccion-boletas-ad-3[_ngcontent-%COMP%] {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/acb20703-f1f9-44c6-88a5-38e2dec47a42.png);\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.imagen-boletos-2[_ngcontent-%COMP%] {\n  width: 230px;\n}\n.etiqueta-pilar[_ngcontent-%COMP%] {\n  background-color: #2d3450;\n}\n.temas-charla-card[_ngcontent-%COMP%]   .btn-reserva-vidrio[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  padding: 0.65rem 1.15rem;\n  font-size: 0.875rem;\n  font-weight: 600;\n  color: #fff;\n  text-align: center;\n  border-radius: 0.625rem;\n  border: 1px solid rgba(255, 255, 255, 0.45);\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.22) 0%,\n      rgba(255, 255, 255, 0.08) 100%);\n  backdrop-filter: blur(14px);\n  -webkit-backdrop-filter: blur(14px);\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.35);\n  cursor: pointer;\n  transition:\n    background 0.2s ease,\n    border-color 0.2s ease,\n    box-shadow 0.2s ease;\n  margin: 20px 0 0 0;\n}\n.temas-charla-card[_ngcontent-%COMP%]   .btn-reserva-vidrio[_ngcontent-%COMP%]:hover {\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.32) 0%,\n      rgba(255, 255, 255, 0.14) 100%);\n  border-color: rgba(255, 255, 255, 0.6);\n  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.45);\n}\n.seccion-temas[_ngcontent-%COMP%] {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/ca85fb18-d61a-4604-8f9d-004f021d7e98.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  padding-top: 70px;\n  padding-bottom: 70px;\n}\n.texto-pilares[_ngcontent-%COMP%] {\n  font-weight: 300;\n  font-size: 30px;\n}\n.texto-entradas[_ngcontent-%COMP%] {\n  font-size: 28px;\n  font-weight: 600;\n  padding-top: 30px;\n}\n.icono-compra[_ngcontent-%COMP%] {\n  margin-right: 10px;\n}\n.sub-texto-tarjeta[_ngcontent-%COMP%] {\n  margin-top: 20px;\n}\n.seccion-boletas-ad[_ngcontent-%COMP%] {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/a0154101-11b4-4330-8169-a6071bff0f43.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  height: 185px;\n  margin-bottom: 80px;\n}\n.botonWhatsappHilton[_ngcontent-%COMP%]   [_ngcontent-%COMP%]:hover {\n  cursor: pointer !important;\n}\n.seccion-vive-foro[_ngcontent-%COMP%] {\n  position: relative;\n  text-align: center;\n  color: #ffffff;\n  padding: 3.5rem 1rem;\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  background-image: url("./media/banner_2.png");\n}\n@media (min-width: 640px) {\n  .seccion-vive-foro[_ngcontent-%COMP%] {\n    padding: 4.5rem 1.5rem;\n  }\n}\n.seccion-vive-foro-inner[_ngcontent-%COMP%] {\n  position: relative;\n  z-index: 1;\n  max-width: 40rem;\n  margin-left: auto;\n  margin-right: auto;\n}\n.seccion-vive-foro[_ngcontent-%COMP%]   .titulo-vive-foro[_ngcontent-%COMP%], \n.seccion-vive-foro[_ngcontent-%COMP%]   .subtitulo-vive-foro[_ngcontent-%COMP%] {\n  color: #ffffff;\n}\n.seccion-vive-foro[_ngcontent-%COMP%]   .titulo-vive-foro[_ngcontent-%COMP%] {\n  font-size: 1.25rem;\n  font-weight: 400;\n  line-height: 1.4;\n  margin: 0 0 0.75rem;\n}\n@media (min-width: 640px) {\n  .seccion-vive-foro[_ngcontent-%COMP%]   .titulo-vive-foro[_ngcontent-%COMP%] {\n    font-size: 1.625rem;\n  }\n}\n.seccion-vive-foro[_ngcontent-%COMP%]   .titulo-vive-foro[_ngcontent-%COMP%]   strong[_ngcontent-%COMP%] {\n  font-weight: 700;\n}\n.seccion-vive-foro[_ngcontent-%COMP%]   .subtitulo-vive-foro[_ngcontent-%COMP%] {\n  font-size: 1rem;\n  font-weight: 400;\n  line-height: 1.45;\n  margin: 0;\n  opacity: 0.96;\n}\n@media (min-width: 640px) {\n  .seccion-vive-foro[_ngcontent-%COMP%]   .subtitulo-vive-foro[_ngcontent-%COMP%] {\n    font-size: 1.0625rem;\n  }\n}\n.seccion-vive-foro[_ngcontent-%COMP%]   .boton-hilton-vidrio[_ngcontent-%COMP%] {\n  margin-top: 1.5rem;\n  display: inline-block;\n  cursor: pointer;\n  padding: 0.65rem 1.35rem;\n  color: #ffffff;\n  font-weight: 600;\n  font-size: 0.875rem;\n  line-height: 1.35;\n  text-decoration: none;\n  text-align: center;\n  border-radius: 0.5rem;\n  background: rgba(255, 255, 255, 0.12);\n  border: 1px solid rgba(255, 255, 255, 0.38);\n  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.14);\n  backdrop-filter: blur(14px);\n  -webkit-backdrop-filter: blur(14px);\n  transition:\n    background-color 0.2s ease,\n    border-color 0.2s ease,\n    opacity 0.2s ease;\n}\n.seccion-vive-foro[_ngcontent-%COMP%]   .boton-hilton-vidrio[_ngcontent-%COMP%]:hover {\n  background: rgba(255, 255, 255, 0.22);\n  border-color: rgba(255, 255, 255, 0.52);\n}\n.sub-text-entradas-ad[_ngcontent-%COMP%] {\n  font-size: 31px;\n}\n.imagen-boletos[_ngcontent-%COMP%] {\n  margin-top: 50px;\n}\n.devolucion[_ngcontent-%COMP%] {\n  margin-top: 10px;\n  font-size: 15px;\n  color: rgb(107 114 128 / var(--tw-text-opacity, 1));\n  font-style: italic;\n}\n.seccion-boletas-ad[_ngcontent-%COMP%]   [_ngcontent-%COMP%]:hover {\n  cursor: pointer;\n}\n.seccion-precios[_ngcontent-%COMP%] {\n  padding-top: 0 !important;\n}\n.logos-container[_ngcontent-%COMP%] {\n  overflow: hidden;\n  padding: 1rem 0;\n  position: relative;\n  width: 100%;\n  display: flex;\n  -webkit-mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n  mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n}\n.logos-slide[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  flex-shrink: 0;\n  white-space: nowrap;\n  animation: _ngcontent-%COMP%_scroll-logos 25s linear infinite;\n}\n.logos-slide[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  width: 160px;\n  height: 60px;\n  object-fit: contain;\n  margin: 0 20px;\n}\n.logo-davivienda[_ngcontent-%COMP%], \n.logo-bolivar[_ngcontent-%COMP%] {\n  width: 110px !important;\n}\n@keyframes _ngcontent-%COMP%_scroll-logos {\n  from {\n    transform: translateX(0);\n  }\n  to {\n    transform: translateX(-100%);\n  }\n}\n.logos-container[_ngcontent-%COMP%]:hover   .logos-slide[_ngcontent-%COMP%] {\n  animation-play-state: paused;\n}\n.carousel-container[_ngcontent-%COMP%] {\n  width: 90%;\n  max-width: 500px;\n  aspect-ratio: 8 / 5;\n  perspective: 1500px;\n  position: relative;\n}\n.carousel-rotator[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  transform-style: preserve-3d;\n  animation: _ngcontent-%COMP%_rotateCarousel 20s linear infinite;\n}\n.carousel-face[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  backface-visibility: hidden;\n}\n.carousel-face[_ngcontent-%COMP%]:nth-child(1) {\n  transform: rotateY(0deg) translateZ(150px);\n}\n.carousel-face[_ngcontent-%COMP%]:nth-child(2) {\n  transform: rotateY(120deg) translateZ(150px);\n}\n.carousel-face[_ngcontent-%COMP%]:nth-child(3) {\n  transform: rotateY(240deg) translateZ(150px);\n}\n@keyframes _ngcontent-%COMP%_rotateCarousel {\n  from {\n    transform: rotateY(0deg);\n  }\n  to {\n    transform: rotateY(-360deg);\n  }\n}\n.animatable-card.is-flipped[_ngcontent-%COMP%] {\n  background-color: white !important;\n  -webkit-backdrop-filter: none !important;\n  backdrop-filter: none !important;\n}\n.animatable-card.is-flipped[_ngcontent-%COMP%]   .card-original-content[_ngcontent-%COMP%] {\n  opacity: 0;\n  pointer-events: none;\n}\n.animatable-card.is-flipped[_ngcontent-%COMP%]   .card-flipped-content[_ngcontent-%COMP%] {\n  opacity: 1;\n  pointer-events: auto;\n}\n.card-slider[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  padding: 1rem;\n}\n.temas-card-destacada[_ngcontent-%COMP%] {\n  width: 100%;\n}\n.card-slider[_ngcontent-%COMP%]    > div[_ngcontent-%COMP%] {\n  width: 100%;\n}\n.card-slider[_ngcontent-%COMP%]    > *[_ngcontent-%COMP%] {\n  flex-shrink: 0;\n}\n.particle-canvas[_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n.contenedorCharlas[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 1.5rem;\n  width: 100%;\n}\n@media (min-width: 768px) {\n  .contenedorCharlas[_ngcontent-%COMP%] {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n.contenedorCharlas[_ngcontent-%COMP%]   .agenda-card-imagen[_ngcontent-%COMP%] {\n  min-height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: rgba(255, 255, 255, 0.06);\n}\n@media (min-width: 768px) {\n  .contenedorCharlas[_ngcontent-%COMP%]   .agenda-card-imagen[_ngcontent-%COMP%] {\n    min-height: 240px;\n  }\n}\n.contenedorCharlas[_ngcontent-%COMP%]   .agenda-card-imagen[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  object-fit: contain;\n  max-height: 280px;\n}\n@media (max-width: 1107px) {\n  .contenedor-logos[_ngcontent-%COMP%] {\n    max-width: 520px !important;\n  }\n  .logo-foro-1[_ngcontent-%COMP%] {\n    max-width: 160px;\n  }\n  .logo-libertador[_ngcontent-%COMP%] {\n    max-width: 230px;\n  }\n  .contenedor-numeros[_ngcontent-%COMP%] {\n    margin-top: 100px;\n  }\n  .sub-text-entradas-ad[_ngcontent-%COMP%] {\n    margin-top: 30px;\n  }\n}\n@media (max-width: 768px) {\n  .logos-slide[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n    width: 110px;\n    height: 45px;\n    margin: 0 10px;\n  }\n  .card-slider[_ngcontent-%COMP%] {\n    gap: 1.5rem;\n    padding: 1rem;\n  }\n}\n@media (max-width: 757px) {\n  .logo-foro-1[_ngcontent-%COMP%] {\n    max-width: 130px;\n  }\n  .logo-libertador[_ngcontent-%COMP%] {\n    max-width: 160px;\n  }\n  .texto-conexion[_ngcontent-%COMP%] {\n    margin-top: -20px;\n  }\n  .contenedor-logo-principal[_ngcontent-%COMP%] {\n    margin-top: 40px !important;\n  }\n}\n@media (max-width: 500px) {\n  .titulo-entradas[_ngcontent-%COMP%] {\n    margin-top: 0;\n  }\n}\n@media (max-width: 407px) {\n  .logo-foro-1[_ngcontent-%COMP%] {\n    max-width: 90px;\n  }\n  .logo-libertador[_ngcontent-%COMP%] {\n    max-width: 100px;\n  }\n}\n/*# sourceMappingURL=landing.css.map */'] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Landing, [{
@@ -43974,7 +43866,7 @@ var Landing = class _Landing {
         <div class="hidden min-[1108px]:flex items-center space-x-8">
             <a href="#inicio-section" (click)="trackHeader('Inicio')" class="nav-link text-white hover:text-gray-300">Inicio</a>
             <a href="#history-section" (click)="trackHeader('Historia')" class="nav-link text-white hover:text-gray-300">Historia</a>
-            <a href="#temas-foro-section" (click)="trackHeader('Temas')" class="nav-link text-white hover:text-gray-300">Temas</a>
+            <a href="#temas-foro-section" (click)="trackHeader('Temas')" class="nav-link text-white hover:text-gray-300">Experiencias</a>
             <a href="#precios-pioneros-section" (click)="trackHeader('Boletas')" class="nav-link text-white hover:text-gray-300">Boletas</a>
         </div>
         <div class="hidden min-[1108px]:block">
@@ -43997,46 +43889,49 @@ var Landing = class _Landing {
         <div class="h-full flex flex-col justify-center items-center space-y-8 -mt-[80px]">
             <a href="#inicio-section" class="nav-link text-3xl font-bold text-[#2d3450] hover:text-gray-500 active-link-mobile">Inicio</a>
             <a href="#history-section" class="nav-link text-3xl font-bold text-[#2d3450] hover:text-gray-500">Historia</a>
-            <a href="#temas-foro-section" class="nav-link text-3xl font-bold text-[#2d3450] hover:text-gray-500">Temas</a>
+            <a href="#temas-foro-section" class="nav-link text-3xl font-bold text-[#2d3450] hover:text-gray-500">Experiencias</a>
             <a href="#precios-pioneros-section" class="nav-link text-3xl font-bold text-[#2d3450] hover:text-gray-500">Boletas</a>
         </div>
     </div>
 
     <div id="animation-container">
-        <main id="inicio-section" class="relative hero-bg w-full p-0">
-            <img
-                class="hero-speakers-img"
-                src="../../../assets/img/fotospeakers.jpg"
-                alt="Speakers XVI Foro Experiencia Inmobiliaria"
-                width="6250"
-                height="3750"
-                loading="eager"
-                decoding="async"
-            />
-            <canvas class="particle-canvas absolute top-0 left-0 w-full h-full z-[1]"></canvas>
+        <main id="inicio-section" class="relative hero-bg w-full flex flex-col p-0">
+            <canvas class="particle-canvas pointer-events-none absolute top-0 left-0 z-0 h-full w-full"></canvas>
+
             <div
                 id="hero-content"
-                class="absolute bottom-0 left-1/2 z-10 flex w-full max-w-5xl -translate-x-1/2 translate-y-1/2 flex-col items-center px-2 text-white sm:px-4"
+                class="absolute bottom-0 left-1/2 z-10 flex w-full max-w-5xl -translate-x-1/2 flex-col items-center px-2 text-white sm:px-4"
             >
-                <div class="hero-timer-row flex flex-wrap justify-center gap-1.5 sm:gap-2">
-                    <div class="timer-box timer-box--hero">
-                        <span id="days" class="text-lg font-bold leading-none tabular-nums sm:text-xl">{{timeleft.days}}</span>
-                        <p class="texto-tiempo texto-tiempo--hero">D\xEDas</p>
-                    </div>
-                    <div class="timer-box timer-box--hero">
-                        <span id="hours" class="text-lg font-bold leading-none tabular-nums sm:text-xl">{{timeleft.hours}}</span>
-                        <p class="texto-tiempo texto-tiempo--hero">Horas</p>
-                    </div>
-                    <div class="timer-box timer-box--hero">
-                        <span id="minutes" class="text-lg font-bold leading-none tabular-nums sm:text-xl">{{timeleft.minutes}}</span>
-                        <p class="texto-tiempo texto-tiempo--hero">Minutos</p>
-                    </div>
-                    <div class="timer-box timer-box--hero">
-                        <span id="seconds" class="text-lg font-bold leading-none tabular-nums sm:text-xl">{{timeleft.seconds}}</span>
-                        <p class="texto-tiempo texto-tiempo--hero">Segundos</p>
-                    </div>
+                <div class="hero-hero-extras mb-3 flex flex-col items-center">
+                    <p class="texto-contador mb-1 text-center text-xs sm:text-sm">Foro Inmobiliario comienza en:</p>
+                    <a
+                        href="https://dvn7rzpuwpj45.cloudfront.net/wp-content/uploads/2026/03/20163220/Agenda_foro_202.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hero-agenda-btn text-center shadow-md transition-opacity hover:opacity-90"
+                        >Conoce la agenda aqu\xED</a>
                 </div>
-                <div class="hero-timer-spacer h-2.5 shrink-0 sm:h-3" aria-hidden="true"></div>
+                <div class="hero-timer-anchor flex translate-y-1/2 flex-col items-center">
+                    <div class="hero-timer-row flex flex-wrap justify-center gap-1.5 sm:gap-2">
+                        <div class="timer-box timer-box--hero">
+                            <span id="days" class="text-base font-bold tabular-nums leading-none sm:text-lg">{{timeleft.days}}</span>
+                            <p class="texto-tiempo texto-tiempo--hero">D\xEDas</p>
+                        </div>
+                        <div class="timer-box timer-box--hero">
+                            <span id="hours" class="text-base font-bold tabular-nums leading-none sm:text-lg">{{timeleft.hours}}</span>
+                            <p class="texto-tiempo texto-tiempo--hero">Horas</p>
+                        </div>
+                        <div class="timer-box timer-box--hero">
+                            <span id="minutes" class="text-base font-bold tabular-nums leading-none sm:text-lg">{{timeleft.minutes}}</span>
+                            <p class="texto-tiempo texto-tiempo--hero">Minutos</p>
+                        </div>
+                        <div class="timer-box timer-box--hero">
+                            <span id="seconds" class="text-base font-bold tabular-nums leading-none sm:text-lg">{{timeleft.seconds}}</span>
+                            <p class="texto-tiempo texto-tiempo--hero">Segundos</p>
+                        </div>
+                    </div>
+                    <div class="hero-timer-spacer h-2 shrink-0 sm:h-2.5" aria-hidden="true"></div>
+                </div>
             </div>
         </main>
     </div>
@@ -44049,7 +43944,7 @@ var Landing = class _Landing {
     </div>
 
 
-    <section id="temas-foro-section" class="relative bg-[#2d3450] py-20 sm:py-28 seccion-temas">
+    <!--<section id="temas-foro-section" class="relative bg-[#2d3450] py-20 sm:py-28 seccion-temas">
         <canvas class="particle-canvas absolute top-0 left-0 w-full h-full z-0"></canvas>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center text-white mb-16">
@@ -44058,24 +43953,6 @@ var Landing = class _Landing {
             </div>
 
             <div class="card-slider">
-                <div class="temas-card-destacada w-full">
-                    <div class="animatable-card agenda-card-destacada bg-white/10 backdrop-blur-lg rounded-2xl text-white text-left w-full relative h-full overflow-hidden transition-colors duration-500">
-                        <div class="card-original-content transition-opacity duration-300 flex flex-col md:flex-row md:items-stretch">
-                            <div class="agenda-card-imagen shrink-0 md:w-[42%] lg:w-[38%] min-h-[200px] md:min-h-[260px]">
-                                <img src="../../../assets/img/speakers.png" alt="Agenda del Foro Experiencia Inmobiliaria" class="block w-full h-full object-cover object-center" />
-                            </div>
-                            <div class="agenda-card-texto flex flex-col justify-center p-6 sm:p-8 md:py-10 md:pr-10 md:pl-8 flex-1 min-w-0">
-                                <span class="inline-flex items-center self-start px-3 py-1 rounded-full text-sm font-medium text-white etiqueta-pilar mb-4">
-                                    Agenda
-                                </span>
-                                <h4 class="text-2xl font-bold">Conoce los speakers, horarios y experiencias del evento</h4>
-                                <div class="mt-6 flex justify-start">
-                                    <a href="https://dvn7rzpuwpj45.cloudfront.net/wp-content/uploads/2026/03/20163220/Agenda_foro_202.pdf" target="_blank" style="background-color: #bd0f14;" class="text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity inline-block shadow-md">Ver agenda</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="text-center text-white">
                     <h3 class="text-3xl font-bold tracking-tight sm:text-4xl">Experiencias Alternas</h3>
@@ -44160,25 +44037,10 @@ var Landing = class _Landing {
 
             </div>
 
-            <div class="relative bg-cover bg-center rounded-2xl shadow-lg overflow-hidden flex flex-col lg:flex-row items-center seccion-boletas-ad-2 h-[220px]">
-                <div class="absolute inset-0 bg-gray-800 opacity-50"></div>
-                <div class="relative z-10 w-full lg:w-3/5 text-white text-center py-6 px-6 lg:py-8 lg:px-12">
-                    <p class="text-lg lg:text-xl font-normal" style="text-align: center;">\xA1Vive el XVI Foro Experiencia Inmobiliaria con <strong> total comodidad! </strong> Disfruta de un <strong> ahorro especial </strong> en el <strong> Hilton Cartagena </strong> gracias a nuestra alianza</p>
-                    <div class="mt-6 flex justify-center" style="justify-content: center;">
-                        <a (click)="abrirWhatsappHotel()" class="botonWhatsappHilton" style="background-color: #bd0f14;" class="text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity inline-block shadow-md cursor-pointer">\xA1Pide m\xE1s info aqu\xED con nuestro asesor exclusivo!</a>
-                    </div>
-                </div>
-                <div class="relative z-10 hidden lg:flex lg:w-2/5 justify-center">
-                    <img src="../../../assets/img/persona-boletos.png" alt="Persona con entradas" class="rounded-lg imagen-boletos-2">
-                </div>
-            </div>    
-
-            
-
         </div>
-    </section>
+    </section> -->
 
-    <section id="precios-pioneros-section" class="py-20 sm:py-28 bg-[#f7f8fa] seccion-precios">
+    <section id="precios-pioneros-section" class="bg-[#f7f8fa] seccion-precios pt-0 pb-10 sm:pb-12">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl md:text-4xl font-extrabold text-[#2d3450] texto-entradas">Asegura tu entrada</h2>
             <p class="mt-4 text-lg text-gray-600" style="margin-top: 0;">Comparte el conocimiento con tu equipo y vive la mejor experiencia</p>
@@ -44309,6 +44171,55 @@ var Landing = class _Landing {
         </div>
     </section>
 
+    <section id="contacto-patrocinadores-section" class="bg-[#f7f8fa] pb-8 pt-4 sm:pb-12 sm:pt-6">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mt-4 text-center sm:mt-6">
+                <h3 class="text-xl font-semibold text-gray-700 tracking-wide">Patrocinan:</h3>
+                
+                <div class="logos-container">
+                    <div class="logos-slide">
+                        <img src="../../../assets/img/Afydi_Logo ROJO.ai.png" alt="Logo Seguros Bol\xEDvar" class="h-8 sm:h-10 mx-8 logo-bolivar">
+                        <img src="../../../assets/img/LOGO-SIMI.jpg" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
+                        <img src="../../../assets/img/N - SEDI SOLUTIONS.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
+                        <img src="../../../assets/img/nuwwe.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="../../../assets/img/Afydi_Logo ROJO.ai.png" alt="Logo Seguros Bol\xEDvar" class="h-8 sm:h-10 mx-8 logo-bolivar">
+                        <img src="../../../assets/img/LOGO-SIMI.jpg" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
+                        <img src="../../../assets/img/N - SEDI SOLUTIONS.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
+                        <img src="../../../assets/img/nuwwe.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="../../../assets/img/Afydi_Logo ROJO.ai.png" alt="Logo Seguros Bol\xEDvar" class="h-8 sm:h-10 mx-8 logo-bolivar">
+                        <img src="../../../assets/img/LOGO-SIMI.jpg" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
+                        <img src="../../../assets/img/N - SEDI SOLUTIONS.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
+                        <img src="../../../assets/img/nuwwe.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="../../../assets/img/Afydi_Logo ROJO.ai.png" alt="Logo Seguros Bol\xEDvar" class="h-8 sm:h-10 mx-8 logo-bolivar">
+                        <img src="../../../assets/img/LOGO-SIMI.jpg" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
+                        <img src="../../../assets/img/N - SEDI SOLUTIONS.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
+                        <img src="../../../assets/img/nuwwe.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </section>
+
+    <section class="seccion-vive-foro">
+        <div class="seccion-vive-foro-inner">
+            <h3 class="titulo-vive-foro">
+                <strong>Vive el XVI Foro Experiencia Inmobiliaria</strong> con total comodidad!
+            </h3>
+            <h4 class="subtitulo-vive-foro">Disfruta de un ahorro especial en el Hilton Cartagena gracias a nuestra alianza</h4>
+            <a
+                href="#"
+                class="boton-hilton-vidrio"
+                (click)="abrirWhatsappHotel(); $event.preventDefault()"
+                >\xA1Pide m\xE1s info aqu\xED con nuestro asesor exclusivo!</a>
+        </div>
+    </section>
+
     <section id="history-section" class="seccion-historia">
         <div class="max-w-7xl mx-auto px-4">
 
@@ -44397,41 +44308,8 @@ var Landing = class _Landing {
         </div>
     </section>
 
-    <section id="contacto-patrocinadores-section" class="py-10 sm:py-16 bg-[#f7f8fa]">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mt-20 text-center">
-                <h3 class="text-xl font-semibold text-gray-700 tracking-wide">Patrocinan:</h3>
-                
-                <div class="logos-container">
-                    <div class="logos-slide">
-                        <img src="../../../assets/img/Afydi_Logo ROJO.ai.png" alt="Logo Seguros Bol\xEDvar" class="h-8 sm:h-10 mx-8 logo-bolivar">
-                        <img src="../../../assets/img/LOGO-SIMI.jpg" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
-                        <img src="../../../assets/img/N - SEDI SOLUTIONS.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
-                        <img src="../../../assets/img/nuwwe.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
-                    </div>
-                    <div class="logos-slide">
-                        <img src="../../../assets/img/Afydi_Logo ROJO.ai.png" alt="Logo Seguros Bol\xEDvar" class="h-8 sm:h-10 mx-8 logo-bolivar">
-                        <img src="../../../assets/img/LOGO-SIMI.jpg" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
-                        <img src="../../../assets/img/N - SEDI SOLUTIONS.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
-                        <img src="../../../assets/img/nuwwe.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
-                    </div>
-                    <div class="logos-slide">
-                        <img src="../../../assets/img/Afydi_Logo ROJO.ai.png" alt="Logo Seguros Bol\xEDvar" class="h-8 sm:h-10 mx-8 logo-bolivar">
-                        <img src="../../../assets/img/LOGO-SIMI.jpg" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
-                        <img src="../../../assets/img/N - SEDI SOLUTIONS.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
-                        <img src="../../../assets/img/nuwwe.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
-                    </div>
-                    <div class="logos-slide">
-                        <img src="../../../assets/img/Afydi_Logo ROJO.ai.png" alt="Logo Seguros Bol\xEDvar" class="h-8 sm:h-10 mx-8 logo-bolivar">
-                        <img src="../../../assets/img/LOGO-SIMI.jpg" alt="Logo CienCuadras" class="h-8 sm:h-10 mx-8">
-                        <img src="../../../assets/img/N - SEDI SOLUTIONS.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
-                        <img src="../../../assets/img/nuwwe.png" alt="Logo El Libertador" class="h-8 sm:h-10 mx-8">
-                    </div>
-                </div>
-            </div> 
-        </div>
-    </section>
-`, styles: ['/* src/app/pages/landing/landing.css */\n.hero-bg {\n  position: relative;\n  margin: 0;\n  width: 100%;\n  max-width: 100%;\n  box-sizing: border-box;\n  background-color: #ffffff;\n}\n.hero-bg .hero-speakers-img {\n  display: block;\n  width: 100%;\n  height: auto;\n}\nheader {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  z-index: 30;\n  background-color: #2d3450;\n  transition: background-color 0.4s ease-out;\n}\nheader.scrolled-header {\n  background-color: #2d3450;\n}\n.logo-white {\n  filter: brightness(0) invert(1);\n}\n.logo-principal {\n  max-width: 290px;\n  width: 100%;\n}\n.logo-foro-1 {\n  max-width: 130px;\n}\n.logo-libertador {\n  max-width: 200px;\n}\n.contenedor-logos {\n  max-width: 170px;\n}\n.timer-box {\n  background-color: #000000;\n  border-radius: 0.5rem;\n  padding: 0.5rem 1rem;\n}\n.timer-box--hero {\n  padding: 0.2rem 0.45rem;\n  border-radius: 0.25rem;\n}\n.texto-tiempo--hero {\n  font-size: 0.5625rem;\n  line-height: 1.1;\n  margin-top: 0.125rem;\n}\n.texto-conexion {\n  line-height: 24px;\n  font-size: 22px;\n  margin-top: 13px;\n}\n.texto-contador {\n  text-align: center;\n  font-weight: 500;\n}\n.texto-tiempo {\n  text-align: center;\n}\n.texto-pabellon {\n  border-bottom: 1px solid #fff;\n  padding-bottom: 15px;\n}\n.texto-fecha {\n  margin-top: 15px;\n  font-size: 22px;\n}\n.texto-ubicacion {\n  font-size: 20px;\n}\n.contenedor-logo-principal {\n  margin-top: 90px;\n}\n.contenedor-textos-info {\n  margin-top: 30px;\n}\n.texto-desliza {\n  margin-top: 20px;\n}\n.floating-cta {\n  position: fixed;\n  bottom: 2.5rem;\n  right: 2.5rem;\n  z-index: 30;\n}\n#animation-container {\n  position: relative;\n  width: 100%;\n  max-width: 100%;\n  margin: 0;\n  padding: 0;\n  padding-top: 88px;\n  padding-bottom: clamp(1.25rem, 4vw, 2.5rem);\n}\n.seccion-historia {\n  padding-top: 30px;\n  padding-left: 1rem;\n  padding-right: 1rem;\n  color: #2d3450;\n  text-align: center;\n  background-color: #f7f8fa;\n}\n.seccion-boletas-ad-2 {\n  background-image: url("./media/fondo-banner-2.png");\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.seccion-boletas-ad-3 {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/acb20703-f1f9-44c6-88a5-38e2dec47a42.png);\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.imagen-boletos-2 {\n  width: 230px;\n}\n.etiqueta-pilar {\n  background-color: #2d3450;\n}\n.temas-charla-card .btn-reserva-vidrio {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  padding: 0.65rem 1.15rem;\n  font-size: 0.875rem;\n  font-weight: 600;\n  color: #fff;\n  text-align: center;\n  border-radius: 0.625rem;\n  border: 1px solid rgba(255, 255, 255, 0.45);\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.22) 0%,\n      rgba(255, 255, 255, 0.08) 100%);\n  backdrop-filter: blur(14px);\n  -webkit-backdrop-filter: blur(14px);\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.35);\n  cursor: pointer;\n  transition:\n    background 0.2s ease,\n    border-color 0.2s ease,\n    box-shadow 0.2s ease;\n  margin: 20px 0 0 0;\n}\n.temas-charla-card .btn-reserva-vidrio:hover {\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.32) 0%,\n      rgba(255, 255, 255, 0.14) 100%);\n  border-color: rgba(255, 255, 255, 0.6);\n  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.45);\n}\n.seccion-temas {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/ca85fb18-d61a-4604-8f9d-004f021d7e98.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  padding-top: 70px;\n  padding-bottom: 70px;\n}\n.texto-pilares {\n  font-weight: 300;\n  font-size: 30px;\n}\n.texto-entradas {\n  font-size: 28px;\n  font-weight: 600;\n}\n.icono-compra {\n  margin-right: 10px;\n}\n.sub-texto-tarjeta {\n  margin-top: 20px;\n}\n.seccion-boletas-ad {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/a0154101-11b4-4330-8169-a6071bff0f43.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  height: 185px;\n  margin-bottom: 80px;\n}\n.botonWhatsappHilton :hover {\n  cursor: pointer !important;\n}\n.sub-text-entradas-ad {\n  font-size: 31px;\n}\n.imagen-boletos {\n  margin-top: 50px;\n}\n.devolucion {\n  margin-top: 10px;\n  font-size: 15px;\n  color: rgb(107 114 128 / var(--tw-text-opacity, 1));\n  font-style: italic;\n}\n.seccion-boletas-ad :hover {\n  cursor: pointer;\n}\n.seccion-precios {\n  padding-bottom: 10px;\n  padding-top: 2rem !important;\n}\n.logos-container {\n  overflow: hidden;\n  padding: 1rem 0;\n  position: relative;\n  width: 100%;\n  display: flex;\n  -webkit-mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n  mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n}\n.logos-slide {\n  display: flex;\n  align-items: center;\n  flex-shrink: 0;\n  white-space: nowrap;\n  animation: scroll-logos 25s linear infinite;\n}\n.logos-slide img {\n  width: 160px;\n  height: 60px;\n  object-fit: contain;\n  margin: 0 20px;\n}\n.logo-davivienda,\n.logo-bolivar {\n  width: 110px !important;\n}\n@keyframes scroll-logos {\n  from {\n    transform: translateX(0);\n  }\n  to {\n    transform: translateX(-100%);\n  }\n}\n.logos-container:hover .logos-slide {\n  animation-play-state: paused;\n}\n.carousel-container {\n  width: 90%;\n  max-width: 500px;\n  aspect-ratio: 8 / 5;\n  perspective: 1500px;\n  position: relative;\n}\n.carousel-rotator {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  transform-style: preserve-3d;\n  animation: rotateCarousel 20s linear infinite;\n}\n.carousel-face {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  backface-visibility: hidden;\n}\n.carousel-face:nth-child(1) {\n  transform: rotateY(0deg) translateZ(150px);\n}\n.carousel-face:nth-child(2) {\n  transform: rotateY(120deg) translateZ(150px);\n}\n.carousel-face:nth-child(3) {\n  transform: rotateY(240deg) translateZ(150px);\n}\n@keyframes rotateCarousel {\n  from {\n    transform: rotateY(0deg);\n  }\n  to {\n    transform: rotateY(-360deg);\n  }\n}\n.animatable-card.is-flipped {\n  background-color: white !important;\n  -webkit-backdrop-filter: none !important;\n  backdrop-filter: none !important;\n}\n.animatable-card.is-flipped .card-original-content {\n  opacity: 0;\n  pointer-events: none;\n}\n.animatable-card.is-flipped .card-flipped-content {\n  opacity: 1;\n  pointer-events: auto;\n}\n.card-slider {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  padding: 1rem;\n}\n.temas-card-destacada {\n  width: 100%;\n}\n.card-slider > div {\n  width: 100%;\n}\n.card-slider > * {\n  flex-shrink: 0;\n}\n.particle-canvas {\n  pointer-events: none;\n}\n.contenedorCharlas {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 1.5rem;\n  width: 100%;\n}\n@media (min-width: 768px) {\n  .contenedorCharlas {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n.contenedorCharlas .agenda-card-imagen {\n  min-height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: rgba(255, 255, 255, 0.06);\n}\n@media (min-width: 768px) {\n  .contenedorCharlas .agenda-card-imagen {\n    min-height: 240px;\n  }\n}\n.contenedorCharlas .agenda-card-imagen img {\n  object-fit: contain;\n  max-height: 280px;\n}\n@media (max-width: 1107px) {\n  .contenedor-logos {\n    max-width: 520px !important;\n  }\n  .logo-foro-1 {\n    max-width: 160px;\n  }\n  .logo-libertador {\n    max-width: 230px;\n  }\n  .contenedor-numeros {\n    margin-top: 100px;\n  }\n  .sub-text-entradas-ad {\n    margin-top: 30px;\n  }\n}\n@media (max-width: 768px) {\n  .logos-slide img {\n    width: 110px;\n    height: 45px;\n    margin: 0 10px;\n  }\n  .card-slider {\n    gap: 1.5rem;\n    padding: 1rem;\n  }\n}\n@media (max-width: 757px) {\n  .logo-foro-1 {\n    max-width: 130px;\n  }\n  .logo-libertador {\n    max-width: 160px;\n  }\n  .texto-conexion {\n    margin-top: -20px;\n  }\n  .contenedor-logo-principal {\n    margin-top: 40px !important;\n  }\n}\n@media (max-width: 500px) {\n  .titulo-entradas {\n    margin-top: 0;\n  }\n}\n@media (max-width: 407px) {\n  .logo-foro-1 {\n    max-width: 90px;\n  }\n  .logo-libertador {\n    max-width: 100px;\n  }\n}\n/*# sourceMappingURL=landing.css.map */\n'] }]
+
+`, styles: ['/* src/app/pages/landing/landing.css */\n.hero-bg {\n  width: 100%;\n  max-width: 100%;\n  box-sizing: border-box;\n  background-image: url("./media/fotospeakers.jpg");\n  background-size: cover;\n  background-position: center top;\n  background-repeat: no-repeat;\n  background-color: #ffffff;\n  height: 80vh;\n  margin-top: 95px;\n}\n@media (min-width: 768px) {\n  .hero-bg {\n    background-size: contain;\n    background-position: center center;\n  }\n}\nheader {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  z-index: 30;\n  background-color: #2d3450;\n  transition: background-color 0.4s ease-out;\n}\nheader.scrolled-header {\n  background-color: #2d3450;\n}\n.logo-white {\n  filter: brightness(0) invert(1);\n}\n.logo-principal {\n  max-width: 290px;\n  width: 100%;\n}\n.logo-foro-1 {\n  max-width: 130px;\n}\n.logo-libertador {\n  max-width: 200px;\n}\n.contenedor-logos {\n  max-width: 170px;\n}\n.timer-box {\n  background-color: rgba(255, 255, 255, 0.1);\n  border-radius: 0.5rem;\n  padding: 0.5rem 1rem;\n  -webkit-backdrop-filter: blur(10px);\n  backdrop-filter: blur(10px);\n}\n#hero-content .timer-box {\n  background-color: #000000;\n  -webkit-backdrop-filter: none;\n  backdrop-filter: none;\n}\n.timer-box--hero {\n  padding: 0.2rem 0.45rem;\n  border-radius: 0.25rem;\n}\n.texto-tiempo--hero {\n  font-size: 0.5625rem;\n  line-height: 1.1;\n  margin-top: 0.125rem;\n}\n.hero-agenda-btn {\n  display: inline-block;\n  max-width: min(100%, 16rem);\n  background-color: #bd0f14;\n  color: #ffffff;\n  font-weight: 600;\n  font-size: 0.6875rem;\n  line-height: 1.2;\n  padding: 0.35rem 0.65rem;\n  border-radius: 0.375rem;\n}\n@media (min-width: 640px) {\n  .hero-agenda-btn {\n    font-size: 0.75rem;\n    padding: 0.4rem 0.85rem;\n  }\n}\n.texto-conexion {\n  line-height: 24px;\n  font-size: 22px;\n  margin-top: 13px;\n}\n.texto-contador {\n  text-align: center;\n  font-weight: 500;\n}\n.texto-tiempo {\n  text-align: center;\n}\n.texto-pabellon {\n  border-bottom: 1px solid #fff;\n  padding-bottom: 15px;\n}\n.texto-fecha {\n  margin-top: 15px;\n  font-size: 22px;\n}\n.texto-ubicacion {\n  font-size: 20px;\n}\n.contenedor-logo-principal {\n  margin-top: 90px;\n}\n.contenedor-textos-info {\n  margin-top: 30px;\n}\n.texto-desliza {\n  margin-top: 20px;\n}\n.floating-cta {\n  position: fixed;\n  bottom: 2.5rem;\n  right: 2.5rem;\n  z-index: 30;\n}\n#animation-container {\n  position: relative;\n  width: 100%;\n  max-width: 100%;\n  margin: 0;\n  padding: 0;\n  min-height: 60vh;\n}\n.seccion-historia {\n  padding-top: 30px;\n  padding-left: 1rem;\n  padding-right: 1rem;\n  color: #2d3450;\n  text-align: center;\n  background-color: #f7f8fa;\n}\n.seccion-boletas-ad-2 {\n  background-image: url("./media/fondo-banner-2.png");\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.seccion-boletas-ad-3 {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/acb20703-f1f9-44c6-88a5-38e2dec47a42.png);\n  background-repeat: no-repeat;\n  background-size: cover !important;\n  height: auto;\n  min-height: 185px;\n  margin-bottom: 80px !important;\n}\n.imagen-boletos-2 {\n  width: 230px;\n}\n.etiqueta-pilar {\n  background-color: #2d3450;\n}\n.temas-charla-card .btn-reserva-vidrio {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  padding: 0.65rem 1.15rem;\n  font-size: 0.875rem;\n  font-weight: 600;\n  color: #fff;\n  text-align: center;\n  border-radius: 0.625rem;\n  border: 1px solid rgba(255, 255, 255, 0.45);\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.22) 0%,\n      rgba(255, 255, 255, 0.08) 100%);\n  backdrop-filter: blur(14px);\n  -webkit-backdrop-filter: blur(14px);\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.35);\n  cursor: pointer;\n  transition:\n    background 0.2s ease,\n    border-color 0.2s ease,\n    box-shadow 0.2s ease;\n  margin: 20px 0 0 0;\n}\n.temas-charla-card .btn-reserva-vidrio:hover {\n  background:\n    linear-gradient(\n      160deg,\n      rgba(255, 255, 255, 0.32) 0%,\n      rgba(255, 255, 255, 0.14) 100%);\n  border-color: rgba(255, 255, 255, 0.6);\n  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.45);\n}\n.seccion-temas {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/ca85fb18-d61a-4604-8f9d-004f021d7e98.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  padding-top: 70px;\n  padding-bottom: 70px;\n}\n.texto-pilares {\n  font-weight: 300;\n  font-size: 30px;\n}\n.texto-entradas {\n  font-size: 28px;\n  font-weight: 600;\n  padding-top: 30px;\n}\n.icono-compra {\n  margin-right: 10px;\n}\n.sub-texto-tarjeta {\n  margin-top: 20px;\n}\n.seccion-boletas-ad {\n  background-image: url(https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/a0154101-11b4-4330-8169-a6071bff0f43.png);\n  background-repeat: no-repeat;\n  background-size: cover;\n  height: 185px;\n  margin-bottom: 80px;\n}\n.botonWhatsappHilton :hover {\n  cursor: pointer !important;\n}\n.seccion-vive-foro {\n  position: relative;\n  text-align: center;\n  color: #ffffff;\n  padding: 3.5rem 1rem;\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  background-image: url("./media/banner_2.png");\n}\n@media (min-width: 640px) {\n  .seccion-vive-foro {\n    padding: 4.5rem 1.5rem;\n  }\n}\n.seccion-vive-foro-inner {\n  position: relative;\n  z-index: 1;\n  max-width: 40rem;\n  margin-left: auto;\n  margin-right: auto;\n}\n.seccion-vive-foro .titulo-vive-foro,\n.seccion-vive-foro .subtitulo-vive-foro {\n  color: #ffffff;\n}\n.seccion-vive-foro .titulo-vive-foro {\n  font-size: 1.25rem;\n  font-weight: 400;\n  line-height: 1.4;\n  margin: 0 0 0.75rem;\n}\n@media (min-width: 640px) {\n  .seccion-vive-foro .titulo-vive-foro {\n    font-size: 1.625rem;\n  }\n}\n.seccion-vive-foro .titulo-vive-foro strong {\n  font-weight: 700;\n}\n.seccion-vive-foro .subtitulo-vive-foro {\n  font-size: 1rem;\n  font-weight: 400;\n  line-height: 1.45;\n  margin: 0;\n  opacity: 0.96;\n}\n@media (min-width: 640px) {\n  .seccion-vive-foro .subtitulo-vive-foro {\n    font-size: 1.0625rem;\n  }\n}\n.seccion-vive-foro .boton-hilton-vidrio {\n  margin-top: 1.5rem;\n  display: inline-block;\n  cursor: pointer;\n  padding: 0.65rem 1.35rem;\n  color: #ffffff;\n  font-weight: 600;\n  font-size: 0.875rem;\n  line-height: 1.35;\n  text-decoration: none;\n  text-align: center;\n  border-radius: 0.5rem;\n  background: rgba(255, 255, 255, 0.12);\n  border: 1px solid rgba(255, 255, 255, 0.38);\n  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.14);\n  backdrop-filter: blur(14px);\n  -webkit-backdrop-filter: blur(14px);\n  transition:\n    background-color 0.2s ease,\n    border-color 0.2s ease,\n    opacity 0.2s ease;\n}\n.seccion-vive-foro .boton-hilton-vidrio:hover {\n  background: rgba(255, 255, 255, 0.22);\n  border-color: rgba(255, 255, 255, 0.52);\n}\n.sub-text-entradas-ad {\n  font-size: 31px;\n}\n.imagen-boletos {\n  margin-top: 50px;\n}\n.devolucion {\n  margin-top: 10px;\n  font-size: 15px;\n  color: rgb(107 114 128 / var(--tw-text-opacity, 1));\n  font-style: italic;\n}\n.seccion-boletas-ad :hover {\n  cursor: pointer;\n}\n.seccion-precios {\n  padding-top: 0 !important;\n}\n.logos-container {\n  overflow: hidden;\n  padding: 1rem 0;\n  position: relative;\n  width: 100%;\n  display: flex;\n  -webkit-mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n  mask-image:\n    linear-gradient(\n      to right,\n      transparent,\n      black 15%,\n      black 85%,\n      transparent);\n}\n.logos-slide {\n  display: flex;\n  align-items: center;\n  flex-shrink: 0;\n  white-space: nowrap;\n  animation: scroll-logos 25s linear infinite;\n}\n.logos-slide img {\n  width: 160px;\n  height: 60px;\n  object-fit: contain;\n  margin: 0 20px;\n}\n.logo-davivienda,\n.logo-bolivar {\n  width: 110px !important;\n}\n@keyframes scroll-logos {\n  from {\n    transform: translateX(0);\n  }\n  to {\n    transform: translateX(-100%);\n  }\n}\n.logos-container:hover .logos-slide {\n  animation-play-state: paused;\n}\n.carousel-container {\n  width: 90%;\n  max-width: 500px;\n  aspect-ratio: 8 / 5;\n  perspective: 1500px;\n  position: relative;\n}\n.carousel-rotator {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  transform-style: preserve-3d;\n  animation: rotateCarousel 20s linear infinite;\n}\n.carousel-face {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  backface-visibility: hidden;\n}\n.carousel-face:nth-child(1) {\n  transform: rotateY(0deg) translateZ(150px);\n}\n.carousel-face:nth-child(2) {\n  transform: rotateY(120deg) translateZ(150px);\n}\n.carousel-face:nth-child(3) {\n  transform: rotateY(240deg) translateZ(150px);\n}\n@keyframes rotateCarousel {\n  from {\n    transform: rotateY(0deg);\n  }\n  to {\n    transform: rotateY(-360deg);\n  }\n}\n.animatable-card.is-flipped {\n  background-color: white !important;\n  -webkit-backdrop-filter: none !important;\n  backdrop-filter: none !important;\n}\n.animatable-card.is-flipped .card-original-content {\n  opacity: 0;\n  pointer-events: none;\n}\n.animatable-card.is-flipped .card-flipped-content {\n  opacity: 1;\n  pointer-events: auto;\n}\n.card-slider {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  padding: 1rem;\n}\n.temas-card-destacada {\n  width: 100%;\n}\n.card-slider > div {\n  width: 100%;\n}\n.card-slider > * {\n  flex-shrink: 0;\n}\n.particle-canvas {\n  pointer-events: none;\n}\n.contenedorCharlas {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 1.5rem;\n  width: 100%;\n}\n@media (min-width: 768px) {\n  .contenedorCharlas {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n.contenedorCharlas .agenda-card-imagen {\n  min-height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: rgba(255, 255, 255, 0.06);\n}\n@media (min-width: 768px) {\n  .contenedorCharlas .agenda-card-imagen {\n    min-height: 240px;\n  }\n}\n.contenedorCharlas .agenda-card-imagen img {\n  object-fit: contain;\n  max-height: 280px;\n}\n@media (max-width: 1107px) {\n  .contenedor-logos {\n    max-width: 520px !important;\n  }\n  .logo-foro-1 {\n    max-width: 160px;\n  }\n  .logo-libertador {\n    max-width: 230px;\n  }\n  .contenedor-numeros {\n    margin-top: 100px;\n  }\n  .sub-text-entradas-ad {\n    margin-top: 30px;\n  }\n}\n@media (max-width: 768px) {\n  .logos-slide img {\n    width: 110px;\n    height: 45px;\n    margin: 0 10px;\n  }\n  .card-slider {\n    gap: 1.5rem;\n    padding: 1rem;\n  }\n}\n@media (max-width: 757px) {\n  .logo-foro-1 {\n    max-width: 130px;\n  }\n  .logo-libertador {\n    max-width: 160px;\n  }\n  .texto-conexion {\n    margin-top: -20px;\n  }\n  .contenedor-logo-principal {\n    margin-top: 40px !important;\n  }\n}\n@media (max-width: 500px) {\n  .titulo-entradas {\n    margin-top: 0;\n  }\n}\n@media (max-width: 407px) {\n  .logo-foro-1 {\n    max-width: 90px;\n  }\n  .logo-libertador {\n    max-width: 100px;\n  }\n}\n/*# sourceMappingURL=landing.css.map */\n'] }]
   }], () => [{ type: ServiceBoletas }, { type: Router }, { type: ChangeDetectorRef }, { type: MatDialog }], { onWindowScroll: [{
     type: HostListener,
     args: ["window:scroll", []]
