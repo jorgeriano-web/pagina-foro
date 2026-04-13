@@ -1,9 +1,14 @@
 .hero-bg {
-    background-image: url('https://image.experienciasbolivar.segurosbolivar.com/lib/fe3511747364047b751475/m/1/da01a461-c25e-400e-8037-cc341bfc1bd3.png');
-    background-size: cover;
-    background-position: center;
-    background-color: #2d3450;
-    height: 60vh;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    background-image: url('../../../assets/img/fotospeakers.jpg');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+    height: 80vh;
+    margin-top: 95px;
 }
 
 header {
@@ -12,7 +17,7 @@ header {
     left: 0;
     right: 0;
     z-index: 30;
-    background-color: transparent;
+    background-color: #2d3450;
     transition: background-color 0.4s ease-out;
 }
 
@@ -97,8 +102,11 @@ header.scrolled-header {
 }
 
 #animation-container {
-     position: relative;
+    position: relative;
     width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
     min-height: 60vh;
 }
 
