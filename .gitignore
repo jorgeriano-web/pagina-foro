@@ -30,7 +30,7 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-# Caché del CLI en front/ (/.angular/cache solo aplicaba a la raíz del repo)
+# Angular CLI: la caché vive en front/.angular/; `/.angular/cache` solo ignoraba la raíz del repo.
 front/.angular/
 .sass-cache/
 /connect.lock
