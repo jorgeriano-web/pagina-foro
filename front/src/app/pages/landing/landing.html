@@ -37,17 +37,26 @@
     </div>
 
     <div id="animation-container">
-        <main id="inicio-section" class="relative hero-bg w-full flex flex-col p-0">
-            <canvas class="particle-canvas pointer-events-none absolute top-0 left-0 z-0 h-full w-full"></canvas>
+        <div class="hero-stack relative w-full">
+            <main id="inicio-section" class="relative hero-bg w-full p-0">
+                <img
+                    class="hero-photo"
+                    src="../../../assets/img/fotospeakers.jpg"
+                    alt="Speakers Foro Inmobiliario 2026"
+                    width="6250"
+                    height="3750"
+                    decoding="async"
+                    fetchpriority="high"
+                />
+                <canvas class="particle-canvas pointer-events-none absolute top-0 left-0 z-0 h-full w-full"></canvas>
+            </main>
 
             <div
                 id="hero-content"
-                class="absolute bottom-0 left-1/2 z-10 flex w-full max-w-5xl -translate-x-1/2 flex-col items-center px-2 text-white sm:px-4"
+                class="hero-content-wrap relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center px-2 py-3 text-white sm:px-4 md:absolute md:bottom-0 md:left-1/2 md:mx-0 md:-translate-x-1/2 md:py-0 md:pb-1"
             >
-            
-                <div class="hero-timer-anchor flex translate-y-1/2 flex-col items-center">
-
-                    <div class="hero-hero-extras mb-3 flex flex-col items-center">
+                <div class="hero-timer-anchor flex max-md:translate-y-0 flex-col items-center md:translate-y-1/2">
+                    <div class="hero-hero-extras mb-2 flex flex-col items-center md:mb-3">
                         <a
                             href="https://dvn7rzpuwpj45.cloudfront.net/wp-content/uploads/2026/03/20163220/Agenda_foro_202.pdf"
                             target="_blank"
@@ -56,28 +65,28 @@
                             >Conoce la agenda aquí</a>
                     </div>
 
-                    <div class="hero-timer-row flex flex-wrap justify-center gap-1.5 sm:gap-2">
+                    <div class="hero-timer-row flex flex-wrap justify-center gap-1 sm:gap-2">
                         <div class="timer-box timer-box--hero">
-                            <span id="days" class="text-base font-bold tabular-nums leading-none sm:text-lg">{{timeleft.days}}</span>
+                            <span id="days" class="hero-timer-digit font-bold tabular-nums leading-none">{{timeleft.days}}</span>
                             <p class="texto-tiempo texto-tiempo--hero">Días</p>
                         </div>
                         <div class="timer-box timer-box--hero">
-                            <span id="hours" class="text-base font-bold tabular-nums leading-none sm:text-lg">{{timeleft.hours}}</span>
+                            <span id="hours" class="hero-timer-digit font-bold tabular-nums leading-none">{{timeleft.hours}}</span>
                             <p class="texto-tiempo texto-tiempo--hero">Horas</p>
                         </div>
                         <div class="timer-box timer-box--hero">
-                            <span id="minutes" class="text-base font-bold tabular-nums leading-none sm:text-lg">{{timeleft.minutes}}</span>
+                            <span id="minutes" class="hero-timer-digit font-bold tabular-nums leading-none">{{timeleft.minutes}}</span>
                             <p class="texto-tiempo texto-tiempo--hero">Minutos</p>
                         </div>
                         <div class="timer-box timer-box--hero">
-                            <span id="seconds" class="text-base font-bold tabular-nums leading-none sm:text-lg">{{timeleft.seconds}}</span>
+                            <span id="seconds" class="hero-timer-digit font-bold tabular-nums leading-none">{{timeleft.seconds}}</span>
                             <p class="texto-tiempo texto-tiempo--hero">Segundos</p>
                         </div>
                     </div>
-                    <div class="hero-timer-spacer h-2 shrink-0 sm:h-2.5" aria-hidden="true"></div>
+                    <div class="hero-timer-spacer h-1.5 shrink-0 max-md:hidden sm:h-2.5" aria-hidden="true"></div>
                 </div>
             </div>
-        </main>
+        </div>
     </div>
 
     <div class="floating-cta">
