@@ -147,6 +147,24 @@
                             </div>
                         </div>
                     </div>
+                
+                    <div class="w-full min-w-0 flex">
+                        <div class="animatable-card temas-charla-card bg-white/10 backdrop-blur-lg rounded-2xl text-white text-left relative h-full w-full overflow-hidden transition-colors duration-500">
+                            <div class="card-original-content transition-opacity duration-300 flex flex-col md:flex-row md:items-stretch flex-1 min-h-0">
+                                <div class="agenda-card-imagen shrink-0 md:w-[42%] lg:w-[38%]">
+                                    <img src="../../../assets/img/charla3.png" alt="Experiencia alterna — Sala 3" class="block w-full h-full object-cover object-center" />
+                                </div>
+                                <div class="agenda-card-texto flex flex-col p-6 sm:p-8 md:py-8 md:pr-8 md:pl-6 flex-1 min-w-0">
+                                    <span class="inline-flex items-center self-start px-3 py-1 rounded-full text-sm font-medium text-white etiqueta-pilar mb-4">
+                                        Sala 3
+                                    </span>
+                                    <h4 class="text-2xl font-bold flex-1">Casos de Exito</h4>
+                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ mensajeCuposPorTurno }}</p>
+                                    <button type="button" (click)="abrirReservaCupo(3, 'Casos de Exito', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="w-full min-w-0 flex">
                         <div class="animatable-card temas-charla-card bg-white/10 backdrop-blur-lg rounded-2xl text-white text-left relative h-full w-full overflow-hidden transition-colors duration-500">
