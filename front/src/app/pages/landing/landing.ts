@@ -223,5 +223,11 @@ export class Landing implements OnInit, OnDestroy {
     const url = `https://wa.me/${numeroWhatsapp}?text=${mensaje}`;
     window.open(url, '_blank');
   }
+
+
+  abrirImagenAgenda(): void {
+    window.open('../../../../assets/img/Agenda_foro_2026.jpeg', '_blank');
+  }
+  
 }
 

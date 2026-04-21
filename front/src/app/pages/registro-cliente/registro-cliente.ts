@@ -35,9 +35,14 @@ export class RegistroCliente implements OnInit {
     private cdr: ChangeDetectorRef){}
 
   ngOnInit(): void {
-    this.cantidadBoletas = this.boletasService.getCantidad();
+    let cantidad = this.boletasService.getCantidad();
+    if (!cantidad || cantidad < 1) {
+      this.boletasService.seleccionarCantidadBoletas(1);
+      cantidad = this.boletasService.getCantidad();
+    }
+    this.cantidadBoletas = cantidad;
     this.precioBoletas = this.boletasService.getPrecio();
-    this.inicializarAsistentes()
+    this.inicializarAsistentes();
   }
 
   stepTitles = [
@@ -58,85 +63,116 @@ export class RegistroCliente implements OnInit {
   // URL del script de Google para validar póliza
   private GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQqpkFd5pxVcaTlCgydAdKvw3-LQpjTTCuKhGTb8G4F3tl_8BwHnsSuu81dqZm9td82Q/exec';
 
-async validarPoliza(): Promise<boolean> {
-  if (!this.formData.poliza.numero) {
-    this.polizaError = 'Ingresa el número de póliza';
+  private pushDataLayerSafe(payload: object): void {
+    try {
+      this.dataLayer.push(payload);
+    } catch {
+      /* no bloquear el flujo por analytics */
+    }
+  }
+
+  private parsePolizaResponse(raw: unknown): any {
+    if (raw == null) return null;
+    if (Array.isArray(raw) && raw.length > 0) {
+      return raw[0];
+    }
+    return raw;
+  }
+
+  private isPolizaSuccess(data: any): boolean {
+    if (!data || typeof data !== 'object') return false;
+    const s = (data as { success?: unknown }).success;
+    if (s === true || s === 1) return true;
+    if (typeof s === 'string') return s.toLowerCase() === 'true' || s === '1';
     return false;
   }
 
-  this.validandoPoliza = true;
-  this.polizaError = '';
-
-  const url = `${this.GOOGLE_SCRIPT_URL}?poliza=${this.formData.poliza.numero}`;
-
-  try {
-    
-    const data = await firstValueFrom(this.http.get<any>(url));
-    
-    if (data.success) {
-      this.formData.poliza.inmobiliaria = data.inmobiliaria;
-      this.formData.poliza.ciudad = data.ciudad;
-      this.formData.poliza.ejecutivo = data.ejecutivo;
-      this.formData.poliza.segmento = data.segmento;
-      this.formData.poliza.contratos = Number(data.contratos);
-      this.formData.poliza.primas = data.primas;
-      this.polizaValidada = true;
-      this.validandoPoliza = false;
-      this.cdr.detectChanges();
-      return true;
-    } else {
-      this.polizaError = data.message || 'Póliza no encontrada.';
-      this.validandoPoliza = false;
+  async validarPoliza(): Promise<boolean> {
+    if (!this.formData.poliza.numero) {
+      this.polizaError = 'Ingresa el número de póliza';
       return false;
     }
-  } catch (error) {
-    this.polizaError = 'No se pudo conectar. Intente de nuevo.';
-    this.validandoPoliza = false;
-    return false;
-  }
-}
 
+    this.validandoPoliza = true;
+    this.polizaError = '';
 
-nextStep() {
+    const url = `${this.GOOGLE_SCRIPT_URL}?poliza=${encodeURIComponent(this.formData.poliza.numero.trim())}`;
 
-  if (this.currentStep === 2) {
-    this.dataLayer.push({
-      event: 'ga_event',
-      category: 'foro 2026',
-      action: 'AMW - datos de asistentes-siguiente',
-      label: 'Siguiente'
-    });
-  }
+    try {
+      const raw = await firstValueFrom(this.http.get<unknown>(url));
+      const data = this.parsePolizaResponse(raw);
 
-  if (this.currentStep === 3) {
-    this.dataLayer.push({
-      event: 'ga_event',
-      category: 'foro 2026',
-      action: 'AMW - informacion de facturacion',
-      label: 'siguiente'
-    });
-  }
-
-  if (this.currentStep < 4) {
-    this.currentStep++;
-  }
-}
-
-prevStep() {
-
-  if (this.currentStep === 4) {
-    this.dataLayer.push({
-      event: 'ga_event',
-      category: 'foro 2026',
-      action: 'AMW - informacion de facturacion',
-      label: 'anterior'
-    });
+      if (this.isPolizaSuccess(data)) {
+        this.formData.poliza.inmobiliaria = data.inmobiliaria ?? '';
+        this.formData.poliza.ciudad = data.ciudad ?? '';
+        this.formData.poliza.ejecutivo = data.ejecutivo ?? '';
+        this.formData.poliza.segmento = data.segmento ?? '';
+        this.formData.poliza.contratos = Number(data.contratos) || 0;
+        this.formData.poliza.primas = data.primas ?? '';
+        this.polizaValidada = true;
+        this.validandoPoliza = false;
+        this.cdr.detectChanges();
+        return true;
+      }
+      this.polizaError = data?.message || 'Póliza no encontrada.';
+      this.validandoPoliza = false;
+      this.cdr.detectChanges();
+      return false;
+    } catch {
+      this.polizaError = 'No se pudo conectar. Intente de nuevo.';
+      this.validandoPoliza = false;
+      this.cdr.detectChanges();
+      return false;
+    }
   }
 
-  if (this.currentStep > 1) {
-    this.currentStep--;
+  nextStep(): void {
+    if (this.currentStep === 1 && !this.polizaValidada) {
+      return;
+    }
+
+    try {
+      if (this.currentStep === 2) {
+        this.pushDataLayerSafe({
+          event: 'ga_event',
+          category: 'foro 2026',
+          action: 'AMW - datos de asistentes-siguiente',
+          label: 'Siguiente',
+        });
+      }
+      if (this.currentStep === 3) {
+        this.pushDataLayerSafe({
+          event: 'ga_event',
+          category: 'foro 2026',
+          action: 'AMW - informacion de facturacion',
+          label: 'siguiente',
+        });
+      }
+    } catch {
+      /* seguir al cambio de paso */
+    }
+
+    if (this.currentStep < 4) {
+      this.currentStep++;
+    }
+    this.cdr.detectChanges();
   }
-}
+
+  prevStep(): void {
+    if (this.currentStep === 4) {
+      this.pushDataLayerSafe({
+        event: 'ga_event',
+        category: 'foro 2026',
+        action: 'AMW - informacion de facturacion',
+        label: 'anterior',
+      });
+    }
+
+    if (this.currentStep > 1) {
+      this.currentStep--;
+    }
+    this.cdr.detectChanges();
+  }
 
   goToStep(step: number) {
     this.currentStep = step;
@@ -147,22 +183,24 @@ prevStep() {
   }
 
   async enviarFormulario() {
-
-    this.dataLayer.push({
+    this.pushDataLayerSafe({
       event: 'ga_event',
       category: 'foro 2026',
       action: 'AMW - confirmar y pagar',
-      label: 'Confirmar y pagar'
+      label: 'Confirmar y pagar',
     });
 
     this.spinner = true;
+    this.cdr.detectChanges();
+    await Promise.resolve();
 
     const esValida = await this.validarPoliza();
 
     if (!esValida) {
-    this.spinner = false;
-    alert('Error: La póliza no es válida.');
-    return;
+      this.spinner = false;
+      this.cdr.detectChanges();
+      alert('Error: La póliza no es válida.');
+      return;
     }
 
     const datosPago: PagoRequest = {
@@ -182,25 +220,26 @@ prevStep() {
   };
 
 
-  try {
-    const response = await this.pagoService.crearLinkPago(datosPago);
-    
-    if (response.success) {
+    try {
+      const response = await this.pagoService.crearLinkPago(datosPago);
 
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'Purchase');
+      if (response.success) {
+        if (typeof fbq !== 'undefined') {
+          fbq('track', 'Purchase');
+        }
+
+        localStorage.setItem('pagoReferencia', response.referencia);
+        this.pagoService.redirigirAPago(response.shortLink);
+      } else {
+        this.spinner = false;
+        this.cdr.detectChanges();
+        alert('No se pudo generar el link de pago. Intenta de nuevo.');
       }
-      
-      localStorage.setItem('pagoReferencia', response.referencia);
-      // Redirigir al gateway de pago
-      this.pagoService.redirigirAPago(response.shortLink);
+    } catch {
+      this.spinner = false;
+      this.cdr.detectChanges();
+      alert('Hubo un error, vuelve a intentarlo');
     }
-  } catch (error) {
-    this.spinner = false;
-    alert("Hubo un error, vuelve a intentarlo")
-
-    // Mostrar mensaje de error al usuario
-  }
   }
 
   inicializarAsistentes(){
@@ -261,14 +300,14 @@ prevStep() {
   showFaltantesPopup = false;
   seccionesFaltantes: string[] = [];
 
-  intentarEnviar() {
+  async intentarEnviar(): Promise<void> {
     if (this.spinner) return;
     if (!this.isFormValid()) {
       this.seccionesFaltantes = this.getMissingSections();
       this.showFaltantesPopup = true;
       return;
     }
-    this.enviarFormulario();
+    await this.enviarFormulario();
   }
 
   cerrarPopupFaltantes() {

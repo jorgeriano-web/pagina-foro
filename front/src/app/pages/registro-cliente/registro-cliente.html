@@ -21,7 +21,7 @@
             </p>
 
             <div class="flex items-center">
-                <button (click)="prevStep()" [disabled]="currentStep === 1" 
+                <button type="button" (click)="prevStep()" [disabled]="currentStep === 1" 
                         class="disabled:text-gray-400 text-custom-blue">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
@@ -32,7 +32,7 @@
                          [class]="step <= currentStep ? 'flex-1 h-2 bg-custom-red rounded-full' : 'flex-1 h-2 bg-gray-300 rounded-full'">
                     </div>
                 </div>
-                <button (click)="nextStep()" [disabled]="currentStep === 4"
+                <button type="button" (click)="nextStep()" [disabled]="currentStep === 4"
                         class="disabled:text-gray-400 text-custom-blue">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
@@ -61,17 +61,17 @@
                 <div *ngIf="polizaValidada" class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-custom-blue mb-1">Nombre de la Inmobiliaria <span class="text-red-500">*</span></label>
-                        <input type="text" [(ngModel)]="formData.poliza.inmobiliaria" readonly
+                        <input type="text" [value]="formData.poliza.inmobiliaria" readonly
                                class="block w-full rounded-md border-gray-300 shadow-sm bg-gray-100">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-custom-blue mb-1">Ciudad <span class="text-red-500">*</span></label>
-                        <input type="text" [(ngModel)]="formData.poliza.ciudad" readonly
+                        <input type="text" [value]="formData.poliza.ciudad" readonly
                                class="block w-full rounded-md border-gray-300 shadow-sm bg-gray-100">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-custom-blue mb-1">Ejecutivo <span class="text-red-500">*</span></label>
-                        <input type="text" [(ngModel)]="formData.poliza.ejecutivo" readonly
+                        <input type="text" [value]="formData.poliza.ejecutivo" readonly
                                class="block w-full rounded-md border-gray-300 shadow-sm bg-gray-100">
                     </div>
                 </div>
@@ -263,28 +263,28 @@
 
         <!-- Botones de navegación -->
         <div *ngIf="!formEnviado" class="mt-6 flex justify-end space-x-4">
-            <button *ngIf="currentStep > 1" (click)="prevStep()"
+            <button type="button" *ngIf="currentStep > 1" (click)="prevStep()"
                     class="text-custom-blue font-semibold py-2 px-6 hover:underline">
                 Anterior
             </button>
-            <button *ngIf="currentStep === 1 && !polizaValidada" (click)="validarPoliza()"
+            <button type="button" *ngIf="currentStep === 1 && !polizaValidada" (click)="validarPoliza()"
                     [disabled]="validandoPoliza"
                     class="btn-primary">
                 {{ validandoPoliza ? 'Validando...' : 'Validar Póliza' }}
             </button>
-            <button *ngIf="currentStep === 1 && polizaValidada" (click)="nextStep()"
+            <button type="button" *ngIf="currentStep === 1 && polizaValidada" (click)="nextStep()"
                     class="btn-primary">
                 Siguiente
             </button>
-            <button *ngIf="currentStep === 2" (click)="nextStep()"
+            <button type="button" *ngIf="currentStep === 2" (click)="nextStep()"
                     class="btn-primary">
                 Siguiente
             </button>
-            <button *ngIf="currentStep === 3" (click)="nextStep()"
+            <button type="button" *ngIf="currentStep === 3" (click)="nextStep()"
                     class="btn-primary">
                 Siguiente
             </button>
-            <button *ngIf="currentStep === 4" 
+            <button type="button" *ngIf="currentStep === 4" 
                     (click)="intentarEnviar()" 
                     class="btn-primary" 
                     [disabled]="spinner">
