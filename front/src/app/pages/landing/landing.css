@@ -120,6 +120,10 @@ header.scrolled-header {
     border-radius: 0.375rem;
 }
 
+.hero-agenda-btn:hover {
+    cursor: pointer;
+}
+
 @media (min-width: 768px) {
     .hero-agenda-btn {
         font-size: 0.75rem;
