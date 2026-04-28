@@ -1,3 +1,6 @@
+/**
+ * Caso de uso “reservar cupo”: valida cupos, escribe fila en Sheet y envía correo con QR.
+ */
 import { HttpsError } from "firebase-functions/v2/https";
 import QRCode from "qrcode";
 import { SALAS_EXPERIENCIA } from "../models/salaExperiencia";

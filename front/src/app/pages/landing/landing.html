@@ -95,24 +95,24 @@
     </div>
 
 
-    <!--<section id="temas-foro-section" class="relative bg-[#2d3450] py-20 sm:py-28 seccion-temas">
+    <section id="temas-foro-section" class="relative bg-[#2d3450] py-20 sm:py-28 seccion-temas">
         <canvas class="particle-canvas absolute top-0 left-0 w-full h-full z-0"></canvas>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center text-white mb-16">
                 <h3 class="text-3xl font-bold tracking-tight sm:text-4xl">Agenda Foro 2026:</h3>
-                <h2 class="text-4xl font-extrabold tracking-tight sm:text-5xl mt-2 texto-pilares">Dos dias para activar el crecimiento del sector inmobiliario</h2>
+                <h2 class="text-4xl font-extrabold tracking-tight sm:text-5xl mt-2 texto-pilares">Dos días para activar el crecimiento del sector inmobiliario</h2>
             </div>
 
             <div class="card-slider">
 
                 <div class="text-center text-white">
-                    <h3 class="text-3xl font-bold tracking-tight sm:text-4xl">Experiencias Alternas</h3>
+                    <h3 class="text-3xl font-bold tracking-tight sm:text-4xl">Experiencias alternativas</h3>
                 </div>
 
                 <div class="contenedorCharlas">
 
 
-                    <div class="w-full min-w-0 flex">cl
+                    <div class="w-full min-w-0 flex">
                         <div class="animatable-card temas-charla-card bg-white/10 backdrop-blur-lg rounded-2xl text-white text-left relative h-full w-full overflow-hidden transition-colors duration-500">
                             <div class="card-original-content transition-opacity duration-300 flex flex-col md:flex-row md:items-stretch flex-1 min-h-0">
                                 <div class="agenda-card-imagen shrink-0 md:w-[42%] lg:w-[38%]">
@@ -140,27 +140,9 @@
                                     <span class="inline-flex items-center self-start px-3 py-1 rounded-full text-sm font-medium text-white etiqueta-pilar mb-4">
                                         Sala 2
                                     </span>
-                                    <h4 class="text-2xl font-bold flex-1">Entorno Juridico</h4>
+                                    <h4 class="text-2xl font-bold flex-1">Entorno jurídico</h4>
                                     <p class="text-sm text-white/85 mt-2 leading-snug">{{ mensajeCuposPorTurno }}</p>
-                                    <button type="button" (click)="abrirReservaCupo(2, 'Entorno Juridico', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="w-full min-w-0 flex">
-                        <div class="animatable-card temas-charla-card bg-white/10 backdrop-blur-lg rounded-2xl text-white text-left relative h-full w-full overflow-hidden transition-colors duration-500">
-                            <div class="card-original-content transition-opacity duration-300 flex flex-col md:flex-row md:items-stretch flex-1 min-h-0">
-                                <div class="agenda-card-imagen shrink-0 md:w-[42%] lg:w-[38%]">
-                                    <img src="../../../assets/img/charla3.png" alt="Experiencia alterna — Sala 3" class="block w-full h-full object-cover object-center" />
-                                </div>
-                                <div class="agenda-card-texto flex flex-col p-6 sm:p-8 md:py-8 md:pr-8 md:pl-6 flex-1 min-w-0">
-                                    <span class="inline-flex items-center self-start px-3 py-1 rounded-full text-sm font-medium text-white etiqueta-pilar mb-4">
-                                        Sala 3
-                                    </span>
-                                    <h4 class="text-2xl font-bold flex-1">Casos de Exito</h4>
-                                    <p class="text-sm text-white/85 mt-2 leading-snug">{{ mensajeCuposPorTurno }}</p>
-                                    <button type="button" (click)="abrirReservaCupo(3, 'Casos de Exito', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
+                                    <button type="button" (click)="abrirReservaCupo(2, 'Entorno jurídico', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Reserva tu cupo aquí</button>
                                 </div>
                             </div>
                         </div>
@@ -185,10 +167,65 @@
                     </div>
 
                 </div>
+
+                <div class="contenedorPreguntas">
+
+                    <div class="text-center text-white">
+                        <h3 class="text-3xl font-bold tracking-tight sm:text-4xl">Pregúntale a tu speaker favorito</h3>
+                    </div>
+
+                    <div class="w-full min-w-0 flex">
+                        <div class="animatable-card temas-charla-card preguntas-form-card rounded-2xl text-white text-left relative h-full w-full overflow-hidden transition-colors duration-500">
+                            <div class="card-original-content transition-opacity duration-300 flex flex-col md:flex-row md:items-stretch flex-1 min-h-0">
+                                <form (ngSubmit)="$event.preventDefault()">
+                                    <div>
+                                        <label for="pregunta-speaker-nombre">Nombre del speaker</label>
+                                        <input
+                                            type="text"
+                                            id="pregunta-speaker-nombre"
+                                            name="preguntaSpeakerNombre"
+                                            [(ngModel)]="preguntaSpeakerNombre"
+                                            placeholder="Nombre"
+                                            autocomplete="name"
+                                            [disabled]="preguntaSpeakerEnviando"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label for="pregunta-speaker-texto">Pregunta</label>
+                                        <input
+                                            type="text"
+                                            id="pregunta-speaker-texto"
+                                            name="preguntaSpeakerTexto"
+                                            [(ngModel)]="preguntaSpeakerTexto"
+                                            placeholder="Pregunta"
+                                            autocomplete="off"
+                                            [disabled]="preguntaSpeakerEnviando"
+                                        />
+                                    </div>
+                                    <p *ngIf="preguntaSpeakerError" class="text-sm text-red-200 mt-2" role="alert">
+                                        {{ preguntaSpeakerError }}
+                                    </p>
+                                    <p *ngIf="preguntaSpeakerExito" class="text-sm text-emerald-200 mt-2" role="status">
+                                        ¡Listo! Tu pregunta fue registrada.
+                                    </p>
+                                    <button
+                                        type="button"
+                                        (click)="enviarPreguntaSpeaker()"
+                                        class="btn-reserva-vidrio mt-6 md:mt-auto"
+                                        [disabled]="preguntaSpeakerEnviando"
+                                    >
+                                        {{ preguntaSpeakerEnviando ? 'Enviando…' : 'Envía tu pregunta aquí' }}
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
-    </section> -->
+    </section> 
 
     <section id="precios-pioneros-section" class="bg-[#f7f8fa] seccion-precios pt-0 pb-10 sm:pb-12">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -316,7 +353,7 @@
                 </div>
 
             </div>
-            <p class="mt-16 text-sm text-gray-500 italic">*Válido hasta el 20 de Mayo de 2026.</p>
+            <p class="mt-16 text-sm text-gray-500 italic">*Válido hasta el 20 de mayo de 2026.</p>
             <h2 class="devolucion">**Ten presente: no realizamos devoluciones de dinero</h2>
         </div>
     </section>
@@ -382,7 +419,7 @@
     <section class="seccion-vive-foro">
         <div class="seccion-vive-foro-inner">
             <h3 class="titulo-vive-foro">
-                <strong>Vive el XVI Foro Experiencia Inmobiliaria</strong> con total comodidad!
+                ¡<strong>Vive el XVI Foro Experiencia Inmobiliaria</strong> con total comodidad!
             </h3>
             <h4 class="subtitulo-vive-foro">Disfruta de un ahorro especial en el Hilton Cartagena gracias a nuestra alianza</h4>
             <a

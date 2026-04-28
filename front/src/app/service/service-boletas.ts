@@ -1,3 +1,6 @@
+/**
+ * Estado en memoria de la compra de boletas (cantidad elegida en la landing → registro).
+ */
 import { Injectable } from '@angular/core';
 
 @Injectable({

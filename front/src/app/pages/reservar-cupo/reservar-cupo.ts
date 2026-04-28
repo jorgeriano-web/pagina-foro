@@ -1,3 +1,7 @@
+/**
+ * Formulario de reserva de cupo por sala: diálogo (landing) o ruta `/reservar-cupos`.
+ * Usa slots y validación de sala en archivos colindantes (`*.slots.ts`, `*.salas.ts`).
+ */
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectorRef,
@@ -10,28 +14,19 @@ import { FormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ReservaCupos } from '../../service/reserva-cupos';
+import {
+  OpcionSlotCharla,
+  OpcionSlotSelect,
+  SLOTS_CHARLA,
+  parseSlotCharlaValue,
+} from './reservar-cupo.slots';
+import { esIdSalaReserva } from './reservar-cupo.salas';
 
 /** Datos que envía la landing al abrir el MatDialog. */
 export interface ReservaCupoDialogData {
   idSala: number;
   nombreExperiencia: string;
 }
-
-/** Valor del `<select>`: `fecha|hora` en formato acordado con el back. */
-export interface OpcionSlotCharla {
-  value: string;
-  label: string;
-}
-
-/** Una fila del `<select>` (texto, valor, si está llena). */
-export interface OpcionSlotSelect {
-  value: string;
-  label: string;
-  disabled: boolean;
-}
-
-const RX_FECHA_YMD = /^\d{4}-\d{2}-\d{2}$/;
-const RX_HORA_HM = /^\d{1,2}:\d{2}$/;
 
 @Component({
   selector: 'app-reservar-cupo',
@@ -47,12 +42,7 @@ export class ReservarCupo implements OnInit {
   correo = '';
   slotSeleccionado = '';
 
-  readonly slotsCharla: OpcionSlotCharla[] = [
-    { value: '2026-05-21|14:30', label: '21 de mayo, 2:30 p. m.' },
-    { value: '2026-05-21|16:45', label: '21 de mayo, 4:45 p. m.' },
-    { value: '2026-05-22|14:30', label: '22 de mayo, 2:30 p. m.' },
-    { value: '2026-05-22|16:45', label: '22 de mayo, 4:45 p. m.' },
-  ];
+  readonly slotsCharla: readonly OpcionSlotCharla[] = SLOTS_CHARLA;
 
   // ——— Estado UI ———
   procesando = false;
@@ -98,7 +88,7 @@ export class ReservarCupo implements OnInit {
     }
     const s = this.route?.snapshot.queryParamMap.get('sala');
     const n = s ? Number.parseInt(s, 10) : NaN;
-    return !Number.isNaN(n) && n >= 1 && n <= 4 ? n : null;
+    return !Number.isNaN(n) && esIdSalaReserva(n) ? n : null;
   }
 
   get nombreExperiencia(): string {
@@ -261,7 +251,7 @@ export class ReservarCupo implements OnInit {
       const salas = await this.reservaCuposService.listarSalasExperiencia();
       const map: Record<number, { capacidadTotal: number }> = {};
       for (const s of salas) {
-        if (s.id === 1 || s.id === 2 || s.id === 3 || s.id === 4) {
+        if (esIdSalaReserva(s.id)) {
           map[s.id] = { capacidadTotal: s.capacidadTotal };
         }
       }
@@ -294,7 +284,7 @@ export class ReservarCupo implements OnInit {
     this.cdr.detectChanges();
 
     const promesas = this.slotsCharla.map(async (s) => {
-      const parsed = this.parseSlotValue(s.value);
+      const parsed = parseSlotCharlaValue(s.value);
       if (parsed == null) {
         return { key: s.value, n: null as number | null };
       }
@@ -398,20 +388,7 @@ export class ReservarCupo implements OnInit {
 
   /** Interpreta `slotSeleccionado` (`fecha|horaCharla`). */
   private parseSlotSeleccionado(): { fecha: string; horaCharla: string } | null {
-    return this.parseSlotValue(this.slotSeleccionado);
-  }
-
-  private parseSlotValue(value: string): { fecha: string; horaCharla: string } | null {
-    if (!value) {
-      return null;
-    }
-    const partes = value.split('|');
-    const fecha = partes[0] ?? '';
-    const horaCharla = (partes[1] ?? '').trim();
-    if (!RX_FECHA_YMD.test(fecha) || !RX_HORA_HM.test(horaCharla)) {
-      return null;
-    }
-    return { fecha, horaCharla };
+    return parseSlotCharlaValue(this.slotSeleccionado);
   }
 
   private mensajeErrorReserva(e: unknown): string {

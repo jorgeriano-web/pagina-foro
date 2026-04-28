@@ -1,10 +1,12 @@
+/**
+ * Pantalla pública `/cupo/:uuid`: muestra datos de la reserva si el UUID existe en Sheets.
+ */
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ReservaCupos, ResultadoCupoPorUuid } from '../../service/reserva-cupos';
-
-const RX_UUID_V4 =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+import { ReservaCupos } from '../../service/reserva-cupos';
+import type { ResultadoCupoPorUuid } from '../../service/reserva-cupos.types';
+import { RX_UUID_V4_CUPO } from './ver-cupo.constants';
 
 @Component({
   selector: 'app-ver-cupo',
@@ -25,7 +27,7 @@ export class VerCupo implements OnInit {
 
   ngOnInit(): void {
     const uuid = this.route.snapshot.paramMap.get('uuid')?.trim() ?? '';
-    if (!RX_UUID_V4.test(uuid)) {
+    if (!RX_UUID_V4_CUPO.test(uuid)) {
       this.estado = 'invalido';
       this.cdr.detectChanges();
       return;

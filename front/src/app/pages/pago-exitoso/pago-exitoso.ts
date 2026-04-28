@@ -1,3 +1,6 @@
+/**
+ * Pantalla tras pago aprobado (mensaje de éxito y animación opcional).
+ */
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pago } from '../../service/pago';

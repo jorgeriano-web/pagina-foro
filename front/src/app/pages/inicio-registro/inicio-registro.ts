@@ -1,3 +1,6 @@
+/**
+ * Paso inicial post-landing: elige flujo cliente Bolívar vs no cliente antes del registro.
+ */
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';

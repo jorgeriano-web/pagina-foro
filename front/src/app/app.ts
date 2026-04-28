@@ -1,3 +1,6 @@
+/**
+ * Raíz de la aplicación: solo contiene el `<router-outlet>`.
+ */
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 

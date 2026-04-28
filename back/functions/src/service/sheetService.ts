@@ -1,7 +1,13 @@
+/**
+ * Lectura/escritura en Google Sheets (transacciones del foro y reservas por sala).
+ */
 import {google} from 'googleapis';
 import { accFireBaseConfig } from '../configSecrets/firebaseConfigAccount';
 
 const SHEET_ID = '1uon5WZ7e6Nr2Gg2sWLKUS9gExPbVhBwdpIIK1iV_HvE';
+
+/** Salas con reservas activas (pestañas Sala{n}Reservas). La 3 puede existir en el Sheet solo por histórico. */
+const IDS_SALA_RESERVA_ACTIVA = new Set<number>([1, 2, 4]);
 
 interface TransaccionData{
   fecha: string;
@@ -115,8 +121,8 @@ export async function agregarFilaAsheet(transaccionData: TransaccionData) {
 export async function agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaData: ClienteReservaSalaData) {
   const { idSala, id, fecha, horaCharla, nombre, numDoc, correo } = clienteReservaSalaData;
 
-  if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
-    throw new Error("La sala debe ser 1, 2, 3 o 4");
+  if (!IDS_SALA_RESERVA_ACTIVA.has(idSala)) {
+    throw new Error("La sala debe ser 1, 2 o 4");
   }
 
   const pestaña = `Sala${idSala}Reservas`;
@@ -155,6 +161,43 @@ export async function agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaDa
   });
 }
 
+const PESTAÑA_PREGUNTAS_SPEAKERS = "PreguntasSpeakers";
+
+export interface PreguntaSpeakerRow {
+  nombreSpeaker: string;
+  pregunta: string;
+}
+
+/**
+ * Una fila por pregunta en la pestaña `PreguntasSpeakers` (append en `A:B`).
+ * Columnas: A nombre del speaker, B pregunta. Sin fecha.
+ */
+export async function agregarPreguntaSpeakerAlSheet(row: PreguntaSpeakerRow): Promise<void> {
+  const serviceAccount = await accFireBaseConfig();
+
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: serviceAccount.client_email,
+      private_key: serviceAccount.private_key,
+    },
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
+  const sheets = google.sheets({ version: "v4", auth });
+
+  const values = [[row.nombreSpeaker.trim(), row.pregunta.trim()]];
+
+  await sheets.spreadsheets.values.append({
+    spreadsheetId: SHEET_ID,
+    /** Solo columnas A–B (nombre del speaker, pregunta). Evita tablas de 3 columnas detectadas por Sheets. */
+    range: `${PESTAÑA_PREGUNTAS_SPEAKERS}!A:B`,
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values,
+    },
+  });
+}
+
 /**
  * Reservas para un turno concreto (misma fecha en B y misma hora en C).
  * Filas desde la 2; columnas A–F como en `agregarDatosClienteReservaSalaAlSheet`.
@@ -164,8 +207,8 @@ export async function contarReservasPorSlot(
   fecha: string,
   horaCharla: string
 ): Promise<number> {
-  if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
-    throw new Error("La sala debe ser 1, 2, 3 o 4");
+  if (!IDS_SALA_RESERVA_ACTIVA.has(idSala)) {
+    throw new Error("La sala debe ser 1, 2 o 4");
   }
 
   const fechaNorm = fechaSoloDiaParaSheet(fecha);

@@ -1,3 +1,4 @@
+/** Envío de correos transaccionales (Nodemailer + credenciales desde Secret Manager). */
 import nodemailer from "nodemailer";
 import type { Attachment } from "nodemailer/lib/mailer";
 import type { SendMailOptions } from "nodemailer";
