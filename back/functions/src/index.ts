@@ -430,8 +430,8 @@ export const reservarCupoSalaProd = onCall(
 
     const { idSala, fecha, horaCharla, nombre, numDoc, correo } = data;
 
-    if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
-      throw new HttpsError("invalid-argument", "idSala debe ser 1, 2, 3 o 4.");
+    if (idSala !== 1 && idSala !== 2 && idSala !== 4) {
+      throw new HttpsError("invalid-argument", "idSala debe ser 1, 2 o 4.");
     }
 
     if (!fecha || !horaCharla || !nombre || !numDoc || !correo) {
@@ -483,10 +483,10 @@ export const contarReservasSalaProd = onCall(
     const fecha = data?.fecha;
     const horaCharla = data?.horaCharla;
 
-    if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
+    if (idSala !== 1 && idSala !== 2 && idSala !== 4) {
       throw new HttpsError(
         "invalid-argument",
-        "Enviá idSala numérico entre 1 y 4."
+        "Enviá idSala: 1, 2 o 4."
       );
     }
 

@@ -3,6 +3,9 @@ import { accFireBaseConfig } from '../configSecrets/firebaseConfigAccount';
 
 const SHEET_ID = '1uon5WZ7e6Nr2Gg2sWLKUS9gExPbVhBwdpIIK1iV_HvE';
 
+/** Salas con reservas activas (pestañas Sala{n}Reservas). La 3 puede existir en el Sheet solo por histórico. */
+const IDS_SALA_RESERVA_ACTIVA = new Set<number>([1, 2, 4]);
+
 interface TransaccionData{
   fecha: string;
   referencia: string;
@@ -115,8 +118,8 @@ export async function agregarFilaAsheet(transaccionData: TransaccionData) {
 export async function agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaData: ClienteReservaSalaData) {
   const { idSala, id, fecha, horaCharla, nombre, numDoc, correo } = clienteReservaSalaData;
 
-  if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
-    throw new Error("La sala debe ser 1, 2, 3 o 4");
+  if (!IDS_SALA_RESERVA_ACTIVA.has(idSala)) {
+    throw new Error("La sala debe ser 1, 2 o 4");
   }
 
   const pestaña = `Sala${idSala}Reservas`;
@@ -164,8 +167,8 @@ export async function contarReservasPorSlot(
   fecha: string,
   horaCharla: string
 ): Promise<number> {
-  if (idSala !== 1 && idSala !== 2 && idSala !== 3 && idSala !== 4) {
-    throw new Error("La sala debe ser 1, 2, 3 o 4");
+  if (!IDS_SALA_RESERVA_ACTIVA.has(idSala)) {
+    throw new Error("La sala debe ser 1, 2 o 4");
   }
 
   const fechaNorm = fechaSoloDiaParaSheet(fecha);

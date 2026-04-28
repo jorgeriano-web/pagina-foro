@@ -48,10 +48,14 @@ export class ReservarCupo implements OnInit {
   slotSeleccionado = '';
 
   readonly slotsCharla: OpcionSlotCharla[] = [
-    { value: '2026-05-21|14:30', label: '21 de mayo, 2:30 p. m.' },
-    { value: '2026-05-21|16:45', label: '21 de mayo, 4:45 p. m.' },
-    { value: '2026-05-22|14:30', label: '22 de mayo, 2:30 p. m.' },
-    { value: '2026-05-22|16:45', label: '22 de mayo, 4:45 p. m.' },
+    { value: '2026-05-21|14:30', label: '21 de mayo, 2:30 p. m. (Grupo 1)' },
+    { value: '2026-05-21|15:00', label: '21 de mayo, 3:00 p. m. (Grupo 2)' },
+    { value: '2026-05-21|16:45', label: '21 de mayo, 4:45 p. m. (Grupo 1)' },
+    { value: '2026-05-21|17:15', label: '21 de mayo, 5:15 p. m. (Grupo 2)' },
+    { value: '2026-05-22|14:30', label: '22 de mayo, 2:30 p. m. (Grupo 1)' },
+    { value: '2026-05-22|15:00', label: '22 de mayo, 3:00 p. m. (Grupo 2)' },
+    { value: '2026-05-22|16:45', label: '22 de mayo, 4:45 p. m. (Grupo 1)' },
+    { value: '2026-05-22|17:15', label: '22 de mayo, 5:15 p. m. (Grupo 2)' },
   ];
 
   // ——— Estado UI ———
@@ -98,7 +102,7 @@ export class ReservarCupo implements OnInit {
     }
     const s = this.route?.snapshot.queryParamMap.get('sala');
     const n = s ? Number.parseInt(s, 10) : NaN;
-    return !Number.isNaN(n) && n >= 1 && n <= 4 ? n : null;
+    return !Number.isNaN(n) && (n === 1 || n === 2 || n === 4) ? n : null;
   }
 
   get nombreExperiencia(): string {
@@ -261,7 +265,7 @@ export class ReservarCupo implements OnInit {
       const salas = await this.reservaCuposService.listarSalasExperiencia();
       const map: Record<number, { capacidadTotal: number }> = {};
       for (const s of salas) {
-        if (s.id === 1 || s.id === 2 || s.id === 3 || s.id === 4) {
+        if (s.id === 1 || s.id === 2 || s.id === 4) {
           map[s.id] = { capacidadTotal: s.capacidadTotal };
         }
       }

@@ -1,36 +1,30 @@
 /** Datos de una sala (estado que devuelve el back; cuposReservados es informativo si lo calculás en otro lado). */
 export interface SalaExperiencia {
-  /** Mismo número que `idSala` en reservas / Sheet (1–4). */
+  /** Mismo número que `idSala` en reservas / Sheet (1, 2 o 4). */
   id: number;
   nombre: string;
   capacidadTotal: number;
   cuposReservados: number;
 }
 
-/** Configuración fija de las 4 salas. `cuposReservados` acá es 0 hasta que lo tomes del Sheet u otra fuente. */
+/** Configuración fija de salas activas (1, 2 y 4). Sala 3 descontinuada; 40 cupos por turno (fecha+hora) cada una. */
 export const SALAS_EXPERIENCIA: SalaExperiencia[] = [
   {
     id: 1,
     nombre: "Implementación de IA para tu Inmobiliaria",
-    capacidadTotal: 20,
+    capacidadTotal: 40,
     cuposReservados: 0,
   },
   {
     id: 2,
-    nombre: "Entorno Juridico",
-    capacidadTotal: 2,
-    cuposReservados: 0,
-  },
-  {
-    id: 3,
-    nombre: "Casos de Exito",
-    capacidadTotal: 45,
+    nombre: "Entorno jurídico",
+    capacidadTotal: 40,
     cuposReservados: 0,
   },
   {
     id: 4,
     nombre: "Meet & Greet",
-    capacidadTotal: 50,
+    capacidadTotal: 40,
     cuposReservados: 0,
   },
 ];

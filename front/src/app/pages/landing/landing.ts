@@ -121,7 +121,7 @@ export class Landing implements OnInit, OnDestroy {
       this.dataLayer.push({
         event: 'ga_event',
         category: 'foro 2026',
-        action: 'AMW - necesito mas entradas',
+        action: 'AMW - necesito más entradas',
         label: 'Comprar 4 entradas'
       });
     }
@@ -130,7 +130,7 @@ export class Landing implements OnInit, OnDestroy {
       this.dataLayer.push({
         event: 'ga_event',
         category: 'foro 2026',
-        action: 'AMW - necesito mas entradas',
+        action: 'AMW - necesito más entradas',
         label: 'Comprar 5 entradas'
       });
     }
@@ -139,7 +139,7 @@ export class Landing implements OnInit, OnDestroy {
       this.dataLayer.push({
         event: 'ga_event',
         category: 'foro 2026',
-        action: 'AMW - necesito mas entradas',
+        action: 'AMW - necesito más entradas',
         label: 'Comprar 6 entradas'
       });
     }
@@ -148,7 +148,7 @@ export class Landing implements OnInit, OnDestroy {
       this.dataLayer.push({
         event: 'ga_event',
         category: 'foro 2026',
-        action: 'AMW - necesito mas entradas',
+        action: 'AMW - necesito más entradas',
         label: 'Comprar 7 entradas'
       });
     }
@@ -157,7 +157,7 @@ export class Landing implements OnInit, OnDestroy {
       this.dataLayer.push({
         event: 'ga_event',
         category: 'foro 2026',
-        action: 'AMW - necesito mas entradas',
+        action: 'AMW - necesito más entradas',
         label: 'Comprar 8 entradas'
       });
     }

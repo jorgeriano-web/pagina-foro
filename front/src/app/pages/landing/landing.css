@@ -599,6 +599,133 @@ header.scrolled-header {
     max-height: 280px;
 }
 
+/* Formulario “Preguntale a tu Speaker” — vidrio más denso + CTA rojo marca */
+.contenedorPreguntas .preguntas-form-card {
+    background: linear-gradient(
+        155deg,
+        rgba(255, 255, 255, 0.26) 0%,
+        rgba(255, 255, 255, 0.12) 45%,
+        rgba(37, 49, 80, 0.45) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
+
+.contenedorPreguntas {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .contenedorPreguntas {
+        margin-top: 3rem;
+        gap: 2rem;
+    }
+}
+
+.contenedorPreguntas .card-original-content {
+    width: 100%;
+}
+
+.contenedorPreguntas form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .contenedorPreguntas form {
+        padding: 2rem;
+    }
+}
+
+.contenedorPreguntas form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.contenedorPreguntas form label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
+    letter-spacing: 0.02em;
+}
+
+.contenedorPreguntas form input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.65rem 0.9rem;
+    font-size: 1rem;
+    line-height: 1.45;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 0.5rem;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.contenedorPreguntas form input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.42);
+}
+
+.contenedorPreguntas form input[type="text"]:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.contenedorPreguntas form input[type="text"]:focus {
+    border-color: rgba(255, 255, 255, 0.55);
+    background-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0 0 3px rgba(189, 15, 20, 0.32);
+}
+
+/* CTA sólido (misma familia que hero / precios “Más popular”), no vidrio */
+.contenedorPreguntas .temas-charla-card form .btn-reserva-vidrio {
+    align-self: flex-start;
+    margin-top: 0.35rem;
+    padding: 0.65rem 1.35rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: #bd0f14;
+    box-shadow: 0 4px 18px rgba(189, 15, 20, 0.45);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.15s ease;
+}
+
+.contenedorPreguntas .temas-charla-card form .btn-reserva-vidrio:hover {
+    background: #9f0d12;
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 6px 22px rgba(189, 15, 20, 0.5);
+}
+
+.contenedorPreguntas .temas-charla-card form .btn-reserva-vidrio:active {
+    transform: scale(0.98);
+}
+
 
 /* Media queries */
 @media (max-width: 1107px) {
