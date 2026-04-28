@@ -1,3 +1,6 @@
+/**
+ * Llama al callable de Firebase que crea el link de pago en el pasarela.
+ */
 import { Injectable } from '@angular/core';
 import { Functions, httpsCallable } from '@angular/fire/functions';
 

@@ -1,3 +1,6 @@
+/**
+ * Mapa de URL → página (standalone). El resto de rutas cae en la landing.
+ */
 import { Routes } from '@angular/router';
 import { Landing } from './pages/landing/landing';
 import { InicioRegistro } from './pages/inicio-registro/inicio-registro';

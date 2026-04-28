@@ -1,4 +1,8 @@
+/**
+ * Landing del foro: hero, agenda, precios, patrocinadores y CTAs (incl. diálogo de cupos).
+ */
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -10,13 +14,14 @@ import {
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ServiceBoletas } from '../../service/service-boletas';
+import { PreguntasSpeaker } from '../../service/preguntas-speaker';
 import { ReservarCupo } from '../reservar-cupo/reservar-cupo';
 
 declare var fbq: any;
 
 @Component({
   selector: 'app-landing',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './landing.html',
   styleUrl: './landing.css',
   standalone: true,
@@ -37,11 +42,19 @@ export class Landing implements OnInit, OnDestroy {
   readonly mensajeCuposPorTurno =
     'Cupo limitado por charla y turno. Al reservar elegís día y hora y ves disponibilidad.';
 
+  /** Formulario “Pregúntale a tu speaker” → Sheet `PreguntasSpeakers`. */
+  preguntaSpeakerNombre = '';
+  preguntaSpeakerTexto = '';
+  preguntaSpeakerEnviando = false;
+  preguntaSpeakerExito = false;
+  preguntaSpeakerError: string | null = null;
+
   constructor(
     private boletasService: ServiceBoletas,
     private router: Router,
     private cdRef: ChangeDetectorRef,
     private dialog: MatDialog,
+    private preguntasSpeaker: PreguntasSpeaker,
   ) {}
 
   ngOnInit(): void {
@@ -228,6 +241,39 @@ export class Landing implements OnInit, OnDestroy {
   abrirImagenAgenda(): void {
     window.open('../../../../assets/img/Agenda_foro_2026.jpeg', '_blank');
   }
-  
+
+  async enviarPreguntaSpeaker(): Promise<void> {
+    this.preguntaSpeakerError = null;
+    this.preguntaSpeakerExito = false;
+    const nombre = this.preguntaSpeakerNombre.trim();
+    const pregunta = this.preguntaSpeakerTexto.trim();
+    if (!nombre || !pregunta) {
+      this.preguntaSpeakerError = 'Completá el nombre del speaker y tu pregunta.';
+      return;
+    }
+    if (this.preguntaSpeakerEnviando) {
+      return;
+    }
+    this.preguntaSpeakerEnviando = true;
+    this.cdRef.detectChanges();
+    try {
+      await this.preguntasSpeaker.guardar({ nombreSpeaker: nombre, pregunta });
+      this.preguntaSpeakerNombre = '';
+      this.preguntaSpeakerTexto = '';
+      this.preguntaSpeakerExito = true;
+      this.dataLayer.push({
+        event: 'ga_event',
+        category: 'foro 2026',
+        action: 'AMW - pregunta speaker',
+        label: 'Pregunta enviada',
+      });
+    } catch {
+      this.preguntaSpeakerError =
+        'No se pudo enviar la pregunta. Intentá de nuevo en unos minutos.';
+    } finally {
+      this.preguntaSpeakerEnviando = false;
+      this.cdRef.detectChanges();
+    }
+  }
 }
 

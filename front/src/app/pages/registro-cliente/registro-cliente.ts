@@ -1,3 +1,6 @@
+/**
+ * Registro y pago para asistentes que son clientes Bolívar (wizard por pasos).
+ */
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';

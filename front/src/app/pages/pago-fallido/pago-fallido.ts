@@ -1,3 +1,6 @@
+/**
+ * Pantalla tras pago rechazado o cancelado.
+ */
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 

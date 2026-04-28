@@ -177,16 +177,45 @@
                     <div class="w-full min-w-0 flex">
                         <div class="animatable-card temas-charla-card preguntas-form-card rounded-2xl text-white text-left relative h-full w-full overflow-hidden transition-colors duration-500">
                             <div class="card-original-content transition-opacity duration-300 flex flex-col md:flex-row md:items-stretch flex-1 min-h-0">
-                                <form>
+                                <form (ngSubmit)="$event.preventDefault()">
                                     <div>
-                                        <label for="nombre">Nombre del speaker</label>
-                                        <input type="text" id="nombre" name="nombre" placeholder="Nombre">
+                                        <label for="pregunta-speaker-nombre">Nombre del speaker</label>
+                                        <input
+                                            type="text"
+                                            id="pregunta-speaker-nombre"
+                                            name="preguntaSpeakerNombre"
+                                            [(ngModel)]="preguntaSpeakerNombre"
+                                            placeholder="Nombre"
+                                            autocomplete="name"
+                                            [disabled]="preguntaSpeakerEnviando"
+                                        />
                                     </div>
                                     <div>
-                                        <label for="pregunta">Pregunta</label>
-                                        <input type="text" id="pregunta" name="pregunta" placeholder="Pregunta">
+                                        <label for="pregunta-speaker-texto">Pregunta</label>
+                                        <input
+                                            type="text"
+                                            id="pregunta-speaker-texto"
+                                            name="preguntaSpeakerTexto"
+                                            [(ngModel)]="preguntaSpeakerTexto"
+                                            placeholder="Pregunta"
+                                            autocomplete="off"
+                                            [disabled]="preguntaSpeakerEnviando"
+                                        />
                                     </div>
-                                    <button type="button" (click)="abrirReservaCupo(4, 'Meet & Greet', $event)" class="btn-reserva-vidrio mt-6 md:mt-auto">Envía tu pregunta aquí</button>
+                                    <p *ngIf="preguntaSpeakerError" class="text-sm text-red-200 mt-2" role="alert">
+                                        {{ preguntaSpeakerError }}
+                                    </p>
+                                    <p *ngIf="preguntaSpeakerExito" class="text-sm text-emerald-200 mt-2" role="status">
+                                        ¡Listo! Tu pregunta fue registrada.
+                                    </p>
+                                    <button
+                                        type="button"
+                                        (click)="enviarPreguntaSpeaker()"
+                                        class="btn-reserva-vidrio mt-6 md:mt-auto"
+                                        [disabled]="preguntaSpeakerEnviando"
+                                    >
+                                        {{ preguntaSpeakerEnviando ? 'Enviando…' : 'Envía tu pregunta aquí' }}
+                                    </button>
                                 </form>
                             </div>
                         </div>

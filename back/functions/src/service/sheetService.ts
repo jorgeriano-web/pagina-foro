@@ -1,3 +1,6 @@
+/**
+ * Lectura/escritura en Google Sheets (transacciones del foro y reservas por sala).
+ */
 import {google} from 'googleapis';
 import { accFireBaseConfig } from '../configSecrets/firebaseConfigAccount';
 
@@ -151,6 +154,48 @@ export async function agregarDatosClienteReservaSalaAlSheet(clienteReservaSalaDa
   await sheets.spreadsheets.values.append({
     spreadsheetId: SHEET_ID,
     range,
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values,
+    },
+  });
+}
+
+const PESTAÑA_PREGUNTAS_SPEAKERS = "PreguntasSpeakers";
+
+export interface PreguntaSpeakerRow {
+  nombreSpeaker: string;
+  pregunta: string;
+}
+
+/**
+ * Una fila por pregunta en la pestaña `PreguntasSpeakers`, append desde A2 (fila 1 libre para encabezados).
+ * Columnas: A fecha/hora ISO (UTC), B nombre del speaker, C pregunta.
+ */
+export async function agregarPreguntaSpeakerAlSheet(row: PreguntaSpeakerRow): Promise<void> {
+  const serviceAccount = await accFireBaseConfig();
+
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: serviceAccount.client_email,
+      private_key: serviceAccount.private_key,
+    },
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
+  const sheets = google.sheets({ version: "v4", auth });
+
+  const values = [
+    [
+      new Date().toISOString(),
+      row.nombreSpeaker.trim(),
+      row.pregunta.trim(),
+    ],
+  ];
+
+  await sheets.spreadsheets.values.append({
+    spreadsheetId: SHEET_ID,
+    range: `${PESTAÑA_PREGUNTAS_SPEAKERS}!A2`,
     valueInputOption: "USER_ENTERED",
     requestBody: {
       values,
