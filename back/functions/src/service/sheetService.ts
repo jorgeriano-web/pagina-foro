@@ -169,8 +169,8 @@ export interface PreguntaSpeakerRow {
 }
 
 /**
- * Una fila por pregunta en la pestaña `PreguntasSpeakers`, append desde A2 (fila 1 libre para encabezados).
- * Columnas: A fecha/hora ISO (UTC), B nombre del speaker, C pregunta.
+ * Una fila por pregunta en la pestaña `PreguntasSpeakers` (append en `A:B`).
+ * Columnas: A nombre del speaker, B pregunta. Sin fecha.
  */
 export async function agregarPreguntaSpeakerAlSheet(row: PreguntaSpeakerRow): Promise<void> {
   const serviceAccount = await accFireBaseConfig();
@@ -185,17 +185,12 @@ export async function agregarPreguntaSpeakerAlSheet(row: PreguntaSpeakerRow): Pr
 
   const sheets = google.sheets({ version: "v4", auth });
 
-  const values = [
-    [
-      new Date().toISOString(),
-      row.nombreSpeaker.trim(),
-      row.pregunta.trim(),
-    ],
-  ];
+  const values = [[row.nombreSpeaker.trim(), row.pregunta.trim()]];
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: SHEET_ID,
-    range: `${PESTAÑA_PREGUNTAS_SPEAKERS}!A2`,
+    /** Solo columnas A–B (nombre del speaker, pregunta). Evita tablas de 3 columnas detectadas por Sheets. */
+    range: `${PESTAÑA_PREGUNTAS_SPEAKERS}!A:B`,
     valueInputOption: "USER_ENTERED",
     requestBody: {
       values,
