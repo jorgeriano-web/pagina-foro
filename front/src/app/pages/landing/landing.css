@@ -662,7 +662,8 @@ header.scrolled-header {
     letter-spacing: 0.02em;
 }
 
-.contenedorPreguntas form input[type="text"] {
+.contenedorPreguntas form input[type="text"],
+.contenedorPreguntas form select {
     width: 100%;
     box-sizing: border-box;
     padding: 0.65rem 0.9rem;
@@ -683,11 +684,21 @@ header.scrolled-header {
     color: rgba(255, 255, 255, 0.42);
 }
 
-.contenedorPreguntas form input[type="text"]:hover {
+.contenedorPreguntas form select:invalid {
+    color: rgba(255, 255, 255, 0.42);
+}
+
+.contenedorPreguntas form select option {
+    color: #1f2937;
+}
+
+.contenedorPreguntas form input[type="text"]:hover,
+.contenedorPreguntas form select:hover {
     border-color: rgba(255, 255, 255, 0.4);
 }
 
-.contenedorPreguntas form input[type="text"]:focus {
+.contenedorPreguntas form input[type="text"]:focus,
+.contenedorPreguntas form select:focus {
     border-color: rgba(255, 255, 255, 0.55);
     background-color: rgba(255, 255, 255, 0.18);
     box-shadow: 0 0 0 3px rgba(189, 15, 20, 0.32);
