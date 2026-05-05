@@ -12,19 +12,19 @@ export const SALAS_EXPERIENCIA: SalaExperiencia[] = [
   {
     id: 1,
     nombre: "Implementación de IA para tu Inmobiliaria",
-    capacidadTotal: 40,
+    capacidadTotal: 35,
     cuposReservados: 0,
   },
   {
     id: 2,
     nombre: "Entorno jurídico",
-    capacidadTotal: 40,
+    capacidadTotal: 35,
     cuposReservados: 0,
   },
   {
     id: 4,
     nombre: "Meet & Greet",
-    capacidadTotal: 40,
+    capacidadTotal: 35,
     cuposReservados: 0,
   },
 ];

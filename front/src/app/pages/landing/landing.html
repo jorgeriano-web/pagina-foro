@@ -180,15 +180,19 @@
                                 <form (ngSubmit)="$event.preventDefault()">
                                     <div>
                                         <label for="pregunta-speaker-nombre">Nombre del speaker</label>
-                                        <input
-                                            type="text"
+                                        <select
                                             id="pregunta-speaker-nombre"
                                             name="preguntaSpeakerNombre"
                                             [(ngModel)]="preguntaSpeakerNombre"
-                                            placeholder="Nombre"
-                                            autocomplete="name"
                                             [disabled]="preguntaSpeakerEnviando"
-                                        />
+                                        >
+                                            <option value="" disabled>Selecciona tu speaker</option>
+                                            <option value="Andrés Bilbao">Andrés Bilbao</option>
+                                            <option value="Nicolás Rojas">Nicolás Rojas</option>
+                                            <option value="Juliana Martínez">Juliana Martínez</option>
+                                            <option value="Juan Carlos Contreras">Juan Carlos Contreras</option>
+                                            <option value="Óscar Córdoba">Óscar Córdoba</option>
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="pregunta-speaker-texto">Pregunta</label>
