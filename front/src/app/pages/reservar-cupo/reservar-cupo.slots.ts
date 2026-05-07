@@ -22,8 +22,6 @@ export const RX_HORA_HM = /^\d{1,2}:\d{2}$/;
 export const SLOTS_CHARLA: readonly OpcionSlotCharla[] = [
   { value: '2026-05-21|14:30', label: '21 de mayo, 2:30 p. m. (Grupo 1)' },
   { value: '2026-05-21|15:00', label: '21 de mayo, 3:00 p. m. (Grupo 2)' },
-  { value: '2026-05-21|16:45', label: '21 de mayo, 4:45 p. m. (Grupo 1)' },
-  { value: '2026-05-21|17:15', label: '21 de mayo, 5:15 p. m. (Grupo 2)' },
   { value: '2026-05-22|14:30', label: '22 de mayo, 2:30 p. m. (Grupo 1)' },
   { value: '2026-05-22|15:00', label: '22 de mayo, 3:00 p. m. (Grupo 2)' },
   { value: '2026-05-22|16:45', label: '22 de mayo, 4:45 p. m. (Grupo 1)' },
