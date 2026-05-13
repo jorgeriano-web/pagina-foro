@@ -15,10 +15,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ReservaCupos } from '../../service/reserva-cupos';
 import {
-  OpcionSlotCharla,
   OpcionSlotSelect,
-  SLOTS_CHARLA,
+  RX_FECHA_YMD,
   parseSlotCharlaValue,
+  slotsCharlaFiltradosPorFechas,
 } from './reservar-cupo.slots';
 import { esIdSalaReserva } from './reservar-cupo.salas';
 
@@ -26,6 +26,8 @@ import { esIdSalaReserva } from './reservar-cupo.salas';
 export interface ReservaCupoDialogData {
   idSala: number;
   nombreExperiencia: string;
+  /** Opcional: solo turnos de estas fechas (`YYYY-MM-DD`), p. ej. sala 4 día 1 vs día 2. */
+  fechasSlotPermitidas?: readonly string[];
 }
 
 @Component({
@@ -41,8 +43,6 @@ export class ReservarCupo implements OnInit {
   numDoc = '';
   correo = '';
   slotSeleccionado = '';
-
-  readonly slotsCharla: readonly OpcionSlotCharla[] = SLOTS_CHARLA;
 
   // ——— Estado UI ———
   procesando = false;
@@ -98,6 +98,10 @@ export class ReservarCupo implements OnInit {
     return this.route?.snapshot.queryParamMap.get('titulo') ?? '';
   }
 
+  get slotsEfectivos() {
+    return slotsCharlaFiltradosPorFechas(this.data?.fechasSlotPermitidas);
+  }
+
   get capacidadMax(): number {
     const id = this.idSala;
     if (id == null || this.salasConfigEstado !== 'ok') {
@@ -116,13 +120,13 @@ export class ReservarCupo implements OnInit {
     const id = this.idSala;
     const max = this.capacidadMax;
     if (this.salasConfigEstado === 'loading' || this.salasConfigEstado === 'error') {
-      return this.slotsCharla.map((s) => ({
+      return this.slotsEfectivos.map((s) => ({
         value: s.value,
         label: s.label,
         disabled: true,
       }));
     }
-    return this.slotsCharla.map((s) => {
+    return this.slotsEfectivos.map((s) => {
       if (id == null || max <= 0) {
         return { value: s.value, label: s.label, disabled: false };
       }
@@ -218,6 +222,12 @@ export class ReservarCupo implements OnInit {
       return;
     }
 
+    const permitidas = this.fechasSlotPermitidasSet();
+    if (permitidas != null && permitidas.size > 0 && !permitidas.has(slot.fecha)) {
+      this.errorReserva = 'Elegí un turno válido para esta experiencia.';
+      return;
+    }
+
     this.errorReserva = null;
     this.procesando = true;
     this.cdr.detectChanges();
@@ -283,7 +293,7 @@ export class ReservarCupo implements OnInit {
     this.cargandoConteosSlots = true;
     this.cdr.detectChanges();
 
-    const promesas = this.slotsCharla.map(async (s) => {
+    const promesas = this.slotsEfectivos.map(async (s) => {
       const parsed = parseSlotCharlaValue(s.value);
       if (parsed == null) {
         return { key: s.value, n: null as number | null };
@@ -310,6 +320,7 @@ export class ReservarCupo implements OnInit {
       }
       this.conteosPorSlot = map;
       this.cargandoConteosSlots = false;
+      this.limpiarSlotSiFueraDeSlotsVisibles();
       this.limpiarSeleccionSiAgotado();
       this.sincronizarReservasActualesDesdeMap();
       this.cdr.detectChanges();
@@ -358,6 +369,28 @@ export class ReservarCupo implements OnInit {
           this.cdr.detectChanges();
         },
       );
+  }
+
+  private fechasSlotPermitidasSet(): Set<string> | null {
+    const raw = this.data?.fechasSlotPermitidas;
+    if (raw == null || raw.length === 0) {
+      return null;
+    }
+    const set = new Set(
+      raw.map((f) => f.trim()).filter((f) => RX_FECHA_YMD.test(f)),
+    );
+    return set.size > 0 ? set : null;
+  }
+
+  private limpiarSlotSiFueraDeSlotsVisibles(): void {
+    if (!this.slotSeleccionado) {
+      return;
+    }
+    if (!this.slotsEfectivos.some((s) => s.value === this.slotSeleccionado)) {
+      this.slotSeleccionado = '';
+      this.reservasActuales = null;
+      this.pedidoConteoSeq++;
+    }
   }
 
   private limpiarSeleccionSiAgotado(): void {

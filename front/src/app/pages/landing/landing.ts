@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ServiceBoletas } from '../../service/service-boletas';
 import { PreguntasSpeaker } from '../../service/preguntas-speaker';
 import { ReservarCupo } from '../reservar-cupo/reservar-cupo';
+import { FORO_FECHA_DIA_1, FORO_FECHA_DIA_2 } from '../reservar-cupo/reservar-cupo.slots';
 
 declare var fbq: any;
 
@@ -48,6 +49,9 @@ export class Landing implements OnInit, OnDestroy {
   preguntaSpeakerEnviando = false;
   preguntaSpeakerExito = false;
   preguntaSpeakerError: string | null = null;
+
+  readonly reservaSala4Solo21Mayo = [FORO_FECHA_DIA_1] as const;
+  readonly reservaSala4Solo22Mayo = [FORO_FECHA_DIA_2] as const;
 
   constructor(
     private boletasService: ServiceBoletas,
@@ -86,13 +90,24 @@ export class Landing implements OnInit, OnDestroy {
 
 
 
-  abrirReservaCupo(idSala: number, nombreExperiencia: string, event?: Event): void {
+  abrirReservaCupo(
+    idSala: number,
+    nombreExperiencia: string,
+    event?: Event,
+    fechasSlotPermitidas?: readonly string[],
+  ): void {
     event?.preventDefault();
     event?.stopPropagation();
     this.dialog.open(ReservarCupo, {
       width: '420px',
       maxWidth: '90vw',
-      data: { idSala, nombreExperiencia },
+      data: {
+        idSala,
+        nombreExperiencia,
+        ...(fechasSlotPermitidas != null && fechasSlotPermitidas.length > 0
+          ? { fechasSlotPermitidas: [...fechasSlotPermitidas] }
+          : {}),
+      },
       panelClass: 'reserva-cupo-dialog',
     });
   }
