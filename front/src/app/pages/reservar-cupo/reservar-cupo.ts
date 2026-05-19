@@ -19,6 +19,7 @@ import {
   RX_FECHA_YMD,
   parseSlotCharlaValue,
   slotsCharlaFiltradosPorFechas,
+  slotsCharlaFiltradosPorValues
 } from './reservar-cupo.slots';
 import { esIdSalaReserva } from './reservar-cupo.salas';
 
@@ -26,8 +27,8 @@ import { esIdSalaReserva } from './reservar-cupo.salas';
 export interface ReservaCupoDialogData {
   idSala: number;
   nombreExperiencia: string;
-  /** Opcional: solo turnos de estas fechas (`YYYY-MM-DD`), p. ej. sala 4 día 1 vs día 2. */
   fechasSlotPermitidas?: readonly string[];
+  slotsPermitidos?: readonly string[]; 
 }
 
 @Component({
@@ -99,7 +100,8 @@ export class ReservarCupo implements OnInit {
   }
 
   get slotsEfectivos() {
-    return slotsCharlaFiltradosPorFechas(this.data?.fechasSlotPermitidas);
+    const porFecha = slotsCharlaFiltradosPorFechas(this.data?.fechasSlotPermitidas);
+    return slotsCharlaFiltradosPorValues(porFecha, this.data?.slotsPermitidos);
   }
 
   get capacidadMax(): number {

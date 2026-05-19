@@ -16,7 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ServiceBoletas } from '../../service/service-boletas';
 import { PreguntasSpeaker } from '../../service/preguntas-speaker';
 import { ReservarCupo } from '../reservar-cupo/reservar-cupo';
-import { FORO_FECHA_DIA_1, FORO_FECHA_DIA_2 } from '../reservar-cupo/reservar-cupo.slots';
+import { FORO_FECHA_DIA_1, FORO_FECHA_DIA_2, SLOT_DIA2_MANANA, SLOT_DIA2_TARDE } from '../reservar-cupo/reservar-cupo.slots';
 
 declare var fbq: any;
 
@@ -52,6 +52,8 @@ export class Landing implements OnInit, OnDestroy {
 
   readonly reservaSala4Solo21Mayo = [FORO_FECHA_DIA_1] as const;
   readonly reservaSala4Solo22Mayo = [FORO_FECHA_DIA_2] as const;
+  readonly reservaSala4Dia2Manana = [SLOT_DIA2_MANANA] as const;
+  readonly reservaSala4Dia2Tarde  = [SLOT_DIA2_TARDE] as const;
 
   constructor(
     private boletasService: ServiceBoletas,
@@ -95,6 +97,7 @@ export class Landing implements OnInit, OnDestroy {
     nombreExperiencia: string,
     event?: Event,
     fechasSlotPermitidas?: readonly string[],
+    slotsPermitidos?: readonly string[], // ← nuevo
   ): void {
     event?.preventDefault();
     event?.stopPropagation();
@@ -104,9 +107,8 @@ export class Landing implements OnInit, OnDestroy {
       data: {
         idSala,
         nombreExperiencia,
-        ...(fechasSlotPermitidas != null && fechasSlotPermitidas.length > 0
-          ? { fechasSlotPermitidas: [...fechasSlotPermitidas] }
-          : {}),
+        ...(fechasSlotPermitidas?.length ? { fechasSlotPermitidas: [...fechasSlotPermitidas] } : {}),
+        ...(slotsPermitidos?.length ? { slotsPermitidos: [...slotsPermitidos] } : {}),
       },
       panelClass: 'reserva-cupo-dialog',
     });

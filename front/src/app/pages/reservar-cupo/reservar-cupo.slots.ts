@@ -19,17 +19,18 @@ export interface OpcionSlotSelect {
 export const RX_FECHA_YMD = /^\d{4}-\d{2}-\d{2}$/;
 export const RX_HORA_HM = /^\d{1,2}:\d{2}$/;
 
+export const SLOT_DIA2_MANANA = '2026-05-22|10:30';
+export const SLOT_DIA2_TARDE  = '2026-05-22|14:00';
+
 /** Foro 2026: primera y segunda jornada (alineado con `SLOTS_CHARLA`). */
 export const FORO_FECHA_DIA_1 = '2026-05-21';
 export const FORO_FECHA_DIA_2 = '2026-05-22';
 
 export const SLOTS_CHARLA: readonly OpcionSlotCharla[] = [
-  { value: '2026-05-21|14:30', label: '21 de mayo, 2:30 p. m. (Grupo 1)' },
-  { value: '2026-05-21|15:00', label: '21 de mayo, 3:00 p. m. (Grupo 2)' },
-  { value: '2026-05-22|10:30', label: '22 de mayo, 10:30 a. m. (Grupo 1)' },
-  { value: '2026-05-22|11:00', label: '22 de mayo, 11:00 a. m. (Grupo 2)' },
-  { value: '2026-05-22|14:00', label: '22 de mayo, 2:00 p. m. (Grupo 1)' },
-  { value: '2026-05-22|14:30', label: '22 de mayo, 2:30 p. m. (Grupo 2)' },
+  { value: '2026-05-21|14:30', label: '21 de mayo, 2:30 p. m' },
+  { value: '2026-05-21|16:45', label: '21 de mayo, 4:45 p. m' },
+  { value: '2026-05-22|10:30', label: '22 de mayo, 10:30 a. m.' },
+  { value: '2026-05-22|14:00', label: '22 de mayo, 2:00 p. m.' },
 ];
 
 /** Interpreta el `value` del slot (`fecha|horaCharla`). */
@@ -67,4 +68,13 @@ export function slotsCharlaFiltradosPorFechas(
     const p = parseSlotCharlaValue(s.value);
     return p != null && permitidas.has(p.fecha);
   });
+}
+
+export function slotsCharlaFiltradosPorValues(
+  slots: readonly OpcionSlotCharla[],
+  valuesPermitidos: readonly string[] | null | undefined,
+): readonly OpcionSlotCharla[] {
+  if (valuesPermitidos == null || valuesPermitidos.length === 0) return slots;
+  const permitidos = new Set(valuesPermitidos);
+  return slots.filter((s) => permitidos.has(s.value));
 }
